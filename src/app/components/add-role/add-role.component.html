@@ -1,0 +1,191 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper addFormSec">
+    <!-- Content Header (Page header) -->
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+     <div class="img_icon">
+     <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/rolemanagement']" aria-hidden="true"></i> Add New Role</span>
+   </div>  </h1>
+    </section> 
+ 
+     <section class="content">
+       <form>
+         <div class="row">
+           <div class="col-md-12">
+             <h4>Role Information</h4>
+             <hr>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <label>Role Name<sup class="text-danger">*</sup></label>
+                 <input type="text" class="form-control" id="email" >
+                </div>
+           </div>
+           
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <label>Application Category</label>
+                <!--  <input type="text" class="form-control" id="email" > -->
+                   <select class="form-control" ng-change="categoryChange()" ng-model="categoryValue">
+                  <option value="">Select Category</option>
+                  <option value="0">Console</option>
+                  <option value="1">Operations</option>
+                  <option value="2">Both</option>
+                </select>
+                </div>
+           </div>
+           
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <label>Enable/ Disable</label>
+               <select class="form-control">
+                  <option>Select Enable/Disable</option>
+                  <option>Enable</option>
+                  <option>Disable</option>
+                </select>
+                </div>
+           </div>
+           
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <label>Role Description</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+                </div>
+           </div>
+                   
+         </div>
+
+         <!-- <div class="row">
+          <div class="col-md-12">
+            <h4>Menu Access Details</h4>
+            <hr>
+          </div>
+        </div> -->
+
+<!-- 
+      <div>
+           <mat-tab-group>
+              <mat-tab label="Console">
+                  <div class="row">
+                      <div class="col-md-12">
+                      <div class="rolemenu-acces-tabs">
+                          <div class="tabContent">
+                              <div class="marB30">
+                                <label><b>Administration</b></label>
+                                <div class="form-group">									
+                                  <label class="checkbox-inline">
+                                      <input type="checkbox" value="">User Management
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Role Management
+                                    </label>
+                                </div>
+                              </div>
+                              
+                              <div class="marB30">
+                                <label><b>Configurations</b></label>
+                                <div class="form-group">									
+                                  <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Archival
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Communication
+                                    </label>
+                                </div>
+                              </div>
+                              
+                              <div class="marB30">
+                                <label><b>Maintenance</b></label>
+                                <div class="form-group">									
+                                  <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Reason Code Maintenance
+                                    </label>
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" value="">Routing Code Maintenance
+                                    </label>
+                                </div>
+                              </div>
+                            </div>
+                       </div>
+                       </div>
+                    </div>
+              </mat-tab>
+            </mat-tab-group>
+      </div>
+      
+      <div>
+         <mat-tab-group>
+            <mat-tab label="Operations">
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="rolemenu-acces-tabs">
+                      <div class="tabContent">
+                        <div class="marB30">
+                          <label><b>Dashboard</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">Transaction Monitor
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Liquidity Monitor
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Status Monitor
+                              </label>
+                          </div>
+                        </div>
+                        
+                        <div class="marB30">
+                          <label><b>Business Operations</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">SOD /EOD
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Archival
+                              </label>
+                          </div>
+                        </div>
+                        
+                        <div class="marB30">
+                          <label><b>Payment Operations</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">Create Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Authorize/Reject Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Modify Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Delete Payment
+                              </label>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                     </div>
+                  </div>
+            </mat-tab>
+          </mat-tab-group>
+    </div> -->
+    
+
+         <div class="row text-center">
+         <div class="col-sm-12">
+            <div class="">
+                 <button type="button" class="btn btn-default btn-submit">Submit</button>
+                 <button type="button" class="btn btn-default btn-close" ui-sref="rolemanagement"> Close</button>
+             </div>
+         </div>
+       </div>
+       </form>
+     </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+ 

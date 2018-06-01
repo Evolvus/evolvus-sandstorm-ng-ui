@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+<div class="update-application" id="update-application" style="transition: 0.8s;">
+  <div class="col-md-10 col-sm-10">
+      <section class="padL35 content-header">
+          <h1 class="marTB15 txt-orange">
+            <span><span class="evo-role"></span>Application</span>
+          </h1>
+        </section>
+
+
+    <br>
+
+    <form class="col-md-12 col-sm-12" #applicationUpdateForm="ngForm" (ngSubmit)="saveUpdatedApplication(applicationUpdateForm)">
+      <div class="row">
+
+        <div class="col-md-5">
+          <div class="form-group">
+              <label for="applicationId">Application ID*</label>
+
+            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationId" min="1" autocomplete="off" required name="applicationId"  type="number" id="applicationId" class="form-control">
+            <label class="btn btn-info" type="label" mat-raised-button matTooltip="Only Numbers are allowed!"><i class="fa fa-exclamation"></i></label>
+
+          </div>
+        </div>
+
+        <div class="col-md-5" style="margin-left: 2em;">
+          <div class="form-group">
+              <label for="applicationCode">Application Code*</label>
+
+            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationCode" autocomplete="off" required name="applicationCode"  type="text" maxlength="4" id="applicationCode" class="form-control">
+            <label class="btn btn-info" type="label" mat-raised-button matTooltip="A Unique Code of Max 4 characters!"><i class="fa fa-exclamation"></i></label>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="form-group ">
+              <label for="applicationName">Application Name*</label>
+
+            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationName" autocomplete="off" required name="applicationName"  type="text" id="applicationName" class="form-control">
+            <label class="btn btn-info" type="label" mat-raised-button matTooltip="Only A-Z and - are allowed!"><i class="fa fa-exclamation"></i></label>
+
+          </div>
+        </div>
+
+        <div class="col-md-5" style="margin-left: 2em;">
+          <div class="form-group ">
+              <label for="description">Description*</label>
+            <input type="text"  [readonly]="viewType" [(ngModel)]="selectedApplication.description" autocomplete="off" required name="applicationDescription"  id="description" class="form-control">
+            <label type="label" class="btn btn-info" mat-raised-button matTooltip="A Description with a Max of 255 characters!"><i class="fa fa-exclamation"></i></label>
+            
+          </div>
+        </div>
+
+
+        <div class="col-md-5">
+          <div class="form-group">
+              <label for="description">Application Status*</label>
+              <br>
+            <select class="form-control" [disabled]="viewType" [(ngModel)]="selectedApplication.enabled" required name="applicationEnabled" id="enabled-option">
+            <option value=null selected disabled >Enable / Disable</option>
+            <option value="true" >Yes, Enabled!</option>
+            <option value="false" >No, Disabled!</option>
+          </select>
+          </div>
+        </div>
+      </div>
+      
+    
+
+      <div class="row">
+   
+        <div class="col-md-6 logo-image">
+          <div class="form-group">
+              <label for="description">Application Logo : </label>
+              <br>
+            <label class="btn btn-default btn-approve" style="padding: 5px; color: white;">
+    Upload<input type="file" name="applicationLogo" required
+    style="display: none;" (change)="logoUpload($event.target.files)" >
+    </label>
+    <br>
+            <!-- <h6 id="logoFileName">*No File Selected</h6> -->
+            <img id="logoImage" src="{{ selectedApplication.logo }}" alt="">
+          </div>
+        </div>
+
+        <div class="col-md-6 favicon-image">
+          <div class="form-group ">
+              <label for="description">Application Favicon : </label>
+              <br>
+            <label class="btn btn-default btn-approve" style="padding: 5px; color: white;">
+    Upload<input type="file" name="applicationFavicon" required
+    style="display: none;" (change)="faviconUpload($event.target.files)" >
+    </label>
+    <br>
+            <!-- <h6 id="faviconFileName">*No File Selected</h6> -->
+            <img id="faviconImage" src="{{ selectedApplication.favicon }}" alt="">
+          </div>
+        </div>
+      </div>
+      <br>
+      <button class="btn btn-primary btn-submit" [disabled]="applicationUpdateForm.invalid" id="submitButton" type="submit">Submit</button>
+
+      <button type="button" class="btn btn-primary btn-submit" (click)="changeType()">Modify</button>
+    </form>
+  </div>
+</div>
+</div>

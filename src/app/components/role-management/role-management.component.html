@@ -1,0 +1,168 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+        <span><span class="evo-role"></span>Role Management</span>
+      </h1>
+      
+    <div class="rightSecBtn adjust-plussymbol"> 
+        <span  [routerLink]="['/addrole']" mat-raised-button
+        matTooltip="Add New Role"><span class="evo-role"></span><span class="plus-symbol">+</span></span>
+     </div>
+    </section> 
+ 
+     <section class="content">
+       <div class="row row-padding">
+         <div class="col-md-12">
+           <h4 class="txt-blue">Role Details</h4>
+            <form>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <select class="form-control">
+                   <option>Select Application Category</option>
+                   <option>Operations</option>
+                   <option>Console</option>
+                   <option>Both</option>
+                 </select>
+               </div>
+              </div>
+              
+              <div class="col-md-3">
+                <div class="form-group">
+                  <select class="form-control">
+                   <option>Select Active / Inactive</option>
+                   <option>Active</option>
+                   <option>Inactive</option>
+                 </select>
+               </div>
+              </div>
+              
+              <div class="col-md-3">
+                <div class="form-group">
+                   <select class="form-control">
+                   <option>Select Status</option>
+                   <option>Pending Authorization</option>
+                   <option>Reject</option>
+                 </select>
+               </div>
+              </div>
+              
+              <div class="col-md-3 filterView">
+                <div class="checkbox">
+                 <label><input type="checkbox" value="">View All</label>
+             </div>
+              </div>
+            </div>   			
+         </form> 
+         </div>
+       </div>
+
+       <div class="row">
+    		<div class="col-md-12">
+    			<div class="gridHeadSec">
+    				<h4>Role Details</h4> 
+    				<h5>Showing 1 to 5 out of 5</h5>
+    				
+    				<div class="pull-right">						
+						<h5 class="txt-black">Results per Page</h5>							
+						<select name="pageSize" class="form-control">
+                <option value="5" selected>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+			     	</select>
+					</div>
+    			</div>
+    			<div class="tablegrid animated">
+    				<div class="float-searchicon" (click) = "gridsearch=!gridsearch"><span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom"><span class="glyphicon glyphicon-search"></span> </span></div>
+						<div class="slide-table">
+				 			<div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div>
+    							<div id="container-table">
+									<div id="content-table">
+					    				<table class="table table-bordered table-striped ">
+										<thead>
+									      <!-- <tr>
+									      <th *ngFor="let header of tableHeader">{{getSplitWord(header)}}<span>{{item1.join(" ")}}</span><br><span>{{item2.join(" ")}}</span></th>									       
+									      </tr> -->
+                        <tr>
+                            <th *ngFor="let header of tableHeader">{{header}}</th>									       
+                          </tr> 
+									      <tr class="grid-search" *ngIf="gridsearch">
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											
+											<td><span class="glyphicon glyphicon-search pull-right"></span></td>
+										</tr> 
+									    </thead>
+									    <tbody>
+									      <tr [routerLink]="['/viewrole']">
+									        <td>Admin-OP</td>
+									        <td>RTP Operations Admin</td>
+									        <td>RTP Operations</td>
+									        <td>Enabled</td>
+									        <td>Authorized</td>
+									        <td>User Authorized</td>
+									        <td>2017-06-18 23:14:45</td>
+									       
+									        <td></td>
+									      </tr>
+									      
+									      <tr ui-sref="viewrolemgmt">
+									        <td>Maker</td>
+									        <td>RTP Maker</td>
+									        <td>RTP Operations</td>
+									        <td>Enabled</td>
+									        <td>Authorized</td>
+									        <td>User Authorized</td>
+									        <td>2017-06-18 23:14:45</td>
+									       
+									        <td></td>
+									      </tr>
+									      
+									      <tr ui-sref="viewrolemgmt">
+									        <td>Checker</td>
+									        <td>RTP Checker</td>
+									        <td>RTP Operations</td>
+									        <td>Enabled</td>
+									        <td>Authorized</td>
+									        <td>User Authorized</td>
+									        <td>2017-06-18 23:14:45</td>
+									        
+									        <td></td>
+									      </tr>
+									      
+									       <tr ui-sref="viewrolemgmt">
+									        <td>Supervisor</td>
+									        <td>RTP Console Supervisor</td>
+									        <td>RTP Console</td>
+									        <td>Enabled</td>
+									        <td>Authorized</td>
+									        <td>User Authorized</td>
+									        <td>2017-06-18 23:14:45</td>
+									        
+									        <td></td>
+									      </tr>
+									    </tbody>
+									</table>
+								</div>
+							</div>
+							<div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div>
+    					</div>
+    				</div>
+    			<div class="pull-right marTB2 paginationSec">			
+					<button class="btn btn-default "><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+		   			 <input type="text" class="text-center paginationInput" style="width:30px;" value="1"> / 1 
+		    		<button class="btn btn-default " >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+    			</div>
+    		</div>
+    	</div>
+     </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+ 

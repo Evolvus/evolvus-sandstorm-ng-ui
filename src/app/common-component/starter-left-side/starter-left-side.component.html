@@ -1,0 +1,34 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="active">
+        <a [routerLink]="['/']">
+        <i class="evo-home4"></i><span>Home</span>
+        </a>
+      </li> 
+      <hr>
+      <li class="header">Application</li>
+      <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
+      <hr>
+      <li class="header">Administration</li> 
+      <li><a [routerLink]="['/rolemanagement']"><i class="evo-role"></i> <span>Role Management</span></a></li>
+      <li><a [routerLink]="['/usermanagement']"><i class="evo-newusers"></i> <span>User Management</span></a></li>
+      <hr>
+      <li class="header">Maintenance</li>          
+      <li><a ui-sref="routingcode"> <i class="evo-routingcode"></i><span>Routing Code</span></a></li>
+      <li><a ui-sref="reasoncode"><i class="evo-reasoncode"></i><span>Reason Code</span></a></li>
+      <li><a ui-sref="systemconfiguration"><i class="evo-Archival"></i> <span>System Configurations</span></a></li>
+      <hr>     
+      
+      <li class="header">Configurations</li>   
+      <li><a ui-sref="archival"><i class="evo-Archival"></i> <span>Archival</span></a></li>
+      <li><a ui-sref="communication"><i class="evo-notification2"></i> <span>Communication</span></a></li>
+       
+    </ul>
+    
+    <ul class="moreMenu">
+      <li class="text-center"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span>More</span></a></li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

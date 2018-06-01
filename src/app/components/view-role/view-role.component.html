@@ -1,0 +1,135 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper viewFormSec">
+  <!-- Content Header (Page header) -->
+  <section class="padL35 content-header ">
+    <h1 class="marTB15 txt-orange">
+      <div class="img_icon">
+       <span><i class="fa fa-angle-left"  mat-raised-button matTooltip="Back" [routerLink]="['/rolemanagement']" aria-hidden="true"></i> View Role Details</span>
+     </div>  
+    </h1>
+  </section> 
+
+   <section class="content">
+     <form>
+       <div class="row">
+         <div class="col-md-12">
+           <h4>Role Information</h4>
+           <hr>
+         </div>
+         <div class="col-md-4">
+                <div class="form-group">
+                   <h5>Role Name</h5>
+                   <label>Admin-OP</label>
+               </div>
+          </div>
+
+          <div class="col-md-4">						  
+               <div class="form-group">
+                   <h5>Application Category</h5>
+                   <label>RTP Operations</label>
+               </div>
+           </div>
+
+          <div class="col-md-4">
+               <div class="form-group">
+                   <h5>Enable/Disable</h5>
+                   <label>Enabled</label>
+               </div>
+          </div>
+
+          <div class="col-md-4">
+               <div class="form-group">
+                   <h5>Role Description</h5>
+                   <label>RTP Operations Admin</label>
+               </div>
+         </div>
+           
+       </div>
+
+       <div class="row">
+          <div class="col-md-12">
+            <h4>Menu Access Details</h4>
+            <hr>
+          </div>
+        </div>
+
+       <mat-tab-group>
+        <mat-tab label="Operations">
+          <div class="tabContent">
+            <div class="marB30">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <h5>Dashboard</h5>
+                    <label>Transaction Monitor, Liquidity Monitor</label>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <h5>Business Operations</h5>
+                  <label>Archival</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <h5>Payment Operations</h5>
+                  <label>Modify Payment</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Console">
+          <div class="tabContent">
+            <div class="marB30">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <h5>Administration</h5>
+                  <label>User Management</label>
+              </div>
+              </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <h5>Business Operations</h5>
+                <label>Checker</label>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                  <h5>Maintenance</h5>
+                  <label>Reason Code Maintenance</label>
+              </div>
+            </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+       
+    <!-- <div class="row" ng-show="remark">
+       <div class="col-md-4">
+           <div class="form-group">
+             <h5>Remarks</h5>
+              <textarea class="form-control" rows="5" id="comment"></textarea>
+           </div>
+         </div>
+    </div> -->
+       
+    <div class="row text-center">
+       <div class="col-sm-12">
+          <div class="">
+               <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
+               <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button>
+               <button type="button" class="btn btn-default btn-submit"> Modify</button>
+               <button type="button" class="btn btn-default btn-close" ui-sref="rolemanagement"> Cancel</button>
+           </div>
+       </div>
+     </div>
+     </form>
+   </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+          <style>
+.content-wrapper{height: {{contentwrapper}} }
+</style>

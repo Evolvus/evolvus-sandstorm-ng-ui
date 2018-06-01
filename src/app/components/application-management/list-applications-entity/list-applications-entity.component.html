@@ -1,0 +1,67 @@
+<div class="content-wrapper">
+
+  <div class="list-applications" id="list-applications" style="transition: 0.8s;">
+    <div class="col-md-12 col-sm-12">
+
+      
+        <section class="padL35 content-header col-md-12">
+            <h1 class="marTB15 txt-orange">
+              <span><span class="evo-role"></span>Application Management</span>
+            </h1>
+            
+          <div class="rightSecBtn adjust-plussymbol" style="margin-top: -2em;"> 
+              <span  [routerLink]="['/createApplication']" mat-raised-button
+              matTooltip="Add New Application"><span class="evo-role"></span><span class="plus-symbol">+</span></span>
+           </div>
+          </section> 
+
+<br>
+<br>
+    
+      <div class="util" id="util">
+        <div class="search-util col-md-11 col-sm-11 gridHeadSec">
+            <h4 (click)="showSearchBar()" style="cursor:pointer;">Search Applications &nbsp; &nbsp; <i class="fa fa-search"></i></h4>
+            <br><hr>
+          <div class="form-group" *ngIf="isSearchBarVisible">
+            <input  type="text" id="searchBar" [(ngModel)]="searchText" class="form-control ">
+            <span style="float:right; margin-top: -28px; margin-right: 10px;"><i class="fa fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+
+<br>
+      <div class="col-md-12">
+        <div *ngIf="(applications | search: searchText).length === 0">
+          <label for="" style="color: red;">* No Results To Display!</label>
+        </div>
+      </div>
+
+
+      <!--Table-->
+      <div class="list-view col-md-11 col-sm-11">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Application Name</th>
+              <th>Application Code</th>
+              <th>Enabled</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let application of applications | search : searchText; let i = index;" (click)="selectApplication(application); viewSelectedApplication();">
+              <th scope="row">{{ i+1 }}</th>
+              <td>{{ application.applicationName | uppercase}}</td>
+              <td>{{ application.applicationCode | uppercase}}</td>
+              <td>{{ application.enabled }}</td>
+            </tr>
+          </tbody>
+          <!--Table body-->
+
+        </table>
+        <!--Table-->
+      </div>
+
+    </div>
+  </div>
+</div>

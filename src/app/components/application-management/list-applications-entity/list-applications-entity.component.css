@@ -1,0 +1,57 @@
+
+.list-applications{
+margin-left: 2em;
+}
+label {
+  color: black;
+  font-weight: 50;
+}
+
+
+.btn {
+  padding: 5px;
+}
+
+button .btn .view-details-button {
+  background-color: #0d476d;
+  color: white;
+}
+
+#util {
+margin-top: 4em;
+}
+
+#appDescription {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+#searchBarName{
+  color: #0d476d;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 200; 
+}
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: #ff8500;
+  color: white;
+}
+
+thead th {
+  font-weight: 50;
+  background-color:#2375a3;
+  color: white;
+
+}
+thead{
+  border: 10px solid #2375a3;
+}
+thead th{
+  border-radius: 5px;
+}
+.util{
+  margin-bottom: 2em;
+}

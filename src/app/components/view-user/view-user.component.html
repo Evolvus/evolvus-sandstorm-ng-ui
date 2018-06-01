@@ -1,0 +1,147 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper viewFormSec">
+    <!-- Content Header (Page header) -->
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+       <div class="img_icon">
+         <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/usermanagement']" aria-hidden="true"></i> View User Details</span>
+       </div>  
+      </h1>
+    </section> 
+ 
+     <section class="content">
+       <form>
+         <div class="row">
+           <div class="col-md-12">
+             <h4>User Information</h4>
+             <hr>
+           </div>
+            <div class="col-md-8 ">
+              <div class="col-md-6 no-padding-left">
+                  <div class="form-group">
+                     <h5>User Id</h5>
+                     <label>001</label>
+                 </div>
+                                 
+                 <div class="form-group">
+                     <h5>Designation</h5>
+                     <label>Software Engineer</label>
+                 </div>
+                 
+                 <div class="form-group">
+                     <h5>Mobile Number</h5>
+                     <label>9632145879</label>
+                 </div>
+                 
+                 <div class="form-group">
+                     <h5>User Name</h5>
+                     <label>Ratheesh</label>
+                 </div>
+              </div>
+              
+               <div class="col-md-6">	    			  		
+                 
+                 <div class="form-group">
+                     <h5>Branch ID </h5>
+                     <label>125896</label>
+                 </div>
+                 
+                 <div class="form-group">
+                     <h5>Email ID </h5>
+                     <label>ratheesh@gmail.com</label>
+                 </div>
+                 
+                 <div class="form-group">
+                     <h5>Fax</h5>
+                     <label>08-080-23658965</label>
+                 </div>	
+               </div>
+         </div>
+         
+         <div class="col-md-4">
+           <div><img src="assets/images/user.jpeg" height="150" width="190"></div>				
+           <div class="">
+             <button type="button" class="btn btn-info btn-add" style="margin-top:11%;margin-bottom:5%;">
+                 <i class="fa fa-camera" aria-hidden="true"></i> Update / Change Photo
+               </button>
+             </div>				    				     
+         </div>				
+         </div>
+         
+         <div class="row">
+           <div class="col-md-12">
+             <h4>Access Details</h4>
+             <hr>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Role</h5>
+               <label>Admin</label>
+            </div>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Enable / Disable</h5>
+               <label>Enable</label>
+            </div>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Active / Inactive</h5>
+               <label>Active</label>
+             </div>
+           </div>
+         </div>
+         
+         <div class="row">
+           <div class="col-md-12">
+             <h4>Amount Limit Details</h4>
+             <hr>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Transaction Limit</h5>
+               <label>200,000,000.00</label>
+            </div>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Daily Limit</h5>
+               <label>100,000.00</label>
+            </div>
+           </div>
+           
+           <div class="col-md-4">
+             <div class="form-group">
+               <h5>Currency</h5>
+               <label>USD</label>
+            </div>
+           </div>
+         </div>
+             <!-- <div class="row" ng-show="remark">
+         <div class="col-md-4">
+             <div class="form-group">
+               <h5>Remarks</h5>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+             </div>
+           </div>
+         </div> -->
+         <div class="row text-center">
+         <div class="col-sm-12">
+            <div class="">
+                 <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
+                 <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button>
+                 <button type="button" class="btn btn-default btn-submit"> Modify</button>
+                 <button type="button" class="btn btn-default btn-close" [routerLink]="['/usermanagement']"> Cancel</button>
+             </div>
+         </div>
+       </div>
+       </form>
+     </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+ 
