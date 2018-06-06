@@ -4,7 +4,7 @@ form {
 }
 
 label {
-  color: black;
+  /* color: black; */
   font-weight: 50;
 }
 
@@ -50,4 +50,11 @@ button:disabled {
 
 button.form-submit {
   margin-top: 2em;
+}
+.example-form {
+  min-width: 180px;
+  width: 80%;
+}
+.example-full-width {
+  width: 90%;
 }

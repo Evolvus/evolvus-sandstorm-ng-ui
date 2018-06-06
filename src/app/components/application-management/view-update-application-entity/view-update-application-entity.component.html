@@ -1,71 +1,79 @@
 <div class="content-wrapper">
 <div class="update-application" id="update-application" style="transition: 0.8s;">
-  <div class="col-md-10 col-sm-10">
+
+
+  
+
+      
+
       <section class="padL35 content-header">
           <h1 class="marTB15 txt-orange">
-            <span><span class="evo-role"></span>Application</span>
+              <div class="img_icon">
+<span><i class="fa fa-angle-left"  mat-raised-button matTooltip="Back" [routerLink]="['/applicationManagement']" aria-hidden="true"></i> View Application Details</span>
+          </div>
           </h1>
         </section>
 
+        <section class="content">
+            <div class="row">
+              <div class="col-md-3">
+                  <h4 class="txt-blue">Application Information</h4>
+               <hr>
+                </div>
+              </div>
 
-    <br>
-
-    <form class="col-md-12 col-sm-12" #applicationUpdateForm="ngForm" (ngSubmit)="saveUpdatedApplication(applicationUpdateForm)">
-      <div class="row">
-
-        <div class="col-md-5">
-          <div class="form-group">
-              <label for="applicationId">Application ID*</label>
-
-            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationId" min="1" autocomplete="off" required name="applicationId"  type="number" id="applicationId" class="form-control">
-            <label class="btn btn-info" type="label" mat-raised-button matTooltip="Only Numbers are allowed!"><i class="fa fa-exclamation"></i></label>
-
-          </div>
-        </div>
-
-        <div class="col-md-5" style="margin-left: 2em;">
-          <div class="form-group">
-              <label for="applicationCode">Application Code*</label>
-
-            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationCode" autocomplete="off" required name="applicationCode"  type="text" maxlength="4" id="applicationCode" class="form-control">
-            <label class="btn btn-info" type="label" mat-raised-button matTooltip="A Unique Code of Max 4 characters!"><i class="fa fa-exclamation"></i></label>
-          </div>
-        </div>
-
-        <div class="col-md-5">
-          <div class="form-group ">
-              <label for="applicationName">Application Name*</label>
-
-            <input  [readonly]="viewType" [(ngModel)]="selectedApplication.applicationName" autocomplete="off" required name="applicationName"  type="text" id="applicationName" class="form-control">
-            <label class="btn btn-info" type="label" mat-raised-button matTooltip="Only A-Z and - are allowed!"><i class="fa fa-exclamation"></i></label>
-
-          </div>
-        </div>
-
-        <div class="col-md-5" style="margin-left: 2em;">
-          <div class="form-group ">
-              <label for="description">Description*</label>
-            <input type="text"  [readonly]="viewType" [(ngModel)]="selectedApplication.description" autocomplete="off" required name="applicationDescription"  id="description" class="form-control">
-            <label type="label" class="btn btn-info" mat-raised-button matTooltip="A Description with a Max of 255 characters!"><i class="fa fa-exclamation"></i></label>
-            
-          </div>
-        </div>
-
-
-        <div class="col-md-5">
-          <div class="form-group">
-              <label for="description">Application Status*</label>
-              <br>
-            <select class="form-control" [disabled]="viewType" [(ngModel)]="selectedApplication.enabled" required name="applicationEnabled" id="enabled-option">
-            <option value=null selected disabled >Enable / Disable</option>
-            <option value="true" >Yes, Enabled!</option>
-            <option value="false" >No, Disabled!</option>
-          </select>
-          </div>
-        </div>
-      </div>
-      
     
+
+    <form  #applicationUpdateForm="ngForm" (ngSubmit)="saveUpdatedApplication(applicationUpdateForm)">
+
+
+        <div class="row">
+
+            <div class="col-lg-5">
+              <div class="form-group">
+                 <mat-form-field class="example-full-width">
+                     <input [(ngModel)]="selectedApplication.applicationCode" required autocomplete="off" matInput name="applicationCode" maxlength="4"   id="applicationCode" placeholder="Application Code">
+                     <label class="btn btn-info"  mat-raised-button matTooltip="A Unique Code of Max 4 characters!"><i class="fa fa-exclamation"></i></label>
+                   </mat-form-field>
+                 </div>
+            </div>
+             
+            
+            <div class="col-lg-5">
+              <div class="form-group">
+                 <mat-form-field class="example-full-width">
+                     <input [(ngModel)]="selectedApplication.applicationName" required autocomplete="off" matInput name="applicationName"  id="applicationName" placeholder="Application Name">
+                     <label class="btn btn-info"  mat-raised-button matTooltip="Only A-Z and - are allowed!"><i class="fa fa-exclamation"></i></label>
+                   </mat-form-field>
+                 </div>
+            </div>
+    
+    <br>
+    <div class="col-lg-5">
+      <div class="form-group">
+         <mat-form-field class="example-full-width">
+             <input [(ngModel)]="selectedApplication.description" required autocomplete="off" matInput name="applicationDescription"   id="applicationDescription" placeholder="Application Description">
+             <label class="btn btn-info"  mat-raised-button matTooltip="A Description with a Max of 255 characters!"><i class="fa fa-exclamation"></i></label>
+           </mat-form-field>
+         </div>
+    </div>
+        
+    <div class="col-lg-5" >
+      <div class="form-group">
+         <mat-form-field [color]="'primary'" class="example-full-width " >
+             <mat-select  [(ngModel)]="selectedApplication.enabled" placeholder="Application Status" required [(ngModel)]="applicationStatus" name="applicationStatus" id="applicationStatus"> 
+               <mat-option value="enabled">Enabled</mat-option>
+               <mat-option value="disabled">Disabled</mat-option>
+             </mat-select>
+           </mat-form-field>
+         </div>
+    </div>
+        
+          </div>
+
+
+
+
 
       <div class="row">
    
@@ -102,6 +110,6 @@
 
       <button type="button" class="btn btn-primary btn-submit" (click)="changeType()">Modify</button>
     </form>
-  </div>
+  </section> 
 </div>
 </div>

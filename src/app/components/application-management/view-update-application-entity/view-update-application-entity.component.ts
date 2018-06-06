@@ -3,7 +3,6 @@ import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ResponsiveService } from '../../shared/responsive.service';
 import { ApplicationModel } from '../../shared/application.model';
 
 @Component({
@@ -14,13 +13,12 @@ import { ApplicationModel } from '../../shared/application.model';
 
 export class ViewUpdateApplicationEntityComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private responsiveService: ResponsiveService) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   selectedApplicationCode = "";
   selectedApplicationName: string = "";
   selectedApplication = {
     _id: "",
-    applicationId: 0,
     applicationCode: "",
     applicationName: "",
     description: "",
@@ -28,8 +26,8 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
     logo: "",
     favicon: ""
   };
-  viewType = true;
 
+  viewType = true;
   logoFile: File = null;
   faviconFile: File = null;
   logoInBase64: string = "";
@@ -46,30 +44,9 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
       });
-    this.fetchSideNavNotification();
 
-
-    this.responsiveService.sideNavOpen.subscribe((sideNavOpenNotification) => {
-      if (sideNavOpenNotification === true) {
-        document.getElementById('update-application').style.marginLeft = "11em";
-      } else {
-        document.getElementById('update-application').style.marginLeft = "1em";
-      }
-    });
+  
   }
-
-  ngAfterViewInit() {
-    this.fetchSideNavNotification();
-  }
-
-  appChanged(event: HTMLInputElement) {
-    for (let application of this.applications) {
-      if (application.applicationName === this.selectedApplicationName) {
-        this.selectedApplication = application;
-      }
-    }
-  }
-
 
 
 
@@ -101,7 +78,6 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
   saveUpdatedApplication(applicationForm: NgForm) {
     var applicationEnabled: boolean;
     this.http.put('http://192.168.1.115:8080/updateApplication/' + this.selectedApplication._id, {
-      applicationId: +this.selectedApplication.applicationId,
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,
@@ -120,14 +96,7 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
   }
 
 
-  fetchSideNavNotification() {
-    var isSideNavOpen = this.responsiveService.isSideNavOpen;
-    if (isSideNavOpen === true) {
-      document.getElementById('update-application').style.marginLeft = "11em";
-    } else {
-      document.getElementById('update-application').style.marginLeft = "2em";
-    }
-  }
+ 
 
 
 

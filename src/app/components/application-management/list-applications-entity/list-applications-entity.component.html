@@ -1,15 +1,16 @@
 <div class="content-wrapper">
 
   <div class="list-applications" id="list-applications" style="transition: 0.8s;">
-    <div class="col-md-12 col-sm-12">
+ 
+      
 
       
-        <section class="padL35 content-header col-md-12">
+        <section class="padL35 content-header">
             <h1 class="marTB15 txt-orange">
               <span><span class="evo-role"></span>Application Management</span>
             </h1>
             
-          <div class="rightSecBtn adjust-plussymbol" style="margin-top: -2em;"> 
+          <div class="rightSecBtn adjust-plussymbol"> 
               <span  [routerLink]="['/createApplication']" mat-raised-button
               matTooltip="Add New Application"><span class="evo-role"></span><span class="plus-symbol">+</span></span>
            </div>
@@ -18,39 +19,46 @@
 <br>
 <br>
     
-      <div class="util" id="util">
-        <div class="search-util col-md-11 col-sm-11 gridHeadSec">
-            <h4 (click)="showSearchBar()" style="cursor:pointer;">Search Applications &nbsp; &nbsp; <i class="fa fa-search"></i></h4>
-            <br><hr>
-          <div class="form-group" *ngIf="isSearchBarVisible">
-            <input  type="text" id="searchBar" [(ngModel)]="searchText" class="form-control ">
-            <span style="float:right; margin-top: -28px; margin-right: 10px;"><i class="fa fa-search"></i></span>
-          </div>
+<section class="content">
+    <div class="row row-padding">
+      <div class="col-md-10">
+            <h4 class="txt-blue">List of Applications</h4>
+            <br>
         </div>
       </div>
 
-<br>
-      <div class="col-md-12">
-        <div *ngIf="(applications | search: searchText).length === 0">
-          <label for="" style="color: red;">* No Results To Display!</label>
-        </div>
-      </div>
+
+     
 
 
       <!--Table-->
-      <div class="list-view col-md-11 col-sm-11">
-        <table class="table table-bordered table-hover">
+      <div class="tablegrid animated row">
+        <div class="col-md-10">
+        	<div class="float-searchicon" (click) = "gridSearch=!gridSearch"><span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom"><span class="glyphicon glyphicon-search"></span> </span></div>
+          <div class="slide-table">
+              <div id="container-table">
+                  <div id="content-table">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>#</th>
+             
               <th>Application Name</th>
               <th>Application Code</th>
               <th>Enabled</th>
             </tr>
+            <tr class="grid-search" *ngIf="gridSearch">
+                
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                
+                
+                <td><span class="glyphicon glyphicon-search pull-right"></span></td>
+              </tr> 
           </thead>
           <tbody>
-            <tr *ngFor="let application of applications | search : searchText; let i = index;" (click)="selectApplication(application); viewSelectedApplication();">
-              <th scope="row">{{ i+1 }}</th>
+            <tr *ngFor="let application of applications" (click)="selectApplication(application); viewSelectedApplication();">
+            
               <td>{{ application.applicationName | uppercase}}</td>
               <td>{{ application.applicationCode | uppercase}}</td>
               <td>{{ application.enabled }}</td>
@@ -59,9 +67,13 @@
           <!--Table body-->
 
         </table>
+      </div>
+    </div>
+  </div>
+</div>
         <!--Table-->
       </div>
+</section>
 
-    </div>
   </div>
 </div>

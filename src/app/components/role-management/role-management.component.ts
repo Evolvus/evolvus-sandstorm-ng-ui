@@ -1,5 +1,8 @@
+import { RoleModel } from '../../shared/role-model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { RoleDataService } from '../../shared/role-data.service';
+import { Pipe } from '@angular/core';
 
 @Component({
   selector: 'app-role-management',
@@ -9,24 +12,23 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class RoleManagementComponent implements OnInit {
   tableHeader:any = [];
 
-  constructor() { }
+  constructor(private roleDataService: RoleDataService) { }
 
   ngOnInit() {
-    this.tableHeader = ['Role Name','Role Description','Application Category','Enable/Disable','Status','Last Action on User','Last Modified Date Time'];
+    this.tableHeader = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
+    this.listOfRoles = this.roleDataService.getRoleData();
+    this.listOfApplicationCategory = this.roleDataService.getlistOfApplicationCategory();
   }
 
-  getSplitWord = function(item){
-   var item1 = [];
-   var item2 = [];
-       
-     var res = item.split(" ");
-     for(var i = 0; i <= 1; i++){
-         item1.push(res[i]);
-     }
+  role: RoleModel;
+  listOfRoles: RoleModel[]=[];
+  listOfApplicationCategory: string [] = [];
+  applicationCategory: string= "Select Application Category";
 
-     for(var i = 2; i <= res.length; i++){
-        item2.push(res[i]);
-     }	          
- };
- 
+
+
+
+  checkBoxTicked(event){
+    console.log(event.checked);
+  }
 }

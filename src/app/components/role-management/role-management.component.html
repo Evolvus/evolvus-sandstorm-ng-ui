@@ -15,43 +15,45 @@
      <section class="content">
        <div class="row row-padding">
          <div class="col-md-12">
-           <h4 class="txt-blue">Role Details</h4>
+           <h4 class="txt-blue">Filters</h4>
             <form>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-lg-3">
+                 
                 <div class="form-group">
-                  <select class="form-control">
-                   <option>Select Application Category</option>
-                   <option>Operations</option>
-                   <option>Console</option>
-                   <option>Both</option>
-                 </select>
+                    <mat-form-field [color]="'primary'">
+                        <mat-select placeholder="Application Category" required [(ngModel)]="applicationCategory" name="applicationCategory">
+                          <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                </div>
               </div>
               
-              <div class="col-md-3">
+              <div class="col-lg-3">
                 <div class="form-group">
-                  <select class="form-control">
-                   <option>Select Active / Inactive</option>
-                   <option>Active</option>
-                   <option>Inactive</option>
-                 </select>
+                    <mat-form-field [color]="'primary'">
+                        <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus" name="activationStatus">
+                          <mat-option  value="active">Active</mat-option>
+                          <mat-option  value="inactive">Inactive</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                </div>
               </div>
               
-              <div class="col-md-3">
+              <div class="col-lg-3">
                 <div class="form-group">
-                   <select class="form-control">
-                   <option>Select Status</option>
-                   <option>Pending Authorization</option>
-                   <option>Reject</option>
-                 </select>
+                    <mat-form-field [color]="'primary'">
+                        <mat-select placeholder="Processing Status" required [(ngModel)]="processingStatus" name="processingStatus">
+                          <mat-option  value="pendingAuthorization">Pending Authorization</mat-option>
+                          <mat-option  value="rejected">Rejected</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                </div>
               </div>
               
               <div class="col-md-3 filterView">
-                <div class="checkbox">
-                 <label><input type="checkbox" value="">View All</label>
+                <div class="checkbox form-group">
+                    <mat-checkbox (change)="checkBoxTicked($event)" >View All</mat-checkbox>
              </div>
               </div>
             </div>   			
@@ -62,8 +64,8 @@
        <div class="row">
     		<div class="col-md-12">
     			<div class="gridHeadSec">
-    				<h4>Role Details</h4> 
-    				<h5>Showing 1 to 5 out of 5</h5>
+    				<h4>Available Role Details</h4> 
+    				<h5>Showing 1 to {{ listOfRoles.length }} out of {{ listOfRoles.length }}</h5>
     				
     				<div class="pull-right">						
 						<h5 class="txt-black">Results per Page</h5>							
@@ -102,53 +104,18 @@
 										</tr> 
 									    </thead>
 									    <tbody>
-									      <tr [routerLink]="['/viewrole']">
-									        <td>Admin-OP</td>
-									        <td>RTP Operations Admin</td>
-									        <td>RTP Operations</td>
-									        <td>Enabled</td>
-									        <td>Authorized</td>
-									        <td>User Authorized</td>
-									        <td>2017-06-18 23:14:45</td>
+									      <tr [routerLink]="['/viewrole']" *ngFor="let role of listOfRoles">
+									        <td>{{role.name}}</td>
+									        <td>{{role.description}}</td>
+									        <td>{{role.applicationCategory}}</td>
+									        <td>{{role.activationStatus}}</td>
+													<td>{{role.processingStatus}}</td>
+													<td>{{role.associatedUsers}}</td>
+									        <td>{{role.lastModifiedTime | date : 'full'}} </td>
 									       
 									        <td></td>
 									      </tr>
-									      
-									      <tr ui-sref="viewrolemgmt">
-									        <td>Maker</td>
-									        <td>RTP Maker</td>
-									        <td>RTP Operations</td>
-									        <td>Enabled</td>
-									        <td>Authorized</td>
-									        <td>User Authorized</td>
-									        <td>2017-06-18 23:14:45</td>
-									       
-									        <td></td>
-									      </tr>
-									      
-									      <tr ui-sref="viewrolemgmt">
-									        <td>Checker</td>
-									        <td>RTP Checker</td>
-									        <td>RTP Operations</td>
-									        <td>Enabled</td>
-									        <td>Authorized</td>
-									        <td>User Authorized</td>
-									        <td>2017-06-18 23:14:45</td>
-									        
-									        <td></td>
-									      </tr>
-									      
-									       <tr ui-sref="viewrolemgmt">
-									        <td>Supervisor</td>
-									        <td>RTP Console Supervisor</td>
-									        <td>RTP Console</td>
-									        <td>Enabled</td>
-									        <td>Authorized</td>
-									        <td>User Authorized</td>
-									        <td>2017-06-18 23:14:45</td>
-									        
-									        <td></td>
-									      </tr>
+									    
 									    </tbody>
 									</table>
 								</div>

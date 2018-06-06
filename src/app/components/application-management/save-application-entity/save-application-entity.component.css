@@ -8,10 +8,6 @@ form {
   transition: 0.8s;
 }
 
-
-
-
-
 label {
   color: black;
   font-weight: 50;
@@ -23,8 +19,6 @@ img {
   height: 100px;
   width: 150px;
 }
-
-
 
 button:disabled {
   cursor: not-allowed;
@@ -41,7 +35,7 @@ button:disabled {
   border-radius: 20px;
   float: right;
   font-size: 12px;
-  margin-top: -35px;
+  margin-top: -15px;
   margin-right: -35px;
 }
 
@@ -56,4 +50,13 @@ button:disabled {
 
 button.form-submit {
   margin-top: 2em;
+}
+
+
+.example-form {
+  min-width: 180px;
+  width: 80%;
+}
+.example-full-width {
+  width: 90%;
 }

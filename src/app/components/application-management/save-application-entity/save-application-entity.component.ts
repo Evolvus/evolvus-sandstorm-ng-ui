@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ResponsiveService } from '../../shared/responsive.service';
 
 @Component({
   selector: 'app-save-application-entity',
@@ -10,27 +9,14 @@ import { ResponsiveService } from '../../shared/responsive.service';
 })
 export class SaveApplicationEntityComponent implements OnInit {
 
-  constructor(private http: HttpClient, private responsiveService: ResponsiveService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
 
-    this.fetchSideNavNotification();
 
-    this.responsiveService.sideNavOpen.subscribe((sideNavOpenNotification) => {
-      var saveAppElement = document.getElementById('create-application');
-      if (saveAppElement !== null) {
-        if (sideNavOpenNotification === true) {
-          document.getElementById('create-application').style.marginLeft = "11em";
-        } else {
-          document.getElementById('create-application').style.marginLeft = "2em";
-        }
-      }
-    });
   }
 
-  ngAfterViewInit() {
-    this.fetchSideNavNotification();
-  }
+
   logoFile: File = null;
   faviconFile: File = null;
   logoInBase64: string = "";
@@ -40,14 +26,7 @@ export class SaveApplicationEntityComponent implements OnInit {
   applicationSuccessfullySaved: boolean = undefined;
   application: any;
 
-  fetchSideNavNotification() {
-    var isSideNavOpen = this.responsiveService.isSideNavOpen;
-    if (isSideNavOpen === true) {
-      document.getElementById('create-application').style.marginLeft = "11em";
-    } else {
-      document.getElementById('create-application').style.marginLeft = "2em";
-    }
-  }
+  
 
 
   logoUpload(file: FileList) {
@@ -76,24 +55,19 @@ export class SaveApplicationEntityComponent implements OnInit {
   }
 
   saveApplication(applicationForm: NgForm) {
-    var applicationEnabled: boolean;
-    if (applicationForm.form.value.applicationEnabled === 'yes') {
-      applicationEnabled = true;
-    } else {
-      applicationEnabled = false;
-    }
+   console.log("save app");
     var result = this.http.post('http://192.168.1.115:8080/saveApplication',
       {
-        applicationId: +applicationForm.form.value.applicationId,
         applicationCode: applicationForm.form.value.applicationCode,
         applicationName: applicationForm.form.value.applicationName,
         description: applicationForm.form.value.applicationDescription,
-        enabled: applicationEnabled,
+        enabled:  applicationForm.form.value.applicationEnabled,
         logo: this.logoInBase64,
         favicon: this.faviconInBase64
+      
       }).subscribe((response) => {
+        console.log(response+ " response");
         if (response !== "FAILURE") {
-          console.log(response);
           this.application = response;
           this.applicationSuccessfullySaved = true;
         }

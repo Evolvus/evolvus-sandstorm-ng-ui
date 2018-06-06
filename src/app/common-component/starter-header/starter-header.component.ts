@@ -17,4 +17,8 @@ export class StarterHeaderComponent implements OnInit {
     this.body.classList.toggle('sidebar-collapse');
   }
 
+logout(){
+  
+}
+
 }

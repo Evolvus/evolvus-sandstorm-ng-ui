@@ -9,71 +9,88 @@
     </section> 
  
      <section class="content">
-       <form>
-         <div class="row">
-           <div class="col-md-12">
-             <h4>Role Information</h4>
-             <hr>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <label>Role Name<sup class="text-danger">*</sup></label>
-                 <input type="text" class="form-control" id="email" >
-                </div>
-           </div>
-           
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <label>Application Category</label>
-                <!--  <input type="text" class="form-control" id="email" > -->
-                   <select class="form-control" ng-change="categoryChange()" ng-model="categoryValue">
-                  <option value="">Select Category</option>
-                  <option value="0">Console</option>
-                  <option value="1">Operations</option>
-                  <option value="2">Both</option>
-                </select>
-                </div>
-           </div>
-           
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <label>Enable/ Disable</label>
-               <select class="form-control">
-                  <option>Select Enable/Disable</option>
-                  <option>Enable</option>
-                  <option>Disable</option>
-                </select>
-                </div>
-           </div>
-           
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <label>Role Description</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
-                </div>
-           </div>
-                   
-         </div>
 
-         <!-- <div class="row">
+
+
+
+       
+         <div class="row">
+
+           <div class="col-md-4">
+             <h4>Role Information</h4>
+          <hr>
+           </div>
+           </div>
+
+
+
+           <form class="new-role" class="roleForm" #roleSaveForm="ngForm" (ngSubmit)="saveRole(roleSaveForm)">
+              <div class="row">
+              <div class="col-md-5">
+                  <div class="form-group">
+                     <mat-form-field class="example-full-width">
+                         <input required matInput placeholder="Role Name">
+
+                       </mat-form-field>
+                     </div>
+                </div>
+
+            
+           
+           
+           <div class="col-md-5">
+             <div class="form-group">
+                <mat-form-field [color]="'primary'" class="example-full-width">
+                    <mat-select placeholder="Application Category" required [(ngModel)]="applicationCategory" name="applicationCategory"> 
+                      <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+           </div>
+
+           <div class="col-md-5">
+              <div class="form-group">
+                 <mat-form-field  class="example-full-width">
+                     <textarea required matInput placeholder="Role Description"></textarea>
+
+                   </mat-form-field>
+                 </div>
+            </div>
+           
+           <div class="col-md-5">
+             <div class="form-group">
+                <mat-form-field [color]="'primary'" class="example-full-width">
+                    <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus" name="activationStatus">
+                      <mat-option  value="active">Active</mat-option>
+                      <mat-option  value="inactive">Inactive</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </div>
+                </div>
+     
+           
+           
+     
+           </div>
+          </form>
+         
+
+         <div class="row" *ngIf="applicationCategory !=='' ">
           <div class="col-md-12">
             <h4>Menu Access Details</h4>
             <hr>
           </div>
-        </div> -->
+        </div> 
 
-<!-- 
+
       <div>
-           <mat-tab-group>
+           <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Console'|| applicationCategory == 'Flux-RTP Console'">
               <mat-tab label="Console">
                   <div class="row">
                       <div class="col-md-12">
                       <div class="rolemenu-acces-tabs">
                           <div class="tabContent">
+                            
                               <div class="marB30">
                                 <label><b>Administration</b></label>
                                 <div class="form-group">									
@@ -116,9 +133,8 @@
               </mat-tab>
             </mat-tab-group>
       </div>
-      
       <div>
-         <mat-tab-group>
+         <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
             <mat-tab label="Operations">
                 <div class="row">
                     <div class="col-md-12">
@@ -174,18 +190,19 @@
                   </div>
             </mat-tab>
           </mat-tab-group>
-    </div> -->
+    </div> 
     
 
          <div class="row text-center">
          <div class="col-sm-12">
             <div class="">
-                 <button type="button" class="btn btn-default btn-submit">Submit</button>
-                 <button type="button" class="btn btn-default btn-close" ui-sref="rolemanagement"> Close</button>
+                 <button type="button" class="btn btn-default btn-submit">Add Role</button>
+                 <button type="button" class="btn btn-default btn-close" routerLink="/rolemanagement"> Close</button>
              </div>
          </div>
        </div>
-       </form>
+    
+      
      </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
  

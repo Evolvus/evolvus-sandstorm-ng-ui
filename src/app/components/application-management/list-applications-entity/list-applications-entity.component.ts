@@ -25,10 +25,10 @@ export class ListApplicationsEntityComponent implements OnInit {
 
 
   applications: any[];
-  isSearchBarVisible: boolean = false;
+
   selectedApplication: { applicationId: number, applicationCode: string, applicationName: string, description: string, enabled: boolean, logo: string, favicon: string }
     = { applicationId: 0, applicationCode: "", applicationName: "", description: "", enabled: null, logo: "", favicon: "" };
-
+gridSearch: boolean = false;
 
   selectApplication(application) {
     this.selectedApplication = application;
@@ -40,10 +40,5 @@ export class ListApplicationsEntityComponent implements OnInit {
     this.router.navigate(['/viewApplication', this.selectedApplication.applicationCode]);
   }
 
-  navigateToCreateNewComponent() {
-    this.router.navigate(['/createApplication']);
-  }
-  showSearchBar(){
-    this.isSearchBarVisible = !this.isSearchBarVisible;
-  }
+ 
 }

@@ -29,11 +29,10 @@
                    <label>RTP Operations</label>
                </div>
            </div>
-
           <div class="col-md-4">
                <div class="form-group">
-                   <h5>Enable/Disable</h5>
-                   <label>Enabled</label>
+                   <h5>Activation Status</h5>
+                   <label>Active</label>
                </div>
           </div>
 
@@ -123,7 +122,7 @@
                <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
                <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button>
                <button type="button" class="btn btn-default btn-submit"> Modify</button>
-               <button type="button" class="btn btn-default btn-close" ui-sref="rolemanagement"> Cancel</button>
+               <button type="button" class="btn btn-default btn-close" routerLink="/rolemanagement"> Cancel</button>
            </div>
        </div>
      </div>
@@ -131,5 +130,5 @@
    </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
           <style>
-.content-wrapper{height: {{contentwrapper}} }
+/* .content-wrapper{height: {{contentwrapper}} } */
 </style>
