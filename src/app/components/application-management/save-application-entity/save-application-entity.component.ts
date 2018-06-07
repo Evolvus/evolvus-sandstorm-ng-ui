@@ -27,7 +27,7 @@ export class SaveApplicationEntityComponent implements OnInit {
   faviconUrl: any;
   applicationSuccessfullySaved: boolean = undefined;
   application: any;
-
+  applicationStatus: string ="";
   
 
 

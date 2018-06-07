@@ -18,6 +18,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   selectedApplicationCode = "";
   selectedApplicationName: string = "";
+  applicationStatus: string="";
   selectedApplication = {
     _id: "",
     applicationCode: "",

@@ -13,5 +13,6 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     this.userTableHeader = ['User Id','User Name','User Role','Enable/Disable','Active/Inactive','Status','Last Action on User','Last Modified Date Time'];
   }
+  gridsearch: boolean = false;
 
 }

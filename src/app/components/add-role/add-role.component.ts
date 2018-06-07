@@ -23,4 +23,8 @@ export class AddRoleComponent implements OnInit {
   newRole: RoleModel;
   activationStatus: string="";
   applicationCategory: string = "";
+
+  saveRole(applicationForm){
+
+  }
 }

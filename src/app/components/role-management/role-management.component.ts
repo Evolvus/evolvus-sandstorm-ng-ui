@@ -24,8 +24,9 @@ export class RoleManagementComponent implements OnInit {
   listOfRoles: RoleModel[]=[];
   listOfApplicationCategory: string [] = [];
   applicationCategory: string= "Select Application Category";
-
-
+activationStatus: string="";
+processingStatus: string ="";
+gridsearch: boolean = false;
 
 
   checkBoxTicked(event){

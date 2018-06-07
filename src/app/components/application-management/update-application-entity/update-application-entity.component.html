@@ -70,7 +70,7 @@
     </div>
         
           </div>
-        </form>
+       
 
 
 
@@ -107,9 +107,10 @@
         </div>
       </div>
       <br>
-      <button class="btn btn-primary btn-submit" (click)="saveUpdatedApplication()" [disabled]="applicationUpdateForm.invalid" id="submitButton" type="submit">Submit</button>
+      <button type="submit" class="btn btn-primary btn-submit" [disabled]="applicationUpdateForm.invalid" id="submitButton" type="submit">Submit</button>
 
       <button type="button" class="btn btn-primary btn-close" (click)="abortUpdateAction()">Cancel</button>
+    </form>
   </section> 
 </div>
 </div>
