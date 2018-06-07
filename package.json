@@ -53,5 +53,8 @@
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1"
+  },
+  "publishConfig": {
+    "registry": "http://10.10.69.203:8081/repository/npm-private/"
   }
 }
