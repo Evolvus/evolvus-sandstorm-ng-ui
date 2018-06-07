@@ -15,6 +15,15 @@ ngOnInit(){
   this.roleData.push(this.role1);
   this.roleData.push(this.role2);
   this.roleData.push(this.role3);
+  this.roleData.push(this.role1);
+  this.roleData.push(this.role2);
+  this.roleData.push(this.role3);
+  this.roleData.push(this.role1);
+  this.roleData.push(this.role2);
+  this.roleData.push(this.role3);
+  this.roleData.push(this.role1);
+  this.roleData.push(this.role2);
+  this.roleData.push(this.role3);
   
 }
 

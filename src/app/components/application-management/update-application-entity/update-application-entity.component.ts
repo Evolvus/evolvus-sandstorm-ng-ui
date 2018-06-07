@@ -4,16 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationModel } from '../../shared/application.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-application-entity',
-  templateUrl: './view-update-application-entity.component.html',
-  styleUrls: ['./view-update-application-entity.component.css']
+  templateUrl: './update-application-entity.component.html',
+  styleUrls: ['./update-application-entity.component.css']
 })
 
-export class ViewUpdateApplicationEntityComponent implements OnInit {
+export class UpdateApplicationEntityComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   selectedApplicationCode = "";
   selectedApplicationName: string = "";
@@ -43,6 +44,14 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
+
+    if(response.enabled === true ){
+      this.selectedApplication.enabled = "enabled";
+    }else if(response.enabled === false){
+      this.selectedApplication.enabled = "disabled";
+    }else{
+      this.selectedApplication.enabled = null;
+    }
       });
 
   
@@ -60,9 +69,7 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
     }
   }
   
-  changeType() {
-    this.viewType = !this.viewType;
-  }
+
 
   faviconUpload(file: FileList) {
     this.faviconFile = file.item(0);
@@ -76,6 +83,7 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
   }
 
   saveUpdatedApplication(applicationForm: NgForm) {
+    console.log("saveUpdatedApplication");
     var applicationEnabled: boolean;
     this.http.put('http://192.168.1.115:8080/updateApplication/' + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
@@ -85,6 +93,7 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
       logo: this.selectedApplication.logo,
       favicon: this.selectedApplication.favicon
     }).subscribe((response) => {
+      console.log(response);
       if (response !== "FAILURE") {
         this.application = response;
       }
@@ -95,7 +104,9 @@ export class ViewUpdateApplicationEntityComponent implements OnInit {
 
   }
 
-
+  abortUpdateAction(){
+this.router.navigate(['/viewApplication', this.selectedApplication.applicationCode]);
+  }
  
 
 

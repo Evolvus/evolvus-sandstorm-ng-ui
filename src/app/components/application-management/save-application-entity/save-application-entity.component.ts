@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-save-application-entity',
@@ -9,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SaveApplicationEntityComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
 
@@ -55,13 +57,22 @@ export class SaveApplicationEntityComponent implements OnInit {
   }
 
   saveApplication(applicationForm: NgForm) {
-   console.log("save app");
+
+    var applicationStatus: boolean;
+    if(applicationForm.form.value.applicationStatus === "enabled"){
+   applicationStatus = true;
+    }else if(applicationForm.form.value.applicationStatus === "disabled"){
+   applicationStatus = false;
+    }else{
+      applicationStatus = null;
+    }
+
     var result = this.http.post('http://192.168.1.115:8080/saveApplication',
       {
         applicationCode: applicationForm.form.value.applicationCode,
         applicationName: applicationForm.form.value.applicationName,
         description: applicationForm.form.value.applicationDescription,
-        enabled:  applicationForm.form.value.applicationEnabled,
+        enabled:  applicationStatus,
         logo: this.logoInBase64,
         favicon: this.faviconInBase64
       
@@ -73,10 +84,15 @@ export class SaveApplicationEntityComponent implements OnInit {
         }
       },
         (err) => {
+          console.log(err);
           this.applicationSuccessfullySaved = false;
         }
       );
 
   }
+
+  abortSaveAction(){
+    this.router.navigate(['/applicationManagement']);
+      }
 
 }

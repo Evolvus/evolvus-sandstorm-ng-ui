@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 import { BehaviorSubject } from "rxjs";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class ResponsiveService {

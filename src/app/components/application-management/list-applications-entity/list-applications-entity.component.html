@@ -61,7 +61,7 @@
             
               <td>{{ application.applicationName | uppercase}}</td>
               <td>{{ application.applicationCode | uppercase}}</td>
-              <td>{{ application.enabled }}</td>
+              <td>{{ application.enabled == true ? 'Enabled' : 'Disabled'}}</td>
             </tr>
           </tbody>
           <!--Table body-->
