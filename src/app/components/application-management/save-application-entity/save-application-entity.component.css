@@ -19,7 +19,7 @@ img {
   height: 100px;
   width: 150px;
 }
-
+ 
 button:disabled {
   cursor: not-allowed;
   pointer-events: all !important;
