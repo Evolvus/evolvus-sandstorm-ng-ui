@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router/src/config';
 import { StarterContentComponent } from '../components/starter-content/starter-content.component';
-import { RoleManagementComponent } from '../components/role-management/role-management.component';
-import { AddRoleComponent } from '../components/add-role/add-role.component';
-import { ViewRoleComponent } from '../components/view-role/view-role.component';
+import { ListRolesEntityComponent } from '../components/role-management/list-roles-entity/list-roles-entity.component';
+import { AddRoleEntityComponent } from '../components/role-management/add-role-entity/add-role-entity.component';
+import { ViewRoleEntityComponent } from '../components/role-management/view-role-entity/view-role-entity.component';
 import { UserManagementComponent } from '../components/user-management/user-management.component';
 import { AddUserComponent } from '../components/add-user/add-user.component';
 import { ViewUserComponent } from '../components/view-user/view-user.component';
@@ -13,7 +13,7 @@ import { SaveApplicationEntityComponent } from '../components/application-manage
 import { ListApplicationsEntityComponent } from '../components/application-management/list-applications-entity/list-applications-entity.component';
 import { UpdateApplicationEntityComponent } from '../components/application-management/update-application-entity/update-application-entity.component';
 import { ViewApplicationEntityComponent } from '../components/application-management/view-application-entity/view-application-entity.component';
-
+import { UpdateRoleEntityComponent } from '../components/role-management/update-role-entity/update-role-entity.component';
 
 
 const routes: Routes =[
@@ -23,9 +23,10 @@ const routes: Routes =[
   { path: 'createApplication', component: SaveApplicationEntityComponent },
   { path: 'viewApplication/:id', component: ViewApplicationEntityComponent },
   { path: 'updateApplication/:id', component: UpdateApplicationEntityComponent },
-  { path: 'roleManagement', component: RoleManagementComponent },
-  { path: 'addRole', component: AddRoleComponent },
-  { path: 'viewRole', component: ViewRoleComponent },
+  { path: 'roleManagement', component: ListRolesEntityComponent },
+  { path: 'addRole', component: AddRoleEntityComponent },
+  { path: 'viewRole/:id', component: ViewRoleEntityComponent },
+  { path: 'updateRole', component: UpdateRoleEntityComponent},
   { path: 'userManagement', component: UserManagementComponent },
    { path: 'adduser', component: AddUserComponent },
    { path: 'viewuser', component: ViewUserComponent }

@@ -1,4 +1,3 @@
-import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+
 import { SaveApplicationEntityComponent } from './components/application-management/save-application-entity/save-application-entity.component';
 import { ListApplicationsEntityComponent } from './components/application-management/list-applications-entity/list-applications-entity.component';
 import { UpdateApplicationEntityComponent } from './components/application-management/update-application-entity/update-application-entity.component';
@@ -34,10 +34,11 @@ import { SearchPipe } from './components/shared/search.pipe';
 
 
 
-import { RoleManagementComponent } from './components/role-management/role-management.component';
+import { ListRolesEntityComponent } from './components/role-management/list-roles-entity/list-roles-entity.component';
 import { StarterContentComponent } from './components/starter-content/starter-content.component';
-import { AddRoleComponent } from './components/add-role/add-role.component';
-import { ViewRoleComponent } from './components/view-role/view-role.component';
+import { AddRoleEntityComponent } from './components/role-management/add-role-entity/add-role-entity.component';
+import { ViewRoleEntityComponent } from './components/role-management/view-role-entity/view-role-entity.component';
+import { UpdateRoleEntityComponent } from './components/role-management/update-role-entity/update-role-entity.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
@@ -56,9 +57,10 @@ import { ViewApplicationEntityComponent } from './components/application-managem
     StarterLeftSideComponent,
     StarterFooterComponent,
     StarterContentComponent,
-    RoleManagementComponent,
-    AddRoleComponent,
-    ViewRoleComponent,
+    ListRolesEntityComponent,
+    AddRoleEntityComponent,
+    ViewRoleEntityComponent,
+    UpdateRoleEntityComponent,
     UserManagementComponent,
     AddUserComponent,
     ViewUserComponent,
@@ -72,7 +74,6 @@ import { ViewApplicationEntityComponent } from './components/application-managem
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AdminModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,

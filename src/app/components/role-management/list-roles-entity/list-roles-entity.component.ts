@@ -1,18 +1,21 @@
-import { RoleModel } from '../../shared/role-model';
+
+import { Router } from '@angular/router';
+import { RoleModel } from '../../../shared/role-model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { RoleDataService } from '../../shared/role-data.service';
+import { RoleDataService } from '../../../shared/role-data.service';
 import { Pipe } from '@angular/core';
 
+
 @Component({
-  selector: 'app-role-management',
-  templateUrl: './role-management.component.html',
-  styleUrls: ['./role-management.component.css']
+  selector: 'app-list-roles-entity',
+  templateUrl: './list-roles-entity.component.html',
+  styleUrls: ['./list-roles-entity.component.css']
 })
-export class RoleManagementComponent implements OnInit {
+export class ListRolesEntityComponent implements OnInit {
   tableHeader:any = [];
 
-  constructor(private roleDataService: RoleDataService) { }
+  constructor(private roleDataService: RoleDataService, private router: Router) { }
 
   ngOnInit() {
     this.tableHeader = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
@@ -32,4 +35,9 @@ gridsearch: boolean = false;
   checkBoxTicked(event){
     console.log(event.checked);
   }
+
+viewRole(role: RoleModel){  
+this.router.navigate(['viewRole', role.name]);  
+}
+
 }

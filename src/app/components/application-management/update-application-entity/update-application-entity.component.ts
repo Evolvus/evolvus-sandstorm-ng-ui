@@ -45,7 +45,6 @@ export class UpdateApplicationEntityComponent implements OnInit {
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
-
     if(response.enabled === true ){
       this.selectedApplication.enabled = "enabled";
     }else if(response.enabled === false){
@@ -84,13 +83,20 @@ export class UpdateApplicationEntityComponent implements OnInit {
   }
 
   saveUpdatedApplication(applicationForm: NgForm) {
-    console.log("saveUpdatedApplication");
+    var applicationStatus: boolean;
+    if(applicationForm.form.value.applicationStatus === "enabled"){
+   applicationStatus = true;
+    }else if(applicationForm.form.value.applicationStatus === "disabled"){
+   applicationStatus = false;
+    }else{
+      applicationStatus = null;
+    }
     var applicationEnabled: boolean;
     this.http.put('http://192.168.1.115:8080/updateApplication/' + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,
-      enabled: this.selectedApplication.enabled,
+      enabled: applicationStatus,
       logo: this.selectedApplication.logo,
       favicon: this.selectedApplication.favicon
     }).subscribe((response) => {

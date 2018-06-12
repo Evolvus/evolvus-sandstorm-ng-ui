@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewRoleComponent } from './view-role.component';
+import { UpdateRoleEntityComponent } from './update-role-entity.component';
 
-describe('ViewRoleComponent', () => {
-  let component: ViewRoleComponent;
-  let fixture: ComponentFixture<ViewRoleComponent>;
+describe('UpdateRoleEntityComponent', () => {
+  let component: UpdateRoleEntityComponent;
+  let fixture: ComponentFixture<UpdateRoleEntityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewRoleComponent ]
+      declarations: [ UpdateRoleEntityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewRoleComponent);
+    fixture = TestBed.createComponent(UpdateRoleEntityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

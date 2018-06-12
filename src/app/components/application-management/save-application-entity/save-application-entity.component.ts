@@ -77,7 +77,6 @@ export class SaveApplicationEntityComponent implements OnInit {
         favicon: this.faviconInBase64
       
       }).subscribe((response) => {
-        console.log(response+ " response");
         if (response !== "FAILURE") {
           this.application = response;
           this.applicationSuccessfullySaved = true;

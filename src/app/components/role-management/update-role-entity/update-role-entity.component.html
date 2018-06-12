@@ -1,6 +1,6 @@
- <!-- Content Wrapper. Contains page content -->
+<!-- 
  <div class="content-wrapper addFormSec">
-    <!-- Content Header (Page header) -->
+
     <section class="padL35 content-header ">
       <h1 class="marTB15 txt-orange">
      <div class="img_icon">
@@ -48,6 +48,29 @@
                 </div>
            </div>
 
+
+           <div class="col-md-5">
+            <div class="form-group">
+               <mat-form-field [color]="'primary'" class="example-full-width">
+                   <mat-select placeholder="Role Type" required [(ngModel)]="roleType" name="roleType"> 
+                     <mat-option *ngFor="let roleType of listOfRoleType" value="{{roleType}}">{{roleType}}</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+               </div>
+          </div>
+
+
+          <div class="col-md-5">
+            <div class="form-group">
+               <mat-form-field [color]="'primary'" class="example-full-width">
+                   <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus" name="activationStatus">
+                     <mat-option  value="active">Active</mat-option>
+                     <mat-option  value="inactive">Inactive</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 </div>
+               </div>
+
            <div class="col-md-5">
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
@@ -57,16 +80,7 @@
                  </div>
             </div>
            
-           <div class="col-md-5">
-             <div class="form-group">
-                <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus" name="activationStatus">
-                      <mat-option  value="active">Active</mat-option>
-                      <mat-option  value="inactive">Inactive</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  </div>
-                </div>
+
      
            
            
@@ -90,42 +104,18 @@
                       <div class="col-md-12">
                       <div class="rolemenu-acces-tabs">
                           <div class="tabContent">
-                            
-                              <div class="marB30">
-                                <label><b>Administration</b></label>
-                                <div class="form-group">									
-                                  <label class="checkbox-inline">
-                                      <input type="checkbox" value="">User Management
-                                    </label>
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Role Management
-                                    </label>
+              
+
+
+                              <div class="marB30" *ngFor = "let consoleMenus of listOfConsoleMenus">
+                                <label><b>{{consoleMenus.menuGroupName}}</b></label>
+                                <div class="form-group" >									
+                                  <label class="checkbox-inline" *ngFor = "let menuItems of consoleMenus.listOfMenuItems">
+                                      <mat-checkbox  id="{{menuItems}}" name="{{menuItems}}" value="{{menuItems}}">{{menuItems}}</mat-checkbox>
+                                  </label>
                                 </div>
                               </div>
-                              
-                              <div class="marB30">
-                                <label><b>Configurations</b></label>
-                                <div class="form-group">									
-                                  <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Archival
-                                    </label>
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Communication
-                                    </label>
-                                </div>
-                              </div>
-                              
-                              <div class="marB30">
-                                <label><b>Maintenance</b></label>
-                                <div class="form-group">									
-                                  <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Reason Code Maintenance
-                                    </label>
-                                    <label class="checkbox-inline">
-                                      <input type="checkbox" value="">Routing Code Maintenance
-                                    </label>
-                                </div>
-                              </div>
+
                             </div>
                        </div>
                        </div>
@@ -197,12 +187,12 @@
          <div class="col-md-12" style="margin-left: 2em;">
             <div class="">
                  <button type="button" class="btn btn-default btn-submit">Add Role</button>
-                 <button type="button" class="btn btn-default btn-close" routerLink="/rolemanagement"> Close</button>
+                 <button type="button" class="btn btn-default btn-close" (click)="abortSaveAction()"> Close</button>
              </div>
          </div>
        </div>
     
       
-     </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
- 
+     </section>
+  </div>
+  -->
