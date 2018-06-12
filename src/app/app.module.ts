@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { SaveApplicationEntityComponent } from './components/application-management/save-application-entity/save-application-entity.component';
@@ -48,6 +49,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ResponsiveService } from './components/shared/responsive.service';
 import { RoleDataService } from './shared/role-data.service';
 import { ViewApplicationEntityComponent } from './components/application-management/view-application-entity/view-application-entity.component';
+import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 
 
 @NgModule({
@@ -69,6 +71,7 @@ import { ViewApplicationEntityComponent } from './components/application-managem
     UpdateApplicationEntityComponent,
     SearchPipe,
     ViewApplicationEntityComponent,
+    ConfirmationDialogEntityComponent,
     
   ],
   imports: [
@@ -77,7 +80,20 @@ import { ViewApplicationEntityComponent } from './components/application-managem
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatSelectModule
+
+
+
+
+  ],
+  entryComponents: [
+    ConfirmationDialogEntityComponent
   ],
   providers: [ResponsiveService, RoleDataService],
   bootstrap: [AppComponent]

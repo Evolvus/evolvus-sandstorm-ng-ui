@@ -110,7 +110,7 @@
                                 <label><b>{{consoleMenus.menuGroupName}}</b></label>
                                 <div class="form-group" >									
                                   <label class="checkbox-inline" *ngFor = "let menuItems of consoleMenus.listOfMenuItems">
-                                      <mat-checkbox  id="{{menuItems}}" name="{{menuItems}}" value="{{menuItems}}" ngModel>{{menuItems}}</mat-checkbox>
+                                      <mat-checkbox id="{{menuItems}}" name="{{menuItems}}" value="{{menuItems}}" ngModel>{{menuItems}}</mat-checkbox>
                                   </label>
                                 </div>
                               </div>
@@ -183,8 +183,8 @@
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">
          <div class="">
-              <button type="submit" class="btn btn-default btn-submit">Add Role</button>
-              <button type="button" class="btn btn-default btn-close" (click)="abortSaveAction()"> Close</button>
+              <button type="submit" class="btn btn-default btn-submit" [disabled] = "roleSaveForm.invalid" (click)="saveRole()">Add Role</button>
+              <button type="button" class="btn btn-default btn-close"  (click)="abortSaveAction()"> Close</button>
           </div>
       </div>
     </div>

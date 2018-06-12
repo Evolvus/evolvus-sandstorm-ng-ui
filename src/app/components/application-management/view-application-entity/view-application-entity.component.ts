@@ -46,7 +46,6 @@ export class ViewApplicationEntityComponent implements OnInit {
     this.http.get('http://192.168.1.115:8080/findByCode/' + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
-console.log(response);
         this.selectedApplication = response;
 
     if(response.enabled === true ){

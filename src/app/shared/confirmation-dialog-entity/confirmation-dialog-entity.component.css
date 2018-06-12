@@ -1,0 +1,23 @@
+.dialog{
+width: 260px;
+padding: 10px;
+padding-bottom: -10px;
+height: 150px;
+margin-left: -10px;
+}
+.fa-thumbs-up{
+    font-size: 50px;
+    position: relative;
+    left:72px;
+    color: #0d476d;
+}
+.btn{
+    position: relative;
+    margin-top: 60px;
+    left:30px;
+}
+h4{
+    margin-top: 50px;
+    font-weight: bold;
+    color:#ff8500;
+}

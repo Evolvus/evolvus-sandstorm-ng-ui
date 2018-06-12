@@ -19,7 +19,7 @@
 <br>
 <br>
     
-<section class="content">
+<section class="content" *ngIf = "areAnyApplicationsAvailable">
     <div class="row row-padding">
       <div class="col-md-10">
             <h4 class="txt-blue">List of Applications</h4>
@@ -46,7 +46,7 @@
               <th>Application Code</th>
               <th>Enabled</th>
             </tr>
-            <tr class="grid-search" *ngIf="gridSearch">
+            <tr class="grid-search" *ngIf = "gridSearch">
                 
                 <td><input type="text"></td>
                 <td><input type="text"></td>
@@ -73,6 +73,14 @@
 </div>
         <!--Table-->
       </div>
+</section>
+<section class="content" *ngIf="!areAnyApplicationsAvailable">
+  <div class="row row-padding">
+    <div class="col-md-10">
+          <h4 class="txt-red" style="color:red;">No Applications Found!</h4>
+          <br>
+      </div>
+    </div>
 </section>
 
   </div>
