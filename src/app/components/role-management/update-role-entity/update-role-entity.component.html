@@ -4,7 +4,7 @@
     <section class="padL35 content-header ">
       <h1 class="marTB15 txt-orange">
      <div class="img_icon">
-     <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i> Add New Role</span>
+     <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i>  Update Role Details</span>
    </div>  </h1>
     </section> 
  
@@ -29,7 +29,7 @@
               <div class="col-md-5">
                   <div class="form-group">
                      <mat-form-field class="example-full-width">
-                         <input required matInput placeholder="Role Name">
+                         <input [(ngModel)]="roleData.name"required matInput placeholder="Role Name" name="roleName">
 
                        </mat-form-field>
                      </div>
@@ -41,7 +41,7 @@
            <div class="col-md-5">
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Application Category" required [(ngModel)]="applicationCategory" name="applicationCategory"> 
+                    <mat-select placeholder="Application Category" required [(ngModel)]="roleData.applicationCategory" name="applicationCategory"> 
                       <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -52,7 +52,7 @@
            <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Role Type" required [(ngModel)]="roleType" name="roleType"> 
+                   <mat-select placeholder="Role Type" required [(ngModel)]="roleData.roleType" name="roleType"> 
                      <mat-option *ngFor="let roleType of listOfRoleType" value="{{roleType}}">{{roleType}}</mat-option>
                    </mat-select>
                  </mat-form-field>
@@ -63,7 +63,7 @@
           <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus" name="activationStatus">
+                   <mat-select placeholder="Activation Status" required  name="activationStatus"[(ngModel)]="roleData.activationStatus" name="activationStatus">
                      <mat-option  value="active">Active</mat-option>
                      <mat-option  value="inactive">Inactive</mat-option>
                    </mat-select>
@@ -71,11 +71,12 @@
                  </div>
                </div>
 
+               
+
            <div class="col-md-5">
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
-                     <textarea required matInput placeholder="Role Description"></textarea>
-
+                     <textarea required matInput placeholder="Role Description" name="description"[(ngModel)]="roleData.description" ></textarea>
                    </mat-form-field>
                  </div>
             </div>

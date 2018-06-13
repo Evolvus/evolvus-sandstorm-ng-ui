@@ -37,7 +37,7 @@ gridsearch: boolean = false;
   }
 
 viewRole(role: RoleModel){  
-this.router.navigate(['viewRole', role.name]);  
+this.router.navigate(['viewRole', role.roleName]);  
 }
 
 }

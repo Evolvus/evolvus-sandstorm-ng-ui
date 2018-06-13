@@ -1,5 +1,6 @@
+import { RoleModel } from './../../../shared/role-model';
 import { Component, OnInit } from '@angular/core';
-
+RoleModel
 @Component({
   selector: 'app-update-role-entity',
   templateUrl: './update-role-entity.component.html',
@@ -10,6 +11,17 @@ export class UpdateRoleEntityComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // this.roleData = {
+    //   name: "Admin",
+    //   description: "This",
+    //   activationStatus: "active",
+    //   applicationCategory: "CDA",
+    //   roleType: "Admin"
+    // }
   }
+
+roleData: RoleModel;
+
+
 
 }

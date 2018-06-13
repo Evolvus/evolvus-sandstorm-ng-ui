@@ -32,7 +32,7 @@
             <div class="col-lg-5">
               <div class="form-group">
                  <mat-form-field class="example-full-width">
-                     <input [(ngModel)]="selectedApplication.applicationCode" required autocomplete="off" matInput name="applicationCode" maxlength="4"   id="applicationCode" placeholder="Application Code">
+                     <input [ngModel]="selectedApplication.applicationCode" required autocomplete="off" matInput name="applicationCode" maxlength="4"   id="applicationCode" placeholder="Application Code">
                      <label class="btn btn-info"  mat-raised-button matTooltip="A Unique Code of Max 4 characters!"><i class="fa fa-exclamation"></i></label>
                    </mat-form-field>
                  </div>
@@ -61,9 +61,9 @@
     <div class="col-lg-5" >
       <div class="form-group">
          <mat-form-field [color]="'primary'" class="example-full-width " >
-             <mat-select  [(ngModel)]="selectedApplication.enabled" placeholder="Application Status" required [(ngModel)]="applicationStatus" name="applicationStatus" id="applicationStatus"> 
-               <mat-option value="enabled">Enabled</mat-option>
-               <mat-option value="disabled">Disabled</mat-option>
+             <mat-select  [(ngModel)]="selectedApplication.enabled" placeholder="Application Status" required  name="enabled" id="enabled"> 
+               <mat-option [value]="true">Enabled</mat-option>
+               <mat-option [value]="false">Disabled</mat-option>
              </mat-select>
            </mat-form-field>
          </div>
@@ -88,7 +88,7 @@
     </label>
     <br>
             <!-- <h6 id="logoFileName">*No File Selected</h6> -->
-            <img id="logoImage" src="{{ selectedApplication.logo }}" alt="">
+            <img id="logoImage" src="{{ selectedApplication?.logo }}" alt="">
           </div>
         </div>
 
@@ -102,7 +102,7 @@
     </label>
     <br>
             <!-- <h6 id="faviconFileName">*No File Selected</h6> -->
-            <img id="faviconImage" src="{{ selectedApplication.favicon }}" alt="">
+            <img id="faviconImage" src="{{ selectedApplication?.favicon }}" alt="">
           </div>
         </div>
       </div>

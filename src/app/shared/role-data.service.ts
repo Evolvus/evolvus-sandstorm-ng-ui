@@ -38,18 +38,18 @@ listOfConsoleMenus: Object[] = [{menuGroupName: "Administration", listOfMenuItem
 
 sampleDate: Date = new Date(); 
 
-role1: RoleModel = {name: "Admin-OP",description: "RTP Operations Admin", roleType: "IT",
+role1: RoleModel = {roleName: "Admin-OP",description: "RTP Operations Admin", roleType: "IT",
  applicationCategory:"RTP Operations",activationStatus: "Enabled", processingStatus: "Authorized",
- associatedUsers:5, lastModifiedTime: this.sampleDate
+ associatedUsers:5, lastModifiedTime: this.sampleDate, menuItems: [{}]
 };
 
-role2: RoleModel = {name: "Checker-OP",description: "RTP Operations Checker", roleType: "Operations",
+role2: RoleModel = {roleName: "Checker-OP",description: "RTP Operations Checker", roleType: "Operations",
  applicationCategory:"RTP Operations",activationStatus: "Disabled", processingStatus: "Unauthorized",
- associatedUsers:3, lastModifiedTime: this.sampleDate
+ associatedUsers:3, lastModifiedTime: this.sampleDate, menuItems: [{}]
 };
-role3: RoleModel = {name: "Maker-OP",description: "RTP Operations Maker", roleType: "Audit",
+role3: RoleModel = {roleName: "Maker-OP",description: "RTP Operations Maker", roleType: "Audit",
  applicationCategory:"RTP Operations",activationStatus: "Enabled", processingStatus: "Unauthorized",
- associatedUsers:2, lastModifiedTime: this.sampleDate
+ associatedUsers:2, lastModifiedTime: this.sampleDate,  menuItems: [{}]
 };
 
 

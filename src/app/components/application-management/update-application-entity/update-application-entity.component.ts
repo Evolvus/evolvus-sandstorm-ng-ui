@@ -1,9 +1,9 @@
+import { ApplicationModel } from './../../shared/application.model';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationModel } from '../../shared/application.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,9 +16,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
-  selectedApplicationCode = "";
-  selectedApplicationName: string = "";
-  applicationStatus: string="";
+  selectedApplicationCode: string;
   selectedApplication = {
     _id: "",
     applicationCode: "",
@@ -45,13 +43,9 @@ export class UpdateApplicationEntityComponent implements OnInit {
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
-    if(response.enabled === true ){
-      this.selectedApplication.enabled = "enabled";
-    }else if(response.enabled === false){
-      this.selectedApplication.enabled = "disabled";
-    }else{
-      this.selectedApplication.enabled = null;
-    }
+        console.log("response ngOnInit", response);
+        console.log("se ngOnInit", this.selectedApplication);
+
       });
 
   
@@ -83,24 +77,16 @@ export class UpdateApplicationEntityComponent implements OnInit {
   }
 
   saveUpdatedApplication(applicationForm: NgForm) {
-    var applicationStatus: boolean;
-    if(applicationForm.form.value.applicationStatus === "enabled"){
-   applicationStatus = true;
-    }else if(applicationForm.form.value.applicationStatus === "disabled"){
-   applicationStatus = false;
-    }else{
-      applicationStatus = null;
-    }
-    var applicationEnabled: boolean;
+    
     this.http.put('http://192.168.1.115:8080/updateApplication/' + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,
-      enabled: applicationStatus,
+      enabled: this.selectedApplication.enabled,
       logo: this.selectedApplication.logo,
       favicon: this.selectedApplication.favicon
     }).subscribe((response) => {
-      console.log(response);
+      console.log(response, "response");
       if (response !== "FAILURE") {
         this.application = response;
       }

@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { RoleModel } from '../../../shared/role-model';
 import { RoleDataService } from '../../../shared/role-data.service';
 import { Router } from '@angular/router';
@@ -14,7 +15,7 @@ import { ConfirmationDialogEntityComponent } from '../../../shared/confirmation-
 
 export class AddRoleEntityComponent implements OnInit {
 
-  constructor(private roleDataService: RoleDataService,private router: Router, public dialog: MatDialog) { }
+  constructor(private roleDataService: RoleDataService,private router: Router, public dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
     this.listOfApplicationCategory = this.roleDataService.getlistOfApplicationCategory();
@@ -26,15 +27,40 @@ export class AddRoleEntityComponent implements OnInit {
   listOfRoleType: string [] = [];
   listOfConsoleMenus: Object [] = [];
 
-  newRole: RoleModel;
+  // newRole: RoleModel;
   activationStatus: string="";
   applicationCategory: string = "";
   roleType: string = "";
+  menuItems = [{
+    tenantId: "name",
+    menuItemType: "quicklink",
+    applicationCode: "CDA",
+    menuItemCode: "mi4",
+    createdBy: "user2",
+    title: "menu item4"
+  }, {
+    tenantId: "name",
+    menuItemType: "queues",
+    applicationCode: "CDA",
+    menuItemCode: "mi5",
+    createdBy: "user3",
+    title: "menu item5"
+  }];
 
-
-  saveRole(applicationForm){
-  console.log(applicationForm);
-  
+  saveRole(applicationForm: NgForm){
+console.log(applicationForm, "appl");
+    this.http.post('http://192.168.1.115:8080/saveRole',{
+      roleName: applicationForm.form.value.roleName,
+      applicationCategory: applicationForm.form.value.applicationCategory,
+      roleType: applicationForm.form.value.roleType,
+      activationStatus: applicationForm.form.value.activationStatus,
+      description: applicationForm.form.value.description,
+      menuItems: this.menuItems
+    })
+    .subscribe((response)=>{
+      console.log(response);
+    });
+    
     this.openDialog();
     }
 
@@ -43,7 +69,7 @@ export class AddRoleEntityComponent implements OnInit {
 }
 
 
-animal: "Good";
+
 
 openDialog(): void {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
