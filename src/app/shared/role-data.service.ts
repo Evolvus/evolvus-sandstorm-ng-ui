@@ -14,7 +14,8 @@ export class RoleDataService {
 
 
 ngOnInit(){
-
+ 
+  
   this.roleData.push(this.role1);
   this.roleData.push(this.role2);
   this.roleData.push(this.role3);
@@ -24,7 +25,7 @@ ngOnInit(){
 }
 
 
-listOfApplicationCategory: string [] = ["Flux-CDA Console", "Flux-CDA Operations", "Flux-RTP Console", "Flux-RTP Operations"];
+listOfApplicationCategory: string [] = [];
 listOfActivationStatus: string[] = ["Active", "Inactive"];
 listOfProcessingStatus: string[] = ["Pending Authorization", "Rejected"];
 listOfRoleType: string []=["IT", "Operations", "Audit", "Data Processing"];
@@ -65,15 +66,16 @@ getRoleData(){
 }
 
 getlistOfApplicationCategory(){
-  return this.listOfApplicationCategory.slice();
+return  this.http.get('http://192.168.1.115:8086/getAllApplicationCodes');
+  
 }
 
 getListOfRoleType(){
-return this.listOfRoleType.slice();
+  return  this.http.get('http://192.168.1.115:8086/getAllRoleTypes');
 }
 
-getListOfConsoleMenus(){
-return this.listOfConsoleMenus.slice();
+getListOfConsoleMenus(applicationCode: string){
+  return this.http.get('http://192.168.1.115:8086/findMenuItemByCode/' + applicationCode);
 }
 
 }

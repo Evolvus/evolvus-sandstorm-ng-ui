@@ -11,13 +11,7 @@ export class UpdateRoleEntityComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.roleData = {
-    //   name: "Admin",
-    //   description: "This",
-    //   activationStatus: "active",
-    //   applicationCategory: "CDA",
-    //   roleType: "Admin"
-    // }
+    
   }
 
 roleData: RoleModel;

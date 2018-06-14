@@ -20,12 +20,15 @@ export class ListRolesEntityComponent implements OnInit {
   ngOnInit() {
     this.tableHeader = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
     this.listOfRoles = this.roleDataService.getRoleData();
-    this.listOfApplicationCategory = this.roleDataService.getlistOfApplicationCategory();
+    this.roleDataService.getlistOfApplicationCategory().subscribe((response)=>{
+      this.listOfApplicationCategory = response;
+    })
+   
   }
 
   role: RoleModel;
   listOfRoles: RoleModel[]=[];
-  listOfApplicationCategory: string [] = [];
+  listOfApplicationCategory: any;
   applicationCategory: string= "Select Application Category";
 activationStatus: string="";
 processingStatus: string ="";

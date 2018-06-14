@@ -41,7 +41,8 @@
            <div class="col-md-5">
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Application Category" required [(ngModel)]="applicationCategory" name="applicationCategory"> 
+                    <mat-select placeholder="Application Category" (ngModelChange)="getMenuItems(applicationCategory)" required ngModel="applicationCategory" name="applicationCategory" #applicationCategory> 
+          
                       <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -52,7 +53,7 @@
            <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Role Type" required [(ngModel)]="roleType" name="roleType"> 
+                   <mat-select placeholder="Role Type" required ngModel="roleType" name="roleType"> 
                      <mat-option *ngFor="let roleType of listOfRoleType" value="{{roleType}}">{{roleType}}</mat-option>
                    </mat-select>
                  </mat-form-field>
@@ -63,7 +64,7 @@
           <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Activation Status" required [(ngModel)]="activationStatus"  name="activationStatus">
+                   <mat-select placeholder="Activation Status" required ngModel="activationStatus"  name="activationStatus">
                      <mat-option  value="active">Active</mat-option>
                      <mat-option  value="inactive">Inactive</mat-option>
                    </mat-select>

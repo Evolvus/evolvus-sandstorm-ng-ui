@@ -32,8 +32,8 @@
             <div class="col-lg-5">
               <div class="form-group">
                  <mat-form-field class="example-full-width">
-                     <input [ngModel]="selectedApplication.applicationCode" required autocomplete="off" matInput name="applicationCode" maxlength="4"   id="applicationCode" placeholder="Application Code">
-                     <label class="btn btn-info"  mat-raised-button matTooltip="A Unique Code of Max 4 characters!"><i class="fa fa-exclamation"></i></label>
+                     <input [ngModel]="selectedApplication.applicationCode" required autocomplete="off" matInput name="applicationCode" maxlength="20" minlength="3"   id="applicationCode" placeholder="Application Code">
+                     <label class="btn btn-info"  mat-raised-button matTooltip="A Unique Code of Min 3 and Max 20 characters!"><i class="fa fa-exclamation"></i></label>
                    </mat-form-field>
                  </div>
             </div>

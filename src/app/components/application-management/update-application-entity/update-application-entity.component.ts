@@ -39,7 +39,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get('http://192.168.1.115:8080/findByCode/' + this.selectedApplicationCode
+    this.http.get('http://192.168.1.115:8086/findByCode/' + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
@@ -78,7 +78,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   saveUpdatedApplication(applicationForm: NgForm) {
     
-    this.http.put('http://192.168.1.115:8080/updateApplication/' + this.selectedApplication._id, {
+    this.http.put('http://192.168.1.115:8086/updateApplication/' + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,

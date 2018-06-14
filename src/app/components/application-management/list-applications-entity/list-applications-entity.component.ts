@@ -15,7 +15,7 @@ export class ListApplicationsEntityComponent implements OnInit {
   ngOnInit() {
 
 
-    this.http.get('http://192.168.1.115:8080/getAllApplications')
+    this.http.get('http://192.168.1.115:8086/getAllApplications')
       .subscribe((response: any) => {
          if(response.message == "No applications found"){
             this.areAnyApplicationsAvailable = false;

@@ -18,16 +18,19 @@ export class AddRoleEntityComponent implements OnInit {
   constructor(private roleDataService: RoleDataService,private router: Router, public dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
-    this.listOfApplicationCategory = this.roleDataService.getlistOfApplicationCategory();
-    this.listOfRoleType = this.roleDataService.getListOfRoleType();
-    this.listOfConsoleMenus = this.roleDataService.getListOfConsoleMenus();
+    this.roleDataService.getlistOfApplicationCategory().subscribe((response)=>{
+      this.listOfApplicationCategory = response;
+    });
+    this.roleDataService.getListOfRoleType().subscribe((response)=>{
+      this.listOfRoleType = response;
+    });
+
   }
 
-  listOfApplicationCategory: string [] = [];
-  listOfRoleType: string [] = [];
-  listOfConsoleMenus: Object [] = [];
+  listOfApplicationCategory: any;
+  listOfRoleType: any;
+  listOfConsoleMenus: any;
 
-  // newRole: RoleModel;
   activationStatus: string="";
   applicationCategory: string = "";
   roleType: string = "";
@@ -48,17 +51,16 @@ export class AddRoleEntityComponent implements OnInit {
   }];
 
   saveRole(applicationForm: NgForm){
-console.log(applicationForm, "appl");
-    this.http.post('http://192.168.1.115:8080/saveRole',{
+    this.http.post('http://192.168.1.115:8086/saveRole',{
       roleName: applicationForm.form.value.roleName,
-      applicationCategory: applicationForm.form.value.applicationCategory,
+      applicationCode: applicationForm.form.value.applicationCategory,
       roleType: applicationForm.form.value.roleType,
       activationStatus: applicationForm.form.value.activationStatus,
       description: applicationForm.form.value.description,
       menuItems: this.menuItems
     })
     .subscribe((response)=>{
-      console.log(response);
+      console.log(response, "error");
     });
     
     this.openDialog();
@@ -68,7 +70,13 @@ console.log(applicationForm, "appl");
     this.router.navigate(['/roleManagement']);
 }
 
+getMenuItems(applicationCategory){
+  this.roleDataService.getListOfConsoleMenus(applicationCategory._value).subscribe((response) =>{
+this.listOfConsoleMenus = response;
+console.log("menuItems", this.listOfConsoleMenus);
+  });
 
+}
 
 
 openDialog(): void {

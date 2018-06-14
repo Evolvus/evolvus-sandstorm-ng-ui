@@ -67,7 +67,7 @@ export class SaveApplicationEntityComponent implements OnInit {
       applicationStatus = null;
     }
 
-    var result = this.http.post('http://192.168.1.115:8080/saveApplication',
+    var result = this.http.post('http://192.168.1.115:8086/saveApplication',
       {
         applicationCode: applicationForm.form.value.applicationCode,
         applicationName: applicationForm.form.value.applicationName,

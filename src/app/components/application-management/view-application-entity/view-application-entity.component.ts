@@ -43,7 +43,7 @@ export class ViewApplicationEntityComponent implements OnInit {
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get('http://192.168.1.115:8080/findByCode/' + this.selectedApplicationCode
+    this.http.get('http://192.168.1.115:8086/findByCode/' + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
