@@ -40,7 +40,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get(`${this.platformURL}/findByCode/` + this.selectedApplicationCode
+    this.http.get(`${this.platformURL}/application/find/` + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
