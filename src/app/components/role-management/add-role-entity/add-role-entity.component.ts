@@ -6,6 +6,7 @@ import { RoleDataService } from '../../../shared/role-data.service';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogEntityComponent } from '../../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-add-role-entity',
@@ -25,39 +26,34 @@ export class AddRoleEntityComponent implements OnInit {
       this.listOfRoleType = response;
     });
 
-  }
 
+  }
+  platformURL = environment.platformURL;
   listOfApplicationCategory: any;
   listOfRoleType: any;
   listOfConsoleMenus: any;
+  applicationCategorySelected: boolean = false;
 
-  activationStatus: string="";
-  applicationCategory: string = "";
-  roleType: string = "";
-  menuItems = [{
-    tenantId: "name",
-    menuItemType: "quicklink",
-    applicationCode: "CDA",
-    menuItemCode: "mi4",
-    createdBy: "user2",
-    title: "menu item4"
-  }, {
-    tenantId: "name",
-    menuItemType: "queues",
-    applicationCode: "CDA",
-    menuItemCode: "mi5",
-    createdBy: "user3",
-    title: "menu item5"
-  }];
+
+roleData: RoleModel = {
+  activationStatus: "",
+  roleName: "",
+  roleType: "",
+  menuItems: [],
+  applicationCategory: "",
+  description: ""
+};
+
 
   saveRole(applicationForm: NgForm){
-    this.http.post('http://192.168.1.115:8086/saveRole',{
-      roleName: applicationForm.form.value.roleName,
-      applicationCode: applicationForm.form.value.applicationCategory,
-      roleType: applicationForm.form.value.roleType,
-      activationStatus: applicationForm.form.value.activationStatus,
-      description: applicationForm.form.value.description,
-      menuItems: this.menuItems
+    console.log("saved role", this.roleData);
+    this.http.post(`${this.platformURL}/role`,{
+      roleName: this.roleData.roleName,
+      applicationCode: this.roleData.applicationCategory,
+      roleType: this.roleData.roleType,
+      activationStatus: this.roleData.activationStatus,
+      description: this.roleData.description,
+      menuItems: this.roleData.menuItems
     })
     .subscribe((response)=>{
       console.log(response, "error");
@@ -71,14 +67,23 @@ export class AddRoleEntityComponent implements OnInit {
 }
 
 getMenuItems(applicationCategory){
+  this.applicationCategorySelected = true;
   this.roleDataService.getListOfConsoleMenus(applicationCategory._value).subscribe((response) =>{
-this.listOfConsoleMenus = response;
-console.log("menuItems", this.listOfConsoleMenus);
+  this.listOfConsoleMenus = response;
   });
-
+  this.roleData.menuItems = [];
 }
 
+addMenuItem(menuItems){
+  var tempIndex: number = this.roleData.menuItems.indexOf(menuItems);
+  if( tempIndex === -1){
+   this.roleData.menuItems.push(menuItems);
+   }else{
+     this.roleData.menuItems.splice(tempIndex, 1);
+   }
 
+
+}
 openDialog(): void {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
     width: '300px',
@@ -86,7 +91,7 @@ openDialog(): void {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log(result);
+    // console.log(result);
   });
 }
 

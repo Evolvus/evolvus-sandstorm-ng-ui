@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-update-application-entity',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class UpdateApplicationEntityComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
-
+  platformURL = environment.platformURL;
   selectedApplicationCode: string;
   selectedApplication = {
     _id: "",
@@ -39,13 +40,10 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get('http://192.168.1.115:8086/findByCode/' + this.selectedApplicationCode
+    this.http.get(`${this.platformURL}/findByCode/` + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
-        console.log("response ngOnInit", response);
-        console.log("se ngOnInit", this.selectedApplication);
-
       });
 
   
@@ -78,7 +76,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   saveUpdatedApplication(applicationForm: NgForm) {
     
-    this.http.put('http://192.168.1.115:8086/updateApplication/' + this.selectedApplication._id, {
+    this.http.put(`${this.platformURL}/application/` + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,
@@ -86,7 +84,6 @@ export class UpdateApplicationEntityComponent implements OnInit {
       logo: this.selectedApplication.logo,
       favicon: this.selectedApplication.favicon
     }).subscribe((response) => {
-      console.log(response, "response");
       if (response !== "FAILURE") {
         this.application = response;
       }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-save-application-entity',
@@ -18,7 +19,7 @@ export class SaveApplicationEntityComponent implements OnInit {
 
   }
 
-
+  platformURL = environment.platformURL;
   logoFile: File = null;
   faviconFile: File = null;
   logoInBase64: string = "";
@@ -67,7 +68,7 @@ export class SaveApplicationEntityComponent implements OnInit {
       applicationStatus = null;
     }
 
-    var result = this.http.post('http://192.168.1.115:8086/saveApplication',
+    var result = this.http.post(`${this.platformURL}/application`,
       {
         applicationCode: applicationForm.form.value.applicationCode,
         applicationName: applicationForm.form.value.applicationName,

@@ -29,7 +29,7 @@
               <div class="col-md-5">
                   <div class="form-group">
                      <mat-form-field class="example-full-width">
-                         <input required matInput placeholder="Role Name" name="roleName" ngModel>
+                         <input required matInput placeholder="Role Name" name="roleName" [(ngModel)]="roleData.roleName">
 
                        </mat-form-field>
                      </div>
@@ -41,7 +41,7 @@
            <div class="col-md-5">
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Application Category" (ngModelChange)="getMenuItems(applicationCategory)" required ngModel="applicationCategory" name="applicationCategory" #applicationCategory> 
+                    <mat-select placeholder="Application Category" (ngModelChange)="getMenuItems(applicationCategory)" required [(ngModel)]="roleData.applicationCategory" name="applicationCategory" #applicationCategory> 
           
                       <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                     </mat-select>
@@ -53,7 +53,7 @@
            <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Role Type" required ngModel="roleType" name="roleType"> 
+                   <mat-select placeholder="Role Type" required [(ngModel)]="roleData.roleType" name="roleType"> 
                      <mat-option *ngFor="let roleType of listOfRoleType" value="{{roleType}}">{{roleType}}</mat-option>
                    </mat-select>
                  </mat-form-field>
@@ -64,7 +64,7 @@
           <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Activation Status" required ngModel="activationStatus"  name="activationStatus">
+                   <mat-select placeholder="Activation Status" required [(ngModel)]="roleData.activationStatus"  name="activationStatus">
                      <mat-option  value="active">Active</mat-option>
                      <mat-option  value="inactive">Inactive</mat-option>
                    </mat-select>
@@ -75,7 +75,8 @@
            <div class="col-md-5">
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
-                     <textarea required matInput placeholder="Role Description" name="description" ngModel></textarea>
+
+                     <textarea required matInput placeholder="Role Description" name="description" [(ngModel)]="roleData.description"></textarea>
 
                    </mat-form-field>
                  </div>
@@ -89,7 +90,7 @@
            </div>
         
 
-         <div class="row" *ngIf="applicationCategory !=='' ">
+         <div class="row" *ngIf="applicationCategorySelected">
           <div class="col-md-12">
             <h4>Menu Access Details</h4>
             <hr>
@@ -98,20 +99,19 @@
 
 
       <div>
-           <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Console'|| applicationCategory == 'Flux-RTP Console'">
-              <mat-tab label="Console">
+           <mat-tab-group *ngIf="applicationCategorySelected">
+              <mat-tab label="Menus">
                   <div class="row">
                       <div class="col-md-12">
                       <div class="rolemenu-acces-tabs">
                           <div class="tabContent">
               
 
-
-                              <div class="marB30" *ngFor = "let consoleMenus of listOfConsoleMenus">
-                                <label><b>{{consoleMenus.menuGroupName}}</b></label>
+                              <div class="marB30" >
+                                <!-- <label><b>{{consoleMenus.menuGroupName}}</b></label> -->
                                 <div class="form-group" >									
-                                  <label class="checkbox-inline" *ngFor = "let menuItems of consoleMenus.listOfMenuItems">
-                                      <mat-checkbox id="{{menuItems}}" name="{{menuItems}}" value="{{menuItems}}" ngModel>{{menuItems}}</mat-checkbox>
+                                  <label class="checkbox-inline" *ngFor = "let menuItems of listOfConsoleMenus">
+                                      <mat-checkbox (change)="addMenuItem(menuItems)" id="{{menuItems.title | lowercase}}" name="{{menuItems.title | lowercase }}" value="{{menuItems.title | lowercase}}" ngModel>{{menuItems.title}}</mat-checkbox>
                                   </label>
                                 </div>
                               </div>
@@ -124,7 +124,7 @@
             </mat-tab-group>
       </div>
       <div>
-         <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
+         <!-- <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
             <mat-tab label="Operations">
                 <div class="row">
                     <div class="col-md-12">
@@ -179,7 +179,7 @@
                      </div>
                   </div>
             </mat-tab>
-          </mat-tab-group>
+          </mat-tab-group> -->
     </div> 
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">

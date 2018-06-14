@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ ngOnInit(){
   this.roleData.push(this.role3);
 }
 
-
+platformURL = environment.platformURL;
 listOfApplicationCategory: string [] = [];
 listOfActivationStatus: string[] = ["Active", "Inactive"];
 listOfProcessingStatus: string[] = ["Pending Authorization", "Rejected"];
@@ -40,17 +40,16 @@ listOfConsoleMenus: Object[] = [{menuGroupName: "Administration", listOfMenuItem
 sampleDate: Date = new Date(); 
 
 role1: RoleModel = {roleName: "Admin-OP",description: "RTP Operations Admin", roleType: "IT",
- applicationCategory:"RTP Operations",activationStatus: "Enabled", processingStatus: "Authorized",
- associatedUsers:5, lastModifiedTime: this.sampleDate, menuItems: [{}]
+ applicationCategory:"RTP Operations",activationStatus: "Enabled",
+ menuItems: [{}]
 };
 
 role2: RoleModel = {roleName: "Checker-OP",description: "RTP Operations Checker", roleType: "Operations",
- applicationCategory:"RTP Operations",activationStatus: "Disabled", processingStatus: "Unauthorized",
- associatedUsers:3, lastModifiedTime: this.sampleDate, menuItems: [{}]
+ applicationCategory:"RTP Operations",activationStatus: "Disabled",
+ menuItems: [{}]
 };
 role3: RoleModel = {roleName: "Maker-OP",description: "RTP Operations Maker", roleType: "Audit",
- applicationCategory:"RTP Operations",activationStatus: "Enabled", processingStatus: "Unauthorized",
- associatedUsers:2, lastModifiedTime: this.sampleDate,  menuItems: [{}]
+ applicationCategory:"RTP Operations",activationStatus: "Enabled",  menuItems: [{}]
 };
 
 
@@ -66,16 +65,16 @@ getRoleData(){
 }
 
 getlistOfApplicationCategory(){
-return  this.http.get('http://192.168.1.115:8086/getAllApplicationCodes');
+return  this.http.get(`${this.platformURL}/applicationCodes`);
   
 }
 
 getListOfRoleType(){
-  return  this.http.get('http://192.168.1.115:8086/getAllRoleTypes');
+  return  this.http.get(`${this.platformURL}/getAllRoleTypes`);
 }
 
 getListOfConsoleMenus(applicationCode: string){
-  return this.http.get('http://192.168.1.115:8086/findMenuItemByCode/' + applicationCode);
+  return this.http.get(`${this.platformURL}/menuItem/find/` + applicationCode);
 }
 
 }

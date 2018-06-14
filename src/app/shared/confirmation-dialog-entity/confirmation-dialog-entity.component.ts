@@ -16,7 +16,6 @@ export class ConfirmationDialogEntityComponent implements OnInit {
   }
 message: string = "";
   onNoClick(): void {
-    console.log("ngOnClick");
     this.dialogRef.close();
   }
 

@@ -13,15 +13,13 @@ export class UpdateRoleEntityComponent implements OnInit {
   ngOnInit() {
     
   }
+listOfApplicationCategory: any;
 
 roleData: RoleModel =  {roleName: "",
 description: "string",
 applicationCategory: "string",
-roleType: "sring",
+roleType: "string",
 activationStatus: "string",
-processingStatus: "string",
-associatedUsers: null,
-lastModifiedTime:  new Date(),
 menuItems: []};
 
 
