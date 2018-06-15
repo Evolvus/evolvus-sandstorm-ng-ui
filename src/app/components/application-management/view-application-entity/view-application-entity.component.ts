@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationModel } from '../../shared/application.model';
+import { ApplicationModel } from '../application.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 

@@ -1,4 +1,4 @@
-import { ApplicationModel } from './../../shared/application.model';
+import { ApplicationModel } from '../application.model';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';

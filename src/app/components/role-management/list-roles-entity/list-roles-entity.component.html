@@ -44,8 +44,10 @@
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
                         <mat-select placeholder="Processing Status" required [(ngModel)]="processingStatus" name="processingStatus">
+                            <mat-option  value="rejected">Authorized</mat-option>
                           <mat-option  value="pendingAuthorization">Pending Authorization</mat-option>
                           <mat-option  value="rejected">Rejected</mat-option>
+         
                         </mat-select>
                       </mat-form-field>
                </div>
@@ -65,7 +67,7 @@
     		<div class="col-md-12">
     			<div class="gridHeadSec">
     				<h4>Available Role Details</h4> 
-    				<h5>Showing 1 to {{ listOfRoles.length }} out of {{ listOfRoles.length }}</h5>
+    				<h5>Showing 1 to {{ listOfRoles?.length }} out of {{ listOfRoles?.length }}</h5>
     				
     				<div class="pull-right">						
 						<h5 class="txt-black">Results per Page</h5>							
@@ -105,13 +107,13 @@
 									    </thead>
 									    <tbody>
 									      <tr (click)="viewRole(role)" *ngFor="let role of listOfRoles">
-									        <td>{{role.roleName}}</td>
-									        <td>{{role.description}}</td>
-									        <td>{{role.applicationCategory}}</td>
-									        <td>{{role.activationStatus}}</td>
-													<td>{{role.processingStatus}}</td>
-													<td>{{role.associatedUsers}}</td>
-									        <td>{{role.lastModifiedTime | date : 'full'}} </td>
+									        <td>{{role?.roleName | titlecase}}</td>
+									        <td>{{role?.description}}</td>
+									        <td>{{role?.applicationCode}}</td>
+									        <td>{{role?.activationStatus | titlecase}}</td>
+													<td>{{role?.processingStatus}}</td>
+													<td>{{role?.associatedUsers}}</td>
+									        <td>{{role?.lastUpdatedDate | date : 'full'}} </td>
 									       
 									        <td></td>
 									      </tr>

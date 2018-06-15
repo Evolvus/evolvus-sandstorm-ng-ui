@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { RoleModel } from '../../../shared/role-model';
-import { RoleDataService } from '../../../shared/role-data.service';
+import { RoleModel } from '../role-model';
+import { RoleDataService } from '../role-data.service';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogEntityComponent } from '../../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
@@ -46,7 +46,6 @@ roleData: RoleModel = {
 
 
   saveRole(applicationForm: NgForm){
-    console.log("saved role", this.roleData);
     this.http.post(`${this.platformURL}/role`,{
       roleName: this.roleData.roleName,
       applicationCode: this.roleData.applicationCategory,

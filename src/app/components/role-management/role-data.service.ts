@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -61,7 +61,7 @@ createNewRole(role: RoleModel){
 }
 
 getRoleData(){
-  return this.roleData.slice();
+  return this.http.get(`${this.platformURL}/role`);
 }
 
 getlistOfApplicationCategory(){

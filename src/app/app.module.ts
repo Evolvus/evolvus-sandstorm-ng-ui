@@ -47,7 +47,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 
 
 import { ResponsiveService } from './components/shared/responsive.service';
-import { RoleDataService } from './shared/role-data.service';
+import { RoleDataService } from './components/role-management/role-data.service';
 import { ViewApplicationEntityComponent } from './components/application-management/view-application-entity/view-application-entity.component';
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 

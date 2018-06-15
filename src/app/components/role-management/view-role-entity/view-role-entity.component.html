@@ -1,6 +1,4 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper viewFormSec">
-  <!-- Content Header (Page header) -->
+ <!-- <div class="content-wrapper viewFormSec">
   <section class="padL35 content-header ">
     <h1 class="marTB15 txt-orange">
       <div class="img_icon">
@@ -19,27 +17,27 @@
          <div class="col-md-4">
                 <div class="form-group">
                    <h5>Role Name</h5>
-                   <label>Admin-OP</label>
+                   <label>{{role.role?.roleName | titlecase}}</label>
                </div>
           </div>
 
           <div class="col-md-4">						  
                <div class="form-group">
                    <h5>Application Category</h5>
-                   <label>RTP Operations</label>
+                   <label>{{role.role?.applicationCode}}</label>
                </div>
            </div>
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Activation Status</h5>
-                   <label>Active</label>
+                   <label>{{role.role?.activationStatus | titlecase}}</label>
                </div>
           </div>
 
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Role Description</h5>
-                   <label>RTP Operations Admin</label>
+                   <label>{{role.role?.description}}</label>
                </div>
          </div>
            
@@ -53,32 +51,20 @@
         </div>
 
        <mat-tab-group>
-        <mat-tab label="Operations">
+        <mat-tab label="Menus" >
           <div class="tabContent">
             <div class="marB30">
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <h5>Dashboard</h5>
-                    <label>Transaction Monitor, Liquidity Monitor</label>
+                  <div class="form-group" *ngFor="let menuItem of role.menuItems">
+        
+                    <label>{{menuItem.menutitle}}</label>
                   </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <h5>Business Operations</h5>
-                  <label>Archival</label>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <h5>Payment Operations</h5>
-                  <label>Modify Payment</label>
-                </div>
               </div>
             </div>
           </div>
-        </mat-tab>
+        </mat-tab> -->
 
-        <mat-tab label="Console">
+        <!-- <mat-tab label="Console">
           <div class="tabContent">
             <div class="marB30">
               <div class="col-md-4">
@@ -103,8 +89,8 @@
             </div>
             </div>
           </div>
-        </mat-tab>
-      </mat-tab-group>
+        </mat-tab> -->
+      <!-- </mat-tab-group> -->
 
        
     <!-- <div class="row" ng-show="remark">
@@ -116,7 +102,7 @@
          </div>
     </div> -->
        
-    <div class="row text-center">
+    <!-- <div class="row text-center">
        <div class="col-sm-12">
           <div class="">
                <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
@@ -127,8 +113,8 @@
        </div>
      </div>
      </form>
-   </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
-          <style>
-/* .content-wrapper{height: {{contentwrapper}} } */
-</style>
+   </section>/.content -->
+<!-- </div>/.content-wrapper -->
+          <!-- <style> -->
+<!-- /* .content-wrapper{height: {{contentwrapper}} } */ -->
+<!-- </style> -->

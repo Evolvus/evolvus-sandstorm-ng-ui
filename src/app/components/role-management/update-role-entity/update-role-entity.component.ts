@@ -1,4 +1,4 @@
-import { RoleModel } from './../../../shared/role-model';
+import { RoleModel } from '../role-model';
 import { Component, OnInit } from '@angular/core';
 RoleModel
 @Component({
