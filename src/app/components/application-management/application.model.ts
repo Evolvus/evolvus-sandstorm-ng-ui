@@ -17,7 +17,6 @@ export class ApplicationModel {
     this.enabled = enabled;
     this.logo = logo;
     this.favicon = favicon;
-
   }
 
 }

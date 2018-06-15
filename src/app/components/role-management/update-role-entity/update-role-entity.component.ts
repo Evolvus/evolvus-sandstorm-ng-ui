@@ -22,6 +22,4 @@ roleType: "string",
 activationStatus: "string",
 menuItems: []};
 
-
-
 }
