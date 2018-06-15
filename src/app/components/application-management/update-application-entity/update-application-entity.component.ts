@@ -40,7 +40,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get(`${this.platformURL}/application/find/` + this.selectedApplicationCode
+    this.http.get(`${this.platformURL}/api/application/find/` + this.selectedApplicationCode
     )
       .subscribe((response: ApplicationModel) => {
         this.selectedApplication = response;
@@ -76,7 +76,7 @@ export class UpdateApplicationEntityComponent implements OnInit {
 
   saveUpdatedApplication(applicationForm: NgForm) {
     
-    this.http.put(`${this.platformURL}/application/` + this.selectedApplication._id, {
+    this.http.put(`${this.platformURL}/api/application/` + this.selectedApplication._id, {
       applicationCode: this.selectedApplication.applicationCode,
       applicationName: this.selectedApplication.applicationName,
       description: this.selectedApplication.description,

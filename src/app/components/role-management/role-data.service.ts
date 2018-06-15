@@ -61,20 +61,20 @@ createNewRole(role: RoleModel){
 }
 
 getRoleData(){
-  return this.http.get(`${this.platformURL}/role`);
+  return this.http.get(`${this.platformURL}/api/role`);
 }
 
 getlistOfApplicationCategory(){
-return  this.http.get(`${this.platformURL}/applicationCodes`);
+return  this.http.get(`${this.platformURL}/api/applicationCodes`);
   
 }
 
 getListOfRoleType(){
-  return  this.http.get(`${this.platformURL}/getAllRoleTypes`);
+  return  this.http.get(`${this.platformURL}/api/getAllRoleTypes`);
 }
 
 getListOfConsoleMenus(applicationCode: string){
-  return this.http.get(`${this.platformURL}/menuItem/find/` + applicationCode);
+  return this.http.get(`${this.platformURL}/api/menuItem/find/` + applicationCode);
 }
 
 }

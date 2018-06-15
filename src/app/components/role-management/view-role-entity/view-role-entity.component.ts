@@ -18,7 +18,7 @@ export class ViewRoleEntityComponent implements OnInit {
   role: RoleModel;
   ngOnInit() {
 
-    this.http.get(`${this.platformURL}/role/find/` +  this.route.snapshot.params['id'])
+    this.http.get(`${this.platformURL}/api/role/find/` +  this.route.snapshot.params['id'])
       .subscribe((response: RoleModel) => {
         // this.role = response;
         console.log("response");

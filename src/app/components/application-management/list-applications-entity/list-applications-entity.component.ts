@@ -18,7 +18,7 @@ export class ListApplicationsEntityComponent implements OnInit {
   ngOnInit() {
 
 
-    this.http.get(`${this.platformURL}/application`)
+    this.http.get(`${this.platformURL}/api/application`)
       .subscribe((response: any) => {
          if(response.message == "No applications found"){
             this.areAnyApplicationsAvailable = false;
