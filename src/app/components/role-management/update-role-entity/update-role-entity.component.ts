@@ -17,9 +17,9 @@ listOfApplicationCategory: any;
 
 roleData: RoleModel =  {roleName: "",
 description: "string",
-applicationCategory: "string",
-roleType: "string",
+applicationCode: "string",
 activationStatus: "string",
-menuItems: []};
+menuGroup: []
+};
 
 }

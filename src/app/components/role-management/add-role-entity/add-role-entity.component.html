@@ -24,12 +24,12 @@
 
 
 
-           <form class="new-role" class="roleForm" #roleSaveForm="ngForm" (ngSubmit)="saveRole(roleSaveForm)">
+           <form [formGroup]="roleForm" (ngSubmit)="saveRole()">
               <div class="row">
               <div class="col-md-5">
                   <div class="form-group">
                      <mat-form-field class="example-full-width">
-                         <input required matInput placeholder="Role Name" name="roleName" [(ngModel)]="roleData.roleName">
+                         <input required matInput placeholder="Role Name" formControlName="roleName" name="roleName">
 
                        </mat-form-field>
                      </div>
@@ -37,11 +37,10 @@
 
             
            
-           
            <div class="col-md-5">
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Application Category" (ngModelChange)="getMenuItems(applicationCategory)" required [(ngModel)]="roleData.applicationCategory" name="applicationCategory" #applicationCategory> 
+                    <mat-select placeholder="Application Category" formControlName="applicationCode" (ngModelChange)="getMenuGroups(applicationCategory.value)" required  name="applicationCategory" #applicationCategory> 
           
                       <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                     </mat-select>
@@ -50,21 +49,12 @@
            </div>
 
 
-           <div class="col-md-5">
-            <div class="form-group">
-               <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Role Type" required [(ngModel)]="roleData.roleType" name="roleType"> 
-                     <mat-option *ngFor="let roleType of listOfRoleType" value="{{roleType}}">{{roleType}}</mat-option>
-                   </mat-select>
-                 </mat-form-field>
-               </div>
-          </div>
 
 
           <div class="col-md-5">
             <div class="form-group">
                <mat-form-field [color]="'primary'" class="example-full-width">
-                   <mat-select placeholder="Activation Status" required [(ngModel)]="roleData.activationStatus"  name="activationStatus">
+                   <mat-select placeholder="Activation Status" formControlName="activationStatus" required  name="activationStatus">
                      <mat-option  value="active">Active</mat-option>
                      <mat-option  value="inactive">Inactive</mat-option>
                    </mat-select>
@@ -76,17 +66,11 @@
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
 
-                     <textarea required matInput placeholder="Role Description" name="description" [(ngModel)]="roleData.description"></textarea>
+                     <textarea required matInput placeholder="Role Description" formControlName="description" name="description" ></textarea>
 
                    </mat-form-field>
                  </div>
             </div>
-           
-
-     
-           
-           
-     
            </div>
         
 
@@ -97,32 +81,31 @@
           </div>
         </div> 
 
-
       <div>
            <mat-tab-group *ngIf="applicationCategorySelected">
               <mat-tab label="Menus">
                   <div class="row">
-                      <div class="col-md-12">
-                      <div class="rolemenu-acces-tabs">
-                          <div class="tabContent">
-              
-
-                              <div class="marB30" >
-                                <!-- <label><b>{{consoleMenus.menuGroupName}}</b></label> -->
-                                <div class="form-group" >									
-                                  <label class="checkbox-inline" *ngFor = "let menuItems of listOfConsoleMenus">
-                                      <mat-checkbox (change)="addMenuItem(menuItems)" id="{{menuItems.title | lowercase}}" name="{{menuItems.title | lowercase }}" value="{{menuItems.title | lowercase}}" ngModel>{{menuItems.title}}</mat-checkbox>
-                                  </label>
-                                </div>
-                              </div>
-
+                   <div class="col-md-12">
+                    <div class="rolemenu-acces-tabs">
+                     <div class="tabContent">
+                      <div class="marB30">
+                        <div class="form-group">									
+                          <label class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
+                            <label for=""class="menu-group-title txt-orange">{{menuGroup.title}}</label>
+                            <div class="menu-items" *ngFor = "let menuItem of menuGroup.menuItems">
+                                <mat-checkbox (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}" name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
                             </div>
-                       </div>
-                       </div>
+                          </label>
+                        </div>
+                      </div>
+                     </div>
                     </div>
+                   </div>
+                  </div>
               </mat-tab>
-            </mat-tab-group>
+           </mat-tab-group>
       </div>
+      
       <div>
          <!-- <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
             <mat-tab label="Operations">
@@ -184,7 +167,7 @@
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">
          <div class="">
-              <button type="submit" class="btn btn-default btn-submit" [disabled] = "roleSaveForm.invalid" >Add Role</button>
+              <button type="submit" [disabled] = "roleForm.invalid"class="btn btn-default btn-submit" >Add Role</button>
               <button type="button" class="btn btn-default btn-close"  (click)="abortSaveAction()"> Close</button>
           </div>
       </div>

@@ -45,7 +45,7 @@
                     <mat-form-field [color]="'primary'">
                         <mat-select placeholder="Processing Status" required [(ngModel)]="processingStatus" name="processingStatus">
                             <mat-option  value="rejected">Authorized</mat-option>
-                          <mat-option  value="pendingAuthorization">Pending Authorization</mat-option>
+                          <mat-option  value="pendingAuthorization">Unauthorized</mat-option>
                           <mat-option  value="rejected">Rejected</mat-option>
          
                         </mat-select>
@@ -80,7 +80,6 @@
 					</div>
     			</div>
     			<div class="tablegrid animated">
-    				<div class="float-searchicon" (click) = "gridsearch=!gridsearch"><span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom"><span class="glyphicon glyphicon-search"></span> </span></div>
 						<div class="slide-table">
 				 			<div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div>
     							<div id="container-table">
@@ -93,17 +92,7 @@
                         <tr>
                             <th *ngFor="let header of tableHeader">{{header}}</th>									       
                           </tr> 
-									      <tr class="grid-search" *ngIf="gridsearch">
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											
-											<td><span class="glyphicon glyphicon-search pull-right"></span></td>
-										</tr> 
+									     
 									    </thead>
 									    <tbody>
 									      <tr (click)="viewRole(role)" *ngFor="let role of listOfRoles">
@@ -111,7 +100,7 @@
 									        <td>{{role?.description}}</td>
 									        <td>{{role?.applicationCode}}</td>
 									        <td>{{role?.activationStatus | titlecase}}</td>
-													<td>{{role?.processingStatus}}</td>
+													<td>{{role?.processingStatus | titlecase}}</td>
 													<td>{{role?.associatedUsers}}</td>
 									        <td>{{role?.lastUpdatedDate | date : 'full'}} </td>
 									       

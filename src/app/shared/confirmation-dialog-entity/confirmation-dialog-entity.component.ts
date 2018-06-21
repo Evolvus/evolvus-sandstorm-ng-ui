@@ -12,9 +12,11 @@ export class ConfirmationDialogEntityComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.message = this.data.message;
+    this.statusMessage = this.data.message;
+    this.messageType = this.data.type;
   }
-message: string = "";
+  statusMessage: string = "";
+messageType: string = "";
   onNoClick(): void {
     this.dialogRef.close();
   }

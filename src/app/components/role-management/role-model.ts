@@ -1,26 +1,79 @@
 export class RoleModel {
   roleName: string;
   description: string;
-  applicationCategory: string;
-  roleType: string;
+  applicationCode: string;
   activationStatus: string;
-  menuItems: Object[];
+  menuGroup: MenuGroup[];
+
 
   constructor(
     roleName: string,
     description: string,
-    applicationCategory: string,
-    roleType: string,
+    applicationCode: string,
     activationStatus: string,
-    menuItems: Object[]
+    menuGroup: MenuGroup[]
   ) {
     this.roleName = roleName;
     this.description = description;
-    this.applicationCategory = applicationCategory;
-    this.roleType = roleType;
+    this.applicationCode = applicationCode;
     this.activationStatus = activationStatus;
-    this.menuItems = menuItems;
+    this.menuGroup = menuGroup;
   }
 
 }
 
+export class MenuGroup
+  {
+    applicationCode: string;
+    menuGroupCode: string;
+    title: string;
+    menuItems: MenuItems[];
+    selectedFlag: boolean;
+
+    constructor(
+      applicationCode: string,
+      menuGroupCode: string,
+      title: string,
+      menuItems: MenuItems[],
+      selectedFlag: boolean
+
+    ) {
+      this.applicationCode = applicationCode;
+      this.menuGroupCode = menuGroupCode;
+      this.title = title;
+      this.menuItems = menuItems;
+      this.selectedFlag = selectedFlag;
+
+    }
+    
+
+
+    
+}
+export class MenuItems
+  {
+    menuItemType: string;
+    applicationCode: string;
+    menuItemCode: string;
+    title: string;
+    selectedFlag: boolean;
+
+    constructor(
+      menuItemType: string,
+      applicationCode: string,
+      menuItemCode: string,
+      title: string,
+      selectedFlag: boolean
+    ) {
+      this.menuItemType = menuItemType;
+      this.applicationCode = applicationCode;
+      this.menuItemCode = menuItemCode;
+      this.title = title;
+      this.selectedFlag = selectedFlag;
+
+    }
+    
+
+
+    
+}
