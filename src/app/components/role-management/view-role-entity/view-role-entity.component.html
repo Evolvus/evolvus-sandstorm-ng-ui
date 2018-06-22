@@ -1,4 +1,4 @@
- <!-- <div class="content-wrapper viewFormSec">
+  <div class="content-wrapper viewFormSec">
   <section class="padL35 content-header ">
     <h1 class="marTB15 txt-orange">
       <div class="img_icon">
@@ -17,27 +17,27 @@
          <div class="col-md-4">
                 <div class="form-group">
                    <h5>Role Name</h5>
-                   <label>{{role.role?.roleName | titlecase}}</label>
+                   <label>{{roleData?.roleName | titlecase}}</label>
                </div>
           </div>
 
           <div class="col-md-4">						  
                <div class="form-group">
                    <h5>Application Category</h5>
-                   <label>{{role.role?.applicationCode}}</label>
+                   <label>{{roleData?.applicationCode}}</label>
                </div>
            </div>
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Activation Status</h5>
-                   <label>{{role.role?.activationStatus | titlecase}}</label>
+                   <label>{{roleData?.activationStatus | titlecase}}</label>
                </div>
           </div>
 
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Role Description</h5>
-                   <label>{{role.role?.description}}</label>
+                   <label>{{roleData?.description}}</label>
                </div>
          </div>
            
@@ -54,16 +54,15 @@
         <mat-tab label="Menus" >
           <div class="tabContent">
             <div class="marB30">
-                <div class="col-md-4">
-                  <div class="form-group" *ngFor="let menuItem of role.menuItems">
-        
-                    <label>{{menuItem.menutitle}}</label>
-                  </div>
+                <div class="col-md-12">
+                  <div class="form-group col-md-4" *ngFor="let mGroup of roleData?.menuGroup">
+                    <h5>{{mGroup?.title | titlecase}}</h5>
+                    <label *ngFor="let menuItem of mGroup?.menuItems">{{menuItem?.title}}<span>,&nbsp;</span> </label>
               </div>
             </div>
           </div>
-        </mat-tab> -->
-
+          </div>
+        </mat-tab>
         <!-- <mat-tab label="Console">
           <div class="tabContent">
             <div class="marB30">
@@ -90,9 +89,9 @@
             </div>
           </div>
         </mat-tab> -->
-      <!-- </mat-tab-group> -->
+    </mat-tab-group>
 
-<!--        
+     
      <div class="row" ng-show="remark">
        <div class="col-md-4">
            <div class="form-group">
@@ -108,10 +107,11 @@
                <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
                <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button>
                <button type="button" class="btn btn-default btn-submit" (click)="updateRole()"> Modify</button>
+               <button type="button" class="btn btn-default btn-delete" (click)="deleteRole()"> Delete</button>
                <button type="button" class="btn btn-default btn-close" routerLink="/rolemanagement"> Cancel</button>
            </div>
        </div>
      </div>
-     </form> -->
-   <!-- </section> --> -->
- -->
+     </form>
+    </section> 
+

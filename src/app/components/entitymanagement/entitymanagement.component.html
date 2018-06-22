@@ -1,0 +1,124 @@
+<div class="content-wrapper">
+
+  <div class="list-applications" id="list-applications" style="transition: 0.8s;">
+
+    <section class="padL35 content-header">
+      <h1 class="marTB15 txt-orange">
+        <span>
+          <span class="evo-role"></span>Entity Management</span>
+      </h1>
+
+      <div class="rightSecBtn adjust-plussymbol">
+        <span [routerLink]="['/createEntity']" mat-raised-button matTooltip="Create new Entity">
+          <span class="evo-role"></span>
+          <span class="plus-symbol">+</span>
+        </span>
+      </div>
+    </section>
+
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Entity Name</label>
+            <input type="text" class="form-control" id="entityName">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Parent Entity Name</label>
+            <select class="form-control" id="entityParent">
+              <option *ngFor="let entity of entities">{{entity.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Entity Active Status</label>
+            <select class="form-control" id="entityActiveStatus">
+              <option>Active</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Entity Processing Status</label>
+            <select class="form-control" id="entityProcStatus">
+              <option>Pending</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="row row-padding">
+        <div class="col-md-10">
+          <h4 class="txt-blue">Available Entitiy Details</h4>
+          <br>
+        </div>
+      </div>
+
+      <!--Table-->
+      <div class="tablegrid animated row">
+        <div class="col-md-10">
+          <div class="float-searchicon" *ngIf="areAnyEntitiesAvailable">
+            <span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+          </div>
+          <div class="slide-table">
+            <div id="container-table">
+              <div id="content-table">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Entity Name</th>
+                      <th>Parent Entity Name</th>
+                      <th>Entity Level</th>
+                      <th>Entity Code</th>
+                      <th>Entity Active Status</th>
+                      <th>Entity Processing Status</th>
+                      <th>Created User</th>
+                    </tr>
+              
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let entity of entities" (click)="selectEntity(entity)">
+
+                      <td>{{ entity.name | uppercase}}</td>
+                      <td>{{ entity.parent | uppercase}}</td>
+                      <td>{{ entity.level}}</td>
+                      <td>{{ entity.entityCode | uppercase}}</td>
+                      <td>{{ entity.enabled == true ? 'Inactive' : 'Active'}}</td>
+                      <td>{{ entity.processingStatus}}</td>
+                      <td>{{ entity.createdBy}}</td>
+
+                      <td>{{ entity.createdDate | date}}</td>
+                    </tr>
+                  </tbody>
+                  <!--Table body-->
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Table-->
+      </div>
+
+    </section>
+    <div class="row row-padding" *ngIf="!areAnyEntitiesAvailable">
+      <div class="row text-center">
+        <h4 class="txt-red" style="color:red;">No Entity Details Available!</h4>
+        <br>
+      </div>
+    </div>
+    <div class="row text-center">
+      <button type="button" class="btn btn-primary btn-close" [routerLink]="['/home']">Close</button>
+    </div>
+
+
+  </div>
+</div>

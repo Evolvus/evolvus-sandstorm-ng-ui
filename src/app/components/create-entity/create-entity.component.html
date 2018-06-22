@@ -1,0 +1,114 @@
+<div class="content-wrapper addFormSec">
+  <div class="create-entity" id="create-entity" style="transition: 0.8s;">
+
+
+
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+        <div class="img_icon">
+          <span>
+            <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/entityManagement']" aria-hidden="true"></i> Add New Entity</span>
+        </div>
+      </h1>
+    </section>
+
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <h4>Entity Information</h4>
+          <hr>
+        </div>
+      </div>
+
+
+      <form [formGroup]="createEntity">
+        <div class="row">
+          <div class="col-lg-5">
+            <div>
+              <mat-form-field class="example-full-width">
+                <input ngModel required autocomplete="off" formControlName="entityName" matInput name="entityName" minlength="3" maxlength="20"
+                  id="entityName" placeholder="Entity Name">
+              </mat-form-field>
+              <div *ngFor="let validation of ValidationMsgs.entityName">
+                <p *ngIf="createEntity.get('entityName').hasError(validation.type) && (createEntity.get('entityName').dirty || createEntity.get('entityName').touched)"
+                  class="errorMsg">{{validation.message}}</p>
+              </div>
+
+            </div>
+            <div>
+              <mat-form-field class="example-full-width">
+                <input ngModel required autocomplete="off" formControlName="entityCode" matInput name="entityCode" minlength="3" maxlength="20"
+                  id="entityCode" placeholder="Entity Code">
+              </mat-form-field>
+              <div *ngFor="let validation of ValidationMsgs.entityCode">
+                <p *ngIf="createEntity.get('entityCode').hasError(validation.type) && (createEntity.get('entityCode').dirty || createEntity.get('entityCode').touched)"
+                  class="errorMsg">{{validation.message}}</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-5">
+            <div>
+              <mat-form-field class="example-full-width">
+                <input ngModel required [matAutocomplete]="auto" formControlName="parentEntity" matInput name="parentEntity" id="parentEntity"
+                  placeholder="Parent Entity">
+                  <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let parent of parentEntities" [value]="parent.name">
+                        {{ parent.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+              </mat-form-field>
+              <div *ngFor="let validation of ValidationMsgs.parentEntity">
+                <p *ngIf="createEntity.get('parentEntity').hasError(validation.type) && (createEntity.get('parentEntity').dirty || createEntity.get('parentEntity').touched)"
+                  class="errorMsg">{{validation.message}}</p>
+              </div>
+            </div>
+
+            <div>
+              <mat-form-field class="example-full-width">
+                <input ngModel required autocomplete="off" formControlName="entityDescription" matInput name="entityDescription" id="entityDescription"
+                  placeholder="Entity Description">
+              </mat-form-field>
+              <div *ngFor="let validation of ValidationMsgs.entityDescription">
+                <p *ngIf="createEntity.get('entityDescription').hasError(validation.type) && (createEntity.get('entityDescription').dirty || createEntity.get('entityDescription').touched)"
+                  class="errorMsg">{{validation.message}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="form-group">
+              <mat-form-field class="example-full-width ">
+                <mat-select ngModel placeholder="Entity Status" formControlName="entityStatus" required name="entityStatus" id="entityStatus">
+                  <mat-option value="true">Active</mat-option>
+                  <mat-option value="false">Inactive</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngFor="let validation of ValidationMsgs.entityStatus">
+                <p *ngIf="createEntity.get('entityStatus').hasError(validation.type) && (createEntity.get('entityStatus').dirty || createEntity.get('entityStatus').touched)"
+                  class="errorMsg">{{validation.message}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section>
+      <div class="row">
+        <div class="text-center">
+          <!-- <div class="col-sm-12"> -->
+          <div class="">
+            <button class="btn btn-primary btn-submit" id="submitButton" [disabled]="!createEntity.valid" (click)="saveEntity(createEntity)">Submit</button>
+            <button type="button" class="btn btn-primary btn-close" [routerLink]="['/entityManagement']">Cancel</button>
+
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>

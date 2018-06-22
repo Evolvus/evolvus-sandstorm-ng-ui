@@ -17,6 +17,7 @@ export class ConfirmationDialogEntityComponent implements OnInit {
   }
   statusMessage: string = "";
 messageType: string = "";
+
   onNoClick(): void {
     this.dialogRef.close();
   }

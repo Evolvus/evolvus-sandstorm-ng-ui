@@ -42,7 +42,7 @@
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
                     <mat-select placeholder="Application Category" required [(ngModel)]="roleData.applicationCategory" name="applicationCategory"> 
-                      <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
+                      <mat-option *ngFor="let applicationCategory of listOfApplicationCodes" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -197,3 +197,185 @@
      </section>
   </div>
   -->
+   <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper addFormSec">
+    <!-- Content Header (Page header) -->
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+     <div class="img_icon">
+     <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i> Update Role Details</span>
+   </div>  </h1>
+    </section> 
+ 
+     <section class="content">
+
+
+
+
+       
+         <div class="row">
+
+           <div class="col-md-4">
+             <h4>Role Information</h4>
+          <hr>
+           </div>
+           </div>
+
+
+
+           <form [formGroup]="roleForm" (ngSubmit)="saveUpdatedRole()">
+              <div class="row">
+              <div class="col-md-5">
+                  <div class="form-group">
+                     <mat-form-field class="example-full-width">
+                         <input required matInput placeholder="Role Name" formControlName="roleName" required name="roleName">
+
+                       </mat-form-field>
+                     </div>
+                </div>
+
+            
+           
+           <div class="col-md-5">
+             <div class="form-group">
+                <mat-form-field [color]="'primary'" class="example-full-width">
+                    <mat-select placeholder="Application Category"  formControlName="applicationCode"  required  name="applicationCode"> 
+                      <mat-option  *ngFor="let applicationCode of listOfApplicationCodes" value="{{applicationCode}}">{{applicationCode}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+           </div>
+
+
+
+
+          <div class="col-md-5">
+            <div class="form-group">
+               <mat-form-field [color]="'primary'" class="example-full-width">
+                   <mat-select placeholder="Activation Status"  formControlName="activationStatus" required  name="activationStatus">
+                     <mat-option  value="active">Active</mat-option>
+                     <mat-option  value="inactive">Inactive</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 </div>
+               </div>
+
+           <div class="col-md-5">
+              <div class="form-group">
+                 <mat-form-field  class="example-full-width">
+
+                     <textarea required matInput placeholder="Role Description"  formControlName="description" name="description" ></textarea>
+
+                   </mat-form-field>
+                 </div>
+            </div>
+           </div>
+        
+
+         <div class="row" >
+          <div class="col-md-12">
+            <h4>Menu Access Details</h4>
+            <hr>
+          </div>
+        </div> 
+
+      <div>
+           <mat-tab-group >
+              <mat-tab label="Menus">
+                  <div class="row">
+                   <div class="col-md-12">
+                    <div class="rolemenu-acces-tabs">
+                     <div class="tabContent">
+                      <div class="marB30">
+                        <div class="form-group">									
+                          <label class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
+                            <label for=""class="menu-group-title txt-orange"><b>{{menuGroup.title}}</b></label>
+                            <div class="menu-items" *ngFor = "let menuItem of menuGroup.menuItems">
+                                <mat-checkbox (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}" name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+              </mat-tab>
+           </mat-tab-group>
+      </div>
+      
+      <div>
+         <!-- <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
+            <mat-tab label="Operations">
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="rolemenu-acces-tabs">
+                      <div class="tabContent">
+                        <div class="marB30">
+                          <label><b>Dashboard</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">Transaction Monitor
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Liquidity Monitor
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Status Monitor
+                              </label>
+                          </div>
+                        </div>
+                        
+                        <div class="marB30">
+                          <label><b>Business Operations</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">SOD /EOD
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Archival
+                              </label>
+                          </div>
+                        </div>
+                        
+                        <div class="marB30">
+                          <label><b>Payment Operations</b></label>
+                          <div class="form-group">									
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="">Create Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Authorize/Reject Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Modify Payment
+                              </label>
+                              <label class="checkbox-inline">
+                                <input type="checkbox" value="">Delete Payment
+                              </label>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                     </div>
+                  </div>
+            </mat-tab>
+          </mat-tab-group> -->
+    </div> 
+    <div class="row text-center">
+      <div class="col-md-12" style="margin-left: 2em;">
+         <div class="">
+              <button type="submit" class="btn btn-default btn-submit" >Add Role</button>
+              <button type="button" class="btn btn-default btn-close"  (click)="abortSaveAction()"> Close</button>
+          </div>
+      </div>
+    </div>
+  </form>
+
+
+   
+    
+      
+     </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+ 

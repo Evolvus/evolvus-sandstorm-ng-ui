@@ -2,14 +2,16 @@
 width: 260px;
 padding: 10px;
 padding-bottom: -10px;
-height: 150px;
+max-height: 100px;
 margin-left: -10px;
 }
-.fa-thumbs-up, .fa-thumbs-down{
+.fa-thumbs-up, .fa-exclamation-triangle{
     font-size: 50px;
-    position: relative;
-    left:72px;
     color: green;
+}
+.fa-exclamation-triangle{
+    font-size: 50px;
+    color: red;
 }
  .fa-thumbs-down{
     font-size: 50px;
@@ -18,12 +20,14 @@ margin-left: -10px;
     color: red;
 }
 .btn{
-    position: relative;
-    margin-top: 60px;
-    left:30px;
+    margin-top: 40px;
 }
 h5{
     margin-top: 50px;
     font-weight: bold;
     color:#ff8500;
+}
+
+h4{
+    padding-top:2rem; 
 }

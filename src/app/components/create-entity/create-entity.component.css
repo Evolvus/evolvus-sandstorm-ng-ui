@@ -1,0 +1,64 @@
+
+form {
+    margin-top: 10px;
+ 
+  }
+
+  
+  label {
+    color: black;
+    font-weight: 50;
+  }
+  
+  
+  button:disabled {
+      margin-left: -200px;
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+  
+  .list-group ul li:hover {
+    background-color: blue;
+    color: white;
+  }
+  
+  .btn-info {
+    padding: 2px 8px;
+    border-radius: 20px;
+    float: right;
+    font-size: 12px;
+    margin-top: -15px;
+    margin-right: -35px;
+  }
+  
+  
+  .logo-image {
+    margin-top: 2em;
+  }
+  
+  .favicon-image {
+    margin-top: 2em;
+  }
+  
+  button.form-submit {
+    margin-top: 2em;
+  }
+  
+  
+  .example-form {
+    min-width: 180px;
+    width: 80%;
+  }
+  .example-full-width {
+    width: 90%;
+  }
+  
+
+  .createEntity .errorMsg {
+    position: absolute;
+    margin: 0;
+    bottom: 1px;
+}
+
+
+

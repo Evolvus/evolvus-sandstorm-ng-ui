@@ -1,17 +1,21 @@
 
 
-<section class="content dialog">
-  <div class="success-message" *ngIf = "messageType === 'success'">
-      <i class="fa fa-thumbs-up"></i>
-      <h4>{{statusMessage}}</h4>
+<section class="">
+  <div class="text-center">
+      <div class="success-message" *ngIf = "messageType === 'success'">
+          <i class="fa fa-thumbs-up"></i>
+          <h4>{{statusMessage}}</h4>
+      </div>
+      <div class="success-message" *ngIf = "messageType === 'error'">
+          <i class="fa fa-thumbs-down"></i>
+          <h4>{{statusMessage}}</h4>
+      </div>
+      <div class="success-message" *ngIf = "messageType === 'alert'">
+          <i class="fa fa-exclamation-triangle"></i>
+          <h4>{{statusMessage}}</h4>
+      </div>
+      <button type="button"  (click)="onNoClick()" class="btn btn-default btn-close">Ok</button>
+      <button type="button"  (click)="onNoClick()" class="btn btn-default btn-close">Close</button>
   </div>
-  <div class="success-message" *ngIf = "messageType === 'error'">
-      <i class="fa fa-thumbs-down"></i>
-      <h5>{{statusMessage}}</h5>
-
-  </div>
-    
-    <button type="button"  (click)="onNoClick()" class="btn btn-default btn-close">Close</button>
-
- 
   </section>
+

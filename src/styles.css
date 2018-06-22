@@ -865,7 +865,7 @@ button#slideright span {
     color: white;
 }
 
-.btn-submit,.btn-close,.btn-approve,.btn-reject {
+.btn-submit,.btn-close,.btn-approve,.btn-reject, .btn-delete {
     min-width: 100px !important;
 	padding: 6px 15px !important;
 	font-size:12px !important;
@@ -901,6 +901,21 @@ button#slideright span {
     opacity:1 !important; 
 }
 
+.btn-delete {
+    border-radius: 22px !important;
+    background-color: #F10000
+     !important;
+    color: white !important;
+    margin-left:15px !important;
+  
+}
+
+.btn-delete:hover {
+    background-color: white !important;
+    color: #F10000 !important;
+    border-color:#F10000 !important;
+    opacity:1 !important; 
+}
 .btn-approve{
 	background-color:#ff8500 !important;
     color: #FFF !important;
@@ -1241,6 +1256,9 @@ top: 11px;}
 } 
 
 
+.errorMsg{
+    color:red !important;
+}
 
 
 /*************/
@@ -1464,3 +1482,5 @@ float: left;
     -webkit-transition: transform;
     transition: transform;
 }
+
+/* label:last-child spanf{display: none;} */

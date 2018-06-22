@@ -19,7 +19,7 @@ export class ListRolesEntityComponent implements OnInit {
 
   ngOnInit() {
     this.tableHeader = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
-    this.roleDataService.getRoleData().
+    this.roleDataService.getAllRoleData().
     subscribe((response)=>{
       console.log(response, "roles");
       this.listOfRoles = response;

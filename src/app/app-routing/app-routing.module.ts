@@ -14,7 +14,8 @@ import { ListApplicationsEntityComponent } from '../components/application-manag
 import { UpdateApplicationEntityComponent } from '../components/application-management/update-application-entity/update-application-entity.component';
 import { ViewApplicationEntityComponent } from '../components/application-management/view-application-entity/view-application-entity.component';
 import { UpdateRoleEntityComponent } from '../components/role-management/update-role-entity/update-role-entity.component';
-
+import { EntitymanagementComponent } from '../components/entitymanagement/entitymanagement.component';
+import { CreateEntityComponent } from '../components/create-entity/create-entity.component';
 
 const routes: Routes =[
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,10 +27,12 @@ const routes: Routes =[
   { path: 'roleManagement', component: ListRolesEntityComponent },
   { path: 'addRole', component: AddRoleEntityComponent },
   { path: 'viewRole/:id', component: ViewRoleEntityComponent },
-  { path: 'updateRole', component: UpdateRoleEntityComponent},
+  { path: 'updateRole/:id', component: UpdateRoleEntityComponent},
   { path: 'userManagement', component: UserManagementComponent },
    { path: 'adduser', component: AddUserComponent },
-   { path: 'viewuser', component: ViewUserComponent }
+   { path: 'viewuser', component: ViewUserComponent },
+   { path: 'entityManagement', component: EntitymanagementComponent },
+   { path: 'createEntity', component: CreateEntityComponent }
 ];
 
 

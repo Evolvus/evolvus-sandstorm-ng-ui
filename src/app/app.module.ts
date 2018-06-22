@@ -49,9 +49,12 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 
 import { ResponsiveService } from './components/shared/responsive.service';
 import { RoleDataService } from './components/role-management/role-data.service';
+import { EntityService } from './shared/services/entityservice';
+
 import { ViewApplicationEntityComponent } from './components/application-management/view-application-entity/view-application-entity.component';
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
-
+import { EntitymanagementComponent } from './../app/components/entitymanagement/entitymanagement.component';
+import { CreateEntityComponent } from './components/create-entity/create-entity.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,8 @@ import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-
     SearchPipe,
     ViewApplicationEntityComponent,
     ConfirmationDialogEntityComponent,
-    
+    EntitymanagementComponent,
+    CreateEntityComponent
   ],
   imports: [
     BrowserModule,
@@ -89,15 +93,11 @@ import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-
     MatCheckboxModule,
     MatDialogModule,
     MatSelectModule
-
-
-
-
   ],
   entryComponents: [
     ConfirmationDialogEntityComponent
   ],
-  providers: [ResponsiveService, RoleDataService],
+  providers: [ResponsiveService, RoleDataService, EntityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
