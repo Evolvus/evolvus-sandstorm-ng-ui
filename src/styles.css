@@ -1483,4 +1483,4 @@ float: left;
     transition: transform;
 }
 
-/* label:last-child spanf{display: none;} */
+.menu-item-display label:last-child span{display: none;}

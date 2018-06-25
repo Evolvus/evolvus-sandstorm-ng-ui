@@ -55,9 +55,9 @@
           <div class="tabContent">
             <div class="marB30">
                 <div class="col-md-12">
-                  <div class="form-group col-md-4" *ngFor="let mGroup of roleData?.menuGroup">
+                  <div class="form-group menu-item-display col-md-4" *ngFor="let mGroup of roleData?.menuGroup">
                     <h5>{{mGroup?.title | titlecase}}</h5>
-                    <label *ngFor="let menuItem of mGroup?.menuItems">{{menuItem?.title}}<span>,&nbsp;</span> </label>
+                    <label *ngFor="let menuItem of mGroup?.menuItems">{{menuItem?.title}}<span >,&nbsp;</span> </label>
               </div>
             </div>
           </div>
@@ -92,14 +92,14 @@
     </mat-tab-group>
 
      
-     <div class="row" ng-show="remark">
+     <!-- <div class="row" ng-show="remark">
        <div class="col-md-4">
            <div class="form-group">
              <h5>Remarks</h5>
               <textarea class="form-control" rows="5" id="comment"></textarea>
            </div>
          </div>
-    </div> 
+    </div>  -->
        
      <div class="row text-center">
        <div class="col-sm-12">

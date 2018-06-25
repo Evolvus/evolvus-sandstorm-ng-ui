@@ -66,7 +66,6 @@ export class AddRoleEntityComponent implements OnInit {
       .getListOfMenuGroups(applicationCode)
       .subscribe((response: MenuGroup[]) => {
         this.listOfMenuGroups = response;
-        console.log("roleMenuGroups", response);
       });
   }
 

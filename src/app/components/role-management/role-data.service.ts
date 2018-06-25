@@ -72,7 +72,11 @@ getOneRoleData(roleName: string){
 saveRole(roleData){
   return this.http.post(`${this.platformURL}/api/role`, roleData);
 }
-
+updateRole(roleData){
+  return this.http.put(`${this.platformURL}/api/role/` + roleData._id,{
+    roleData: roleData
+  });
+}
 deleteRole(roleData){
   return this.http.put(`${this.platformURL}/api/role/delete/` + roleData._id,{
     roleData: roleData

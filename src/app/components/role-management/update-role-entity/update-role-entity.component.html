@@ -239,8 +239,8 @@
            <div class="col-md-5">
              <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
-                    <mat-select placeholder="Application Category"  formControlName="applicationCode"  required  name="applicationCode"> 
-                      <mat-option  *ngFor="let applicationCode of listOfApplicationCodes" value="{{applicationCode}}">{{applicationCode}}</mat-option>
+                    <mat-select placeholder="Application Category"  formControlName="applicationCode" (ngModelChange)="getMenuGroups(applicationCode.value)"  required  name="applicationCode" #applicationCode> 
+                      <mat-option  *ngFor="let applicationCode of listOfApplicationCodes"  value="{{applicationCode}}">{{applicationCode}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -260,6 +260,7 @@
                  </div>
                </div>
 
+
            <div class="col-md-5">
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
@@ -270,7 +271,6 @@
                  </div>
             </div>
            </div>
-        
 
          <div class="row" >
           <div class="col-md-12">
@@ -284,16 +284,21 @@
               <mat-tab label="Menus">
                   <div class="row">
                    <div class="col-md-12">
-                    <div class="rolemenu-acces-tabs">
+                    <div class="rolemenu-acces-tabs ">
                      <div class="tabContent">
                       <div class="marB30">
                         <div class="form-group">									
-                          <label class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
+                          <div class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
                             <label for=""class="menu-group-title txt-orange"><b>{{menuGroup.title}}</b></label>
                             <div class="menu-items" *ngFor = "let menuItem of menuGroup.menuItems">
-                                <mat-checkbox (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}" name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
+                                <mat-checkbox 
+                                (change)="addMenuItem(menuGroup, menuItem)"
+                              [checked] = "checkIfMenuItemIsSelected(menuItem)"
+                                id="{{menuItem.title | lowercase}}" 
+                                name="{{menuItem.title | lowercase }}" 
+                                value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
                             </div>
-                          </label>
+                          </div>
                         </div>
                       </div>
                      </div>
@@ -365,16 +370,16 @@
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">
          <div class="">
-              <button type="submit" class="btn btn-default btn-submit" >Add Role</button>
+              <button type="submit" class="btn btn-default btn-submit" >Update Role</button>
               <button type="button" class="btn btn-default btn-close"  (click)="abortSaveAction()"> Close</button>
           </div>
       </div>
     </div>
-  </form>
 
 
    
-    
+  </form>
+
       
      </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
