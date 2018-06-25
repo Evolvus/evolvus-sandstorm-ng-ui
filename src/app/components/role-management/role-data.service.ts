@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -29,7 +29,7 @@ platformURL = environment.platformURL;
 listOfApplicationCategory: string [] = [];
 listOfActivationStatus: string[] = ["Active", "Inactive"];
 listOfProcessingStatus: string[] = ["Pending Authorization", "Rejected"];
-
+dialogClosed: Subject<boolean> = new Subject<boolean>();
 
 
 sampleDate: Date = new Date(); 
@@ -67,7 +67,16 @@ getOneRoleData(roleName: string){
 }
 
 
+getFilteredRoleData(applicationCode, activationStatus, processingStatus){
+  return this.http.get(`${this.platformURL}/api/role/filter`,{
+  params:  {
+      applicationCode: applicationCode,
+      activationStatus: activationStatus,
+      processingStatus: processingStatus
+    }
 
+  });
+}
 
 saveRole(roleData){
   return this.http.post(`${this.platformURL}/api/role`, roleData);
@@ -86,7 +95,7 @@ deleteRole(roleData){
 
 
 
-openDialog(messageType, statusMessage): string {
+openDialog(messageType, statusMessage): any {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
     width: "300px",
     data: {
@@ -95,11 +104,8 @@ openDialog(messageType, statusMessage): string {
     }
   });
 
-  dialogRef.afterClosed().subscribe(result => {
-    return "success";
-  });
-  return "failure";
-
+  return dialogRef.afterClosed();
+  
 }
 
 

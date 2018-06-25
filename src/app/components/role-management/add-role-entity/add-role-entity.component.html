@@ -93,7 +93,7 @@
                           <label class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
                             <label for=""class="menu-group-title txt-orange">{{menuGroup.title}}</label>
                             <div class="menu-items" *ngFor = "let menuItem of menuGroup.menuItems">
-                                <mat-checkbox (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}" name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
+                                <mat-checkbox class="mat-pseudo-checkbox" (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}" name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
                             </div>
                           </label>
                         </div>

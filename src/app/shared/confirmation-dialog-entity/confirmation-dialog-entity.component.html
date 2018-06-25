@@ -5,17 +5,20 @@
       <div class="success-message" *ngIf = "messageType === 'success'">
           <i class="fa fa-thumbs-up"></i>
           <h4>{{statusMessage}}</h4>
+          <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">Close</button>
       </div>
       <div class="success-message" *ngIf = "messageType === 'error'">
           <i class="fa fa-thumbs-down"></i>
           <h4>{{statusMessage}}</h4>
+          <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">Ok</button>
       </div>
       <div class="success-message" *ngIf = "messageType === 'alert'">
           <i class="fa fa-exclamation-triangle"></i>
           <h4>{{statusMessage}}</h4>
+          <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">Confirm</button>
+          <button type="button" (click)="onNoClick(false)" class="btn btn-default btn-close">Cancel</button>
+
       </div>
-      <button type="button"  (click)="onNoClick()" class="btn btn-default btn-close">Ok</button>
-      <button type="button"  (click)="onNoClick()" class="btn btn-default btn-close">Close</button>
   </div>
   </section>
 

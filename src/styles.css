@@ -1484,3 +1484,6 @@ float: left;
 }
 
 .menu-item-display label:last-child span{display: none;}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #ff8500 !important;
+  }

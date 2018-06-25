@@ -14,7 +14,7 @@ export class StarterLeftSideComponent implements OnInit {
   }
 
   routing(){
-this.router.navigate(['rolemanagement']);
+this.router.navigate(['roleManagement']);
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
 @Component({
   selector: 'app-confirmation-dialog-entity',
   templateUrl: './confirmation-dialog-entity.component.html',
@@ -18,8 +17,10 @@ export class ConfirmationDialogEntityComponent implements OnInit {
   statusMessage: string = "";
 messageType: string = "";
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onNoClick(status): void {
+  this.dialogRef.close(status);
+
+
   }
 
 }

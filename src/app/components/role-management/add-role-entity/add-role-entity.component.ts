@@ -80,8 +80,7 @@ export class AddRoleEntityComponent implements OnInit {
       this.menuGroupNotSelected = true;
       for (
         var miIndex = 0;
-        miIndex < this.listOfMenuGroups[mgIndex].menuItems.length;
-        miIndex++
+        miIndex < this.listOfMenuGroups[mgIndex].menuItems.length;miIndex++
       ) {
         if (!this.listOfMenuGroups[mgIndex].menuItems[miIndex].selectedFlag) {
           this.listOfMenuGroups[mgIndex].menuItems.splice(miIndex, 1);
@@ -107,14 +106,18 @@ export class AddRoleEntityComponent implements OnInit {
     this.roleDataService.saveRole(roleData).subscribe(
       data => {
 
-        this.roleDataService.openDialog(
+       this.roleDataService.openDialog(
           "success",
           roleData.roleName + "\xa0Role Saved Successfully!"
-        );
+        ).subscribe((result)=>{
+        this.router.navigate(['roleManagement']);
+        });
+   
       },
       err => {
-        console.log(err);
-        this.roleDataService.openDialog("error", err.error.message);
+        this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+          this.getMenuGroups(this.roleForm.value.applicationCode);
+        })
       }
     );
   }

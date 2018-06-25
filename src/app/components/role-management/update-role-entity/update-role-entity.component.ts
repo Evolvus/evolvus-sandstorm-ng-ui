@@ -175,7 +175,6 @@ abortSaveAction(){
   }else{
     this.router.navigate(['viewRole', this.roleData.roleName]);  
   }
-  
 
 }
 }

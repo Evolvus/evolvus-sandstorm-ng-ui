@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  platformURL: 'http://192.168.1.115:8086'
+  platformURL: 'http://192.168.1.115:8080'
 
 };
 

@@ -22,7 +22,6 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 import { SaveApplicationEntityComponent } from './components/application-management/save-application-entity/save-application-entity.component';
 import { ListApplicationsEntityComponent } from './components/application-management/list-applications-entity/list-applications-entity.component';
 import { UpdateApplicationEntityComponent } from './components/application-management/update-application-entity/update-application-entity.component';
@@ -92,7 +91,8 @@ import { CreateEntityComponent } from './components/create-entity/create-entity.
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    
   ],
   entryComponents: [
     ConfirmationDialogEntityComponent

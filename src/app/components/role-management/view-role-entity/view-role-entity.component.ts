@@ -34,24 +34,38 @@ export class ViewRoleEntityComponent implements OnInit {
 
 
 deleteRole(){
-  console.log(this.roleData);
-  this.roleDataService.deleteRole(this.roleData)
-  .subscribe((response)=>{
-    this.roleDataService.openDialog(
-      "success",
-      this.roleData.roleName + "\xa0Role Deleted Successfully!"
-    );
-  }, (err)=>{
-    this.roleDataService.openDialog(
-      "error",
-     "Error occurred while deleting role. Please try again!"
-    );
-  });
+
+this.roleDataService.openDialog(
+  "alert",
+  "Are you sure you want to delete "+this.roleData.roleName+" Role?"
+).subscribe((result)=>{
+  if(result==true){
+    this.roleDataService.deleteRole(this.roleData)
+    .subscribe((response)=>{
+      this.roleDataService.openDialog(
+        "success",
+        this.roleData.roleName + "\xa0Role Deleted Successfully!"
+      );
+    }, (err)=>{
+      this.roleDataService.openDialog(
+        "error",
+       "Error occurred while deleting role. Please try again!"
+      );
+    });  
+  }
+})
+
+
 }
 
 updateRole()
 {
 this.router.navigate(['updateRole', this.roleData.roleName] );
 }
+abortViewAction(){
 
+  this.router.navigate(['roleManagement']);
+
+
+}
 }
