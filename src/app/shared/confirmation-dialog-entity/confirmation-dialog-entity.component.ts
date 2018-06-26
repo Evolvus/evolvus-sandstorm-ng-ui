@@ -13,10 +13,13 @@ export class ConfirmationDialogEntityComponent implements OnInit {
   ngOnInit() {
     this.statusMessage = this.data.message;
     this.messageType = this.data.type;
+    if(this.statusMessage == undefined){
+    this.serverError = true;
+    }
   }
   statusMessage: string = "";
 messageType: string = "";
-
+serverError: boolean = false;
   onNoClick(status): void {
   this.dialogRef.close(status);
 

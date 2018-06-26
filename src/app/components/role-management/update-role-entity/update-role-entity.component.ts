@@ -50,11 +50,7 @@ export class UpdateRoleEntityComponent implements OnInit {
         applicationCode: response.applicationCode,
         description: response.description,
       });
-      this.roleDataService
-      .getListOfMenuGroups(response.applicationCode)
-      .subscribe((response: MenuGroup[]) => {
-        this.listOfMenuGroups = response;
-      });
+      this.getMenuGroups(response.applicationCode);
    }
 
   );
@@ -89,17 +85,14 @@ addSelectedMenuItemCodes(){
 
 
 getMenuGroups(applicationCode) {
-  console.log(applicationCode);
   this.roleDataService
     .getListOfMenuGroups(applicationCode)
     .subscribe((response: MenuGroup[]) => {
       this.listOfMenuGroups = response;
-      console.log("get list", response);
     });
 }
 
 addMenuItem(menuGroup, menuItem) {
-
 this.menuItemsChanged = true;
 if(menuItem.selectedFlag){
   menuItem.selectedFlag = false;
@@ -111,25 +104,25 @@ if(menuItem.selectedFlag){
 
 saveUpdatedRole(){
 
-
     for (var mgIndex = 0; mgIndex < this.listOfMenuGroups.length; mgIndex++) {
       this.menuGroupNotSelected = true;
       for (var miIndex = 0; miIndex < this.listOfMenuGroups[mgIndex].menuItems.length; miIndex++) {
         if (!this.listOfMenuGroups[mgIndex].menuItems[miIndex].selectedFlag) {
+
           this.listOfMenuGroups[mgIndex].menuItems.splice(miIndex, 1);
           --miIndex;
           this.menuGroupNotSelected = true;
 
         } else {
+
           this.menuGroupNotSelected = false;
         }
       }
-      if (this.menuGroupNotSelected) {
+      if (this.listOfMenuGroups[mgIndex].menuItems.length == 0) {  //Removing a menu group if it doesn't have any menu items
         this.listOfMenuGroups.splice(mgIndex, 1);
         --mgIndex;
       }
     }
-
 
       this.roleData.roleName = this.roleForm.value.roleName,
       this.roleData.applicationCode = this.roleForm.value.applicationCode,
@@ -137,16 +130,18 @@ saveUpdatedRole(){
       this.roleData.description = this.roleForm.value.description,
       this.roleData.menuGroup = this.listOfMenuGroups
   
-
-    this.roleDataService.updateRole(this.roleData).subscribe(
-      data => {
-
-        this.roleDataService.openDialog(
-          "success",
-          this.roleData.roleName + "\xa0Role Saved Successfully!"
-        );
+   
+      this.roleDataService.updateRole(this.roleData).subscribe(
+        (data: {savedRoleObject: Object, message: string}) => {
+         this.roleDataService.openDialog(
+            "success",
+           data.message
+          ).subscribe((result)=>{
+            this.router.navigate(['roleManagement']);
+          });
       },
       err => {
+
         this.roleDataService.openDialog("error", err.error.message);
       }
     );
@@ -156,6 +151,7 @@ saveUpdatedRole(){
 
 checkIfMenuItemIsSelected(menuItem): boolean{
 if(!this.menuItemsChanged){
+
   if(this.listOfMenuItemCodes.includes(menuItem.menuItemCode)){
  menuItem.selectedFlag = true;
  return true;

@@ -104,17 +104,16 @@ export class AddRoleEntityComponent implements OnInit {
     };
 
     this.roleDataService.saveRole(roleData).subscribe(
-      data => {
-
+      (data: {savedRoleObject: Object, message: string}) => {
        this.roleDataService.openDialog(
           "success",
-          roleData.roleName + "\xa0Role Saved Successfully!"
+         data.message
         ).subscribe((result)=>{
         this.router.navigate(['roleManagement']);
         });
    
       },
-      err => {
+      (err) => {
         this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
           this.getMenuGroups(this.roleForm.value.applicationCode);
         })

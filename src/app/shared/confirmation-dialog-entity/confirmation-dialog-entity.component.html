@@ -9,7 +9,8 @@
       </div>
       <div class="success-message" *ngIf = "messageType === 'error'">
           <i class="fa fa-thumbs-down"></i>
-          <h4>{{statusMessage}}</h4>
+          <h4 *ngIf="serverError">Server Error, Try Again!</h4>
+          <h4 *ngIf="!serverError">{{statusMessage}}</h4>
           <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">Ok</button>
       </div>
       <div class="success-message" *ngIf = "messageType === 'alert'">

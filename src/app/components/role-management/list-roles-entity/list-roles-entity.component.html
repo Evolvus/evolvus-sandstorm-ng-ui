@@ -33,8 +33,8 @@
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (ngModelChange)="getFilteredRoleData(appCodeLocalVar.value ,actStatusLocalVar.value, proStatusLocalVar.value)" [(ngModel)]="activationStatus" name="activationStatus" #actStatusLocalVar>
-                          <mat-option  value="active">Active</mat-option>
-                          <mat-option  value="inactive">Inactive</mat-option>
+                          <mat-option  value="ACTIVE">Active</mat-option>
+                          <mat-option  value="INACTIVE">Inactive</mat-option>
                         </mat-select>
                       </mat-form-field>
                </div>
@@ -44,9 +44,9 @@
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
                         <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (ngModelChange)="getFilteredRoleData(appCodeLocalVar.value ,actStatusLocalVar.value, proStatusLocalVar.value)" [(ngModel)]="processingStatus" name="processingStatus" #proStatusLocalVar>
-                            <mat-option  value="authorized">Authorized</mat-option>
-                          <mat-option  value="unauthorized">Unauthorized</mat-option>
-                          <mat-option  value="rejected">Rejected</mat-option>
+                            <mat-option  value="AUTHORIZED">Authorized</mat-option>
+                          <mat-option  value="PENDING_AUTHORIZATION">Pending Authorization</mat-option>
+                          <mat-option  value="REJECTED">Rejected</mat-option>
          
                         </mat-select>
                       </mat-form-field>
@@ -55,7 +55,7 @@
               
               <div class="col-md-3 filterView">
                 <div class="checkbox form-group">
-                    <mat-checkbox (change)="checkBoxTicked(viewAll.value)" #viewAll>View All</mat-checkbox>
+                    <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
              </div>
               </div>
             </div>   			
@@ -67,28 +67,26 @@
     		<div class="col-md-12">
     			<div class="gridHeadSec">
     				<h4>Available Role Details</h4> 
-    				<h5>Showing 1 to {{ listOfRoles?.length }} out of {{ listOfRoles?.length }}</h5>
+    				<h5>Showing {{listOfRoles?.length == 0 ? '0' : '1'}} to {{ noOfRolesInCurrentPage }} out of {{ this.noOfRoles }}</h5>
     				
     				<div class="pull-right">						
 						<h5 class="txt-black">Results per Page</h5>							
-						<select name="pageSize" class="form-control">
+						<select name="tablePageSize" (change)="getTableStructure()"[(ngModel)]="selectedPageSize" class="form-control">
                 <option value="5" selected>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
 			     	</select>
 					</div>
     			</div>
     			<div class="tablegrid animated">
 						<div class="slide-table">
-				 			<div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div>
+				 			<!-- <div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div> -->
     							<div id="container-table">
 									<div id="content-table">
 					    				<table class="table table-bordered table-striped ">
 										<thead>
-									      <!-- <tr>
-									      <th *ngFor="let header of tableHeader">{{getSplitWord(header)}}<span>{{item1.join(" ")}}</span><br><span>{{item2.join(" ")}}</span></th>									       
-									      </tr> -->
+									    
                         <tr>
                             <th *ngFor="let header of tableHeader">{{header}}</th>									       
                           </tr> 
@@ -99,8 +97,8 @@
 									        <td>{{role?.roleName | titlecase}}</td>
 									        <td>{{role?.description}}</td>
 									        <td>{{role?.applicationCode}}</td>
-									        <td>{{role?.activationStatus | titlecase}}</td>
-													<td>{{role?.processingStatus | titlecase}}</td>
+									        <td>{{role?.activationStatus}}</td>
+													<td>{{role?.processingStatus}}</td>
 													<td>{{role?.associatedUsers}}</td>
 									        <td>{{role?.lastUpdatedDate | date : 'full'}} </td>
 									       
@@ -111,12 +109,12 @@
 									</table>
 								</div>
 							</div>
-							<div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div>
+							<!-- <div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div> -->
     					</div>
     				</div>
     			<div class="pull-right marTB2 paginationSec">			
-					<button class="btn btn-default "><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
-		   			 <input type="text" class="text-center paginationInput" style="width:30px;" value="1"> / 1 
+					<button class="btn btn-default" [disabled]="currentPage == 0"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+		   			 <input type="text" class="text-center paginationInput" [(ngModel)]="currentPage" style="width:30px;" value="{{currentPage}}">/ {{totalNoOfPages}} 
 		    		<button class="btn btn-default " >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
     			</div>
     		</div>

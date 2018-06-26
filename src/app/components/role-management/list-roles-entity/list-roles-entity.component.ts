@@ -21,7 +21,7 @@ export class ListRolesEntityComponent implements OnInit {
     this.tableHeader = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
   
   this.getApplicationCodes();
-  this.getRoleData();
+  // this.getRoleData();
   this.getRoleDataBasedOnDefaultFilterCriteria();
 }
 
@@ -30,10 +30,15 @@ export class ListRolesEntityComponent implements OnInit {
   listOfApplicationCategory: any;
   applicationCode: string;
   activationStatus: string;
-  processingStatus: string = "unauthorized";
+  processingStatus: string = "PENDING_AUTHORIZATION";
   gridsearch: boolean = false;
   isViewAllOptionSelected: boolean = false;
   noRoleDataMessage: string = "";
+  selectedPageSize: number = 5;
+  currentPage: number = 1;
+  totalNoOfPages: number = 1;
+  noOfRoles: number = 0;
+  noOfRolesInCurrentPage: number = 0;
 
 getApplicationCodes(){
   this.roleDataService.getlistOfApplicationCategory().subscribe((response)=>{
@@ -44,15 +49,21 @@ getApplicationCodes(){
 
 getRoleData(){
   this.roleDataService.getAllRoleData().
-  subscribe((response)=>{
-    console.log(response, "roles");
-    this.listOfRoles = response;
+  subscribe((roleData: RoleModel[])=>{
+    this.listOfRoles = roleData;
+    if(roleData != []){
+      this.getTableStructure();
+    }else{
+      this.noRoleDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
+    }
+  }, (err)=>{
+    console.log("getRoleData()", err);
   });
 }
 
-  checkBoxTicked(status){
+  checkBoxTicked(value){
 this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
-if(this.isViewAllOptionSelected){
+if(value){
   this.getRoleData();
 }else{
   this.getFilteredRoleData(this.applicationCode, this.activationStatus, this.processingStatus);
@@ -67,27 +78,45 @@ getRoleDataBasedOnDefaultFilterCriteria(){
   this.listOfRoles = [];
   this.roleDataService.getFilteredRoleData(this.applicationCode, this.activationStatus, this.processingStatus).subscribe((response: Object[])=>{
   if(response.length == 0){
-    this.processingStatus = "authorized";
+    this.processingStatus = "AUTHORIZED";
     this.roleDataService.getFilteredRoleData(this.applicationCode, this.activationStatus, this.processingStatus).subscribe((response: Object[])=>{
       if(response.length == 0){
         this.noRoleDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
       }else{
         this.listOfRoles = response;
+        this.getTableStructure();
+
       }
     })
   }else{
     this.listOfRoles = response;
+    this.getTableStructure();
+
   }
-  })
+  }, (err)=>{
+console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
+  });
 }
 
 getFilteredRoleData(applicationCode,activationStatus, processingStatus){
-console.log(applicationCode,activationStatus, processingStatus);
   this.roleDataService.getFilteredRoleData(applicationCode,activationStatus, processingStatus)
   .subscribe((response)=>{
     this.listOfRoles = response;
   });
 }
 
+
+getTableStructure(){
+this.noOfRoles = this.listOfRoles.length;
+if(this.noOfRoles==0){
+  this.noOfRolesInCurrentPage = 0;
+  this.totalNoOfPages = 0;
+}else if(this.noOfRoles<=this.selectedPageSize){
+  this.noOfRolesInCurrentPage = this.noOfRoles;
+  this.totalNoOfPages = 1;
+}else{
+  this.totalNoOfPages = Math.ceil(this.noOfRoles/this.selectedPageSize);
+}
+}
 
 }
