@@ -22,7 +22,7 @@
                  
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
-                        <mat-select placeholder="Application Category" [disabled] = "isViewAllOptionSelected" (ngModelChange)="getFilteredRoleData(appCodeLocalVar.value ,actStatusLocalVar.value, proStatusLocalVar.value)"required [(ngModel)]="applicationCode" name="applicationCategory" #appCodeLocalVar>
+                        <mat-select placeholder="Application Category" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredRoleData()"required [(ngModel)]="applicationCode" name="applicationCategory" #appCodeLocalVar>
                           <mat-option *ngFor="let applicationCategory of listOfApplicationCategory" value="{{applicationCategory}}">{{applicationCategory}}</mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -32,7 +32,7 @@
               <div class="col-lg-3">
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
-                        <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (ngModelChange)="getFilteredRoleData(appCodeLocalVar.value ,actStatusLocalVar.value, proStatusLocalVar.value)" [(ngModel)]="activationStatus" name="activationStatus" #actStatusLocalVar>
+                        <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredRoleData()" [(ngModel)]="activationStatus" name="activationStatus" #actStatusLocalVar>
                           <mat-option  value="ACTIVE">Active</mat-option>
                           <mat-option  value="INACTIVE">Inactive</mat-option>
                         </mat-select>
@@ -43,7 +43,7 @@
               <div class="col-lg-3">
                 <div class="form-group">
                     <mat-form-field [color]="'primary'">
-                        <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (ngModelChange)="getFilteredRoleData(appCodeLocalVar.value ,actStatusLocalVar.value, proStatusLocalVar.value)" [(ngModel)]="processingStatus" name="processingStatus" #proStatusLocalVar>
+                        <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredRoleData()" [(ngModel)]="processingStatus" name="processingStatus" #proStatusLocalVar>
                             <mat-option  value="AUTHORIZED">Authorized</mat-option>
                           <mat-option  value="PENDING_AUTHORIZATION">Pending Authorization</mat-option>
                           <mat-option  value="REJECTED">Rejected</mat-option>

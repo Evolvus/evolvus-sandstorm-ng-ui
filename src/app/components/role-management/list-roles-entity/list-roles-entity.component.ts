@@ -66,7 +66,7 @@ this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
 if(value){
   this.getRoleData();
 }else{
-  this.getFilteredRoleData(this.applicationCode, this.activationStatus, this.processingStatus);
+  this.getFilteredRoleData();
 }
   }
 
@@ -98,8 +98,8 @@ console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
   });
 }
 
-getFilteredRoleData(applicationCode,activationStatus, processingStatus){
-  this.roleDataService.getFilteredRoleData(applicationCode,activationStatus, processingStatus)
+getFilteredRoleData(){
+  this.roleDataService.getFilteredRoleData(this.applicationCode, this.activationStatus, this.processingStatus)
   .subscribe((response)=>{
     this.listOfRoles = response;
   });
