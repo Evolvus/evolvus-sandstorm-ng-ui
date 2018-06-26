@@ -16,34 +16,36 @@
          <h4 class="txt-blue">Filters</h4>
           <form>
           <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <select class="form-control">
-                 <option>Select Enable/Disable</option>
-                 <option>Enable</option>
-                 <option>Disable</option>
-               </select>
-             </div>
+            <div class="col-md-3">              
+               <mat-form-field>
+                <mat-select placeholder="User Login Status">
+                  <mat-option *ngFor="let loginval of logins" [value]="loginval.value">
+                    {{ loginval.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>               
+            </div>
+            
+           
+
+            <div class="col-md-3">              
+               <mat-form-field>
+                <mat-select placeholder="Activation Status">
+                  <mat-option *ngFor="let activestate of activationstatus" [value]="activestate.value">
+                    {{ activestate.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>              
             </div>
             
             <div class="col-md-3">
-              <div class="form-group">
-                <select class="form-control">
-                 <option>Select Active/Inactive</option>
-                 <option>Active</option>
-                 <option>Inactive</option>
-               </select>
-             </div>
-            </div>
-            
-            <div class="col-md-3">
-              <div class="form-group">
-                <select class="form-control">
-                 <option>Status</option>
-                 <option>Pending Authorization</option>
-                 <option>Reject</option>
-               </select>
-             </div>
+              <mat-form-field>
+                <mat-select placeholder="Processing Status">
+                  <mat-option *ngFor="let processtate of processingstatus" [value]="processtate.value">
+                    {{ processtate.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>             
             </div>
             
              <div class="col-md-3 filterView">

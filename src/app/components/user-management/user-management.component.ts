@@ -8,10 +8,30 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class UserManagementComponent implements OnInit {
   userTableHeader:any = [];
+
+  logins = [
+    {value: 'login', viewValue: 'Logged-In'},
+    {value: 'logout', viewValue: 'Logged-Out'}
+    
+  ];
+
+  activationstatus = [
+    {value: 'active', viewValue: 'Active'},
+    {value: 'Inactive', viewValue: 'InActive'}
+    
+  ];
+
+  processingstatus = [
+    {value: 'pending', viewValue: 'Pending Authorization'},
+    {value: 'authorized', viewValue: 'Authorized'},
+    {value: 'reject', viewValue: 'Rejected'}
+    
+  ];
+
   constructor() { }
 
   ngOnInit() {
-    this.userTableHeader = ['User Id','User Name','User Role','Enable/Disable','Active/Inactive','Status','Last Action on User','Last Modified Date Time'];
+    this.userTableHeader = ['User Id','User Name','User Role','Designation','Phone Number','Mobile Number','Country','City'];
   }
   gridsearch: boolean = false;
 
