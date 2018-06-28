@@ -24,7 +24,7 @@
 
 
 
-           <form [formGroup]="roleForm" (ngSubmit)="saveRole()">
+           <form [formGroup]="roleForm" (ngSubmit)="save()">
               <div class="row">
               <div class="col-md-5">
                   <div class="form-group">
@@ -66,7 +66,7 @@
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
 
-                     <textarea required matInput placeholder="Role Description" formControlName="description" name="description" ></textarea>
+                     <textarea  matInput placeholder="Role Description" formControlName="description" name="description" ></textarea>
 
                    </mat-form-field>
                  </div>
@@ -107,62 +107,7 @@
       </div>
       
       <div>
-         <!-- <mat-tab-group *ngIf= "applicationCategory == 'Flux-CDA Operations'|| applicationCategory == 'Flux-RTP Operations'">
-            <mat-tab label="Operations">
-                <div class="row">
-                    <div class="col-md-12">
-                    <div class="rolemenu-acces-tabs">
-                      <div class="tabContent">
-                        <div class="marB30">
-                          <label><b>Dashboard</b></label>
-                          <div class="form-group">									
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="">Transaction Monitor
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Liquidity Monitor
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Status Monitor
-                              </label>
-                          </div>
-                        </div>
-                        
-                        <div class="marB30">
-                          <label><b>Business Operations</b></label>
-                          <div class="form-group">									
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="">SOD /EOD
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Archival
-                              </label>
-                          </div>
-                        </div>
-                        
-                        <div class="marB30">
-                          <label><b>Payment Operations</b></label>
-                          <div class="form-group">									
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="">Create Payment
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Authorize/Reject Payment
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Modify Payment
-                              </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="">Delete Payment
-                              </label>
-                          </div>
-                        </div>
-                      </div>
-                     </div>
-                     </div>
-                  </div>
-            </mat-tab>
-          </mat-tab-group> -->
+         
     </div> 
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">

@@ -19,7 +19,26 @@ RoleModel
   templateUrl: './update-role-entity.component.html',
   styleUrls: ['./update-role-entity.component.css']
 })
+
 export class UpdateRoleEntityComponent implements OnInit {
+
+
+
+  roleData: RoleModel;
+  roleForm: FormGroup;  
+  listOfApplicationCodes: any;
+  listOfMenuGroups: MenuGroup[];
+  listOfSelectedMenuGroups: MenuGroup[];
+  listOfMenuItemCodes: string[] = [];
+  menuGroupNotSelected = false;
+  menuItemsChanged = false;
+ // we have used two attributes of mat-checkbox in html. (change) and [checked].. 
+ //[checked] is used in order to check the boxes of already selected Menu Items while loading
+ //(change) is used to update any changes to the checkbox after loading...
+ // But when there are any changes to made to the checkbox, both the attributes are triggered..
+ // Both attributes call two different functions with different logic which will create conflicts..
+ // Hence 'menuItemsChanged' is used to in order to avoid conflicts..
+
 
   constructor(private roleDataService: RoleDataService, private route: ActivatedRoute, private router: Router) { }
 
@@ -57,21 +76,8 @@ export class UpdateRoleEntityComponent implements OnInit {
 
     
   }
-roleData: RoleModel;
-roleForm: FormGroup;  
-listOfApplicationCodes: any;
-listOfMenuGroups: MenuGroup[];
-listOfSelectedMenuGroups: MenuGroup[];
-listOfMenuItemCodes: string[] = [];
-menuGroupNotSelected = false;
 
-menuItemsChanged = false;
- // we have used two attributes of mat-checkbox in html. (change) and [checked].. 
- //[checked] is used in order to check the boxes of already selected Menu Items while loading
- //(change) is used to update any changes to the checkbox after loading...
- // But when there are any changes to made to the checkbox, both the attributes are triggered..
- // Both attributes call two different functions with different logic which will create conflicts..
- // Hence 'menuItemsChanged' is used to in order to avoid conflicts..
+
  
 addSelectedMenuItemCodes(){   
 //All the MenuItemCodes of selected MenuItems of the selected Role is added to a list for UI representation during loading..

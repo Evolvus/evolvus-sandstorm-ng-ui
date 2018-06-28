@@ -1,9 +1,7 @@
 import { RoleModel } from './../role-model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../../../environments/environment';
 import { RoleDataService } from '../role-data.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 
@@ -13,10 +11,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
   styleUrls: ['./view-role-entity.component.css']
 })
 export class ViewRoleEntityComponent implements OnInit {
-
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private roleDataService: RoleDataService) { }
-  platformURL = environment.platformURL;
+  
   roleData: any;
+  constructor(private router: Router, private route: ActivatedRoute, private roleDataService: RoleDataService) { }
+ 
   ngOnInit() {
    
     var roleName = this.route.snapshot.params['id'];

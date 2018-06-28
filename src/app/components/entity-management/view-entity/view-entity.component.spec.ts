@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateEntityComponent } from './create-entity.component';
+import { ViewEntityComponent } from './view-entity.component';
 
-describe('CreateEntityComponent', () => {
-  let component: CreateEntityComponent;
-  let fixture: ComponentFixture<CreateEntityComponent>;
+describe('ViewEntityComponent', () => {
+  let component: ViewEntityComponent;
+  let fixture: ComponentFixture<ViewEntityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateEntityComponent ]
+      declarations: [ ViewEntityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateEntityComponent);
+    fixture = TestBed.createComponent(ViewEntityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

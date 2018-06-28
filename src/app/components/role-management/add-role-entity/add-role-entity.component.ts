@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
@@ -12,7 +11,7 @@ import { MenuGroup } from "../role-model";
 import { MenuItems } from "../role-model";
 import { RoleDataService } from "../role-data.service";
 import { Router } from "@angular/router";
-import { environment } from "../../../../environments/environment";
+import { min, max } from "rxjs/operators";
 
 @Component({
   selector: "app-add-role-entity",
@@ -20,18 +19,29 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ["./add-role-entity.component.css"]
 })
 export class AddRoleEntityComponent implements OnInit {
+
+
+
+  listOfApplicationCategory: string[];
+  listOfMenuGroups: MenuGroup[];
+  applicationCategorySelected: boolean = false;
+  roleForm: FormGroup;
+  menuGroupNotSelected: boolean;
+
+
+
+
   constructor(
     private roleDataService: RoleDataService,
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.roleForm = new FormGroup({
       activationStatus: new FormControl(null, Validators.required),
-      roleName: new FormControl(null, Validators.required),
+      roleName: new FormControl(null, [Validators.minLength(6), Validators.maxLength(35), Validators.required]),
       applicationCode: new FormControl(null, Validators.required),
-      description: new FormControl(null, Validators.required)
+      description: new FormControl(null, [Validators.minLength(6), Validators.maxLength(140)])
     });
 
     this.roleDataService
@@ -41,20 +51,7 @@ export class AddRoleEntityComponent implements OnInit {
       });
   }
 
-  platformURL = environment.platformURL;
-  listOfApplicationCategory: string[];
-  listOfMenuGroups: MenuGroup[];
-  applicationCategorySelected: boolean = false;
-  roleForm: FormGroup;
-  menuGroupNotSelected: boolean;
 
-  roleData: RoleModel = {
-    activationStatus: "",
-    roleName: "",
-    menuGroup: [],
-    applicationCode: "",
-    description: ""
-  };
 
   abortSaveAction() {
     this.router.navigate(["/roleManagement"]);
@@ -75,7 +72,7 @@ export class AddRoleEntityComponent implements OnInit {
 
 
 
-  saveRole() {
+  save() {
     for (var mgIndex = 0; mgIndex < this.listOfMenuGroups.length; mgIndex++) {
       this.menuGroupNotSelected = true;
       for (
@@ -103,7 +100,7 @@ export class AddRoleEntityComponent implements OnInit {
       menuGroup: this.listOfMenuGroups
     };
 
-    this.roleDataService.saveRole(roleData).subscribe(
+    this.roleDataService.save(roleData).subscribe(
       (data: {savedRoleObject: Object, message: string}) => {
        this.roleDataService.openDialog(
           "success",

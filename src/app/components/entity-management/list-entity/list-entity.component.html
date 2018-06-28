@@ -1,0 +1,140 @@
+<div class="content-wrapper">
+
+  <div class="list-applications" id="list-applications" style="transition: 0.8s;">
+
+    <section class="padL35 content-header">
+      <h1 class="marTB15 txt-orange">
+        <span>
+          <span class="evo-role"></span>Entity Management</span>
+      </h1>
+
+      <div class="rightSecBtn adjust-plussymbol">
+        <span [routerLink]="['/addEntity']" mat-raised-button matTooltip="Add New Entity">
+          <span class="evo-role"></span>
+          <span class="plus-symbol">+</span>
+        </span>
+      </div>
+    </section>
+
+ 
+
+    <section class="content">
+
+      <div class="row row-padding">
+          <div class="col-md-12">
+            <h4 class="txt-blue">Filters</h4>
+             <form>
+             <div class="row">
+
+              
+               <div class="col-lg-3">
+                 <div class="form-group">
+                     <mat-form-field [color]="'primary'">
+                         <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()"required [(ngModel)]="defaultFilterCriteria.parent" name="parent">
+                           <mat-option *ngFor="let parentEntity of listOfParentEntities" value="{{parentEntity}}">{{parentEntity}}</mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                </div>
+               </div>
+               
+               <div class="col-lg-3">
+                 <div class="form-group">
+                     <mat-form-field [color]="'primary'">
+                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()" [(ngModel)]="defaultFilterCriteria.enableFlag" name="enableFlag">
+                           <mat-option  value=true>Active</mat-option>
+                           <mat-option  value=false>Inactive</mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                </div>
+               </div>
+              
+               <div class="col-lg-3">
+                 <div class="form-group">
+                     <mat-form-field [color]="'primary'">
+                         <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()" [(ngModel)]="defaultFilterCriteria.processingStatus" name="processingStatus">
+                             <mat-option  value="AUTHORIZED">Authorized</mat-option>
+                           <mat-option  value="PENDING_AUTHORIZATION">Pending Authorization</mat-option>
+                           <mat-option  value="REJECTED">Rejected</mat-option>
+          
+                         </mat-select>
+                       </mat-form-field>
+                </div>
+               </div>
+               
+               <div class="col-lg-3">
+                 <div class="checkbox form-group">
+                     <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
+              </div>
+               </div>
+             </div>   			
+          </form> 
+          </div>
+        </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <div class="gridHeadSec">
+          <h4 class="txt-blue">Available Entity Details</h4>
+          <!-- <h5>Showing {{startIndex+1}} to {{ noOfRolesInCurrentPage }} out of {{ this.listOfRoles.length }}</h5> -->
+      
+</div>
+      <!--Table-->
+      <div class="tablegrid animated row">
+        <div class="col-md-12">
+          <div class="float-searchicon" *ngIf="areAnyEntitiesAvailable">
+            <span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+          </div>
+          <div class="slide-table">
+            <div id="container-table">
+              <div id="content-table">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                     
+                        <tr>
+                            <th *ngFor="let header of tableHeader">{{header}}</th>									       
+                          </tr> 
+              
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let entity of listOfEntities" (click)="view(entity)">
+
+                      <td>{{ entity?.name | uppercase}}</td>
+                      <td>{{ entity?.parent | uppercase}}</td>
+                      <td>{{ entity?.accessLevel}}</td>
+                      <td>{{ entity?.entityCode | uppercase}}</td>
+                      <td>{{ entity?.enableFlag == true ? 'Active' : 'Inactive'}}</td>
+
+                      <td>{{ entity?.processingStatus}}</td>
+                      <td>{{ entity?.createdBy}}</td>
+
+                      <td>{{ entity?.createdDate | date : 'full'}}</td>
+                    </tr>
+                  </tbody>
+                  <!--Table body-->
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Table-->
+      </div>
+      <div class="pull-right marTB2 paginationSec">			
+        <button class="btn btn-default" ><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+            <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="currentPage" style="width:30px;" value="{{currentPage}}">/ {{totalNoOfPages}} 
+          <button class="btn btn-default"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+        </div>
+    <div class="row row-padding" *ngIf="listOfEntities.length == 0">
+      <div class="row text-center">
+        <h5 class="txt-red" style="color:red;">No Entity Details Available!</h5>
+        <br>
+      </div>
+    </div> 
+
+
+</div>
+  </div>
+</section>
+</div>

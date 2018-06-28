@@ -1,5 +1,7 @@
 
-
+mat-form-field{
+  width: 100%;
+}
 .btn {
     padding: 5px;
   }

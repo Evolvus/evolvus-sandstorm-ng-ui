@@ -30,6 +30,12 @@ listOfApplicationCategory: string [] = [];
 listOfActivationStatus: string[] = ["Active", "Inactive"];
 listOfProcessingStatus: string[] = ["Pending Authorization", "Rejected"];
 dialogClosed: Subject<boolean> = new Subject<boolean>();
+roleTableHeaders = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
+defaultFilterCriteria = {
+  applicationCode:undefined,
+  activationStatus:undefined,
+  processingStatus: "PENDING_AUTHORIZATION"
+} 
 defaultHeaders: HttpHeaders = new HttpHeaders({
 entityCode: 'defaultEntity',
 tenantId: 'EVL',
@@ -58,6 +64,13 @@ return this.http.get(`${this.platformURL}/api/applicationCodes`,{
 });
 }
 
+getTableHeaders(){
+return this.roleTableHeaders;
+}
+
+getDefaultFilterCriteria(){
+  return this.defaultFilterCriteria;
+}
 
 getListOfMenuGroups(applicationCode: string){
 return this.http.get(`${this.platformURL}/api/menu/find`, {
@@ -90,7 +103,7 @@ getFilteredRoleData(applicationCode, activationStatus, processingStatus){
   });
 }
 
-saveRole(roleData){
+save(roleData){
   return this.http.post(`${this.platformURL}/api/role`, roleData, {
     headers: this.defaultHeaders
 

@@ -1,0 +1,105 @@
+
+
+<div class="content-wrapper addFormSec">
+
+
+
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+        <div class="img_icon">
+          <span>
+            <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/entityManagement']" aria-hidden="true"></i> Update Entity</span>
+        </div>
+      </h1>
+    </section>
+
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Entity Information</h4>
+          <hr>
+        </div>
+      </div>
+
+
+      <form [formGroup]="entityForm">
+
+
+
+
+    
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input  required autocomplete="off" formControlName="name" matInput name="name" 
+                  id="name" placeholder="Entity Name">
+              </mat-form-field>
+            
+            </div>
+            </div>
+            <div class="col-md-5">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input  required autocomplete="off" formControlName="entityCode" matInput name="entityCode"
+                  id="entityCode" placeholder="Entity Code">
+              </mat-form-field>
+             
+
+            </div>
+          </div>
+         
+
+          <div class="col-md-5">
+            <div class="form-group">
+
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Parent Entity" formControlName="parent" aria-label="Parent Entity" required name="parent" id="parent"[matAutocomplete]="auto" >
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let parent of filteredEntityNames | async" [value]="parent">{{parent}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            
+            </div>
+          </div>
+          <div class="col-md-5">
+              <div class="form-group">
+                <mat-form-field class="example-full-width ">
+                  <mat-select  placeholder="Activation Status" formControlName="enableFlag" required name="enableFlag" id="enableFlag">
+                    <mat-option [value]='true'>Active</mat-option>
+                    <mat-option [value]='false'>Inactive</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            
+              </div>
+            </div>
+          <div class="col-md-5">
+              <div class="form-group">
+                 <mat-form-field  class="example-full-width">
+                     <textarea required matInput placeholder="Description" formControlName="description" name="description" ></textarea>
+                   </mat-form-field>
+                 </div>
+            </div>
+
+        
+
+     
+        </div>
+      </form>
+    </section>
+    <section>
+      <div class="row">
+        <div class="text-center">
+          <div class="">
+            <button class="btn btn-primary btn-submit" id="submitButton" [disabled]="entityForm.invalid" (click)="update()">Submit</button>
+            <button type="button" class="btn btn-primary btn-close" (click)="abortUdpateAction()">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+</div>

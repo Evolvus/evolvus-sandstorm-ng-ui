@@ -48,12 +48,14 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 
 import { ResponsiveService } from './components/shared/responsive.service';
 import { RoleDataService } from './components/role-management/role-data.service';
-import { EntityService } from './shared/services/entityservice';
+import { EntityDataService } from './components/entity-management/entity-data.service';
 
 import { ViewApplicationEntityComponent } from './components/application-management/view-application-entity/view-application-entity.component';
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
-import { EntitymanagementComponent } from './../app/components/entitymanagement/entitymanagement.component';
-import { CreateEntityComponent } from './components/create-entity/create-entity.component';
+import { ListEntityComponent } from './components/entity-management/list-entity/list-entity.component';
+import { AddEntityComponent } from './components/entity-management/add-entity/add-entity.component';
+import { ViewEntityComponent } from './components/entity-management/view-entity/view-entity.component';
+import { UpdateEntityComponent } from './components/entity-management/update-entity/update-entity.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +77,10 @@ import { CreateEntityComponent } from './components/create-entity/create-entity.
     SearchPipe,
     ViewApplicationEntityComponent,
     ConfirmationDialogEntityComponent,
-    EntitymanagementComponent,
-    CreateEntityComponent
+    ListEntityComponent,
+    AddEntityComponent,
+    ViewEntityComponent,
+    UpdateEntityComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +101,7 @@ import { CreateEntityComponent } from './components/create-entity/create-entity.
   entryComponents: [
     ConfirmationDialogEntityComponent
   ],
-  providers: [ResponsiveService, RoleDataService, EntityService],
+  providers: [ResponsiveService, RoleDataService, EntityDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

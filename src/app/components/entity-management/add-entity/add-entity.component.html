@@ -1,0 +1,106 @@
+
+
+<div class="content-wrapper addFormSec">
+
+
+
+    <section class="padL35 content-header ">
+      <h1 class="marTB15 txt-orange">
+        <div class="img_icon">
+          <span>
+            <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/entityManagement']" aria-hidden="true"></i> Add New Entity</span>
+        </div>
+      </h1>
+    </section>
+
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Entity Information</h4>
+          <hr>
+        </div>
+      </div>
+
+
+      <form [formGroup]="entityForm">
+
+
+
+
+    
+        <div class="row">
+          <div class="col-md-5">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input  required autocomplete="off" formControlName="name" matInput name="name" minlength="3" maxlength="20"
+                  id="name" placeholder="Entity Name">
+              </mat-form-field>
+            
+            </div>
+            </div>
+            <div class="col-md-5">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input  required autocomplete="off" formControlName="entityCode" matInput name="entityCode" minlength="3" maxlength="20"
+                  id="entityCode" placeholder="Entity Code">
+              </mat-form-field>
+             
+
+            </div>
+          </div>
+         
+
+          <div class="col-md-5">
+            <div class="form-group">
+
+
+
+                <mat-form-field class="example-full-width ">
+                    <mat-select  placeholder="Parent Entity" formControlName="parent" required name="parent" id="parent">
+                        <mat-option *ngFor="let parent of listOfParentEntities" [value]="parent">
+                            {{ parent }}
+                          </mat-option>
+                    </mat-select>
+                  </mat-form-field>  
+            </div>
+          </div>
+          <div class="col-md-5">
+              <div class="form-group">
+                <mat-form-field class="example-full-width ">
+                  <mat-select  placeholder="Activation Status" formControlName="enableFlag" required name="enableFlag" id="enableFlag">
+                    <mat-option value=false>Active</mat-option>
+                    <mat-option value=true>Inactive</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            
+              </div>
+            </div>
+          <div class="col-md-5">
+              <div class="form-group">
+                 <mat-form-field  class="example-full-width">
+                     <textarea required matInput placeholder="Description" formControlName="description" name="description" ></textarea>
+                   </mat-form-field>
+                 </div>
+            </div>
+
+        
+
+     
+        </div>
+      </form>
+    </section>
+    <section>
+      <div class="row">
+        <div class="text-center">
+          <div class="">
+            <button class="btn btn-primary btn-submit" id="submitButton" [disabled]="entityForm.invalid" (click)="save()">Submit</button>
+            <button type="button" class="btn btn-primary btn-close" (click)="abortSaveAction()">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+</div>
