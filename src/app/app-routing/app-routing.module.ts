@@ -6,9 +6,9 @@ import { StarterContentComponent } from '../components/starter-content/starter-c
 import { ListRolesEntityComponent } from '../components/role-management/list-roles-entity/list-roles-entity.component';
 import { AddRoleEntityComponent } from '../components/role-management/add-role-entity/add-role-entity.component';
 import { ViewRoleEntityComponent } from '../components/role-management/view-role-entity/view-role-entity.component';
-import { UserManagementComponent } from '../components/user-management/user-management.component';
-import { AddUserComponent } from '../components/add-user/add-user.component';
-import { ViewUserComponent } from '../components/view-user/view-user.component';
+import { AddUserComponent } from '../components/user-management/add-user/add-user.component';
+import { ListUsersComponent } from './../components/user-management/list-users/list-users.component';
+import { ViewUserComponent } from '../components/user-management/view-user/view-user.component';
 import { SaveApplicationEntityComponent } from '../components/application-management/save-application-entity/save-application-entity.component';
 import { ListApplicationsEntityComponent } from '../components/application-management/list-applications-entity/list-applications-entity.component';
 import { UpdateApplicationEntityComponent } from '../components/application-management/update-application-entity/update-application-entity.component';
@@ -30,7 +30,7 @@ const routes: Routes =[
   { path: 'addRole', component: AddRoleEntityComponent },
   { path: 'viewRole/:id', component: ViewRoleEntityComponent },
   { path: 'updateRole/:id', component: UpdateRoleEntityComponent},
-  { path: 'userManagement', component: UserManagementComponent },
+  { path: 'userManagement', component: ListUsersComponent },
    { path: 'adduser', component: AddUserComponent },
    { path: 'viewuser', component: ViewUserComponent },
    { path: 'entityManagement', component: ListEntityComponent },

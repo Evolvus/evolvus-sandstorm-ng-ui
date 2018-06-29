@@ -20,19 +20,18 @@ export class ListRolesEntityComponent implements OnInit {
   defaultFilterCriteria = {
     applicationCode: "",
     activationStatus: "",
-    processingStatus: ""
+    processingStatus: "",
+    pageSize: 5,
+    pageNo: 1
   } 
-  gridsearch: boolean = false;
   isViewAllOptionSelected: boolean = false;
   noRoleDataMessage: string = "";
-  selectedPageSize = 5;
-  currentPage: number = 1;
+  noOfRolesInCurrentPage: number = 0;
+  pageSize: number= 5;
+  pageNo: number= 1;
   totalNoOfPages: number = 1;
-  noOfRoles: number = 0;
-  noOfRolesInCurrentPage: number = this.selectedPageSize;
+  totalNoOfRoles: number = 0;
   startIndex: number = 0;
-
-  
   constructor(private roleDataService: RoleDataService, private router: Router) { }
 
   ngOnInit() {
@@ -51,10 +50,12 @@ getApplicationCodes(){
 
 
 getRoleData(){
-  this.roleDataService.getAllRoleData().
-  subscribe((roleData: RoleModel[])=>{
-    if(roleData != []){
-      this.listOfRoles = roleData;
+  this.roleDataService.getAllRoleData(this.pageSize, this.pageNo).
+  subscribe((response: any)=>{
+    if(response.data != []){
+      this.listOfRoles = response.data ;
+      this.totalNoOfRoles = response.totalNoOfRecords;
+      this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
     }else{
       this.noRoleDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
@@ -62,7 +63,6 @@ getRoleData(){
   }, (err)=>{
     console.log("getRoleData()", err);
   });
-  this.setNoOfRolesInCurrentPage();
 
 }
 
@@ -81,23 +81,26 @@ this.router.navigate(['viewRole', role.roleName]);
 
 getRoleDataBasedOnDefaultFilterCriteria(){
   this.listOfRoles = [];
-  this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus).subscribe((response: Object[])=>{
-  if(response.length == 0){
+  this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo).subscribe((response: any)=>{
+  if(response.data.length == 0){
     this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
 
-    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus).subscribe((response: Object[])=>{
-      if(response.length == 0){
-        this.noRoleDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
-      }else{
-        this.listOfRoles = response;
-        
-      }
+    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo).subscribe((response: any)=>{
+   
+        this.listOfRoles = response.data;
+        this.totalNoOfRoles = response.totalNoOfRecords;
+        this.totalNoOfPages = response.totalNoOfPages;
+        this.startIndex = 1;
+        this.setCurrentPage(0);
+      
     })
   }else{
-    this.listOfRoles = response;
-    
+    this.listOfRoles = response.data;
+    this.totalNoOfRoles = response.totalNoOfRecords;
+    this.totalNoOfPages = response.totalNoOfPages;
+    this.startIndex = 1;
+    this.setCurrentPage(0);
   }
-  this.setCurrentPage(0);
   }
   , (err)=>{
 console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
@@ -107,47 +110,42 @@ console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
 
 
 
-setCurrentPage(movement: number){ //fired from next and prev button -1 --> back 1--> next
-  if(movement===0){ //if movement is 0, only totalNoOfPages attribute value needs to be changed.. 
-    this.totalNoOfPages = Math.ceil(this.listOfRoles.length / this.selectedPageSize);
-  }else{
+setCurrentPage(movement: number){ 
+  if(movement == 1){ //next page
+this.pageNo = this.pageNo + 1;
+if(this.isViewAllOptionSelected){
   this.getRoleData();
-if(movement==1){
-  if(this.currentPage<this.totalNoOfPages){
-    this.currentPage = this.currentPage + 1;
-
-    this.startIndex = (this.selectedPageSize*(this.currentPage-1));
-    
-    this.totalNoOfPages = Math.ceil(this.listOfRoles.length / this.selectedPageSize);
-
+}else{
+  this.getFilteredRoleData();
+}
+this.startIndex = (this.pageSize * this.startIndex);
+  }else if(movement == -1 && this.pageNo > 1){  //prev page 
+    this.pageNo = this.pageNo - 1;
+    if(this.isViewAllOptionSelected){
+      this.getRoleData();
+    }else{
+      this.getFilteredRoleData();
     }
-}else if(this.currentPage>1 && movement==-1){ //enters only if current page is greater than 1 and movement is 0
-  this.currentPage = this.currentPage - 1;
-  this.startIndex = (this.selectedPageSize*(this.currentPage-1));
-  this.totalNoOfPages = Math.ceil(this.listOfRoles.length / this.selectedPageSize);
-
-}{
-
-}
+    this.startIndex = (this.startIndex - this.pageSize+1);
+  }else if(movement == 0){    //only for pagination purpose
+    if(this.listOfRoles.length == this.pageSize){
+      this.noOfRolesInCurrentPage = this.pageSize;
+    }else{
+      this.noOfRolesInCurrentPage = this.totalNoOfRoles;
+    }
   }
-this.setNoOfRolesInCurrentPage();
 
-}
-
-setNoOfRolesInCurrentPage(){
-  this.noOfRolesInCurrentPage = this.currentPage * this.selectedPageSize;
-  if(this.noOfRolesInCurrentPage>this.listOfRoles.length){
-    this.noOfRolesInCurrentPage = this.listOfRoles.length;
-  }
 }
 
 
 getFilteredRoleData(){
-  this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus)
-  .subscribe((response)=>{
-    this.listOfRoles = response;
+   this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo )
+   .subscribe((response: any)=>{
+  this.listOfRoles = response.data;
+        this.totalNoOfRoles = response.totalNoOfRecords;
+       this.totalNoOfPages = response.totalNoOfPages;
     this.setCurrentPage(0);
-  });
+   });
   
 }
 

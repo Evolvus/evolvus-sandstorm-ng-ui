@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -12,6 +10,8 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class AddUserComponent implements OnInit {
   
+userForm: FormGroup;
+
   userrole = [
     {value: 'admin', viewValue: 'Admin'},
     {value: 'developer', viewValue: 'Developer'},
@@ -114,7 +114,9 @@ export class AddUserComponent implements OnInit {
  
   constructor() { }
 
-  
+  save(){
+    
+  }
   
 
 }

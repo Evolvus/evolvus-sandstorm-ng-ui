@@ -75,13 +75,13 @@
         <div class="col-md-12">
             <div class="gridHeadSec">
           <h4 class="txt-blue">Available Entity Details</h4>
-          <!-- <h5>Showing {{startIndex+1}} to {{ noOfRolesInCurrentPage }} out of {{ this.listOfRoles.length }}</h5> -->
+          <h5>Showing {{startIndex}} to {{ noOfEntitiesInCurrentPage }} out of {{ totalNoOfEntities }}</h5>
       
 </div>
       <!--Table-->
       <div class="tablegrid animated row">
         <div class="col-md-12">
-          <div class="float-searchicon" *ngIf="areAnyEntitiesAvailable">
+          <div class="float-searchicon">
             <span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom">
               <span class="glyphicon glyphicon-search"></span>
             </span>
@@ -123,7 +123,7 @@
       </div>
       <div class="pull-right marTB2 paginationSec">			
         <button class="btn btn-default" ><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
-            <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="currentPage" style="width:30px;" value="{{currentPage}}">/ {{totalNoOfPages}} 
+            <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}} 
           <button class="btn btn-default"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
         </div>
     <div class="row row-padding" *ngIf="listOfEntities.length == 0">

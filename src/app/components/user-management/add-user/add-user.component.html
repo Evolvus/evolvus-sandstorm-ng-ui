@@ -10,7 +10,7 @@
    </section> 
 
     <section class="content">
-    	<form >
+    	<form [formGroup]="userForm" (ngSubmit)="save()">
 	    	<div class="row">
 	    		<div class="col-md-12">
 	    			<h4>User Details</h4>
@@ -19,10 +19,22 @@
     			 <div class="col-md-8 ">
 	    			 <div class="col-md-6 no-padding-left">
 							
+
+						<!-- <div class="row">
+							<div class="col-md-5">
+								<div class="form-group">
+								   <mat-form-field class="example-full-width">
+									   <input required matInput placeholder="Role Name" formControlName="roleName" name="roleName">
+			  
+									 </mat-form-field>
+								   </div>
+							  </div>
+			   -->
+
 	    			 		<div class="form-group">					 			 
 						     	<mat-form-field class="example-full-width">
 									<input required matInput placeholder="User Id" value="" [formControl]="text">
-									<mat-error *ngIf="">{{getTxtErrorMessage()}}</mat-error>
+									<mat-error *ngIf = "">You must enter data</mat-error>
 								</mat-form-field>
 	          			 	</div>
 	          			 	

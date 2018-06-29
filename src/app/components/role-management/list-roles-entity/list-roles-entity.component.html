@@ -67,11 +67,11 @@
     		<div class="col-md-12">
     			<div class="gridHeadSec">
     				<h4>Available Role Details</h4> 
-    				<h5>Showing {{startIndex+1}} to {{ noOfRolesInCurrentPage }} out of {{ this.listOfRoles.length }}</h5>
+    				<h5>Showing {{startIndex}} to {{ noOfRolesInCurrentPage }} out of {{ totalNoOfRoles }}</h5>
     				
     				<div class="pull-right">						
 						<h5 class="txt-black">Results per Page</h5>							
-						<mat-select name="tablePageSize" (selectionChange)="setNoOfRolesInCurrentPage()" selectedValue="selectedPageSize"[(ngModel)]="selectedPageSize" class="form-control">
+						<mat-select name="tablePageSize" (selectionChange)="getFilteredRoleData()" selectedValue="selectedPageSize" [(ngModel)]="pageSize" class="form-control">
                 <mat-option [value]="5" >5</mat-option>
                 <mat-option [value]="10">10</mat-option>
                 <mat-option [value]="15">15</mat-option>
@@ -93,7 +93,7 @@
 									     
 									    </thead>
 									    <tbody>
-									      <tr (click)="viewRole(role)" *ngFor="let role of listOfRoles | slice:startIndex:noOfRolesInCurrentPage ;">
+									      <tr (click)="viewRole(role)" *ngFor="let role of listOfRoles">
 									        <td>{{role?.roleName | titlecase}}</td>
 									        <td>{{role?.description}}</td>
 									        <td>{{role?.applicationCode}}</td>
@@ -113,9 +113,10 @@
     					</div>
     				</div>
     			<div class="pull-right marTB2 paginationSec">			
-					<button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="currentPage == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
-		   			 <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="currentPage" style="width:30px;" value="{{currentPage}}">/ {{totalNoOfPages}} 
-		    		<button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="listOfRoles.length<selectedPageSize">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+					<button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+              <!-- <input  type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
+             {{pageNo}} / {{totalNoOfPages}}
+		    		<button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
           </div>
           <div class="row row-padding" *ngIf="listOfRoles.length == 0">
             <div class="row text-center">

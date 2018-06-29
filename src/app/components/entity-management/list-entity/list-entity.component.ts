@@ -24,6 +24,12 @@ export class ListEntityComponent implements OnInit {
     processingStatus: ""
   } 
   noEntityDataMessage: string = "";
+  noOfEntitiesInCurrentPage: number = 0;
+  pageSize: number= 5;
+  pageNo: number= 1;
+  totalNoOfPages: number = 1;
+  totalNoOfEntities: number = 0;
+  startIndex: number = 0;
   constructor(private router: Router, private entityService: EntityDataService) {  }
 
   ngOnInit() {

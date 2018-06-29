@@ -2,9 +2,7 @@ import { Observable, Subject } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators'; 
 import { environment } from '../../../environments/environment';
-import { throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConfirmationDialogEntityComponent } from "../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
@@ -34,7 +32,9 @@ roleTableHeaders = ['Role Name','Role Description','Application Category','Activ
 defaultFilterCriteria = {
   applicationCode:undefined,
   activationStatus:undefined,
-  processingStatus: "PENDING_AUTHORIZATION"
+  processingStatus: "PENDING_AUTHORIZATION",
+  pageSize: 5,
+  pageNo: 1
 } 
 defaultHeaders: HttpHeaders = new HttpHeaders({
 entityCode: 'defaultEntity',
@@ -51,10 +51,13 @@ createNewRole(role: RoleModel){
  this.roleData.push(role);
 }
 
-getAllRoleData(){
+getAllRoleData(pageSize, pageNo){
 return this.http.get(`${this.platformURL}/api/role`,{
-  headers: this.defaultHeaders
-
+  headers: this.defaultHeaders,
+  params: {
+    pageSize: pageSize,
+    pageNo: pageNo
+  }
 });
 }
 
@@ -91,13 +94,15 @@ getOneRoleData(roleName: string){
 }
 
 
-getFilteredRoleData(applicationCode, activationStatus, processingStatus){
+getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSize, pageNo){
   return this.http.get(`${this.platformURL}/api/role/filter`,  {
     headers: this.defaultHeaders,
   params:  {
       applicationCode: applicationCode,
       activationStatus: activationStatus,
-      processingStatus: processingStatus
+      processingStatus: processingStatus,
+      pageSize: pageSize,
+      pageNo: pageNo
     }
 
   });
