@@ -13,7 +13,9 @@ export class EntityDataService {
     defaultFilterCriteria = {
       parent:undefined,
       enableFlag:undefined,
-      processingStatus: "PENDING_AUTHORIZATION"
+      processingStatus: "PENDING_AUTHORIZATION",
+      pageSize: 5,
+      pageNo: 1
     } 
 
     constructor(public http: HttpClient, private dialog: MatDialog) { 
@@ -30,14 +32,18 @@ export class EntityDataService {
     
 
 
-  getAllEntityData(){
+  getAllEntityData(pageSize, pageNo){
     return this.http.get(`${this.platformURL}/api/entity`,{
-      headers: this.defaultHeaders
+      headers: this.defaultHeaders,
+      params: {
+        pageSize: pageSize,
+        pageNo: pageNo
+      }
     
     });
   }
 
-  getFilteredEntityData(parent, enableFlag, processingStatus){
+  getFilteredEntityData(parent, enableFlag, processingStatus, pageSize, pageNo){
    enableFlag =  this.getBooleanValue(enableFlag);
 
     return this.http.get(`${this.platformURL}/api/entity/filter`,  {
@@ -45,7 +51,9 @@ export class EntityDataService {
     params:  {
       parent: parent,
         enableFlag: enableFlag,
-        processingStatus: processingStatus
+        processingStatus: processingStatus,
+        pageSize: pageSize,
+        pageNo: pageNo
       }
   
     });

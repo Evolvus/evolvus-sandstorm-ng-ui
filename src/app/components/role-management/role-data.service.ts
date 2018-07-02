@@ -13,7 +13,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 export class RoleDataService {
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
-    this.ngOnInit();
    }
 
 

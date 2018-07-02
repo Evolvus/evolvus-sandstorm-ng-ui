@@ -1,5 +1,8 @@
+import { UserModel } from './../user-model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { UserDataService } from './../user-data.service';
+
 
 @Component({
   selector: 'app-list-users',
@@ -7,32 +10,48 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
-  userTableHeader:any = [];
-
-  logins = [
-    {value: 'login', viewValue: 'Logged-In'},
-    {value: 'logout', viewValue: 'Logged-Out'}
-    
-  ];
-
-  activationstatus = [
-    {value: 'active', viewValue: 'Active'},
-    {value: 'Inactive', viewValue: 'InActive'}
-    
-  ];
-
-  processingstatus = [
-    {value: 'pending', viewValue: 'Pending Authorization'},
-    {value: 'authorized', viewValue: 'Authorized'},
-    {value: 'reject', viewValue: 'Rejected'}
-    
-  ];
-
-  constructor() { }
+  userTableHeaders: string[] = [];
+  isViewAllOptionSelected: boolean = false;
+  defaultFilterCriteria = {  
+  userLoginStatus: "",
+  activationStatus: "",
+  processingStatus: "",
+  pageSize: 5,
+  pageNo: 1
+};
+noUserDataMessage: string = "";
+listOfUsers: UserModel[];
+startIndex: number =  0;
+noOfUsersInCurrentPage: number = 0;
+totalNoOfUsers: number = 0;
+pageSize: number = 5;
+pageNo: number = 1;
+totalNoOfPages: number = 0;
+  constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {
-    this.userTableHeader = ['User Id','User Name','User Role','Designation','Phone Number','Mobile Number','Country','City'];
+    this.userTableHeaders = this.userDataService.getTableHeaders();
+    this.defaultFilterCriteria = this.userDataService.getDefaultFilterCriteria();  
   }
-  gridsearch: boolean = false;
+
+
+  getFilteredUserData(){
+
+  }
+
+  view(user){
+
+  }
+
+  checkBoxTicked(value){
+    this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
+    // if(value){
+    //   this.getRoleData();
+    // }else{
+    //   this.getFilteredRoleData();
+    // }
+      }
+
+
 
 }

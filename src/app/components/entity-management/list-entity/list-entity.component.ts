@@ -15,14 +15,16 @@ export class ListEntityComponent implements OnInit {
 
   platformURL = environment.platformURL;
   isViewAllOptionSelected: boolean = false;
-  listOfParentEntities: string [];
-  tableHeader: string[];
-  listOfEntities: EntityModel[];
+  listOfParentEntities: string [] = [];
+  tableHeader: any[];
+  listOfEntities: any = [];
   defaultFilterCriteria = {
     parent: "",
     enableFlag: "",
-    processingStatus: ""
-  } 
+    processingStatus: "",
+    pageSize: 5,
+    pageNo: 1
+  };
   noEntityDataMessage: string = "";
   noOfEntitiesInCurrentPage: number = 0;
   pageSize: number= 5;
@@ -49,52 +51,52 @@ export class ListEntityComponent implements OnInit {
 
   getEntityDataBasedOnDefaultFilterCriteria(){
     this.listOfEntities = [];
-    this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus).subscribe((response: EntityModel[])=>{
-    if(response.length == 0){
+    this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus,this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any )=>{
+    if(response.totalNoOfRecords==0){
       this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
   
-      this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus).subscribe((response: EntityModel[])=>{
-
-        if(response.length == 0){
-          this.noEntityDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
-        }else{
-          this.listOfEntities = response;
-          
-        }
+      this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus,this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
+          this.listOfEntities = response.data;
+          this.totalNoOfEntities = response.totalNoOfRecords;
+          this.totalNoOfPages = response.totalNoOfPages;
+          this.startIndex = 1;
+          this.setCurrentPage(0);
+      }, (err)=>{
+        this.noEntityDataMessage = "Server Error! Try Again Later!";
       })
     }else{
-      this.listOfEntities = response;
-      
+          this.listOfEntities = response.data;
+          this.totalNoOfEntities = response.totalNoOfRecords;
+          this.totalNoOfPages = response.totalNoOfPages;
+          this.startIndex = 1;
+          this.setCurrentPage(0);
     }
-    // this.setCurrentPage(-1);
     }
     , (err)=>{
-  console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
+      this.noEntityDataMessage = "Server Error! Try Again Later!";
     });
-  
   }
   getAllEntityData(){
-    this.entityService.getAllEntityData().
-    subscribe((entityData: EntityModel[])=>{
-      if(entityData != []){
-        this.listOfEntities = entityData;
-        // this.setCurrentPage(0);
-      }else{
-        this.noEntityDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
-      }
+    this.entityService.getAllEntityData(this.pageSize, this.pageNo).
+    subscribe((response: any)=>{
+        this.listOfEntities = response.data;
+        this.totalNoOfEntities = response.totalNoOfRecords;
+        this.totalNoOfPages = response.totalNoOfPages;
+        this.setCurrentPage(0);
     }, (err)=>{
-      console.log("getRoleData()", err);
+      this.noEntityDataMessage = "Server Error! Try Again Later!";
     });
-    // this.setNoOfRolesInCurrentPage();
   
   }
 
   getFilteredEntityData(){
-
-    this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus)
-    .subscribe((response: EntityModel[])=>{
-      this.listOfEntities = response;
-      // this.setCurrentPage(-1);
+    this.listOfEntities = [];
+    this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus,this.pageSize, this.pageNo)
+    .subscribe((response: any)=>{
+        this.listOfEntities = response.data;
+        this.totalNoOfEntities = response.totalNoOfRecords;
+        this.totalNoOfPages = response.totalNoOfPages;
+        this.setCurrentPage(0);
     });
     
   }
@@ -102,8 +104,10 @@ export class ListEntityComponent implements OnInit {
 
 
   checkBoxTicked(value){
+  
     this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
     if(value){
+      console.log("getAllEntityData()");
       this.getAllEntityData();        
     }else{
           this.getFilteredEntityData();
@@ -115,6 +119,39 @@ export class ListEntityComponent implements OnInit {
       view(entity){  
         this.router.navigate(['viewEntity', entity.entityId]);  
         }
+
+
+        setCurrentPage(movement: number){ 
+          if(movement == 1){ //next page
+        this.pageNo = this.pageNo + 1;
+        if(this.isViewAllOptionSelected){
+          this.getAllEntityData();
+        }else{
+          this.getFilteredEntityData();
+        }
+        this.startIndex = (this.pageSize * this.startIndex);
+          }else if(movement == -1 && this.pageNo > 1){  //prev page 
+            this.pageNo = this.pageNo - 1;
+            if(this.isViewAllOptionSelected){
+              this.getAllEntityData();
+            }else{
+              this.getFilteredEntityData();
+            }
+            this.startIndex = (this.startIndex - this.pageSize+1);
+          }else if(movement == 0){    
+            console.log(this.listOfEntities, "listOfEnt");
+            //only for pagination purpose
+            if(this.listOfEntities.length == this.pageSize){
+              this.noOfEntitiesInCurrentPage = this.pageSize;
+            }else{
+              this.noOfEntitiesInCurrentPage = this.totalNoOfEntities;
+            }
+          }
+        
+        }
+
+        
+
 
 
 }

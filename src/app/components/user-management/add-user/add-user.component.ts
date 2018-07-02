@@ -12,42 +12,7 @@ export class AddUserComponent implements OnInit {
   
 userForm: FormGroup;
 
-  userrole = [
-    {value: 'admin', viewValue: 'Admin'},
-    {value: 'developer', viewValue: 'Developer'},
-    {value: 'checker', viewValue: 'Checker'}
-  ];
-
   
-  states = [
-    {value: 'AP', viewValue: 'AndhraPradesh'},
-    {value: 'KA', viewValue: 'Karnataka'},
-    {value: 'TN', viewValue: 'Tamilnadu'}
-  ];
-
-  timezone = [
-    {value: 'India', viewValue: 'India'},
-    {value: 'USA', viewValue: 'USA'},
-    {value: 'UK', viewValue: 'UK'}
-  ];
-
-  transamount = [
-    {value: '10000', viewValue: '10k'},
-    {value: '50000', viewValue: '50k'},
-    {value: '100000', viewValue: '1 lac'}
-  ];
-
-  dailylimit = [
-    {value: '10000', viewValue: '10k'},
-    {value: '50000', viewValue: '50k'},
-    {value: '100000', viewValue: '1 lac'}
-  ];
-
-  currency = [
-    {value: 'rs', viewValue: 'Rupee'},
-    {value: 'dr', viewValue: 'Dollar'},
-    {value: 'euro', viewValue: 'Euro'}
-  ];
   
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -80,6 +45,28 @@ userForm: FormGroup;
   filteredOptions3: Observable<string[]>;
 
   ngOnInit() {
+
+    this.userForm = new FormGroup({
+      userId : new FormControl(null, Validators.required),
+      userName : new FormControl(null, [Validators.minLength(6), Validators.maxLength(35), Validators.required]),
+      designation : new FormControl(null, Validators.required),
+      role: new FormControl(null, [Validators.required]),
+      entity: new FormControl(null, [Validators.required]),
+      emailId: new FormControl(null, [Validators.required, Validators.email]),
+      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{0-10}")]),
+      mobileNumber: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{0-10}")]),
+      country: new FormControl(null, [Validators.required]),
+      state: new FormControl(null, [Validators.required]),
+      city: new FormControl(null, [Validators.required]),
+      timeZone: new FormControl(null, [Validators.required]),
+      branch: new FormControl(null, [Validators.required]),
+      individualTransactionLimit: new FormControl(null, [Validators.required]),
+      dailyLimit: new FormControl(null, [Validators.required]),
+      currency: new FormControl(null, [Validators.required]),   
+      fax: new FormControl(null, [Validators.required]),
+    });
+
+
     this.filteredOptions = this.cntryControl.valueChanges.pipe(
       startWith(''),
       map(val => this.filtercountries(val))
@@ -96,7 +83,6 @@ userForm: FormGroup;
       startWith(''),
       map(val3 => this.filterbranch(val3))
     );
-    
   }
 
   filtercountries(val: string): string[] {

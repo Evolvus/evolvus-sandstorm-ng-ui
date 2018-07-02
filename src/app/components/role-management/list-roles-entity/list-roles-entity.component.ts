@@ -15,7 +15,7 @@ import { Pipe } from '@angular/core';
 export class ListRolesEntityComponent implements OnInit {
   tableHeader:any = [];
   role: RoleModel;
-  listOfRoles: any;
+  listOfRoles: any  = [];
   listOfApplicationCategory: any;
   defaultFilterCriteria = {
     applicationCode: "",
@@ -29,7 +29,7 @@ export class ListRolesEntityComponent implements OnInit {
   noOfRolesInCurrentPage: number = 0;
   pageSize: number= 5;
   pageNo: number= 1;
-  totalNoOfPages: number = 1;
+  totalNoOfPages: number = 0;
   totalNoOfRoles: number = 0;
   startIndex: number = 0;
   constructor(private roleDataService: RoleDataService, private router: Router) { }
@@ -52,14 +52,10 @@ getApplicationCodes(){
 getRoleData(){
   this.roleDataService.getAllRoleData(this.pageSize, this.pageNo).
   subscribe((response: any)=>{
-    if(response.data != []){
       this.listOfRoles = response.data ;
       this.totalNoOfRoles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
-    }else{
-      this.noRoleDataMessage = "No Roles Found! Use the Add Role button to create a new role!";
-    }
   }, (err)=>{
     console.log("getRoleData()", err);
   });
@@ -75,17 +71,17 @@ if(value){
 }
   }
 
-viewRole(role: RoleModel){  
+view(role: RoleModel){  
 this.router.navigate(['viewRole', role.roleName]);  
 }
 
 getRoleDataBasedOnDefaultFilterCriteria(){
   this.listOfRoles = [];
-  this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo).subscribe((response: any)=>{
-  if(response.data.length == 0){
+  this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
+  if(response.totalNoOfRecords == 0){
     this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
 
-    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo).subscribe((response: any)=>{
+    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
    
         this.listOfRoles = response.data;
         this.totalNoOfRoles = response.totalNoOfRecords;
@@ -139,12 +135,15 @@ this.startIndex = (this.pageSize * this.startIndex);
 
 
 getFilteredRoleData(){
+  this.listOfRoles = [];
+
    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo )
    .subscribe((response: any)=>{
-  this.listOfRoles = response.data;
-        this.totalNoOfRoles = response.totalNoOfRecords;
-       this.totalNoOfPages = response.totalNoOfPages;
-    this.setCurrentPage(0);
+      this.listOfRoles = response.data;
+      this.totalNoOfRoles = response.totalNoOfRecords;
+     this.totalNoOfPages = response.totalNoOfPages;
+  this.setCurrentPage(0);
+
    });
   
 }

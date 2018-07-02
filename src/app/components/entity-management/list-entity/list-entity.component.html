@@ -76,16 +76,20 @@
             <div class="gridHeadSec">
           <h4 class="txt-blue">Available Entity Details</h4>
           <h5>Showing {{startIndex}} to {{ noOfEntitiesInCurrentPage }} out of {{ totalNoOfEntities }}</h5>
-      
+      		<div class="pull-right">						
+						<h5 class="txt-black">Results per Page</h5>							
+						<mat-select name="tablePageSize" (selectionChange)="getFilteredEntityData()" [(ngModel)]="pageSize" class="form-control">
+                <mat-option [value]="5" >5</mat-option>
+                <mat-option [value]="10">10</mat-option>
+                <mat-option [value]="15">15</mat-option>
+                <mat-option [value]="20">20</mat-option>
+			     	</mat-select>
+					</div>
 </div>
       <!--Table-->
       <div class="tablegrid animated row">
         <div class="col-md-12">
-          <div class="float-searchicon">
-            <span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom">
-              <span class="glyphicon glyphicon-search"></span>
-            </span>
-          </div>
+     
           <div class="slide-table">
             <div id="container-table">
               <div id="content-table">
@@ -122,11 +126,12 @@
         <!--Table-->
       </div>
       <div class="pull-right marTB2 paginationSec">			
-        <button class="btn btn-default" ><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
-            <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}} 
-          <button class="btn btn-default"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+        <button class="btn btn-default"  (click)="setCurrentPage(-1)" [disabled]="pageNo == 1" ><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+            <!-- <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
+                 {{pageNo}} / {{totalNoOfPages}}
+          <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
         </div>
-    <div class="row row-padding" *ngIf="listOfEntities.length == 0">
+    <div class="row row-padding" *ngIf="noEntityDataMessage!='' && listOfEntities.length==0">
       <div class="row text-center">
         <h5 class="txt-red" style="color:red;">No Entity Details Available!</h5>
         <br>

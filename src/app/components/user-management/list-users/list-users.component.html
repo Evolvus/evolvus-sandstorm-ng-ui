@@ -5,7 +5,7 @@
     </h1>
     
   <div class="rightSecBtn"> 
-      <span [routerLink]="['/adduser']" mat-raised-button
+      <span [routerLink]="['/addUser']" mat-raised-button
       matTooltip="Add New User"><span class="evo-user3"></span><span class="plus-symbol">+</span> </span>
    </div>
   </section> 
@@ -18,10 +18,9 @@
           <div class="row">
             <div class="col-md-3">              
                <mat-form-field>
-                <mat-select placeholder="User Login Status">
-                  <mat-option *ngFor="let loginval of logins" [value]="loginval.value">
-                    {{ loginval.viewValue }}
-                  </mat-option>
+                <mat-select placeholder="User Login Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredUserData()" [(ngModel)]="defaultFilterCriteria.userLoginStatus" name="userLoginStatus">
+                  <mat-option  value="LOGGED-IN">Logged In</mat-option>
+                  <mat-option  value="LOGGED-OUT">Logged Out</mat-option>
                 </mat-select>
               </mat-form-field>               
             </div>
@@ -30,29 +29,29 @@
 
             <div class="col-md-3">              
                <mat-form-field>
-                <mat-select placeholder="Activation Status">
-                  <mat-option *ngFor="let activestate of activationstatus" [value]="activestate.value">
-                    {{ activestate.viewValue }}
-                  </mat-option>
+                <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredUserData()" [(ngModel)]="defaultFilterCriteria.activationStatus" name="activationStatus">
+                  <mat-option  value="ACTIVE">Active</mat-option>
+                  <mat-option  value="INACTIVE">Inactive</mat-option>
                 </mat-select>
               </mat-form-field>              
             </div>
             
             <div class="col-md-3">
               <mat-form-field>
-                <mat-select placeholder="Processing Status">
-                  <mat-option *ngFor="let processtate of processingstatus" [value]="processtate.value">
-                    {{ processtate.viewValue }}
-                  </mat-option>
+                <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredUserData()" [(ngModel)]="defaultFilterCriteria.processingStatus" name="processingStatus">
+                  <mat-option  value="AUTHORIZED">Authorized</mat-option>
+                  <mat-option  value="PENDING_AUTHORIZATION">Pending Authorization</mat-option>
+                  <mat-option  value="REJECTED">Rejected</mat-option>
                 </mat-select>
               </mat-form-field>             
             </div>
-            
-             <div class="col-md-3 filterView">
-              <div class="checkbox">
-               <label><input type="checkbox" value="">View All</label>
+              
+            <div class="col-md-3 filterView">
+              <div class="checkbox form-group">
+                  <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
            </div>
             </div>
+     
           </div>   			
        </form> 
        </div>
@@ -60,179 +59,67 @@
      
      <div class="row">
        <div class="col-md-12">
+ 
          <div class="gridHeadSec">
-           <h4>User Details</h4> 
-           <h5>Showing 1 to 10 out of 10</h5>
-           
-           <div class="pull-right">						
-           <h5 class="txt-black">Results per Page</h5>							
-           <select name="pageSize" ng-model="pageSize" class="form-control" ng-options="pageCount for pageCount in pageValue">
-              </select>
-         </div>
-         </div>
+          <h4>Available User Details</h4> 
+          <h5>Showing {{startIndex}} to {{ noOfUsersInCurrentPage }} out of {{ totalNoOfUsers }}</h5>
+          
+          <div class="pull-right">						
+          <h5 class="txt-black">Results per Page</h5>							
+          <mat-select name="tablePageSize" (selectionChange)="getFilteredUserData()"  [(ngModel)]="defaultFilterCriteria.pageSize" class="form-control">
+              <mat-option [value]="5" >5</mat-option>
+              <mat-option [value]="10">10</mat-option>
+              <mat-option [value]="15">15</mat-option>
+              <mat-option [value]="20">20</mat-option>
+           </mat-select>
+        </div>
+        </div>
          
          <div class="tablegrid animated">
-           <div class="float-searchicon" (click) = "gridsearch=!gridsearch"><span tooltip="Search for particular column" tooltip-trigger="mouseenter" tooltip-placement="bottom"><span class="glyphicon glyphicon-search"></span> </span></div>
            <div class="slide-table">
-              <div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div>
+              <!-- <div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div> -->
                  <div id="container-table">
                  <div id="content-table">
                      <table class="table table-bordered table-striped ">
                    <thead>
                        <tr>
-                              <th *ngFor="let header of userTableHeader">{{header}}</th>									       
-                       <!-- <th ng-repeat="header in usertableheader">{{getSplitWord(header)}}<span>{{item1.join(" ")}}</span><br><span>{{item2.join(" ")}}</span></th> -->
+                         <th *ngFor="let header of userTableHeaders">{{header}}</th>									       
                        </tr>
                        
-                        <tr class="grid-search" *ngIf="gridsearch">
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     <td><input type="text"></td>
-                     
-                     <td><span class="glyphicon glyphicon-search pull-right"></span></td>
-                   </tr> 
+              
                      </thead>
                      <tbody>
-                       <tr [routerLink]="['/viewuser']">
-                         <td>TEST0001</td>
-                         <td>Ahmed</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                        
-                         <td></td>
-                       </tr>
+                      <tr (click)="view(role)" *ngFor="let user of listOfUsers">
+                        <td>{{user?.userName | titlecase}}</td>
+                        <td>{{user?.userId}}</td>
+                        <td>{{user?.designation}}</td>
+                        <td>{{user?.activationStatus}}</td>
+                        <td>{{user?.processingStatus}}</td>
+                        <td>{{user?.associatedUsers}}</td>
+                        <td>{{user?.lastUpdatedDate | date : 'full'}} </td>
                        
-                       <tr ui-sref="viewuser">
-                         <td>TEST0002</td>
-                         <td>Akil</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0003</td>
-                         <td>Azhar</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                       
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0011</td>
-                         <td>Barakah</td>
-                         <td>Checker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                        
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0021</td>
-                         <td>Faisal</td>
-                         <td>Checker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0005</td>
-                         <td>Faruq</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0010</td>
-                         <td>Ghazi</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                        
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0031</td>
-                         <td>Hashim</td>
-                         <td>Maker</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                       
-                        <tr ui-sref="viewuser">
-                         <td>TEST0034</td>
-                         <td>Ibrahim</td>
-                         <td>Admin OP</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                                  <tr ui-sref="viewuser">
-                         <td>TEST0041</td>
-                         <td>Jamal</td>
-                         <td>Admin OP</td>
-                         <td>Enabled</td>
-                         <td>Active</td>
-                         <td>Authorized</td>
-                         <td>User Authorized</td>
-                         <td>2017-06-18 23:14:45</td>
-                         
-                         <td></td>
-                       </tr>
-                     </tbody>
+                        <td></td>
+                      </tr>
+                    
+                    </tbody>
                  </table>
                </div>
              </div>
-             <div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div>
+             <!-- <div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div> -->
              </div>
            </div>
+           <div class="pull-right marTB2 paginationSec">			
+            <!-- <button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button> -->
+                <!-- <input  type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
+               <!-- {{pageNo}} / {{totalNoOfPages}} -->
+              <!-- <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button> -->
+            </div>
+            <!-- <div class="row row-padding" *ngIf="listOfRoles.length == 0">
+              <div class="row text-center">
+                <h5 class="txt-red" style="color:red;">No Role Details Available!</h5>
+                <br>
+              </div>
+            </div>  -->
          <div class="pull-right marTB2 paginationSec">			
          <button class="btn btn-default "><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
              <input type="text" class="text-center paginationInput" style="width:30px;" value="1"> / 1 
