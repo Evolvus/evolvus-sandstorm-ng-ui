@@ -29,6 +29,9 @@
   .evo-role:before {
     content: "\eb1b";
   }
+  .evo-entity:before {
+    content: "\f19c";
+  }
   .evo-newusers:before {
     content: "\eb16";
   }
@@ -1503,3 +1506,9 @@ float: left;
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
     background-color: #ff8500 !important;
   }
+  .successIcon i{font-size: 4.5em;height: 80px;width: 80px;color: green;border: 1px solid green;
+    border-radius: 50%;padding: 0.5rem;}
+    .failureIcon i{font-size: 4.5em;height: 80px;width: 80px;color: #f50000;border: 1px solid #f50000;
+    border-radius: 50%;padding: 0.5rem;}
+    .alertIcon i{font-size: 4.5em;height: 80px;width: 80px;color: #e26816;border: 1px solid #e26816;
+        border-radius: 50%;padding: 0.5rem;}

@@ -25,17 +25,21 @@ export class AddEntityComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private entityService: EntityDataService, private router: Router) {
     this.entityForm = new FormGroup({
-      name: new FormControl(''),
-      entityCode: new FormControl(''),
-      parent: new FormControl(''),
-      description: new FormControl(''),
-      enableFlag: new FormControl('')
+      name: new FormControl('',[Validators.pattern("[a-zA-Z0-9_-]*"), Validators.pattern(/^\S*$/),
+      Validators.minLength(6), Validators.maxLength(35)]),
+      entityCode: new FormControl('', [Validators.pattern("[a-zA-Z0-9_-]*"), Validators.pattern(/^\S*$/),
+      Validators.minLength(6), Validators.maxLength(35)]),
+      parent: new FormControl('', Validators.required),
+      description: new FormControl('', [
+      Validators.minLength(6), Validators.maxLength(140)]),
+      enableFlag: new FormControl('', Validators.required)
     });
   }
 
   ngOnInit() {
     this.getAllEntityNames();
     this.getFilteredEntityNames();
+    
   }
 
 
@@ -67,7 +71,7 @@ getFilteredEntityNames(){
      }, (err)=>{
       this.entityService.openDialog(
         "error",
-       err.message
+       err.error.message+"."
       ).subscribe((result)=>{
         console.log(err, "errrroooor");
 
@@ -83,7 +87,12 @@ getFilteredEntityNames(){
 
   
   abortSaveAction() {
+    console.log(this.entityForm);
     this.router.navigate(["/entityManagement"]);
   }
+
+
+
+
 }
 

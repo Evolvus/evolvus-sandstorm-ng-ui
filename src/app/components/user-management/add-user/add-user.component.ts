@@ -1,7 +1,9 @@
+import { EntityModel } from './../../entity-management/entity.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { UserDataService } from './../user-data.service';
 
 @Component({
   selector: 'app-add-user',
@@ -11,8 +13,8 @@ import {map, startWith} from 'rxjs/operators';
 export class AddUserComponent implements OnInit {
   
 userForm: FormGroup;
-
-  
+listOfTimeZones: Object[] = [];
+listOfEntities: EntityModel[]=[];
   
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -20,14 +22,7 @@ userForm: FormGroup;
   number = new FormControl('', [Validators.required]);
   select = new FormControl('', [Validators.required]);
 
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter data' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
-  }
-  getTxtErrorMessage() {
-    return this.text.hasError('required') ? 'You must enter data' : '';
-  }
+
 
   cntryControl: FormControl = new FormControl();
   stateControl: FormControl = new FormControl();
@@ -83,6 +78,12 @@ userForm: FormGroup;
       startWith(''),
       map(val3 => this.filterbranch(val3))
     );
+
+this.listOfTimeZones = this.userDataService.getAllTimeZones();
+this.userDataService.getAllEntities().subscribe((response: any)=>{
+  this.listOfEntities = response.data;
+});
+
   }
 
   filtercountries(val: string): string[] {
@@ -98,12 +99,19 @@ userForm: FormGroup;
       return this.branchesList.filter(option3 => option3.toLowerCase().indexOf(val3.toLowerCase()) === 0);
     }
  
-  constructor() { }
+  constructor(private userDataService: UserDataService) { }
 
   save(){
     
   }
   
-
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter data' :
+        this.email.hasError('email') ? 'Not a valid email' :
+            '';
+  }
+  getTxtErrorMessage() {
+    return this.text.hasError('required') ? 'You must enter data' : '';
+  }
 }
 

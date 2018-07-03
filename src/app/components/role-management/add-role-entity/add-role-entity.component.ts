@@ -38,10 +38,10 @@ export class AddRoleEntityComponent implements OnInit {
 
   ngOnInit() {
     this.roleForm = new FormGroup({
-      activationStatus: new FormControl(null, Validators.required),
-      roleName: new FormControl(null, [Validators.minLength(6), Validators.maxLength(35), Validators.required]),
-      applicationCode: new FormControl(null, Validators.required),
-      description: new FormControl(null, [Validators.minLength(6), Validators.maxLength(140)])
+      activationStatus: new FormControl('', Validators.required),
+      roleName: new FormControl('', [Validators.pattern("[a-zA-Z0-9_-]*"), Validators.pattern(/^\S*$/), Validators.minLength(6), Validators.maxLength(35), Validators.required]),
+      applicationCode: new FormControl('', Validators.required),
+      description: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(140)])
     });
 
     this.roleDataService

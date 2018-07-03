@@ -62,7 +62,7 @@ getRoleData(){
 
 }
 
-  checkBoxTicked(value){
+checkBoxTicked(value){
 this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
 if(value){
   this.getRoleData();
@@ -123,7 +123,7 @@ this.startIndex = (this.pageSize * this.startIndex);
       this.getFilteredRoleData();
     }
     this.startIndex = (this.startIndex - this.pageSize+1);
-  }else if(movement == 0){    //only for pagination purpose
+  }else if(movement == 0){//only for pagination purpose
     if(this.listOfRoles.length == this.pageSize){
       this.noOfRolesInCurrentPage = this.pageSize;
     }else{
@@ -134,16 +134,26 @@ this.startIndex = (this.pageSize * this.startIndex);
 }
 
 
+setPageSize(){
+  this.pageNo = 1;
+  this.startIndex = 1;
+  if(this.isViewAllOptionSelected){
+    this.getRoleData();
+  }else{
+    this.getFilteredRoleData();
+  }
+}
+
+
 getFilteredRoleData(){
   this.listOfRoles = [];
-
+   
    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo )
    .subscribe((response: any)=>{
       this.listOfRoles = response.data;
       this.totalNoOfRoles = response.totalNoOfRecords;
-     this.totalNoOfPages = response.totalNoOfPages;
-  this.setCurrentPage(0);
-
+      this.totalNoOfPages = response.totalNoOfPages;
+      this.setCurrentPage(0);
    });
   
 }

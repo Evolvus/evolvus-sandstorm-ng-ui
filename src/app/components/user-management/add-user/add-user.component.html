@@ -91,15 +91,15 @@
 								</mat-form-field>
 							</div>	
 							
-							<!-- <div class="form-group">
+							<div class="form-group">
 								<mat-form-field class="example-full-width">
 									<mat-select placeholder="Timezone" [formControl]="select" aria-required="true">
-										<mat-option *ngFor="let times of timezone" [value]="times.value">
-													{{ times.viewValue }}
+										<mat-option *ngFor="let timeZone of listOfTimeZones"  [value]="timeZone">
+									<b>{{timeZone.zoneCode}}</b>&nbsp;&nbsp;{{timeZone.offset}}
 										</mat-option>
 									</mat-select>
 								</mat-form-field> 
-							</div> -->
+							</div>
 
 	          			 	
 	    			  </div>
@@ -146,8 +146,8 @@
 							<mat-form-field class="example-full-width">
 									<input type="text" placeholder="Branches" aria-label="Number" matInput [formControl]="branchControl" [matAutocomplete]="auto3" required>
 										<mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
-											<mat-option *ngFor="let option3 of filteredOptions3 | async" [value]="option3">
-																{{ option3 }}
+											<mat-option *ngFor="let entity of listOfEntities" [value]="entity">
+																{{ entity.name }}
 											</mat-option>
 									</mat-autocomplete>
 								</mat-form-field>		

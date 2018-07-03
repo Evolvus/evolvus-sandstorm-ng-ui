@@ -21,16 +21,18 @@ export class UpdateEntityComponent implements OnInit {
 
   constructor(private entityService: EntityDataService, private router: Router, private route: ActivatedRoute) { 
     this.entityForm = new FormGroup({
-      name: new FormControl('', Validators.compose([
-        Validators.required,
+      name: new FormControl('',[
+       Validators.pattern("[a-zA-Z0-9_-]*"),
+       Validators.pattern(/^\S*$/),
+       Validators.minLength(6),
+       Validators.maxLength(35)]),
+
+      entityCode: new FormControl('',[
+        Validators.pattern("[a-zA-Z0-9_-]*"),
+        Validators.pattern(/^\S*$/),
         Validators.minLength(6),
-        Validators.maxLength(35)
-      ])),
-      entityCode: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(35)
-      ])),
+        Validators.maxLength(35)]),
+        
       parent: new FormControl('', Validators.compose([
         Validators.required
       ])),

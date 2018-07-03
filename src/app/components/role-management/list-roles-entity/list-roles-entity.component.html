@@ -71,7 +71,7 @@
     				
     				<div class="pull-right">						
 						<h5 class="txt-black">Results per Page</h5>							
-						<mat-select name="tablePageSize" (selectionChange)="getFilteredRoleData()" [(ngModel)]="pageSize" class="form-control">
+						<mat-select name="tablePageSize" (selectionChange)="setPageSize()" [(ngModel)]="pageSize" class="form-control">
                 <mat-option [value]="5" >5</mat-option>
                 <mat-option [value]="10">10</mat-option>
                 <mat-option [value]="15">15</mat-option>

@@ -1,3 +1,4 @@
+import { EntityModel } from './../entity-management/entity.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -26,8 +27,10 @@ export class UserDataService {
     accessLevel: '0'
     });
     
-  
-  constructor() { }
+    listOfTimeZones: Object[]=
+    [{zoneCode: "IST", offset: "UTC+5:30"}, {zoneCode: "CDT", offset: "UTC-5:00"}];
+     
+  constructor(private http: HttpClient) { }
 
 
   getTableHeaders(){
@@ -38,8 +41,21 @@ export class UserDataService {
       return this.defaultFilterCriteria;
     }
 
-    
-
+    getAllTimeZones(){
+return this.listOfTimeZones;
+    }
+    getAllEntities(){
+      var pageSize = "0";
+      var pageNo = "1";
+      return this.http.get(`${this.platformURL}/api/entity`,{
+        headers: this.defaultHeaders,
+        params: {
+          pageSize: pageSize,
+          pageNo: pageNo
+        }
+      
+      });
+    }
 
 
 }

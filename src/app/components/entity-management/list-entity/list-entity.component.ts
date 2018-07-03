@@ -151,7 +151,15 @@ export class ListEntityComponent implements OnInit {
         }
 
         
-
+        setPageSize(){
+          this.pageNo = 1;
+          this.startIndex = 1;
+          if(this.isViewAllOptionSelected){
+            this.getAllEntityData();
+          }else{
+            this.getFilteredEntityData();
+          }
+        }
 
 
 }
