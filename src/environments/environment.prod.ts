@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  platformURL: '..'
+//  platformURL: '..'
+  platformURL: 'http://localhost:9090'
 };

@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../login-console/authentication/login/login.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StarterHeaderComponent implements OnInit {
   body: HTMLBodyElement = document.getElementsByTagName('body')[0];
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -18,7 +19,7 @@ export class StarterHeaderComponent implements OnInit {
   }
 
 logout(){
-  
+  this.authService.logout();
 }
 
 }

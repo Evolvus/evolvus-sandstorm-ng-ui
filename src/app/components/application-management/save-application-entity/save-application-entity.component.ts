@@ -68,7 +68,7 @@ export class SaveApplicationEntityComponent implements OnInit {
       applicationStatus = null;
     }
 
-    var result = this.http.post(`${this.platformURL}/application`,
+    var result = this.http.post(`${this.platformURL}/sandstorm/api/application`,
       {
         applicationCode: applicationForm.form.value.applicationCode,
         applicationName: applicationForm.form.value.applicationName,

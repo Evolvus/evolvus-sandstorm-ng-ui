@@ -35,7 +35,6 @@ gridSearch: boolean = false;
 
 getAllApplications(){
   this.applicationDataService.getAllApplications().subscribe((response)=>{
-    console.log(response, "===");
     this.applications = response;
   }, (err)=>{
 

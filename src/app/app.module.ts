@@ -1,3 +1,4 @@
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -8,12 +9,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/module/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 //MaterialLibrary
 
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatDialogRef } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -21,8 +22,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatDialog } from '@angular/material/dialog';
 import 'hammerjs';
+//SERVICE COMPONENTS
+
+import { ApplicationDataService } from './components/application-management/application-data.service';
+import { ResponsiveService } from './components/shared/responsive.service';
+import { RoleDataService } from './components/role-management/role-data.service';
+import { EntityDataService } from './components/entity-management/entity-data.service';
+import { AuthenticationService } from './login-console/authentication/login/login.service';
+import { JWTTokenIntercepter } from './shared/http.intercepter';
+import { AuthGuardService } from './shared/auth-guard.service';
+
+
+//LOGIN PAGE COMPONENT
+
+import { LoginConsoleComponent } from './login-console/login-console.component';
 
 //HOME PAGE COMPONENTS
 
@@ -59,15 +74,11 @@ import { ListUsersComponent } from './components/user-management/list-users/list
 import { ViewUserComponent } from './components/user-management/view-user/view-user.component';
 import { UpdateUserComponent } from './components/user-management/update-user/update-user.component';
 
-//SERVICE COMPONENTS
 
-import { ApplicationDataService } from './components/application-management/application-data.service';
-import { ResponsiveService } from './components/shared/responsive.service';
-import { RoleDataService } from './components/role-management/role-data.service';
-import { EntityDataService } from './components/entity-management/entity-data.service';
 
 //HELPER COMPONENTS
 
+import { SessionexpiredComponent } from './components/sessionexpired/sessionexpired.component'; 
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 import { SearchPipe } from './components/shared/search.pipe';
 
@@ -96,7 +107,9 @@ import { SearchPipe } from './components/shared/search.pipe';
     AddUserComponent,
     ListUsersComponent,
     ViewUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    SessionexpiredComponent,
+    LoginConsoleComponent
   ],
   imports: [
     BrowserModule,
@@ -111,13 +124,18 @@ import { SearchPipe } from './components/shared/search.pipe';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSelectModule,
+    MatSelectModule
     
   ],
   entryComponents: [
-    ConfirmationDialogEntityComponent
+    ConfirmationDialogEntityComponent, LoginConsoleComponent
   ],
-  providers: [ResponsiveService, RoleDataService, EntityDataService, ApplicationDataService],
+  providers: [ResponsiveService, RoleDataService, EntityDataService, ApplicationDataService,   AuthGuardService,  AuthenticationService, 
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JWTTokenIntercepter,
+    multi: true
+}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

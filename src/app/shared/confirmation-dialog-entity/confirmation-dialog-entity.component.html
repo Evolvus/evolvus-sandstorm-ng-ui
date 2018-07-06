@@ -1,6 +1,6 @@
 
 
-<section class="">
+<section class="popUp">
   <div class="text-center">
       <div class="success-message" *ngIf = "messageType === 'success'">
         <span class="successIcon"><i class="fa fa-check" aria-hidden="true"></i></span>
@@ -11,7 +11,7 @@
         <span class="failureIcon"><i class="fa fa-times" aria-hidden="true"></i></span>
         <h4 *ngIf="serverError">Server Error, Try Again!</h4>
           <h4 *ngIf="!serverError">{{statusMessage}}</h4>
-          <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">Ok</button>
+          <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">OK</button>
       </div>
       <div class="success-message" *ngIf = "messageType === 'alert'">
         <span class="alertIcon"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>        </span>
@@ -23,26 +23,4 @@
   </div>
   </section>
 
-  <!-- <div class="popUpSec">
-    <div class="row text-center" *ngIf="(data.msgType==='SUCCESS') ; else otherTemp">
-    <div class="col-12">
-    <span class="successIcon"><i class="fa fa-check" aria-hidden="true"></i></span>
-    <p>{{data.successOrfailMsg}}</p>
-    <p>{{data.msg}}</p>
-    <button class="btn btn-default btn-ok" (click)="onNoClick('OK')"> OK</button>
-    <button class="btn btn-default btn-close"(click)="onNoClick('CLOSE')"> Close</button>
-    </div>
-    </div>
-    
-    <ng-template #otherTemp>
-    <div class="row text-center" >
-    <div class="col-12">
-    <span class="failureIcon"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <p>{{data.successOrfailMsg}}</p>
-    <p>{{data.msg}}</p>
-    <button class="btn btn-default btn-ok" (click)="onNoClick('OK')"> OK</button>
-    </div>
-    </div>
-    </ng-template>
-    
-    </div> -->
+  

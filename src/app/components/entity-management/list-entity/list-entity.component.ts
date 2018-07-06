@@ -43,8 +43,8 @@ export class ListEntityComponent implements OnInit {
 
 
   getListOfEntityNames(){
-    this.entityService.getAllEntityNames().subscribe((response: string[])=>{
-      this.listOfParentEntities = response;
+    this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
+      this.listOfParentEntities = response.data;
     });
   }
   

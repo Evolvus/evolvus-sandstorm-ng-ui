@@ -67,6 +67,7 @@ export class AddRoleEntityComponent implements OnInit {
   }
 
   addMenuItem(menuGroupFromUser, menuItemFromUser) {
+    console.log("addMenuItem", menuItemFromUser.selectedFlag);
     menuItemFromUser.selectedFlag = !menuItemFromUser.selectedFlag;
   }
 
@@ -99,9 +100,9 @@ export class AddRoleEntityComponent implements OnInit {
       description: this.roleForm.value.description,
       menuGroup: this.listOfMenuGroups
     };
-
     this.roleDataService.save(roleData).subscribe(
       (data: {savedRoleObject: Object, message: string}) => {
+        console.log(roleData, "========roleDatra");
        this.roleDataService.openDialog(
           "success",
          data.message
@@ -114,6 +115,7 @@ export class AddRoleEntityComponent implements OnInit {
         this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
           this.getMenuGroups(this.roleForm.value.applicationCode);
         })
+
       }
     );
   }

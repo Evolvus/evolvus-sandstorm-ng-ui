@@ -20,7 +20,8 @@ export class AddEntityComponent implements OnInit {
   entityData: EntityModel;
   entityForm: FormGroup;
   parentEntities: any;
-  listOfParentEntities: string[]=[];
+  listOfParentEntities: EntityModel[]=[];
+  listOfParentEntityNames: string[]=[];
   filteredEntityNames: Observable<string[]>;
 
   constructor(public formBuilder: FormBuilder, private entityService: EntityDataService, private router: Router) {
@@ -44,8 +45,12 @@ export class AddEntityComponent implements OnInit {
 
 
 getAllEntityNames(){
-  this.entityService.getAllEntityNames().subscribe((response: string[])=>{
+  this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
     this.listOfParentEntities = response;
+    console.log(this.listOfParentEntities, "==========");
+    for(let entityName of response.data){{
+      this.listOfParentEntityNames.push(entityName.name);
+    }}
   });
 }
 
@@ -54,12 +59,18 @@ getFilteredEntityNames(){
   this.filteredEntityNames = this.entityForm.controls.parent.valueChanges
   .pipe(
     startWith(''),
-    map(entityName => entityName ? this.filterEntities(entityName) : this.listOfParentEntities.slice())
+    map(entityName => entityName ? this.filterEntities(entityName) : this.listOfParentEntityNames.slice())
   );
 }
 
 
   save() {
+    if(this.entityForm.value.enableFlag){
+      this.entityForm.value.enableFlag = "1";
+    }else{
+      this.entityForm.value.enableFlag = "0";
+
+    }
     this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, message: string}) => {
       this.entityService.openDialog(
          "success",
@@ -82,7 +93,7 @@ getFilteredEntityNames(){
   
   private filterEntities(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.listOfParentEntities.filter(entityName => entityName.toLowerCase().indexOf(filterValue) === 0);
+    return this.listOfParentEntityNames.filter(entityName => entityName.toLowerCase().indexOf(filterValue) === 0);
   }
 
   

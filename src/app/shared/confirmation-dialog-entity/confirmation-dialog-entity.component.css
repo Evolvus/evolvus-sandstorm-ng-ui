@@ -29,5 +29,11 @@ h5{
 }
 
 h4{
-    padding-top:2rem; 
+    
+    font-family: 'Segoe UI';
+    padding-top:2rem;
+}
+.text-center{
+    border: 1em solid white;
+    border-radius: 10px;
 }

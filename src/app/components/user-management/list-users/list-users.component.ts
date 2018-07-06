@@ -2,6 +2,7 @@ import { UserModel } from './../user-model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserDataService } from './../user-data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,7 @@ totalNoOfUsers: number = 0;
 pageSize: number = 5;
 pageNo: number = 1;
 totalNoOfPages: number = 0;
-  constructor(private userDataService: UserDataService) { }
+  constructor(private userDataService: UserDataService, private router: Router) { }
 
   ngOnInit() {
     this.userTableHeaders = this.userDataService.getTableHeaders();
@@ -52,6 +53,9 @@ totalNoOfPages: number = 0;
     // }
       }
 
+routeToAdd(){
+  this.router.navigate(['addUser']);
 
+}
 
 }

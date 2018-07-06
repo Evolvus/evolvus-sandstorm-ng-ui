@@ -20,9 +20,9 @@ export class EntityDataService {
 
     constructor(public http: HttpClient, private dialog: MatDialog) { 
       this.defaultHeaders = new HttpHeaders({
-            entityId: 'abc12',
-            tenantId: 'IVL',
-            accessLevel: '1'
+            entityId: 'HOO1BOO1',
+            tenantId: 'T001',
+            accessLevel: '0'
             });
             
 
@@ -33,8 +33,7 @@ export class EntityDataService {
 
 
   getAllEntityData(pageSize, pageNo){
-    return this.http.get(`${this.platformURL}/api/entity`,{
-      headers: this.defaultHeaders,
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params: {
         pageSize: pageSize,
         pageNo: pageNo
@@ -46,8 +45,7 @@ export class EntityDataService {
   getFilteredEntityData(parent, enableFlag, processingStatus, pageSize, pageNo){
    enableFlag =  this.getBooleanValue(enableFlag);
 
-    return this.http.get(`${this.platformURL}/api/entity/filter`,  {
-      headers: this.defaultHeaders,
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity/filter`,  {
     params:  {
       parent: parent,
         enableFlag: enableFlag,
@@ -59,9 +57,12 @@ export class EntityDataService {
     });
   }  
 
-    getAllEntityNames(){
-    return this.http.get(`${this.platformURL}/api/entityNames`, {
-    headers: this.defaultHeaders
+    getAllEntities(pageSize, pageNo){
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
+    params: {
+     pageSize: pageSize,
+     pageNo: pageNo
+    },
     });
     }
   
@@ -69,8 +70,7 @@ export class EntityDataService {
     
     getOneEntityData(entityId){
     
-    return this.http.get(`${this.platformURL}/api/entity/find`, {
-    headers: this.defaultHeaders,
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity/find`, {
     params:{
       entityId: entityId 
     }
@@ -80,16 +80,14 @@ export class EntityDataService {
     save(entityData) {
       entityData.enableFlag =  this.getBooleanValue(entityData.enableFlag);
         
-     return  this.http.post(`${this.platformURL}/api/entity`, entityData, {
-           headers: this.defaultHeaders
+     return  this.http.post(`${this.platformURL}/sandstorm/api/entity`, entityData, {
        });
 }
 
 update(entityData){
   entityData.enableFlag =  this.getBooleanValue(entityData.enableFlag);
         
-  return  this.http.put(`${this.platformURL}/api/entity/` + entityData._id , {
-        headers: this.defaultHeaders,
+  return  this.http.put(`${this.platformURL}/sandstorm/api/entity/` + entityData._id , {
         entityData: entityData
 
     });

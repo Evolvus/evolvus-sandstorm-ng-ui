@@ -51,7 +51,7 @@ createNewRole(role: RoleModel){
 }
 
 getAllRoleData(pageSize, pageNo){
-return this.http.get(`${this.platformURL}/api/role`,{
+return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
   headers: this.defaultHeaders,
   params: {
     pageSize: pageSize,
@@ -61,7 +61,7 @@ return this.http.get(`${this.platformURL}/api/role`,{
 }
 
 getlistOfApplicationCategory(){
-return this.http.get(`${this.platformURL}/api/applicationCodes`,{
+return this.http.get(`${this.platformURL}/sandstorm/api/applicationCodes`,{
   headers: this.defaultHeaders
 });
 }
@@ -75,7 +75,7 @@ getDefaultFilterCriteria(){
 }
 
 getListOfMenuGroups(applicationCode: string){
-return this.http.get(`${this.platformURL}/api/menu/find`, {
+return this.http.get(`${this.platformURL}/sandstorm/api/menu/find`, {
   headers: this.defaultHeaders,
  params: {
 applicationCode: applicationCode
@@ -84,7 +84,7 @@ applicationCode: applicationCode
 }
 
 getOneRoleData(roleName: string){
- return this.http.get(`${this.platformURL}/api/role/find`, {
+ return this.http.get(`${this.platformURL}/sandstorm/api/role/find`, {
   headers: this.defaultHeaders,
  params: {
    roleName: roleName 
@@ -94,7 +94,7 @@ getOneRoleData(roleName: string){
 
 
 getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSize, pageNo){
-  return this.http.get(`${this.platformURL}/api/role/filter`,  {
+  return this.http.get(`${this.platformURL}/sandstorm/api/role/filter`,  {
     headers: this.defaultHeaders,
   params:  {
       applicationCode: applicationCode,
@@ -108,20 +108,20 @@ getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSiz
 }
 
 save(roleData){
-  return this.http.post(`${this.platformURL}/api/role`, roleData, {
+  return this.http.post(`${this.platformURL}/sandstorm/api/role`, roleData, {
     headers: this.defaultHeaders
 
   });
 }
 updateRole(roleData){
-  return this.http.put(`${this.platformURL}/api/role/` + roleData._id,{
+  return this.http.put(`${this.platformURL}/sandstorm/api/role/` + roleData._id,{
     headers: this.defaultHeaders,
 
     roleData: roleData
   });
 }
 deleteRole(roleData){
-  return this.http.put(`${this.platformURL}/api/role/delete/` + roleData._id,{
+  return this.http.put(`${this.platformURL}/sandstorm/api/role/delete/` + roleData._id,{
     headers: this.defaultHeaders,
     roleData: roleData
   });

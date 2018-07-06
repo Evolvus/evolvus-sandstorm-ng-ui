@@ -7,9 +7,20 @@
         </a>
       </li> 
       <hr>
+
       <li class="header">Application</li>
       <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
       <hr>
+<div class="menuGroup">
+  <div class="menu" *ngFor="let menuGroup of userMenuGroups">
+    <li class="header">{{menuGroup.title}}</li>
+    <div class="menuItem" *ngFor="let menuItem of userMenuGroups.menuItems">
+        <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
+    </div>
+  </div>
+</div>
+
+    
       <li class="header">Administration</li> 
       <li><a [routerLink]="['/roleManagement']"><i class="evo-role"></i> <span>Role Management</span></a></li>
       <li><a [routerLink]="['/userManagement']"><i class="evo-newusers"></i> <span>User Management</span></a></li>

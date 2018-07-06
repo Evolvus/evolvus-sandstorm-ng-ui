@@ -15,8 +15,7 @@ export class ApplicationDataService {
 
 
 getAllApplications(){
- return this.http.get(`${this.platformURL}/api/application`);
-  
+ return this.http.get(`${this.platformURL}/sandstorm/api/application`);
 }
 
 }

@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../login-console/authentication/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,9 +9,14 @@ import { Router } from '@angular/router';
 })
 export class StarterLeftSideComponent implements OnInit {
 
-  constructor(public router:Router) { }
+userMenuGroups: any;
+
+  constructor(private router:Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.authService.userData.subscribe((userData)=>{
+this.userMenuGroups = userData.data.role.menuGroup;
+    });
   }
 
   routing(){

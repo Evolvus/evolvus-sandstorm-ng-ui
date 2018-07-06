@@ -31,7 +31,7 @@
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
                          <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()"required [(ngModel)]="defaultFilterCriteria.parent" name="parent">
-                           <mat-option *ngFor="let parentEntity of listOfParentEntities" value="{{parentEntity}}">{{parentEntity}}</mat-option>
+                           <mat-option *ngFor="let parentEntity of listOfParentEntities" value="{{parentEntity.name}}">{{parentEntity.name}}</mat-option>
                          </mat-select>
                        </mat-form-field>
                 </div>

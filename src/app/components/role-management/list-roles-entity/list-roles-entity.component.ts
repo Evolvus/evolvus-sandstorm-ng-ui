@@ -99,8 +99,14 @@ getRoleDataBasedOnDefaultFilterCriteria(){
   }
   }
   , (err)=>{
-console.log(err, "getRoleDataBasedOnDefaultFilterCriteria()");
-  });
+    this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+      // console.log("Server Down");
+    })
+  }
+
+
+
+  );
 
 }
 
@@ -154,8 +160,15 @@ getFilteredRoleData(){
       this.totalNoOfRoles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
-   });
-  
+   },(err) => {
+    this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+      
+    });
+
+  });
+
+   
+
 }
 
 
