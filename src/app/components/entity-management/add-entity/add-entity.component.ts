@@ -47,7 +47,6 @@ export class AddEntityComponent implements OnInit {
 getAllEntityNames(){
   this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
     this.listOfParentEntities = response;
-    console.log(this.listOfParentEntities, "==========");
     for(let entityName of response.data){{
       this.listOfParentEntityNames.push(entityName.name);
     }}
@@ -71,10 +70,10 @@ getFilteredEntityNames(){
       this.entityForm.value.enableFlag = "0";
 
     }
-    this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, message: string}) => {
+    this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
       this.entityService.openDialog(
          "success",
-        data.message
+        data.description
        ).subscribe((result)=>{
        this.router.navigate(['entityManagement']);
        });
@@ -82,9 +81,8 @@ getFilteredEntityNames(){
      }, (err)=>{
       this.entityService.openDialog(
         "error",
-       err.error.message+"."
+       err.error.description+"."
       ).subscribe((result)=>{
-        console.log(err, "errrroooor");
 
       });
     });
@@ -98,7 +96,6 @@ getFilteredEntityNames(){
 
   
   abortSaveAction() {
-    console.log(this.entityForm);
     this.router.navigate(["/entityManagement"]);
   }
 

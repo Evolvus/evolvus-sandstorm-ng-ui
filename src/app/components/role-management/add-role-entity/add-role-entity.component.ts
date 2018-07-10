@@ -22,12 +22,12 @@ export class AddRoleEntityComponent implements OnInit {
 
 
 
-  listOfApplicationCategory: string[];
+  listOfApplicationCategory: string[] = [];
   listOfMenuGroups: MenuGroup[];
   applicationCategorySelected: boolean = false;
   roleForm: FormGroup;
   menuGroupNotSelected: boolean;
-
+  listOfApplications: any;
 
 
 
@@ -44,13 +44,21 @@ export class AddRoleEntityComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(140)])
     });
 
-    this.roleDataService
-      .getlistOfApplicationCategory()
-      .subscribe((response: string[]) => {
-        this.listOfApplicationCategory = response;
-      });
+  this.getApplicationCodes();
   }
 
+
+
+
+  getApplicationCodes(){
+    this.roleDataService.getlistOfApplicationCategory().subscribe((response: any)=>{
+      this.listOfApplications = response.data;
+      console.log(response, "72727272772");
+    for(let application of this.listOfApplications){
+      this.listOfApplicationCategory.push(application.applicationCode);
+    }
+    });
+  }
 
 
   abortSaveAction() {
@@ -61,8 +69,8 @@ export class AddRoleEntityComponent implements OnInit {
     this.applicationCategorySelected = true;
     this.roleDataService
       .getListOfMenuGroups(applicationCode)
-      .subscribe((response: MenuGroup[]) => {
-        this.listOfMenuGroups = response;
+      .subscribe((response: any) => {
+        this.listOfMenuGroups = response.data;
       });
   }
 
@@ -100,23 +108,31 @@ export class AddRoleEntityComponent implements OnInit {
       description: this.roleForm.value.description,
       menuGroup: this.listOfMenuGroups
     };
+
+    if(roleData.menuGroup.length != 0) {
+
+   
     this.roleDataService.save(roleData).subscribe(
-      (data: {savedRoleObject: Object, message: string}) => {
-        console.log(roleData, "========roleDatra");
+      (data: {savedRoleObject: Object, description: string}) => {
        this.roleDataService.openDialog(
           "success",
-         data.message
+         data.description
         ).subscribe((result)=>{
         this.router.navigate(['roleManagement']);
         });
    
       },
       (err) => {
-        this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+        this.roleDataService.openDialog("error", err.error.description).subscribe((result)=>{
           this.getMenuGroups(this.roleForm.value.applicationCode);
         })
 
       }
     );
+  }else{
+    this.roleDataService.openDialog("error", "Menus is a required field!").subscribe((result)=>{
+      this.getMenuGroups(this.roleForm.value.applicationCode);
+    });
+  }
   }
 }

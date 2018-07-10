@@ -1,9 +1,9 @@
+import { EntityDataService } from './../entity-data.service';
 import { EntityModel } from './../entity.model';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { EntityDataService } from '../entity-data.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -37,12 +37,12 @@ export class ListEntityComponent implements OnInit {
   ngOnInit() {
     this.tableHeader =this.entityService.getTableHeaders();
     this.defaultFilterCriteria = this.entityService.getDefaultFilterCriteria();
-    this.getListOfEntityNames();
+    this.getListOfEntities();
     this.getEntityDataBasedOnDefaultFilterCriteria();
   }
 
 
-  getListOfEntityNames(){
+  getListOfEntities(){
     this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
       this.listOfParentEntities = response.data;
     });
@@ -73,11 +73,13 @@ export class ListEntityComponent implements OnInit {
     }
     }
     , (err)=>{
-      this.noEntityDataMessage = "Server Error! Try Again Later!";
-    });
+
+      this.entityService.openDialog("error", err.error.error).subscribe((result)=>{
+        // console.log("Server Down");
+      });    });
   }
   getAllEntityData(){
-    this.entityService.getAllEntityData(this.pageSize, this.pageNo).
+    this.entityService.getAllEntities(this.pageSize, this.pageNo).
     subscribe((response: any)=>{
         this.listOfEntities = response.data;
         this.totalNoOfEntities = response.totalNoOfRecords;
@@ -89,7 +91,11 @@ export class ListEntityComponent implements OnInit {
   
   }
 
-  getFilteredEntityData(){
+  getFilteredEntityData(source){
+    if(source=='filter'){
+      this.pageNo = 1;
+      this.startIndex = 1;
+    }
     this.listOfEntities = [];
     this.entityService.getFilteredEntityData(this.defaultFilterCriteria.parent, this.defaultFilterCriteria.enableFlag, this.defaultFilterCriteria.processingStatus,this.pageSize, this.pageNo)
     .subscribe((response: any)=>{
@@ -107,27 +113,27 @@ export class ListEntityComponent implements OnInit {
   
     this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
     if(value){
-      console.log("getAllEntityData()");
       this.getAllEntityData();        
     }else{
-          this.getFilteredEntityData();
+          this.getFilteredEntityData("");
     }
 
       }
 
 
       view(entity){  
-        this.router.navigate(['viewEntity', entity.entityId]);  
+        this.router.navigate(['viewEntity', entity.entityCode]);  
         }
 
 
         setCurrentPage(movement: number){ 
+         
           if(movement == 1){ //next page
         this.pageNo = this.pageNo + 1;
         if(this.isViewAllOptionSelected){
           this.getAllEntityData();
         }else{
-          this.getFilteredEntityData();
+          this.getFilteredEntityData("");
         }
         this.startIndex = (this.pageSize * this.startIndex);
           }else if(movement == -1 && this.pageNo > 1){  //prev page 
@@ -135,13 +141,17 @@ export class ListEntityComponent implements OnInit {
             if(this.isViewAllOptionSelected){
               this.getAllEntityData();
             }else{
-              this.getFilteredEntityData();
+              this.getFilteredEntityData("");
             }
             this.startIndex = (this.startIndex - this.pageSize+1);
           }else if(movement == 0){    
-            console.log(this.listOfEntities, "listOfEnt");
             //only for pagination purpose
+            // if(this.listOfEntities.length == 0){
+            //   // this.startIndex = 0;
+            //   this.pageNo = 0;
+            // }
             if(this.listOfEntities.length == this.pageSize){
+            
               this.noOfEntitiesInCurrentPage = this.pageSize;
             }else{
               this.noOfEntitiesInCurrentPage = this.totalNoOfEntities;
@@ -157,7 +167,7 @@ export class ListEntityComponent implements OnInit {
           if(this.isViewAllOptionSelected){
             this.getAllEntityData();
           }else{
-            this.getFilteredEntityData();
+            this.getFilteredEntityData("");
           }
         }
 

@@ -46,7 +46,7 @@ export class LoginConsoleComponent implements OnInit {
       this.authenticationService.authenticate(authentication).subscribe((user : any) => {
           if (user != null) {
         this.authenticationService.userData.next(user);
-
+console.log(user, "user");
             this.isUserAuthenticated = true;
             setTimeout(()=>{
                 this.authenticationService.isAuthenticated = true;

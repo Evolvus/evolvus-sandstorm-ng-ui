@@ -22,13 +22,11 @@ export class ViewEntityComponent implements OnInit {
   ngOnInit() {
     
     this.entityId = "" + this.route.snapshot.params['id'];
-    console.log(this.entityId, "entityId");
-    this.entityService.getOneEntityData(this.entityId).subscribe((entityData)=>{
-      console.log(entityData, "entityData");
+    this.entityService.getOneEntityData(this.entityId).subscribe((entityData: any)=>{
+      // console.log(entityData, "entityData");
 
-      this.selectedEntity = entityData;
+      this.selectedEntity = entityData.data[0];
     }, (err)=>{
-      console.log(err, "err");
 
       alert("No Entities");
     })
@@ -36,7 +34,7 @@ export class ViewEntityComponent implements OnInit {
 
 
   updateEntity(){
-    this.router.navigate(['/updateEntity', this.selectedEntity.entityId]);
+    this.router.navigate(['/updateEntity', this.selectedEntity.entityCode]);
     }
   
   abortViewAction(){

@@ -19,9 +19,10 @@ export class ViewRoleEntityComponent implements OnInit {
    
     var roleName = this.route.snapshot.params['id'];
     this.roleDataService.getOneRoleData(roleName)
-     .subscribe((response)=>{
-      this.roleData = response;
-      
+     .subscribe((response: any)=>{
+       if(response.data.length != 0){
+      this.roleData = response.data[0];
+       }
    });
 
 

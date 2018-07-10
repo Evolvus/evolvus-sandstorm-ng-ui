@@ -52,7 +52,6 @@ createNewRole(role: RoleModel){
 
 getAllRoleData(pageSize, pageNo){
 return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
-  headers: this.defaultHeaders,
   params: {
     pageSize: pageSize,
     pageNo: pageNo
@@ -61,8 +60,7 @@ return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
 }
 
 getlistOfApplicationCategory(){
-return this.http.get(`${this.platformURL}/sandstorm/api/applicationCodes`,{
-  headers: this.defaultHeaders
+return this.http.get(`${this.platformURL}/sandstorm/api/application`,{
 });
 }
 
@@ -75,8 +73,7 @@ getDefaultFilterCriteria(){
 }
 
 getListOfMenuGroups(applicationCode: string){
-return this.http.get(`${this.platformURL}/sandstorm/api/menu/find`, {
-  headers: this.defaultHeaders,
+return this.http.get(`${this.platformURL}/sandstorm/api/menu`, {
  params: {
 applicationCode: applicationCode
   }
@@ -84,8 +81,7 @@ applicationCode: applicationCode
 }
 
 getOneRoleData(roleName: string){
- return this.http.get(`${this.platformURL}/sandstorm/api/role/find`, {
-  headers: this.defaultHeaders,
+ return this.http.get(`${this.platformURL}/sandstorm/api/role`, {
  params: {
    roleName: roleName 
  }
@@ -94,8 +90,8 @@ getOneRoleData(roleName: string){
 
 
 getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSize, pageNo){
-  return this.http.get(`${this.platformURL}/sandstorm/api/role/filter`,  {
-    headers: this.defaultHeaders,
+  console.log(processingStatus, "sdshgjdsgds");
+  return this.http.get(`${this.platformURL}/sandstorm/api/role`,  {
   params:  {
       applicationCode: applicationCode,
       activationStatus: activationStatus,
@@ -109,8 +105,6 @@ getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSiz
 
 save(roleData){
   return this.http.post(`${this.platformURL}/sandstorm/api/role`, roleData, {
-    headers: this.defaultHeaders
-
   });
 }
 updateRole(roleData){

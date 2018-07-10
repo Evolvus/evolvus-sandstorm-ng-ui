@@ -32,22 +32,21 @@ export class EntityDataService {
     
 
 
-  getAllEntityData(pageSize, pageNo){
-    return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
-      params: {
-        pageSize: pageSize,
-        pageNo: pageNo
-      }
+  // getAllEntityData(pageSize, pageNo){
+  //   return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
+  //     params: {
+  //       pageSize: pageSize,
+  //       pageNo: pageNo
+  //     }
     
-    });
-  }
+  //   });
+  // }
 
   getFilteredEntityData(parent, enableFlag, processingStatus, pageSize, pageNo){
-   enableFlag =  this.getBooleanValue(enableFlag);
 
-    return this.http.get(`${this.platformURL}/sandstorm/api/entity/filter`,  {
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`,  {
     params:  {
-      parent: parent,
+        parent: parent,
         enableFlag: enableFlag,
         processingStatus: processingStatus,
         pageSize: pageSize,
@@ -70,27 +69,21 @@ export class EntityDataService {
     
     getOneEntityData(entityId){
     
-    return this.http.get(`${this.platformURL}/sandstorm/api/entity/find`, {
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
     params:{
-      entityId: entityId 
+      entityCode: entityId 
     }
     });
     }
 
     save(entityData) {
-      entityData.enableFlag =  this.getBooleanValue(entityData.enableFlag);
         
-     return  this.http.post(`${this.platformURL}/sandstorm/api/entity`, entityData, {
-       });
+     return  this.http.post(`${this.platformURL}/sandstorm/api/entity`, entityData);
 }
 
 update(entityData){
-  entityData.enableFlag =  this.getBooleanValue(entityData.enableFlag);
         
-  return  this.http.put(`${this.platformURL}/sandstorm/api/entity/` + entityData._id , {
-        entityData: entityData
-
-    });
+  return this.http.put(`${this.platformURL}/sandstorm/api/entity/` + entityData.entityCode, entityData);
 }
 
 

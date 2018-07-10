@@ -11,14 +11,16 @@
       <li class="header">Application</li>
       <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
       <hr>
-<div class="menuGroup">
+<!-- <div class="menuGroup">
   <div class="menu" *ngFor="let menuGroup of userMenuGroups">
     <li class="header">{{menuGroup.title}}</li>
     <div class="menuItem" *ngFor="let menuItem of userMenuGroups.menuItems">
-        <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
+        <li><a [routerLink]="['{{menuItem.m}}']"><i class="evo-role"></i> <span>Application Management</span></a></li>
     </div>
   </div>
-</div>
+</div> -->
+
+
 
     
       <li class="header">Administration</li> 

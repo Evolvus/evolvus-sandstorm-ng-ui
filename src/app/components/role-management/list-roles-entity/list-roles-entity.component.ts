@@ -16,11 +16,12 @@ export class ListRolesEntityComponent implements OnInit {
   tableHeader:any = [];
   role: RoleModel;
   listOfRoles: any  = [];
-  listOfApplicationCategory: any;
+  listOfApplicationCategory: string []=[];
+  listOfApplications: any;
   defaultFilterCriteria = {
     applicationCode: "",
     activationStatus: "",
-    processingStatus: "",
+    processingStatus: "PENDING_AUTHORIZATION",
     pageSize: 5,
     pageNo: 1
   } 
@@ -43,8 +44,11 @@ export class ListRolesEntityComponent implements OnInit {
 
 
 getApplicationCodes(){
-  this.roleDataService.getlistOfApplicationCategory().subscribe((response)=>{
-    this.listOfApplicationCategory = response;
+  this.roleDataService.getlistOfApplicationCategory().subscribe((response: any)=>{
+    this.listOfApplications = response.data;
+  for(let application of this.listOfApplications){
+    this.listOfApplicationCategory.push(application.applicationCode);
+  }
   });
 }
 
@@ -52,13 +56,20 @@ getApplicationCodes(){
 getRoleData(){
   this.roleDataService.getAllRoleData(this.pageSize, this.pageNo).
   subscribe((response: any)=>{
+    if(response.totalNoOfRecords != 0){
       this.listOfRoles = response.data ;
       this.totalNoOfRoles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
+    }else{
+      this.noRoleDataMessage = "No Role Details Found!";
+    }
+
   }, (err)=>{
-    console.log("getRoleData()", err);
-  });
+
+    this.roleDataService.openDialog("error", err.error.description).subscribe((result)=>{
+      // console.log("Server Down");
+    });  });
 
 }
 
@@ -67,7 +78,7 @@ this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
 if(value){
   this.getRoleData();
 }else{
-  this.getFilteredRoleData();
+  this.getFilteredRoleData('');
 }
   }
 
@@ -78,11 +89,11 @@ this.router.navigate(['viewRole', role.roleName]);
 getRoleDataBasedOnDefaultFilterCriteria(){
   this.listOfRoles = [];
   this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
-  if(response.totalNoOfRecords == 0){
+  if(response.data.length == 0){
     this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
 
     this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
-   
+
         this.listOfRoles = response.data;
         this.totalNoOfRoles = response.totalNoOfRecords;
         this.totalNoOfPages = response.totalNoOfPages;
@@ -99,9 +110,10 @@ getRoleDataBasedOnDefaultFilterCriteria(){
   }
   }
   , (err)=>{
+
     this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
       // console.log("Server Down");
-    })
+    });
   }
 
 
@@ -118,7 +130,7 @@ this.pageNo = this.pageNo + 1;
 if(this.isViewAllOptionSelected){
   this.getRoleData();
 }else{
-  this.getFilteredRoleData();
+  this.getFilteredRoleData('');
 }
 this.startIndex = (this.pageSize * this.startIndex);
   }else if(movement == -1 && this.pageNo > 1){  //prev page 
@@ -126,10 +138,11 @@ this.startIndex = (this.pageSize * this.startIndex);
     if(this.isViewAllOptionSelected){
       this.getRoleData();
     }else{
-      this.getFilteredRoleData();
+      this.getFilteredRoleData('');
     }
     this.startIndex = (this.startIndex - this.pageSize+1);
-  }else if(movement == 0){//only for pagination purpose
+  }else if(movement == 0){
+    //only for pagination purpose
     if(this.listOfRoles.length == this.pageSize){
       this.noOfRolesInCurrentPage = this.pageSize;
     }else{
@@ -146,12 +159,16 @@ setPageSize(){
   if(this.isViewAllOptionSelected){
     this.getRoleData();
   }else{
-    this.getFilteredRoleData();
+    this.getFilteredRoleData('');
   }
 }
 
 
-getFilteredRoleData(){
+getFilteredRoleData(source){
+  if(source=='filter'){
+    this.pageNo = 1;
+    this.startIndex = 1;
+  }
   this.listOfRoles = [];
    
    this.roleDataService.getFilteredRoleData(this.defaultFilterCriteria.applicationCode, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus, this.pageSize, this.pageNo )

@@ -9,7 +9,7 @@
       </div>
       <div class="success-message" *ngIf = "messageType === 'error'">
         <span class="failureIcon"><i class="fa fa-times" aria-hidden="true"></i></span>
-        <h4 *ngIf="serverError">Server Error, Try Again!</h4>
+        <!-- <h4 *ngIf="serverError">Server Error, Try Again!</h4> -->
           <h4 *ngIf="!serverError">{{statusMessage}}</h4>
           <button type="button" (click)="onNoClick(true)" class="btn btn-default btn-close">OK</button>
       </div>

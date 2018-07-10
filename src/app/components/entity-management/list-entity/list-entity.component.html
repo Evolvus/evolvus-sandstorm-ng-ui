@@ -30,7 +30,7 @@
                <div class="col-lg-3">
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
-                         <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()"required [(ngModel)]="defaultFilterCriteria.parent" name="parent">
+                         <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')"required [(ngModel)]="defaultFilterCriteria.parent" name="parent">
                            <mat-option *ngFor="let parentEntity of listOfParentEntities" value="{{parentEntity.name}}">{{parentEntity.name}}</mat-option>
                          </mat-select>
                        </mat-form-field>
@@ -40,9 +40,9 @@
                <div class="col-lg-3">
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
-                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()" [(ngModel)]="defaultFilterCriteria.enableFlag" name="enableFlag">
-                           <mat-option  value=true>Active</mat-option>
-                           <mat-option  value=false>Inactive</mat-option>
+                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.enableFlag" name="enableFlag">
+                           <mat-option  value="1">Active</mat-option>
+                           <mat-option  value="0">Inactive</mat-option>
                          </mat-select>
                        </mat-form-field>
                 </div>
@@ -51,7 +51,7 @@
                <div class="col-lg-3">
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
-                         <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData()" [(ngModel)]="defaultFilterCriteria.processingStatus" name="processingStatus">
+                         <mat-select placeholder="Processing Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.processingStatus" name="processingStatus">
                              <mat-option  value="AUTHORIZED">Authorized</mat-option>
                            <mat-option  value="PENDING_AUTHORIZATION">Pending Authorization</mat-option>
                            <mat-option  value="REJECTED">Rejected</mat-option>
@@ -101,7 +101,7 @@
                           </tr> 
               
                   </thead>
-                  <tbody>
+                  <tbody *ngIf ="listOfEntities.length != 0">
                     <tr *ngFor="let entity of listOfEntities" (click)="view(entity)">
 
                       <td>{{ entity?.name | uppercase}}</td>
@@ -125,13 +125,14 @@
         </div>
         <!--Table-->
       </div>
+
       <div class="pull-right marTB2 paginationSec">			
         <button class="btn btn-default"  (click)="setCurrentPage(-1)" [disabled]="pageNo == 1" ><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
             <!-- <input min=1 max = "{{totalNoOfPages}}" type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
                  {{pageNo}} / {{totalNoOfPages}}
-          <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+          <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="listOfEntities.length ==0 || pageNo==totalNoOfPages"  >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
         </div>
-    <div class="row row-padding" *ngIf="noEntityDataMessage!='' || listOfEntities == []">
+    <div class="row row-padding" *ngIf="listOfEntities.length == 0">
       <div class="row text-center">
         <h5 class="txt-red" style="color:red;">No Entity Details Available!</h5>
         <br>
