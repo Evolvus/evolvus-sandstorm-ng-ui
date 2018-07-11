@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
 //  platformURL: '..'
-  platformURL: 'http://localhost:9090'
+  platformURL: 'http://10.10.69.193:9090'
 };

@@ -47,9 +47,9 @@ export class AddEntityComponent implements OnInit {
 getAllEntityNames(){
   this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
     this.listOfParentEntities = response;
-    for(let entityName of response.data){{
-      this.listOfParentEntityNames.push(entityName.name);
-    }}
+    for(let entity of response.data){
+      this.listOfParentEntityNames.push(entity.name);
+    }
   });
 }
 

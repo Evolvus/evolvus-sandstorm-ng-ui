@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import {Component, OnInit,Inject} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -30,11 +31,14 @@ export class LoginConsoleComponent implements OnInit {
      ) {}
 
   ngOnInit() {
+      console.log("environment", environment);
       // this.dialogRef.updateSize("15%", "40%");
       this.loginForm = new FormGroup({
           userName: new FormControl(null, Validators.required),
           userPassword: new FormControl(null, Validators.required)
       });
+
+
   }
 
   login() {
@@ -46,7 +50,7 @@ export class LoginConsoleComponent implements OnInit {
       this.authenticationService.authenticate(authentication).subscribe((user : any) => {
           if (user != null) {
         this.authenticationService.userData.next(user);
-console.log(user, "user");
+            console.log(user, "user");
             this.isUserAuthenticated = true;
             setTimeout(()=>{
                 this.authenticationService.isAuthenticated = true;

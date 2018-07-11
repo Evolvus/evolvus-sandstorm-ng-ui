@@ -9,7 +9,7 @@ import {
   HttpHeaders,
   HttpClient
 } from "@angular/common/http";
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
 import { AuthenticationService } from './../login-console/authentication/login/login.service';
 
 

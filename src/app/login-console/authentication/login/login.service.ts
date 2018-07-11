@@ -15,7 +15,11 @@ export class AuthenticationService {
     userData = new Subject<any>();
     constructor(private http : HttpClient, private router : Router) {}
 
+
+
+
     authenticate(authentication : Authentication) {
+        console.log('authenticate ',authentication);
         return this.http.post(`${this.serviceUrl}/auth`, authentication);
     }
 
