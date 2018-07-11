@@ -66,7 +66,7 @@
           
           <div class="pull-right">						
           <h5 class="txt-black">Results per Page</h5>							
-          <mat-select name="tablePageSize" (selectionChange)="getFilteredUserData('filter')"  [(ngModel)]="defaultFilterCriteria.pageSize" class="form-control">
+          <mat-select name="tablePageSize" (selectionChange)="setPageSize()"  [(ngModel)]="pageSize" class="form-control">
               <mat-option [value]="5" >5</mat-option>
               <mat-option [value]="10">10</mat-option>
               <mat-option [value]="15">15</mat-option>
@@ -90,8 +90,8 @@
                      </thead>
                      <tbody>
                       <tr (click)="view(user)" *ngFor="let user of listOfUsers">
-                        <td>{{user?.userName | titlecase}}</td>
                         <td>{{user?.userId}}</td>
+                        <td>{{user?.userName | titlecase}}</td>
                         <td>{{user?.loginStatus}}</td>
                         <td>{{user?.activationStatus}}</td>
                         <td>{{user?.processingStatus}}</td>

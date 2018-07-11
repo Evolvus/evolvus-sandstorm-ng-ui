@@ -39,23 +39,6 @@ listOfMasterCurrency: any[]=[];
 
     
 
-    // this.filteredOptions = this.cntryControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(val => this.filtercountries(val))
-    // );
-    // this.filteredOptions1 = this.stateControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(val1 => this.filterstates(val1))
-    // );
-    // this.filteredEntityNames = this.userForm.controls.entity.valueChanges.pipe(
-    //   startWith(''),
-    //   map(val2 => this.filtercities(val2))
-    // );
-    // this.filteredOptions3 = this.branchControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(val3 => this.filterbranch(val3))
-    // );
-
 //  this.userDataService.getAllTimeZones().subscribe((response: any)=>{
 //    console.log(response, "getAllTimeZones");
 // this.listOfTimeZones = response.data;
@@ -73,6 +56,7 @@ this.userDataService.getAllEntities().subscribe((response: any)=>{
 });
 this.userDataService.getAllRoleData(0,1).subscribe((response: any)=>{
   this.listOfRoles = response.data;
+  console.log(" this.listOfRoles",  response);
   for(let role of this.listOfRoles){
     this.listOfRoleNames.push(role.roleName);
   }
@@ -84,72 +68,31 @@ this.userDataService.getAllRoleData(0,1).subscribe((response: any)=>{
 
   }
 
-  // filtercountries(val: string): string[] {
-  //     return this.countries.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  //   }
-  //   filterstates(val1: string): string[] {
-  //     return this.stateslist.filter(option1 => option1.toLowerCase().indexOf(val1.toLowerCase()) === 0);
-  //   }
-  //   filtercities(val2: string): string[] {
-  //     return this.citieslist.filter(option2 => option2.toLowerCase().indexOf(val2.toLowerCase()) === 0);
-  //   }
-  //   filterbranch(val3: string): string[] {
-  //     return this.branchesList.filter(option3 => option3.toLowerCase().indexOf(val3.toLowerCase()) === 0);
-  //   }
- 
   constructor(private userDataService: UserDataService, private router: Router) {
     this.userForm = new FormGroup({
-      userId : new FormControl("", Validators.required),
-      userName : new FormControl("", [Validators.minLength(6), Validators.maxLength(35), Validators.required]),
-      designation : new FormControl(""),
+      userId : new FormControl("", [Validators.required, Validators.minLength(6), Validators.minLength(35)]),
+      userName : new FormControl("", [Validators.minLength(6), Validators.maxLength(140), Validators.required]),
+      designation : new FormControl("", [Validators.maxLength(140)]),
       role: new FormControl("", [Validators.required]),
       entity: new FormControl("", [Validators.required]),
       emailId: new FormControl("", [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(""),
+      phoneNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
       mobileNumber: new FormControl(""),
-      country: new FormControl("", [Validators.required]),
-      state: new FormControl("", [Validators.required]),
-      city: new FormControl("", [Validators.required]),
+      country: new FormControl("", [Validators.required, Validators.maxLength(140)]),
+      state: new FormControl("", [Validators.required, Validators.maxLength(140)]),
+      city: new FormControl("", [Validators.required, Validators.maxLength(140)]),
       // timeZone: new FormControl("", [Validators.required]),
       individualTransactionLimit: new FormControl("", [Validators.required]),
       dailyLimit: new FormControl("", [Validators.required]),
       currency: new FormControl("", [Validators.required]),   
-      faxNumber: new FormControl(""),
+      faxNumber: new FormControl("")
     });
 
    }
 
   save() {
 
-
-var selectedRole = this.listOfRoles.filter(role => role.roleName == this.userForm.controls.role.value);
-var selectedEntity = this.listOfEntities.filter(entity => entity.name == this.userForm.controls.entity.value);
-var selectedMasterCurrency = this.listOfMasterCurrency.filter(masterCurrency => masterCurrency.currencyName == this.userForm.controls.currency.value);
-
-var userData = {
-userName: this.userForm.value.userName,
-userId: this.userForm.value.userId,
-designation: this.userForm.value.designation,
-role: selectedRole[0],
-entityId: selectedEntity[0].entityId,
-// masterTimeZone: this.userForm.value.timeZone,
-masterCurrency: this.userForm.value.currency,
-contact: {
-  phoneNumber:  this.userForm.value.phoneNumber,
-  mobileNumber:  this.userForm.value.mobileNumber,
-  faxNumber:  this.userForm.value.faxNumber,
-  city: this.userForm.value.city,
-  state: this.userForm.value.state,
-  country: this.userForm.value.country,
-  emailId: this.userForm.value.emailId
-},
-userPassword: "evolvus*123",
-individualTransactionLimit: this.userForm.value.individualTransactionLimit,
-dailyLimit: this.userForm.value.dailyLimit
-};
-
-
-    this.userDataService.save(userData).subscribe((response: {savedEntityObject: Object, description: string, status: string}) => {
+    this.userDataService.save(this.userForm, this.listOfRoles, this.listOfEntities, this.listOfMasterCurrency).subscribe((response: {savedEntityObject: Object, description: string, status: string}) => {
       this.userDataService.openDialog(
          "success",
          response.description

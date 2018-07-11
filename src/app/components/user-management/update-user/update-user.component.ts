@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { UserModel } from './../user-model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserDataService } from './../user-data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-user',
@@ -12,113 +15,170 @@ import {map, startWith} from 'rxjs/operators';
 export class UpdateUserComponent implements OnInit {
   
 userForm: FormGroup;
-
-  userrole = [
-    {value: 'admin', viewValue: 'Admin'},
-    {value: 'developer', viewValue: 'Developer'},
-    {value: 'checker', viewValue: 'Checker'}
-  ];
-
+selectedUserData: any;
   
-  states = [
-    {value: 'AP', viewValue: 'AndhraPradesh'},
-    {value: 'KA', viewValue: 'Karnataka'},
-    {value: 'TN', viewValue: 'Tamilnadu'}
-  ];
+filteredEntityNames: Observable<string[]>;  
+listOfEntityNames: string[]=[];
+listOfEntities: any;
 
-  timezone = [
-    {value: 'India', viewValue: 'India'},
-    {value: 'USA', viewValue: 'USA'},
-    {value: 'UK', viewValue: 'UK'}
-  ];
+filteredRoleNames: Observable<string[]>;
+listOfRoleNames: string[]=[];
+listOfRoles: any;
 
-  transamount = [
-    {value: '10000', viewValue: '10k'},
-    {value: '50000', viewValue: '50k'},
-    {value: '100000', viewValue: '1 lac'}
-  ];
+listOfMasterCurrency: any[]=[];
 
-  dailylimit = [
-    {value: '10000', viewValue: '10k'},
-    {value: '50000', viewValue: '50k'},
-    {value: '100000', viewValue: '1 lac'}
-  ];
 
-  currency = [
-    {value: 'rs', viewValue: 'Rupee'},
-    {value: 'dr', viewValue: 'Dollar'},
-    {value: 'euro', viewValue: 'Euro'}
-  ];
-  
+constructor(private userDataService: UserDataService, private router: Router, private route: ActivatedRoute) {
+  this.userForm = new FormGroup({
+      userId : new FormControl(""),
+      userName : new FormControl(""),
+      designation : new FormControl("", [Validators.maxLength(140)]),
+      role: new FormControl("", [Validators.required]),
+      entity: new FormControl("", [Validators.required]),
+      emailId: new FormControl("", [Validators.required, Validators.email]),
+      phoneNumber: new FormControl(""),
+      mobileNumber: new FormControl(""),
+      country: new FormControl("", [Validators.required, Validators.maxLength(140)]),
+      state: new FormControl("", [Validators.required, Validators.maxLength(140)]),
+      city: new FormControl("", [Validators.required, Validators.maxLength(140)]),
+      // timeZone: new FormControl("", [Validators.required]),
+      individualTransactionLimit: new FormControl("", [Validators.required]),
+      dailyLimit: new FormControl("", [Validators.required]),
+      currency: new FormControl("", [Validators.required]),   
+      faxNumber: new FormControl("")
+  });
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  text = new FormControl('', [Validators.required]);
-  number = new FormControl('', [Validators.required]);
-  select = new FormControl('', [Validators.required]);
-
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter data' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
-  }
-  getTxtErrorMessage() {
-    return this.text.hasError('required') ? 'You must enter data' : '';
-  }
-
-  cntryControl: FormControl = new FormControl();
-  stateControl: FormControl = new FormControl();
-  cityControl: FormControl = new FormControl();
-  branchControl: FormControl = new FormControl();
-
-  countries = ['India', 'USA', 'UK'];
-  stateslist = ['AP', 'KA', 'TN'];
-  citieslist = ['Pune', 'Bangalore', 'Chennai'];
-  branchesList = ['MG Road', 'BTM', 'Jayanagar', 'Halsuru', 'JP Nagar', 'ITPL'];
-
-  filteredOptions: Observable<string[]>;
-  filteredOptions1: Observable<string[]>;
-  filteredOptions2: Observable<string[]>;
-  filteredOptions3: Observable<string[]>;
+ }
 
   ngOnInit() {
-    this.filteredOptions = this.cntryControl.valueChanges.pipe(
-      startWith(''),
-      map(val => this.filtercountries(val))
-    );
-    this.filteredOptions1 = this.stateControl.valueChanges.pipe(
-      startWith(''),
-      map(val1 => this.filterstates(val1))
-    );
-    this.filteredOptions2 = this.cityControl.valueChanges.pipe(
-      startWith(''),
-      map(val2 => this.filtercities(val2))
-    );
-    this.filteredOptions3 = this.branchControl.valueChanges.pipe(
-      startWith(''),
-      map(val3 => this.filterbranch(val3))
-    );
+
+    var userName = "" + this.route.snapshot.params['id'];
+    this.userDataService.getOneUserData(userName).subscribe((response: any)=>{
+     var userData = response.data[0];
+     if(userData.length != 0){
+     
+     this.selectedUserData = userData;
+      this.userForm.patchValue({
+        role: userData.role.roleName,
+        applicationCode: userData.applicationCode,
+        phoneNumber: userData.contact.phoneNumber,
+        mobileNumber: userData.contact.mobileNumber,
+        emailId: userData.contact.emailId,
+        faxNumber: userData.contact.faxNumber,
+        userId: userData.userId,
+        userName: userData.userName,
+        individualTransactionLimit: userData.individualTransactionLimit,
+        dailyLimit: userData.dailyLimit,
+        currency: userData.masterCurrency,
+        designation: userData.designation,
+        state: userData.contact.state,
+        country: userData.contact.country,
+        city: userData.contact.city
+      });
+    }else{
+      alert('No Such User Found, you Loser!');
+    }
+    }, (err)=>{
+
+      alert("No User Data");
+    });
+
+
+
+    this.userDataService.getAllMasterCurrency().subscribe((response: any)=>{
+      this.listOfMasterCurrency = response.data;
+      });
+    this.userDataService.getAllEntities().subscribe((response: any)=>{
+      this.listOfEntities = response.data;
+      for(let entity of this.listOfEntities){
+        this.listOfEntityNames.push(entity.name);
+      }
+      var selectedEntity = this.listOfEntities.filter(entity => entity.entityId == this.selectedUserData.entityId);
+      this.userForm.patchValue({
+       entity: selectedEntity[0].name
+      });
+      this.getFilteredEntityNames();
+    });
+    this.userDataService.getAllRoleData(0,1).subscribe((response: any)=>{
+      this.listOfRoles = response.data;
+      for(let role of this.listOfRoles){
+        this.listOfRoleNames.push(role.roleName);
+      }
+      this.getFilteredRoleNames();
+    
+    });
     
   }
 
-  filtercountries(val: string): string[] {
-      return this.countries.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
-    }
-    filterstates(val1: string): string[] {
-      return this.stateslist.filter(option1 => option1.toLowerCase().indexOf(val1.toLowerCase()) === 0);
-    }
-    filtercities(val2: string): string[] {
-      return this.citieslist.filter(option2 => option2.toLowerCase().indexOf(val2.toLowerCase()) === 0);
-    }
-    filterbranch(val3: string): string[] {
-      return this.branchesList.filter(option3 => option3.toLowerCase().indexOf(val3.toLowerCase()) === 0);
-    }
- 
-  constructor() { }
 
-  save()
-{
+
+
+  update(){
+    this.userDataService.update(this.userForm, this.listOfRoles, this.listOfEntities, this.listOfMasterCurrency).subscribe((response: {savedEntityObject: Object, description: string, status: string}) => {
+      this.userDataService.openDialog(
+         "success",
+         response.description
+       ).subscribe((result)=>{
+       this.router.navigate(['userManagement']);
+       
+       });
+  
+     }, (err)=>{
+      this.userDataService.openDialog(
+        "error",
+       err.error.message+"."
+      ).subscribe((result)=>{
+        console.log(err, "errrroooor");
+
+      });
+    });
+
 
 }  
+
+getFilteredEntityNames(){
+  this.filteredEntityNames = this.userForm.controls.entity.valueChanges
+  .pipe(
+    startWith(''),
+    map(entityName => entityName ? this.filterEntities(entityName) : this.listOfEntityNames.slice())
+  );
+}
+
+
+getFilteredRoleNames(){
+  this.filteredRoleNames = this.userForm.controls.role.valueChanges
+  .pipe(
+    startWith(''),
+    map(roleName => roleName ? this.filterRoles(roleName) : this.listOfRoleNames.slice())
+  );
+}
+
+private filterEntities(value: string): string[] {
+  const filterValue = value.toLowerCase();
+  return this.listOfEntityNames.filter(entityName => entityName.toLowerCase().indexOf(filterValue) === 0);
+}
+
+private filterRoles(value: string): string[] {
+  const filterValue = value.toLowerCase();
+  return this.listOfRoleNames.filter(roleName => roleName.toLowerCase().indexOf(filterValue) === 0);
+}
+
+
+
+abortUpdateAction(){
+  // var tempStatus = "";
+  // if(this.roleForm.touched){
+  //   tempStatus = this.roleDataService.openDialog("alert", "All the changes will be discarded, click OK to continue!");
+  //   if(tempStatus === "success"){
+      this.router.navigate(['userManagement']);  
+    // }
+  // }else{
+  //   this.router.navigate(['viewRole', this.roleData.roleName]);  
+  // }
+
+}
+
+
 
 }
 
