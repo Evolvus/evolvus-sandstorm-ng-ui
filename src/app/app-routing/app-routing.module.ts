@@ -11,6 +11,7 @@ import { ViewRoleEntityComponent } from '../components/role-management/view-role
 import { AddUserComponent } from '../components/user-management/add-user/add-user.component';
 import { ListUsersComponent } from './../components/user-management/list-users/list-users.component';
 import { ViewUserComponent } from '../components/user-management/view-user/view-user.component';
+import { UpdateUserComponent } from '../components/user-management/update-user/update-user.component';
 import { SaveApplicationEntityComponent } from '../components/application-management/save-application-entity/save-application-entity.component';
 import { ListApplicationsEntityComponent } from '../components/application-management/list-applications-entity/list-applications-entity.component';
 import { UpdateApplicationEntityComponent } from '../components/application-management/update-application-entity/update-application-entity.component';
@@ -34,17 +35,22 @@ const routes: Routes =[
   component: SessionexpiredComponent
 },
   { path: 'home', component: StarterContentComponent, canActivate: [AuthGuardService]  },
+
   { path: 'applicationManagement', component: ListApplicationsEntityComponent , canActivate: [AuthGuardService] },
   { path: 'createApplication', component: SaveApplicationEntityComponent , canActivate: [AuthGuardService] },
   { path: 'viewApplication/:id', component: ViewApplicationEntityComponent, canActivate: [AuthGuardService]  },
-  { path: 'updateApplication/:id', component: UpdateApplicationEntityComponent, canActivate: [AuthGuardService]  },
+  { path: 'updateApplication/:id', component: UpdateApplicationEntityComponent, canActivate: [AuthGuardService]},
+
   { path: 'roleManagement', component: ListRolesEntityComponent , canActivate: [AuthGuardService] },
   { path: 'addRole', component: AddRoleEntityComponent , canActivate: [AuthGuardService] },
   { path: 'viewRole/:id', component: ViewRoleEntityComponent , canActivate: [AuthGuardService] },
   { path: 'updateRole/:id', component: UpdateRoleEntityComponent, canActivate: [AuthGuardService] },
+
   { path: 'userManagement', component: ListUsersComponent , canActivate: [AuthGuardService] },
    { path: 'addUser', component: AddUserComponent, canActivate: [AuthGuardService] },
    { path: 'viewUser/:id', component: ViewUserComponent , canActivate: [AuthGuardService] },
+   { path: 'updateUser/:id', component: UpdateUserComponent , canActivate: [AuthGuardService] },
+
    { path: 'entityManagement', component: ListEntityComponent , canActivate: [AuthGuardService] },
    { path: 'addEntity', component: AddEntityComponent , canActivate: [AuthGuardService] },
    { path: 'viewEntity/:id', component: ViewEntityComponent , canActivate: [AuthGuardService] },

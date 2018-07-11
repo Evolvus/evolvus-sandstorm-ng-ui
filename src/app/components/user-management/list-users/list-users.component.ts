@@ -36,7 +36,6 @@ totalNoOfPages: number = 0;
     this.userTableHeaders = this.userDataService.getTableHeaders();
     this.defaultFilterCriteria = this.userDataService.getDefaultFilterCriteria(); 
     this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";
-    console.log(this.defaultFilterCriteria, "defaultCriteria"); 
     this.getUserDataBasedOnDefaultFilterCriteria();
   }
 
@@ -44,14 +43,11 @@ totalNoOfPages: number = 0;
   getUserDataBasedOnDefaultFilterCriteria(){
     this.listOfUsers = [];
     this.userDataService.getFilteredUserData(this.defaultFilterCriteria.userLoginStatus, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus,this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any )=>{
-      console.log("response if", response);
     if(response.totalNoOfRecords==0){
 
       this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
   
       this.userDataService.getFilteredUserData(this.defaultFilterCriteria.userLoginStatus, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus,this.defaultFilterCriteria.pageSize, this.defaultFilterCriteria.pageNo).subscribe((response: any)=>{
-        console.log("response else", response);
-
           this.listOfUsers = response.data;
           this.totalNoOfUsers = response.totalNoOfRecords;
           this.totalNoOfPages = response.totalNoOfPages;
@@ -86,13 +82,16 @@ totalNoOfPages: number = 0;
       this.startIndex = 1;
     }
     this.listOfUsers = [];
-    this.userDataService.getFilteredUserData(this.defaultFilterCriteria.userLoginStatus, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus,this.pageSize, this.pageNo)
-    .subscribe((response: any)=>{
-        this.listOfUsers = response.data;
-        this.totalNoOfUsers = response.totalNoOfRecords;
-        this.totalNoOfPages = response.totalNoOfPages;
-        this.setCurrentPage(0);
-    });
+
+      this.userDataService.getFilteredUserData(this.defaultFilterCriteria.userLoginStatus, this.defaultFilterCriteria.activationStatus, this.defaultFilterCriteria.processingStatus,this.pageSize, this.pageNo)
+      .subscribe((response: any)=>{
+          this.listOfUsers = response.data;
+          this.totalNoOfUsers = response.totalNoOfRecords;
+          this.totalNoOfPages = response.totalNoOfPages;
+          this.setCurrentPage(0);
+      });
+    
+    
     
   }
 
@@ -112,6 +111,7 @@ totalNoOfPages: number = 0;
 
   checkBoxTicked(value){
     this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
+    this.pageNo = 1;
     if(value){
       this.getAllUserData();
     }else{
@@ -143,11 +143,6 @@ this.startIndex = (this.pageSize * this.startIndex);
     }
     this.startIndex = (this.startIndex - this.pageSize+1);
   }else if(movement == 0){    
-    //only for pagination purpose
-    // if(this.listOfEntities.length == 0){
-    //   // this.startIndex = 0;
-    //   this.pageNo = 0;
-    // }
     if(this.listOfUsers.length == this.pageSize){
     
       this.noOfUsersInCurrentPage = this.pageSize;
@@ -159,5 +154,15 @@ this.startIndex = (this.pageSize * this.startIndex);
 }
 
 
+        
+setPageSize(){
+  this.pageNo = 1;
+  this.startIndex = 1;
+  if(this.isViewAllOptionSelected){
+    this.getAllUserData();
+  }else{
+    this.getFilteredUserData("");
+  }
+}
 
 }

@@ -64,13 +64,61 @@ export class UserDataService {
       return this.http.get(`${this.platformURL}/sandstorm/api/role`);
       }
       getAllUserData(pageSize, pageNo){
-        return this.http.get(`${this.platformURL}/sandstorm/api/user`);
+        return this.http.get(`${this.platformURL}/sandstorm/api/user`,{
+        params:{
+pageSize: pageSize,
+pageNo: pageNo
+        }
+      }
+      );
         }
       
-      save(userData){
-        return this.http.post(`${this.platformURL}/sandstorm/api/user`, userData, {
+      save(userForm,listOfRoles,listOfEntities,listOfMasterCurrency){
+       var user =  this.createUserObject(userForm,listOfRoles,listOfEntities,listOfMasterCurrency);
+        return this.http.post(`${this.platformURL}/sandstorm/api/user`, user, {
         });
       }
+
+      update(userForm,listOfRoles,listOfEntities,listOfMasterCurrency){
+        var user =  this.createUserObject( userForm,listOfRoles,listOfEntities,listOfMasterCurrency);
+        console.log("updatedUser", user);
+        return this.http.put(`${this.platformURL}/sandstorm/api/user/`+user.userName, user
+
+        );
+      }
+
+
+createUserObject(userForm, listOfRoles, listOfEntities, listOfMasterCurrency): any{
+
+  var selectedRole = listOfRoles.filter(role => role.roleName == userForm.controls.role.value);
+  var selectedEntity = listOfEntities.filter(entity => entity.name == userForm.controls.entity.value);
+  var selectedMasterCurrency = listOfMasterCurrency.filter(masterCurrency => masterCurrency.currencyName == userForm.controls.currency.value);
+  
+  var userData = {
+  userName: userForm.value.userName,
+  userId: userForm.value.userId,
+  designation: userForm.value.designation,
+  role: selectedRole[0],
+  entityId: selectedEntity[0].entityId,
+  // masterTimeZone: this.userForm.value.timeZone,
+  masterCurrency: userForm.value.currency,
+  contact: {
+    phoneNumber:  userForm.value.phoneNumber,
+    mobileNumber:  userForm.value.mobileNumber,
+    faxNumber:  userForm.value.faxNumber,
+    city: userForm.value.city,
+    state: userForm.value.state,
+    country: userForm.value.country,
+    emailId: userForm.value.emailId
+  },
+  individualTransactionLimit: userForm.value.individualTransactionLimit,
+  dailyLimit: userForm.value.dailyLimit
+  };
+
+
+return userData;
+
+}
 
 
 

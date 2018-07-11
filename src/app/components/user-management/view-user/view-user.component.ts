@@ -21,7 +21,7 @@ selectedUser: any;
     }, (err)=>{
 
       alert("No User Data");
-    })
+    });
   }
 
 

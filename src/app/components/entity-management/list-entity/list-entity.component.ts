@@ -36,6 +36,7 @@ export class ListEntityComponent implements OnInit {
 
   ngOnInit() {
     this.tableHeader =this.entityService.getTableHeaders();
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";
     this.defaultFilterCriteria = this.entityService.getDefaultFilterCriteria();
     this.getListOfEntities();
     this.getEntityDataBasedOnDefaultFilterCriteria();
