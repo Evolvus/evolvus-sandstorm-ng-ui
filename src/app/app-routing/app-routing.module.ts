@@ -44,7 +44,7 @@ const routes: Routes =[
   { path: 'updateRole/:id', component: UpdateRoleEntityComponent, canActivate: [AuthGuardService] },
   { path: 'userManagement', component: ListUsersComponent , canActivate: [AuthGuardService] },
    { path: 'addUser', component: AddUserComponent, canActivate: [AuthGuardService] },
-   { path: 'viewUser', component: ViewUserComponent , canActivate: [AuthGuardService] },
+   { path: 'viewUser/:id', component: ViewUserComponent , canActivate: [AuthGuardService] },
    { path: 'entityManagement', component: ListEntityComponent , canActivate: [AuthGuardService] },
    { path: 'addEntity', component: AddEntityComponent , canActivate: [AuthGuardService] },
    { path: 'viewEntity/:id', component: ViewEntityComponent , canActivate: [AuthGuardService] },

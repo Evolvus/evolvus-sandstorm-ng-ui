@@ -109,14 +109,12 @@ save(roleData){
 }
 updateRole(roleData){
   return this.http.put(`${this.platformURL}/sandstorm/api/role/` + roleData._id,{
-    headers: this.defaultHeaders,
 
     roleData: roleData
   });
 }
 deleteRole(roleData){
   return this.http.put(`${this.platformURL}/sandstorm/api/role/delete/` + roleData._id,{
-    headers: this.defaultHeaders,
     roleData: roleData
   });
 }

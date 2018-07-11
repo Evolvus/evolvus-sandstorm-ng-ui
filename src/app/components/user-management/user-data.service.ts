@@ -13,7 +13,7 @@ export class UserDataService {
 
 
   platformURL = environment.platformURL;
-  userTableHeaders = ['User Id','User Name','User Role','Designation','Phone Number','Mobile Number','Country','City'];
+  userTableHeaders = ['User Id','User Name','Login Status', 'Activation Status', 'Processing Status','User Role', 'Last Updated Date'];
   defaultFilterCriteria = {
     userLoginStatus:undefined,
     activationStatus:undefined,
@@ -32,86 +32,9 @@ export class UserDataService {
      {zoneCode: "CDT", offset: "UTC-5:00"}];
      
 
-listOfMasterCurrency: Object[]=[
-  { tenantId: "T001",
-  currencyCode: "DZD",
-  currencyName: "Algerian dinar",
-  decimalDigit: 2,
-  delimiter: 12,
-  createdBy: "SYSTEM",
-  updatedBy: "SYSTEM",
-  createdDate: "2018-07-04T10:20:05.552Z",
-  lastUpdatedDate: "2018-09-04T10:20:05.552Z",
-  objVersion: 123,
-  enableFlag: "1",
-  currencyLocale: "local"
-},
-{ tenantId: "T001",
-currencyCode: "INR",
-currencyName: "Indian Rupee",
-decimalDigit: 2,
-delimiter: 12,
-createdBy: "SYSTEM",
-updatedBy: "SYSTEM",
-createdDate: "2018-04-04T10:20:05.552Z",
-lastUpdatedDate: "2018-09-04T10:20:05.552Z",
-objVersion: 125,
-enableFlag: "1",
-currencyLocale: "local"
-}
-];
 
-listOfMasterTimeZone: Object[]=[
-  { enableFlag : "1",
-  tenantId : "T001",
-  zoneCode: "IST",
-  zoneName : "India",
-  offsetValue : "+05.30",
-  createdBy : "SYSTEM",
-  updatedBy : "SYSTEM",
-  createdDate : "2018-07-04T10:20:05.552Z",
-  lastUpdatedDate : "2018-07-04T10:20:05.552Z",
-  offSet : "UTC+05:30",
-  objVersion : 1234,
 
-},
-{ enableFlag : "1",
-tenantId : "T001",
-zoneCode: "CST",
-zoneName : "China",
-offsetValue : "+08.00",
-createdBy : "SYSTEM",
-updatedBy : "SYSTEM",
-createdDate : "2018-07-04T10:20:05.552Z",
-lastUpdatedDate : "2018-07-04T10:20:05.552Z",
-offSet : "UTC+08:00",
-objVersion : 1234,
 
-}];
-
-// listOfSupportedDateFormats: Object[]=[
-//  { enabledFlag : "1",
-//   tenantId : "T001",
-//   formatCode : "dd/mm/yyyy",
-//   timeFormat : "hh:mm:ss",
-//   description : "This is supportedDateFormat 1",
-//   createdDate : "2018-07-04T12:46:43.628Z",
-//   lastUpdatedDate: "2018-07-04T12:46:43.628Z",
-//   createdBy : "SYSTEM",
-//   updatedBy : "SYSTEM",
-//   objVersion : 1,
-// },
-// { enabledFlag : "1",
-// tenantId : "T001",
-// formatCode : "mm/dd/yyyy",
-// timeFormat : "hh:mm:ss",
-// description : "This is supportedDateFormat 2",
-// createdDate : "2018-07-04T12:46:43.628Z",
-// lastUpdatedDate: "2018-07-04T12:46:43.628Z",
-// createdBy : "SYSTEM",
-// updatedBy : "SYSTEM",
-// objVersion : 1,
-// }];
 
 
   constructor(private http: HttpClient, private dialog: MatDialog) { }
@@ -122,42 +45,58 @@ objVersion : 1234,
     }
 
     getDefaultFilterCriteria(){
+      console.log(this.defaultFilterCriteria, "Service method");
       return this.defaultFilterCriteria;
     }
 
     getAllTimeZones(){
-return this.listOfTimeZones;
+      return this.http.get(`${this.platformURL}/sandstorm/api/masterTimeZone`);
+      // return this.listOfMasterTimeZone;
     }
     getAllMasterCurrency(){
-      return this.listOfMasterCurrency;
+      return this.http.get(`${this.platformURL}/sandstorm/api/masterCurrency`);
+      // return this.listOfMasterCurrency;
           }
     getAllEntities(){
-      var pageSize = "0";
-      var pageNo = "1";
-      return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
-        headers: this.defaultHeaders,
-        params: {
-          pageSize: pageSize,
-          pageNo: pageNo
-        }
-      
-      });
+      return this.http.get(`${this.platformURL}/sandstorm/api/entity`);
     }
     getAllRoleData(pageSize, pageNo){
-      return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
-        headers: this.defaultHeaders,
-        params: {
-          pageSize: pageSize,
-          pageNo: pageNo
-        }
-      });
+      return this.http.get(`${this.platformURL}/sandstorm/api/role`);
       }
+      getAllUserData(pageSize, pageNo){
+        return this.http.get(`${this.platformURL}/sandstorm/api/user`);
+        }
       
       save(userData){
         return this.http.post(`${this.platformURL}/sandstorm/api/user`, userData, {
-          headers: this.defaultHeaders
         });
       }
+
+
+
+      getFilteredUserData(userLoginStatus, activationStatus, processingStatus, pageSize, pageNo){
+        return this.http.get(`${this.platformURL}/sandstorm/api/user`, {
+          params:{
+            loginStatus: userLoginStatus,
+            activationStatus: activationStatus,
+            processingStatus: processingStatus,
+            pageSize: pageSize,
+            pageNo: pageNo
+          }
+        });
+
+      }
+
+getOneUserData(userName){
+    return this.http.get(`${this.platformURL}/sandstorm/api/user`, {
+    params:{
+      userName: userName 
+    }
+    });
+    
+}
+
+
       openDialog(messageType, statusMessage): any {
         let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
           width: "300px",

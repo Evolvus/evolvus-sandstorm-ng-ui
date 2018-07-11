@@ -35,13 +35,13 @@
 	          			 	
 	          			 	<div class="form-group">					 			 
 						     	<mat-form-field class="example-full-width">
-									<input matInput placeholder="Phone Number" type="text" value="" formControlName="phoneNo">
+									<input matInput placeholder="Phone Number" type="text" value="" formControlName="phoneNumber">
 								</mat-form-field>  
 	          			 	</div>
 	          			 	
 	          			 	<div class="form-group">					 			
 						     	 <mat-form-field class="example-full-width">
-									<input matInput placeholder="Mobile Number" type="text" value="" formControlName="mobileNo">
+									<input matInput placeholder="Mobile Number" type="text" value="" formControlName="mobileNumber">
 								</mat-form-field> 
 							</div>
 							<!-- <div class="form-group">
@@ -71,7 +71,7 @@
 							   
 							<div class="form-group">
 								<mat-form-field class="example-full-width">
-									<input required matInput placeholder="Email ID" value="" formControlName="email" >
+									<input required matInput placeholder="Email ID" value="" formControlName="emailId" >
 								</mat-form-field>
 							</div>	          			 	
 	          			 	
@@ -109,7 +109,12 @@
 											<input type="text" placeholder="Country"  matInput formControlName="country" required>
 										</mat-form-field> 
 							  </div>
-							<div class="form-group">
+							  <div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput type="text" placeholder="Fax" value="" formControlName="faxNumber">
+									</mat-form-field> 
+								 </div>
+							<!-- <div class="form-group">
 								<mat-form-field class="example-full-width">
 									<mat-select placeholder="Timezone" [formControl]="select" aria-required="true">
 										<mat-option *ngFor="let timeZone of listOfTimeZones"  [value]="timeZone">
@@ -117,28 +122,13 @@
 										</mat-option>
 									</mat-select>
 								</mat-form-field> 
-							</div>
+							</div> -->
 
 	          			 	
 	    			  </div>
 				</div>
 				
-				<div class="col-md-4">
-					<!-- <div style="height:115px;width:100px;border:1px solid #ddd;border-radius:3px;margin-left:32%;margin-top:7%;"></div> -->
-					
-					<!-- <div class="text-center">
-						<button type="button" class="btn  btn-add" style="margin-top:1.5em;margin-bottom:5%;">
-					      <i class="fa fa-camera" aria-hidden="true"></i> Add / Change Photo
-					    </button>
-				    </div> -->
-				    
-				    <div class="form-group">
-						<mat-form-field class="example-full-width">
-							<input matInput type="text" placeholder="Fax" value="" formControlName="faxNumber">
-						</mat-form-field> 
-         			</div>
-	          			 	
-				</div>				
+						
 	    	</div>
 	    	
 	    	<div class="row">
@@ -146,15 +136,18 @@
 	    			<h4>Access Details</h4>
 	    			<hr>
 	    		</div>
-	    		
+				
+	
+
 	    		<div class="col-md-4">
 	    			<div class="form-group">
 						<mat-form-field class="example-full-width">
-							<mat-select placeholder="User Role" formControlName="role">
-								<mat-option *ngFor="let role of listOfRoles"  [value]="role">
-									{{ role?.roleName  | uppercase}}
-								</mat-option>
-							</mat-select>
+								<input type="text" placeholder="User Role" matInput aria-label="User Role" formControlName="role" name="role" id="role" [matAutocomplete]="auto4" required>
+								<mat-autocomplete  #auto4="matAutocomplete">
+									<mat-option *ngFor="let roleName of filteredRoleNames | async" [value]="roleName">
+											{{ roleName  | uppercase}}
+									</mat-option>
+							</mat-autocomplete>
 						 </mat-form-field>	 
          			</div>
 	    		</div>
@@ -162,10 +155,10 @@
 	    		<div class="col-md-4">
 	    			  <div class="form-group">
 							<mat-form-field class="example-full-width">
-									<input type="text" placeholder="Branch" aria-label="Number" matInput formControlName="entity" [matAutocomplete]="auto3" required>
-										<mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
-											<mat-option *ngFor="let entity of listOfEntities" [value]="entity">
-																{{ entity?.name | uppercase }}
+									<input type="text" placeholder="Branch" matInput formControlName="entity" name="entity" id="entity" [matAutocomplete]="auto3" required>
+										<mat-autocomplete  #auto3="matAutocomplete">
+											<mat-option *ngFor="let entityName of filteredEntityNames | async" [value]="entityName">
+																{{ entityName | uppercase }}
 											</mat-option>
 									</mat-autocomplete>
 								</mat-form-field>		
@@ -206,7 +199,7 @@
 	    			<div class="form-group">
 						<mat-form-field class="example-full-width">
 								<mat-select placeholder="Currency" formControlName="currency">
-										<mat-option *ngFor="let currency of listOfMasterCurrency" value="currency" >
+										<mat-option *ngFor="let currency of listOfMasterCurrency" [value]="currency?.currencyName" >
 													{{ currency?.currencyName }}
 										</mat-option>
 									</mat-select>
