@@ -1,0 +1,8 @@
+.side-menu-group .menu-group li{
+    color: white;
+    margin-bottom: 10px;
+
+}
+.side-menu-group > .menu-group > .menu-item > .menuItemRoute:hover{
+    opacity: 0.5;
+}

@@ -98,7 +98,8 @@ body {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     /* box-shadow: 5px 5px 0px 0 #DCDCDC; */
-    border:2px solid  #ff8500;
+    /* border:2px solid  #ff8500; */
+    background-color: aliceblue;
     width:280px;
 }
 

@@ -1,26 +1,25 @@
-import { AuthenticationService } from './../../login-console/authentication/login/login.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "./../../login-console/authentication/login/login.service";
+import { SandstormGlobalVariablesService } from "./../../shared/sandstorm-global-variables.service";
 
 @Component({
-  selector: 'app-starter-left-side',
-  templateUrl: './starter-left-side.component.html',
-  styleUrls: ['./starter-left-side.component.css']
+  selector: "app-starter-left-side",
+  templateUrl: "./starter-left-side.component.html",
+  styleUrls: ["./starter-left-side.component.css"]
 })
 export class StarterLeftSideComponent implements OnInit {
-
-userMenuGroups: any;
-
-  constructor(private router:Router, private authService: AuthenticationService) { }
+  userMenuGroups: any;
+  user: any;
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private globalVariableService: SandstormGlobalVariablesService
+  ) {}
 
   ngOnInit() {
-    this.authService.userData.subscribe((userData)=>{
-this.userMenuGroups = userData.data.role.menuGroup;
-    });
+    this.user = this.globalVariableService.currentUser;
   }
 
-  routing(){
-this.router.navigate(['roleManagement']);
-  }
 
 }

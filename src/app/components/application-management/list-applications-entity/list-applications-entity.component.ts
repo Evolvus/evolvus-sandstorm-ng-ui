@@ -16,6 +16,21 @@ export class ListApplicationsEntityComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private applicationDataService: ApplicationDataService) { }
   
+
+  // defaultFilterCriteria = {
+  //   enableFlag: "",
+  //   processingStatus: "",
+  //   pageSize: 5,
+  //   pageNo: 1
+  // };
+  noApplicationsDataMessage: string = "";
+  noOfApplicationsInCurrentPage: number = 0;
+  pageSize: number= 5;
+  pageNo: number= 1;
+  totalNoOfPages: number = 1;
+  totalNoOfApplications: number = 0;
+  startIndex: number = 0;
+
   ngOnInit() {
 
 this.getAllApplications();
@@ -23,21 +38,24 @@ this.getAllApplications();
   }
 
 
-  applications: any;
+  applications: any[] = [];
   
-  selectedApplication: { applicationId: number, applicationCode: string, applicationName: string, description: string, enabled: boolean, logo: string, favicon: string }
-    = { applicationId: 0, applicationCode: "", applicationName: "", description: "", enabled: null, logo: "", favicon: "" };
-gridSearch: boolean = false;
+  selectedApplication: any;
 
   selectApplication(application) {
     this.selectedApplication = application;
   }
 
+  
 getAllApplications(){
-  this.applicationDataService.getAllApplications().subscribe((response)=>{
-    this.applications = response;
+  this.applicationDataService.getAllApplications().subscribe((response: any)=>{
+    if(response.data.length!=0){
+      this.applications = response.data;
+    }
   }, (err)=>{
-
+    this.applicationDataService.openDialog("error", err.error.description).subscribe((result)=>{
+      // console.log("Server Down");
+    });   
   });
 }
 
@@ -45,5 +63,5 @@ getAllApplications(){
     this.router.navigate(['/viewApplication', this.selectedApplication.applicationCode]);
   }
 
- 
+
 }

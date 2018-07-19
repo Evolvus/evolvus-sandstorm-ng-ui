@@ -27,13 +27,26 @@
         </div>
       </div>
 
-
+      <div class="row">
+        <div class="col-md-12">
      
-
+      <div class="gridHeadSec">
+        <h4 class="txt-blue">Available Application Details</h4>
+        <!-- <h5>Showing {{startIndex}} to {{ noOfApplicationsInCurrentPage }} out of {{ totalNoOfApplications }}</h5> -->
+        <div class="pull-right">						
+          <!-- <h5 class="txt-black">Results per Page</h5>							 -->
+          <!-- <mat-select name="tablePageSize" (selectionChange)="setPageSize()" [(ngModel)]="pageSize" class="form-control">
+              <mat-option [value]="5" >5</mat-option>
+              <mat-option [value]="10">10</mat-option>
+              <mat-option [value]="15">15</mat-option>
+              <mat-option [value]="20">20</mat-option>
+           </mat-select> -->
+        </div>
+</div>
 
       <!--Table-->
       <div class="tablegrid animated row">
-        <div class="col-md-10">
+        <div class="col-md-12">
           <div class="slide-table">
               <div id="container-table">
                   <div id="content-table">
@@ -43,24 +56,16 @@
              
               <th>Application Name</th>
               <th>Application Code</th>
-              <th>Enabled</th>
+              <th>Activation Status</th>
             </tr>
-            <tr class="grid-search" *ngIf = "gridSearch">
-                
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                
-                
-                <td><span class="glyphicon glyphicon-search pull-right"></span></td>
-              </tr> 
+     
           </thead>
           <tbody>
             <tr *ngFor="let application of applications" (click)="selectApplication(application); viewSelectedApplication();">
             
-              <td>{{ application.applicationName | uppercase}}</td>
-              <td>{{ application.applicationCode | uppercase}}</td>
-              <td>{{ application.enabled == true ? 'Enabled' : 'Disabled'}}</td>
+              <td>{{ application?.applicationName | uppercase}}</td>
+              <td>{{ application?.applicationCode | uppercase}}</td>
+              <td>{{ application?.enableFlag == true ? 'Enabled' : 'Disabled'}}</td>
             </tr>
           </tbody>
           <!--Table body-->
@@ -71,6 +76,8 @@
   </div>
 </div>
         <!--Table-->
+        </div>
+        </div>
       </div>
 </section>
 <!-- <section class="content" *ngIf="!areAnyApplicationsAvailable">

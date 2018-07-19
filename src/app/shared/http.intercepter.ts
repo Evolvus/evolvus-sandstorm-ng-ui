@@ -39,7 +39,6 @@ export class JWTTokenIntercepter implements HttpInterceptor {
 
         //2.Step check authService.isAuthenticated is 'true'
         if (this.authService.isAuthenticated === true && this.authService.getToken() != null) {
-            console.log("if true and token");
             if (req.url != `${this.serviceUrl}/sessionCheck`) {
                 this.isSessionActive().subscribe((session : any) => {
                     if (session != null) {

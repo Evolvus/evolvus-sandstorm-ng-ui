@@ -20,27 +20,27 @@
          <div class="col-md-4">
                 <div class="form-group">
                    <h5>Application Name</h5>
-                   <label>{{selectedApplication.applicationName}}</label>
+                   <label>{{selectedApplication?.applicationName}}</label>
                </div>
           </div>
 
           <div class="col-md-4">						  
                <div class="form-group">
                    <h5>Application Code</h5>
-                   <label>{{selectedApplication.applicationCode}}</label>
+                   <label>{{selectedApplication?.applicationCode}}</label>
                </div>
            </div>
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Description</h5>
-                   <label>{{selectedApplication.description}}</label>
+                   <label>{{selectedApplication?.description}}</label>
                </div>
           </div>
 
           <div class="col-md-4">
                <div class="form-group">
                    <h5>Application Status</h5>
-                   <label>{{selectedApplication.enabled}}</label>
+                   <label>{{selectedApplication?.enableFlag == '1' ? 'Enabled' : 'Disabled' }}</label>
                </div>
          </div>
            
@@ -55,7 +55,7 @@
               <h5>Application Logo  </h5>
              
   
-            <img id="logoImage" src="{{ selectedApplication.logo }}" alt="">
+            <img id="logoImage" src="{{ selectedApplication?.logo }}" alt="">
           </div>
         </div>
 
@@ -64,7 +64,7 @@
             <h5>Application Favicon </h5>
           
     
-            <img id="faviconImage" src="{{ selectedApplication.favicon }}" alt="">
+            <img id="faviconImage" src="{{ selectedApplication?.favicon }}" alt="">
           </div>
         </div>
      

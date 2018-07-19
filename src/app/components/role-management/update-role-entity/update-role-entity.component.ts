@@ -24,7 +24,7 @@ export class UpdateRoleEntityComponent implements OnInit {
 
 
 
-  roleData: RoleModel;
+  roleData: any;
   roleForm: FormGroup;  
   listOfApplicationCodes: any;
   listOfMenuGroups: MenuGroup[];
@@ -32,6 +32,10 @@ export class UpdateRoleEntityComponent implements OnInit {
   listOfMenuItemCodes: string[] = [];
   menuGroupNotSelected = false;
   menuItemsChanged = false;
+  listOfApplications: any[]=[];
+  listOfRoleTypes: any;
+  listOfTxnTypes: any;
+  user: any;   //currently loggedIn User
  // we have used two attributes of mat-checkbox in html. (change) and [checked].. 
  //[checked] is used in order to check the boxes of already selected Menu Items while loading
  //(change) is used to update any changes to the checkbox after loading...
@@ -40,39 +44,34 @@ export class UpdateRoleEntityComponent implements OnInit {
  // Hence 'menuItemsChanged' is used to in order to avoid conflicts..
 
 
-  constructor(private roleDataService: RoleDataService, private route: ActivatedRoute, private router: Router) { }
-
-  ngOnInit() {
-    this.roleDataService
-    .getlistOfApplicationCategory()
-    .subscribe((response: string[]) => {
-      this.listOfApplicationCodes = response;
-    });
-
+  constructor(private roleDataService: RoleDataService, private route: ActivatedRoute, private router: Router) { 
     this.roleForm = new FormGroup({
       activationStatus: new FormControl(null, Validators.required),
       roleName: new FormControl(null, Validators.required),
       applicationCode: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
+      roleType: new FormControl('', Validators.required),
+      txnType: new FormControl([], Validators.required)
     });
+  }
+
+  ngOnInit() {
+    this.user = this.roleDataService.currentLoggedInUserData;
+
+    this.roleDataService
+    .getlistOfApplicationCategory()
+    .subscribe((response: any) => {
+      this.listOfApplications = response.data;
+      this.listOfApplicationCodes = this.listOfApplications.map(application=>application.applicationCode); 
+    });
+
+
 
     var roleName = this.route.snapshot.params['id'];
 
-    this.roleDataService.getOneRoleData(roleName)
-     .subscribe((response: RoleModel)=>{
-      this.roleData = response;
-      this.listOfSelectedMenuGroups = this.roleData.menuGroup;
-      this.addSelectedMenuItemCodes();
-      this.roleForm.patchValue({
-        activationStatus: response.activationStatus,
-        roleName: response.roleName,
-        applicationCode: response.applicationCode,
-        description: response.description,
-      });
-      this.getMenuGroups(response.applicationCode);
-   }
-
-  );
+    this.getRoleData(roleName);
+    this.getRoleTypes();
+  this.getTxtTypes();
 
     
   }
@@ -86,15 +85,37 @@ addSelectedMenuItemCodes(){
       this.listOfMenuItemCodes.push(menuItem.menuItemCode);
     }
   }
+ 
+
 }
 
+getRoleData(roleName){
+  this.roleDataService.getOneRoleData(roleName)
+     .subscribe((response: any)=>{
+      this.roleData = response.data[0];
+      this.listOfSelectedMenuGroups = this.roleData.menuGroup;
+      this.addSelectedMenuItemCodes();
+      this.roleForm.patchValue({
+        activationStatus: this.roleData.activationStatus,
+        roleName: this.roleData.roleName,
+        applicationCode: this.roleData.applicationCode,
+        description: this.roleData.description,
+        txnType: this.roleData.txnType,
+        roleType: this.roleData.roleType
+
+      });
+      this.getMenuGroups(this.roleData.applicationCode);
+   }
+
+  );
+}
 
 
 getMenuGroups(applicationCode) {
   this.roleDataService
     .getListOfMenuGroups(applicationCode)
-    .subscribe((response: MenuGroup[]) => {
-      this.listOfMenuGroups = response;
+    .subscribe((response: any) => {
+      this.listOfMenuGroups = response.data;
     });
 }
 
@@ -108,7 +129,7 @@ if(menuItem.selectedFlag){
 
 }
 
-saveUpdatedRole(){
+update(){
 
     for (var mgIndex = 0; mgIndex < this.listOfMenuGroups.length; mgIndex++) {
       this.menuGroupNotSelected = true;
@@ -137,18 +158,19 @@ saveUpdatedRole(){
       this.roleData.menuGroup = this.listOfMenuGroups
   
    
-      this.roleDataService.updateRole(this.roleData).subscribe(
-        (data: {savedRoleObject: Object, message: string}) => {
+      this.roleDataService.update(this.roleData).subscribe(
+        (response: any) => {
          this.roleDataService.openDialog(
             "success",
-           data.message
+           response.description
           ).subscribe((result)=>{
             this.router.navigate(['roleManagement']);
           });
       },
       err => {
-
-        this.roleDataService.openDialog("error", err.error.message);
+        this.roleDataService.openDialog("error", err.error.description).subscribe((response)=>{
+          this.router.navigate(['viewRole', this.roleData.roleName]);  
+        })
       }
     );
   
@@ -168,15 +190,25 @@ if(!this.menuItemsChanged){
 }
 
 abortSaveAction(){
-  var tempStatus = "";
-  if(this.roleForm.touched){
-    tempStatus = this.roleDataService.openDialog("alert", "All the changes will be discarded, click OK to continue!");
-    if(tempStatus === "success"){
+  // var tempStatus = "";
+  // if(this.roleForm.touched){
+  //   tempStatus = this.roleDataService.openDialog("alert", "All the changes will be discarded, click OK to continue!");
+  //   if(tempStatus === "success"){
       this.router.navigate(['viewRole', this.roleData.roleName]);  
-    }
-  }else{
-    this.router.navigate(['viewRole', this.roleData.roleName]);  
-  }
+  //   }
+  // }else{
+  //   this.router.navigate(['viewRole', this.roleData.roleName]);  
+  // }
 
 }
+getRoleTypes(){
+  this.roleDataService.getLookUpCodeValues('ROLE_ROLETYPE').subscribe((response: any)=>{
+  this.listOfRoleTypes = response.data.map(lookUp => lookUp.value);
+  });
+  }
+  getTxtTypes(){
+    this.roleDataService.getLookUpCodeValues('ROLE_TXNTYPE').subscribe((response: any)=>{
+      this.listOfTxnTypes = response.data.map(lookUp => lookUp.value);
+      });
+  }
 }

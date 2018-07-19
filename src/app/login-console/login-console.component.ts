@@ -4,6 +4,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import { AuthenticationService } from './authentication/login/login.service';
 import { Authentication } from "../models/authentication.model";
+import { SandstormGlobalVariablesService } from './../shared/sandstorm-global-variables.service';
 
 @Component({
   selector: 'app-login-console',
@@ -27,11 +28,10 @@ export class LoginConsoleComponent implements OnInit {
 
 
    
-  constructor(private authenticationService : AuthenticationService, private router : Router
+  constructor(private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService
      ) {}
 
   ngOnInit() {
-      console.log("environment", environment);
       // this.dialogRef.updateSize("15%", "40%");
       this.loginForm = new FormGroup({
           userName: new FormControl(null, Validators.required),
@@ -50,7 +50,6 @@ export class LoginConsoleComponent implements OnInit {
       this.authenticationService.authenticate(authentication).subscribe((user : any) => {
           if (user != null) {
         this.authenticationService.userData.next(user);
-            console.log(user, "user");
             this.isUserAuthenticated = true;
             setTimeout(()=>{
                 this.authenticationService.isAuthenticated = true;
@@ -59,6 +58,7 @@ export class LoginConsoleComponent implements OnInit {
                 //Need to update below hardcoded to user.supportedDtformat.format
                 this.authenticationService.dtFormat = 'dd/MM/yyyy hh:mm:ss';
                 this.dateFormat =this.authenticationService.dtFormat;
+                this.globalVariableService.currentUser = user.data;
                 this.router.navigate(['home']);
             }, 1000);    
           }else{

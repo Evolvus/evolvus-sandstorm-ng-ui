@@ -157,7 +157,7 @@
 	    			<div class="form-group">
 						<mat-form-field class="example-full-width">
 								<input type="text" placeholder="User Role" matInput aria-label="User Role" formControlName="role" name="role" id="role" [matAutocomplete]="auto4" required>
-								<mat-autocomplete  #auto4="matAutocomplete">
+								<mat-autocomplete  #auto4="matAutocomplete" (optionSelected)="selectedFromDropDown('role')">
 									<mat-option *ngFor="let roleName of filteredRoleNames | async" [value]="roleName">
 											{{ roleName  | uppercase}}
 									</mat-option>
@@ -170,14 +170,18 @@
 	    		<div class="col-md-4">
 	    			  <div class="form-group">
 							<mat-form-field class="example-full-width">
-									<input type="text" placeholder="Branch" matInput formControlName="entity" name="entity" id="entity" [matAutocomplete]="auto3" required>
-										<mat-autocomplete  #auto3="matAutocomplete">
-											<mat-option *ngFor="let entityName of filteredEntityNames | async" [value]="entityName">
+									<input type="text" placeholder="Branch" matInput formControlName="entity"  name="entity" id="entity" [matAutocomplete]="auto3" required>
+										<mat-autocomplete  #auto3="matAutocomplete"   (optionSelected)="selectedFromDropDown('entity')">
+											<mat-option  *ngFor="let entityName of filteredEntityNames | async" [value]="entityName">
 																{{ entityName | uppercase }}
 											</mat-option>
 									</mat-autocomplete>
+									<mat-error>This Entity Doesn't exist!</mat-error>
+                                    
 									<mat-error *ngIf="userForm.controls.entity.pristine">This is a required field</mat-error>
-								</mat-form-field>		
+
+								</mat-form-field>	
+	
          			</div>
 	    		</div>
 	    		

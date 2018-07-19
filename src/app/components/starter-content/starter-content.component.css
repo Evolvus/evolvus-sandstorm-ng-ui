@@ -1,0 +1,6 @@
+.info-box-content a{
+    color: black;
+}
+.info-box-content:hover span{
+    color: white;
+}

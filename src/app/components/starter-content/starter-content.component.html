@@ -13,7 +13,8 @@
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box maintananceicon1">
               <span class="info-box-icon bg-transparent">
-               <span class="evo-role"></span></span>
+                <span class="evo-role"></span>
+              </span>
               <div class="info-box-content" [routerLink]="['/applicationManagement']">
                 <span class="info-box-text">Application Management</span>
               </div>
@@ -23,76 +24,43 @@
           <!-- fix for small devices only -->
           <div class="clearfix visible-sm-block"></div>
         </div>
-        <div class="row">
+
+
+        <!-- <div class="side-menu-group">
+          <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup">
+            <li class="header">{{menuGroup.title | titlecase}}</li>
+            <div class="menuItem" *ngFor="let menuItem of menuGroup.menuItems">
+              <li class="menuItemRoute">
+                <a routerLink="{{menuItem.menuItemCode}}">
+                  <i class="evo-role"></i>
+                  <span>{{menuItem.title}}</span>
+                </a>
+              </li>
+  
+            </div>
+            <hr>
+          </div>
+        </div> -->
+
+
+
+
+        <div class="row" *ngFor="let menuGroup of user.role.menuGroup">
           <section class="content-header home-header">
             <h1 class="txt-orange marT15">
-           Administration
-         </h1>
+              {{menuGroup.title | titlecase}}
+            </h1>
           </section>
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let menuItem of menuGroup.menuItems">
             <div class="info-box maintananceicon1">
               <span class="info-box-icon bg-transparent">
-               <span class="evo-role"></span></span>
-              <div class="info-box-content" [routerLink]="['/roleManagement']">
-                <span class="info-box-text">Role Management</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-transparent">
-                <span class="evo-newusers"></span></span>
-              <div class="info-box-content" [routerLink]="['/userManagement']">
-                <span class="info-box-text">User Management</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-transparent">
-                  <span class="evo-newusers"></span></span>
-                <div class="info-box-content" [routerLink]="['/entityManagement']">
-                  <span class="info-box-text">Entity Management</span>
-                </div>
-              </div>
-            </div>
-          <!-- fix for small devices only -->
-          <div class="clearfix visible-sm-block"></div>
-        </div>
-        <!-- /.row -->
+                <span class="evo-role"></span>
+              </span>
+              <div class="info-box-content">
+                <a routerLink="/{{menuItem.menuItemCode}}">
+                  <span class="info-box-text">{{menuItem.title}}</span>
+                </a>
 
-        <hr>
-        <div class="row">
-          <section class="content-header home-header">
-            <h1 class="txt-orange">
-           Maintenance
-         </h1>
-          </section>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box maintananceicon1">
-              <span class="info-box-icon bg-transparent">
-            <!--    <i class="fa fa-question" aria-hidden="true"></i> -->
-            <span class="evo-reasoncode"></span></span>
-              <div class="info-box-content" ui-sref="reasoncode">
-                <span class="info-box-text">Reason Code</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-transparent">
-                <span class="evo-routingcode"></span></span>
-              <div class="info-box-content" ui-sref="routingcode">
-                <span class="info-box-text">Routing Code</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-transparent">
-                <span class="evo-routingcode"></span></span>
-              <div class="info-box-content" ui-sref="systemconfiguration">
-                <span class="info-box-text">System Configurations</span>
               </div>
             </div>
           </div>
@@ -100,39 +68,6 @@
           <!-- fix for small devices only -->
           <div class="clearfix visible-sm-block"></div>
         </div>
-        <!-- /.row -->
-
-        <hr>
-
-
-
-        <div class="row">
-          <section class="content-header home-header">
-            <h1 class="txt-orange">
-                Configurations
-              </h1>
-          </section>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box maintananceicon1">
-              <span class="info-box-icon bg-transparent">  <span class="archve evo-Archival"></span>
-              </span>
-              <div class="info-box-content" ui-sref="archival">
-                <span class="info-box-text">Archival</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-transparent">  <span class="comm evo-notification2"></span>
-              </span>
-              <div class="info-box-content" ui-sref="communication">
-                <span class="info-box-text">Communication</span>
-              </div>
-            </div>
-          </div>
-          <div class="clearfix visible-sm-block"></div>
-        </div>
-        <!-- /.row -->
       </div>
       <!-- /.col -->
 
@@ -152,7 +87,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
 
 
                 <div class="pendingActionBlock">
@@ -163,7 +100,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
 
                 <div class="pendingActionBlock">
                   <div class="pull-left">
@@ -173,7 +112,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
 
                 <div class="pendingActionBlock">
                   <div class="pull-left">
@@ -183,7 +124,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
 
                 <div class="pendingActionBlock">
                   <div class="pull-left">
@@ -193,7 +136,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
                 <div class="pendingActionBlock">
                   <div class="pull-left">
                     User Role acceptance
@@ -202,7 +147,9 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center">
+                  <small>Requested username 1 hour ago</small>
+                </div>
               </div>
             </div>
           </div>
@@ -217,15 +164,18 @@
                   <div class="media">
                     <div class="media-left">
                       <a href="#">
-                               <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                           </a>
+                        <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
+                      </a>
                     </div>
                     <div class="media-body">
                       <div class="notificationClosebtn pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <i class="fa fa-times"></i>
+                        </button>
                       </div>
                       <p>X user Transaction Limit Crossed !Some more transaction notifications comes here</p>
-                      <small class="pull-right"><i class="fa fa-clock-o"></i> 1 hours ago</small>
+                      <small class="pull-right">
+                        <i class="fa fa-clock-o"></i> 1 hours ago</small>
                     </div>
                   </div>
                 </div>
@@ -234,15 +184,18 @@
                   <div class="media">
                     <div class="media-left">
                       <a href="#">
-                               <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                           </a>
+                        <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
+                      </a>
                     </div>
                     <div class="media-body">
                       <div class="notificationClosebtn pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <i class="fa fa-times"></i>
+                        </button>
                       </div>
                       <p>X user Transaction Limit Crossed</p>
-                      <small class="pull-right"><i class="fa fa-clock-o"></i> 2 hours ago</small>
+                      <small class="pull-right">
+                        <i class="fa fa-clock-o"></i> 2 hours ago</small>
                     </div>
                   </div>
                 </div>
@@ -251,15 +204,18 @@
                   <div class="media">
                     <div class="media-left">
                       <a href="#">
-                               <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                           </a>
+                        <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
+                      </a>
                     </div>
                     <div class="media-body">
                       <div class="notificationClosebtn pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <i class="fa fa-times"></i>
+                        </button>
                       </div>
                       <p>X user Transaction Limit Crossed</p>
-                      <small class="pull-right"><i class="fa fa-clock-o"></i> 2 hours ago</small>
+                      <small class="pull-right">
+                        <i class="fa fa-clock-o"></i> 2 hours ago</small>
                     </div>
                   </div>
                 </div>
@@ -268,15 +224,18 @@
                   <div class="media">
                     <div class="media-left">
                       <a href="#">
-                               <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                           </a>
+                        <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
+                      </a>
                     </div>
                     <div class="media-body">
                       <div class="notificationClosebtn pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <i class="fa fa-times"></i>
+                        </button>
                       </div>
                       <p>X user Transaction Limit Crossed</p>
-                      <small class="pull-right"><i class="fa fa-clock-o"></i> 15 min ago</small>
+                      <small class="pull-right">
+                        <i class="fa fa-clock-o"></i> 15 min ago</small>
                     </div>
                   </div>
                 </div>

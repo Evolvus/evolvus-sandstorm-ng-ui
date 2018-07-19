@@ -25,7 +25,7 @@
 
 
 
-           <form [formGroup]="roleForm" (ngSubmit)="saveUpdatedRole()">
+           <form [formGroup]="roleForm" >
               <div class="row">
               <div class="col-md-5">
                   <div class="form-group">
@@ -52,7 +52,26 @@
                 </div>
            </div>
 
-
+           <div class="col-md-5">
+              <div class="form-group">
+                <mat-form-field [color]="'primary'" class="example-full-width">
+                  <mat-select placeholder="Role Type" formControlName="roleType" required name="roleType">
+                    <mat-option *ngFor="let roleType of listOfRoleTypes" value="{{roleType}}">{{roleType}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+    
+    
+            <div class="col-md-5">
+              <div class="form-group">
+                <mat-form-field [color]="'primary'" class="example-full-width">
+                  <mat-select placeholder="Transaction Type" formControlName="txnType" required name="txnType" multiple>
+                    <mat-option *ngFor="let txnType of listOfTxnTypes" value="{{txnType}}">{{txnType}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
 
 
           <div class="col-md-5">
@@ -99,13 +118,13 @@
                         <div class="form-group">									
                           <div class="checkbox-inline" *ngFor = "let menuGroup of listOfMenuGroups">
                             <label for=""class="menu-group-title txt-orange"><b>{{menuGroup.title}}</b></label>
-                            <div class="menu-items" *ngFor = "let menuItem of menuGroup.menuItems">
+                            <div class="menu-items" *ngFor = "let menuItem of menuGroup?.menuItems">
                                 <mat-checkbox 
                                 (change)="addMenuItem(menuGroup, menuItem)"
                               [checked] = "checkIfMenuItemIsSelected(menuItem)"
-                                id="{{menuItem.title | lowercase}}" 
-                                name="{{menuItem.title | lowercase }}" 
-                                value="{{menuItem.title | lowercase}}" >{{menuItem.title}}</mat-checkbox>
+                                id="{{menuItem?.title | lowercase}}" 
+                                name="{{menuItem?.title | lowercase }}" 
+                                value="{{menuItem?.title | lowercase}}" >{{menuItem?.title}}</mat-checkbox>
                             </div>
                           </div>
                         </div>
@@ -124,7 +143,7 @@
     <div class="row text-center">
       <div class="col-md-12" style="margin-left: 2em;">
          <div class="">
-              <button type="submit" [disabled]="roleForm.invalid" class="btn btn-default btn-submit" >Update Role</button>
+              <button type="submit" [disabled]="roleForm.invalid" class="btn btn-default btn-submit" (click)="update()">Update Role</button>
               <button type="button" class="btn btn-default btn-close"  (click)="abortSaveAction()"> Close</button>
           </div>
       </div>

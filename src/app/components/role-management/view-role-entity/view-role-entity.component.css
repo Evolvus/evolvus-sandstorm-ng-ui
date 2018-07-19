@@ -1,3 +1,4 @@
 .menu-items{
     display: block;
 }
+.transaction-type label:last-child span{display: none;}

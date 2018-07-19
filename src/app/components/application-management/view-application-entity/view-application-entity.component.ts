@@ -1,3 +1,4 @@
+import { ApplicationDataService } from './../application-data.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -6,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ApplicationModel } from '../application.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
-
 
 
 @Component({
@@ -18,44 +18,24 @@ export class ViewApplicationEntityComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private applicationDataService: ApplicationDataService
+  ) { }
 
   platformURL = environment.platformURL;
   selectedApplicationCode = "";
-  selectedApplicationName: string = "";
-  selectedApplication = {
-    applicationCode: "",
-    applicationName: "",
-    description: "",
-    enabled: null,
-    logo: "",
-    favicon: ""
-  };
-
-  viewType = true;
-  logoFile: File = null;
-  faviconFile: File = null;
-  logoInBase64: string = "";
-  faviconInBase64: string = "";
-  logoUrl: any;
-  faviconUrl: any;
-  application: any;
-  applications: any[];
+  selectedApplication: any;
+ 
 
   ngOnInit() {
     this.selectedApplicationCode = "" + this.route.snapshot.params['id'];
-    this.http.get(`${this.platformURL}/api/application/find/` + this.selectedApplicationCode
-    )
-      .subscribe((response: ApplicationModel) => {
-        this.selectedApplication = response;
-
-    if(response.enabled === true ){
-      this.selectedApplication.enabled = "Enabled";
-    }else if(response.enabled === false){
-      this.selectedApplication.enabled = "Disabled";
-    }else{
-      this.selectedApplication.enabled = null;
-    }
+    this.applicationDataService.getOneApplication(this.selectedApplicationCode).subscribe((response: any) => {
+      if(response.data.length!=0){
+        this.selectedApplication = response.data[0];
+      }
+      }, (err)=>{
+        this.applicationDataService.openDialog("error", err.error.description).subscribe((response)=>{
+          // Dialog response can be handled here
+        })
       });
 
   

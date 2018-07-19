@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { EntityDataService } from '../entity-data.service';
+import { SandstormGlobalVariablesService } from './../../../shared/sandstorm-global-variables.service';
 
 @Component({
   selector: 'app-view-entity',
@@ -16,25 +17,34 @@ export class ViewEntityComponent implements OnInit {
 
   entityId: string = "";
   selectedEntity: any;
-
-  constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService) { }
+  isStatusPending: boolean = true;
+  user: any;
+  roleType: any;
+  constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService, private globalVariableService: SandstormGlobalVariablesService) { }
 
   ngOnInit() {
     
     this.entityId = "" + this.route.snapshot.params['id'];
     this.entityService.getOneEntityData(this.entityId).subscribe((entityData: any)=>{
-      // console.log(entityData, "entityData");
 
       this.selectedEntity = entityData.data[0];
+      this.user = this.globalVariableService.currentUser;
+      this.roleType = this.user.role.roleType;
+      if(this.selectedEntity.processingStatus!='PENDING_AUTHORIZATION'){
+    this.isStatusPending = false;
+      }else{
+        this.isStatusPending = true;
+      }
     }, (err)=>{
 
-      alert("No Entities");
     })
   }
 
 
   updateEntity(){
-    this.router.navigate(['/updateEntity', this.selectedEntity.entityCode]);
+    if(!this.isStatusPending){
+      this.router.navigate(['/updateEntity', this.selectedEntity.entityCode]);
+    }
     }
   
   abortViewAction(){

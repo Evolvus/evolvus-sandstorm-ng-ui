@@ -19,7 +19,6 @@ export class AuthenticationService {
 
 
     authenticate(authentication : Authentication) {
-        console.log('authenticate ',authentication);
         return this.http.post(`${this.serviceUrl}/auth`, authentication);
     }
 
@@ -34,7 +33,8 @@ export class AuthenticationService {
     logout() {
         localStorage.clear();
         // this.router.navigate([""]);
-        this.authenticatedSubject.next(false);
+        this.isAuthenticated = false;
+        this.authenticatedSubject.next(this.isAuthenticated);
         this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
             this.router.navigate(['login']);
         });

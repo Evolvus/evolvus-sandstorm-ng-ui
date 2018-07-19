@@ -11,13 +11,27 @@ export class ViewUserComponent implements OnInit {
 
 userName: string = "";
 selectedUser: any;
+isStatusPending: boolean = true;
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.userName = "" + this.route.snapshot.params['id'];
     this.userDataService.getOneUserData(this.userName).subscribe((userData: any)=>{
 
-      this.selectedUser = userData.data[0];
+
+
+      if(userData.data.length != 0){
+        this.selectedUser = userData.data[0];
+        if(this.selectedUser.processingStatus!='PENDING_AUTHORIZATION'){
+          this.isStatusPending = false;
+            }else{
+              this.isStatusPending = true;
+            }
+      }else{ //If there is no data with that Username
+        this.userDataService.openDialog("error", "No User found with Username "+this.userName!).subscribe((response)=>{
+          this.router.navigate(['userManagement']);
+        });
+      }
     }, (err)=>{
 
       alert("No User Data");
@@ -26,7 +40,9 @@ selectedUser: any;
 
 
   updateUser(){
+    if(!this.isStatusPending){
     this.router.navigate(['/updateUser', this.selectedUser.userName]);
+    }
     }
   
   abortViewAction(){

@@ -136,8 +136,11 @@
             <div class="">
                  <!-- <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
                  <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button> -->
-                 <button type="button" class="btn btn-default btn-submit" (click)="updateUser()"> Modify</button>
-                 <button type="button" class="btn btn-default btn-close" [routerLink]="['/userManagement']"> Cancel</button>
+                 <button type="button" class="btn btn-default btn-submit" (click)="updateUser()" [disabled]="isStatusPending"> 
+                    <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
+                    <span *ngIf="!isStatusPending">Modify</span>
+                 </button>
+                 <button type="button" class="btn btn-default btn-close" [routerLink]="['/suserManagement']"> Cancel</button>
              </div>
          </div>
        </div>

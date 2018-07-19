@@ -6,22 +6,19 @@ import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { ConfirmationDialogEntityComponent } from "../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleDataService {
 
-  constructor(private http: HttpClient, private dialog: MatDialog) {
+  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) {
    }
 
 
 
-ngOnInit(){
- 
-
-}
-
+currentLoggedInUserData = this.globalVariablesService.currentUser;
 platformURL = environment.platformURL;
 listOfApplicationCategory: string [] = [];
 listOfActivationStatus: string[] = ["Active", "Inactive"];
@@ -61,6 +58,9 @@ return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
 
 getlistOfApplicationCategory(){
 return this.http.get(`${this.platformURL}/sandstorm/api/application`,{
+  params: {
+    processingStatus: 'AUTHORIZED'
+  }
 });
 }
 
@@ -90,7 +90,6 @@ getOneRoleData(roleName: string){
 
 
 getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSize, pageNo){
-  console.log(processingStatus, "sdshgjdsgds");
   return this.http.get(`${this.platformURL}/sandstorm/api/role`,  {
   params:  {
       applicationCode: applicationCode,
@@ -104,23 +103,27 @@ getFilteredRoleData(applicationCode, activationStatus, processingStatus, pageSiz
 }
 
 save(roleData){
-  return this.http.post(`${this.platformURL}/sandstorm/api/role`, roleData, {
-  });
+  return this.http.post(`${this.platformURL}/sandstorm/api/role`, roleData, );
 }
-updateRole(roleData){
-  return this.http.put(`${this.platformURL}/sandstorm/api/role/` + roleData._id,{
-
-    roleData: roleData
-  });
+update(roleData){
+  return this.http.put(`${this.platformURL}/sandstorm/api/role/` + roleData.roleName,roleData
+  );
 }
 deleteRole(roleData){
-  return this.http.put(`${this.platformURL}/sandstorm/api/role/delete/` + roleData._id,{
+  return this.http.put(`${this.platformURL}/sandstorm/api/role/delete/` + roleData.roleName,{
     roleData: roleData
   });
 }
 
 
+getLookUpCodeValues(lookupCode){
+  return this.http.get(`${this.platformURL}/sandstorm/api/lookup/`,{
+    params:{
+      lookupCode: lookupCode
+    }
+  })
 
+}
 
 openDialog(messageType, statusMessage): any {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {

@@ -2,47 +2,46 @@
   <section class="sidebar">
     <ul class="sidebar-menu">
       <li class="active">
-        <a [routerLink]="['/']">
-        <i class="evo-home4"></i><span>Home</span>
+        <a [routerLink]="['/home']">
+          <i class="evo-home4"></i>
+          <span>Home</span>
         </a>
-      </li> 
+      </li>
       <hr>
 
       <li class="header">Application</li>
-      <li><a [routerLink]="['/applicationManagement']"><i class="evo-role"></i> <span>Application Management</span></a></li>
+      <li>
+        <a [routerLink]="['applicationManagement']">
+          <i class="evo-role"></i>
+          <span>Application Management</span>
+        </a>
+      </li>
       <hr>
-<!-- <div class="menuGroup">
-  <div class="menu" *ngFor="let menuGroup of userMenuGroups">
-    <li class="header">{{menuGroup.title}}</li>
-    <div class="menuItem" *ngFor="let menuItem of userMenuGroups.menuItems">
-        <li><a [routerLink]="['{{menuItem.m}}']"><i class="evo-role"></i> <span>Application Management</span></a></li>
-    </div>
-  </div>
-</div> -->
+      <div class="side-menu-group">
+        <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup">
+          <li class="header">{{menuGroup.title | titlecase}}</li>
+          <div class="menuItem" *ngFor="let menuItem of menuGroup.menuItems">
+            <li class="menuItemRoute">
+              <a routerLink="{{menuItem.menuItemCode}}">
+                <i class="evo-role"></i>
+                <span>{{menuItem.title}}</span>
+              </a>
+            </li>
 
-
-
-    
-      <li class="header">Administration</li> 
-      <li><a [routerLink]="['/roleManagement']"><i class="evo-role"></i> <span>Role Management</span></a></li>
-      <li><a [routerLink]="['/userManagement']"><i class="evo-newusers"></i> <span>User Management</span></a></li>
-      <li><a [routerLink]="['/entityManagement']"><i class="evo-entity"></i> <span>Entity Management</span></a></li>
-      <hr>
-      <li class="header">Maintenance</li>          
-      <li><a ui-sref="routingcode"> <i class="evo-routingcode"></i><span>Routing Code</span></a></li>
-      <li><a ui-sref="reasoncode"><i class="evo-reasoncode"></i><span>Reason Code</span></a></li>
-      <li><a ui-sref="systemconfiguration"><i class="evo-Archival"></i> <span>System Configurations</span></a></li>
-      <hr>     
-      
-      <li class="header">Configurations</li>   
-      <li><a ui-sref="archival"><i class="evo-Archival"></i> <span>Archival</span></a></li>
-      <li><a ui-sref="communication"><i class="evo-notification2"></i> <span>Communication</span></a></li>
-       
+          </div>
+          <hr>
+        </div>
+      </div>
     </ul>
-    
-    <ul class="moreMenu">
-      <li class="text-center"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span>More</span></a></li>
-    </ul>
+
+    <!-- <ul class="moreMenu">
+      <li class="text-center">
+        <a href="#">
+          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          <span>More</span>
+        </a>
+      </li>
+    </ul> -->
   </section>
-  <!-- /.sidebar -->
+
 </aside>

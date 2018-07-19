@@ -38,18 +38,16 @@ export class AddEntityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllEntityNames();
+    this.getParentEntities();
     this.getFilteredEntityNames();
     
   }
 
 
-getAllEntityNames(){
-  this.entityService.getAllEntities(0,1).subscribe((response: any)=>{
-    this.listOfParentEntities = response;
-    for(let entity of response.data){
-      this.listOfParentEntityNames.push(entity.name);
-    }
+getParentEntities(){
+  this.entityService.getParentEntities().subscribe((response: any)=>{
+    this.listOfParentEntities = response.data;
+    this.listOfParentEntityNames = this.listOfParentEntities.map(entity => entity.name);
   });
 }
 
@@ -70,6 +68,7 @@ getFilteredEntityNames(){
       this.entityForm.value.enableFlag = "0";
 
     }
+    
     this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
       this.entityService.openDialog(
          "success",

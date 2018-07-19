@@ -28,8 +28,11 @@ export class AddRoleEntityComponent implements OnInit {
   roleForm: FormGroup;
   menuGroupNotSelected: boolean;
   listOfApplications: any;
+  listOfRoleTypes: any;
+  listOfTxnTypes: any;
+  user: any;   //currently loggedIn User
 
-
+   
 
   constructor(
     private roleDataService: RoleDataService,
@@ -37,14 +40,22 @@ export class AddRoleEntityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.user = this.roleDataService.currentLoggedInUserData;
     this.roleForm = new FormGroup({
       activationStatus: new FormControl('', Validators.required),
       roleName: new FormControl('', [Validators.pattern("[a-zA-Z0-9_-]*"), Validators.pattern(/^\S*$/), Validators.minLength(6), Validators.maxLength(35), Validators.required]),
       applicationCode: new FormControl('', Validators.required),
-      description: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(140)])
+      description: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(140)]),
+      roleType: new FormControl('', Validators.required),
+      txnType: new FormControl([], Validators.required)
     });
+  
+
+  //data for the input fields
 
   this.getApplicationCodes();
+  this.getRoleTypes();
+  this.getTxtTypes();
   }
 
 
@@ -53,10 +64,10 @@ export class AddRoleEntityComponent implements OnInit {
   getApplicationCodes(){
     this.roleDataService.getlistOfApplicationCategory().subscribe((response: any)=>{
       this.listOfApplications = response.data;
-      console.log(response, "72727272772");
-    for(let application of this.listOfApplications){
-      this.listOfApplicationCategory.push(application.applicationCode);
-    }
+    this.listOfApplicationCategory = this.listOfApplications.map(application => application.applicationCode);
+    // for(let application of this.listOfApplications){
+    //   this.listOfApplicationCategory.push(application.applicationCode);
+    // }
     });
   }
 
@@ -71,11 +82,11 @@ export class AddRoleEntityComponent implements OnInit {
       .getListOfMenuGroups(applicationCode)
       .subscribe((response: any) => {
         this.listOfMenuGroups = response.data;
-      });
+      }
+    );
   }
 
   addMenuItem(menuGroupFromUser, menuItemFromUser) {
-    console.log("addMenuItem", menuItemFromUser.selectedFlag);
     menuItemFromUser.selectedFlag = !menuItemFromUser.selectedFlag;
   }
 
@@ -101,14 +112,17 @@ export class AddRoleEntityComponent implements OnInit {
       }
     }
 
+
+
     var roleData = {
       roleName: this.roleForm.value.roleName,
       applicationCode: this.roleForm.value.applicationCode,
       activationStatus: this.roleForm.value.activationStatus,
+      roleType: this.roleForm.value.roleType,
+      txnType: this.roleForm.value.txnType,
       description: this.roleForm.value.description,
       menuGroup: this.listOfMenuGroups
     };
-
     if(roleData.menuGroup.length != 0) {
 
    
@@ -135,4 +149,16 @@ export class AddRoleEntityComponent implements OnInit {
     });
   }
   }
+
+getRoleTypes(){
+this.roleDataService.getLookUpCodeValues('ROLE_ROLETYPE').subscribe((response: any)=>{
+this.listOfRoleTypes = response.data.map(lookUp => lookUp.value);
+});
+}
+getTxtTypes(){
+  this.roleDataService.getLookUpCodeValues('ROLE_TXNTYPE').subscribe((response: any)=>{
+    this.listOfTxnTypes = response.data.map(lookUp => lookUp.value);
+    });
+}
+
 }

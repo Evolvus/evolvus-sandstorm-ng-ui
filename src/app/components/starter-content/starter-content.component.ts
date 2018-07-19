@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 
 
 @Component({
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StarterContentComponent implements OnInit {
 
-  constructor() { }
+user: any;
+
+  constructor(private globalVariableService: SandstormGlobalVariablesService) { }
+
 
   ngOnInit() {
-  
+this.user = this.globalVariableService.currentUser;  
   }
 
 }

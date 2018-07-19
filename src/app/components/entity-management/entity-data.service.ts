@@ -56,6 +56,15 @@ export class EntityDataService {
     });
   }  
 
+  getParentEntities(){
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
+    params: {
+      processingStatus: 'AUTHORIZED'
+    }
+    });
+  }
+
+
     getAllEntities(pageSize, pageNo){
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
     params: {

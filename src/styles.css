@@ -15,7 +15,6 @@
   [class^="evo-"], [class*=" evo-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'evicons' !important;
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -1365,7 +1364,7 @@ display: block;
 }
 
 /* checkbox checked */
-input[type="checkbox"]:checked:before {
+/* input[type="checkbox"]:checked:before {
 content: '';
 display: block;
 width: 5px;
@@ -1376,7 +1375,7 @@ border-width: 0 2px 2px 0;
 transform: rotate(45deg);
 margin-left: 6px;
 margin-top: 3px;
-}
+} */
 /****** select *****/
 
 /* select {  background: url(../../../images/downarrow1.png) no-repeat scroll 96% center transparent !important;
@@ -1503,6 +1502,7 @@ float: left;
 }
 
 .menu-item-display label:last-child span{display: none;}
+
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
     background-color: #ff8500 !important;
   }
@@ -1512,3 +1512,7 @@ float: left;
     border-radius: 50%;padding: 0.5rem;}
     .alertIcon i{font-size: 4.5em;height: 80px;width: 80px;color: #e26816;border: 1px solid #e26816;
         border-radius: 50%;padding: 0.5rem;}
+        .addFormSec .rolemenu-acces-tabs .mat-pseudo-checkbox{
+            border: 0 !important;
+            vertical-align: inherit !important;
+         }

@@ -19,14 +19,14 @@
                 </div>
               </div>
               
-    <form class="applicationForm" #applicationSaveForm="ngForm" (ngSubmit)="saveApplication(applicationSaveForm)">
+    <form  [formGroup]="applicationForm">
       <div class="row">
 
         <div class="col-lg-5">
           <div class="form-group">
              <mat-form-field class="example-full-width">
-                 <input ngModel required autocomplete="off" matInput name="applicationCode"   minlength="3" maxlength="20"   id="applicationCode" placeholder="Application Code">
-                 <label class="btn btn-info"  mat-raised-button matTooltip="A Unique Code of Min 3 and Max 20 characters!"><i class="fa fa-exclamation"></i></label>
+                 <input  required autocomplete="off" matInput name="applicationCode" formControlName="applicationCode"   id="applicationCode" placeholder="Application Code">
+                 <label class="btn btn-info"  mat-raised-button matTooltip="3 - 20 characters &#10004;"><i class="fa fa-question-circle" ></i></label>
                </mat-form-field>
              </div>
         </div>
@@ -35,8 +35,9 @@
         <div class="col-lg-5">
           <div class="form-group">
              <mat-form-field class="example-full-width">
-                 <input ngModel required autocomplete="off" matInput name="applicationName"  id="applicationName" placeholder="Application Name">
-                 <label class="btn btn-info"  mat-raised-button matTooltip="Only A-Z and - are allowed!"><i class="fa fa-exclamation"></i></label>
+                 <input  required autocomplete="off" matInput name="applicationName" formControlName="applicationName" id="applicationName" placeholder="Application Name">
+                 <label class="btn btn-info"  mat-raised-button matTooltip="1 - 100 characters &#10004;"><i class="fa fa-question-circle" ></i></label>
+
                </mat-form-field>
              </div>
         </div>
@@ -45,8 +46,8 @@
 <div class="col-lg-5">
   <div class="form-group">
      <mat-form-field class="example-full-width">
-         <input ngModel required autocomplete="off" matInput name="applicationDescription"   id="applicationDescription" placeholder="Application Description">
-         <label class="btn btn-info"  mat-raised-button matTooltip="A Description with a Max of 255 characters!"><i class="fa fa-exclamation"></i></label>
+         <input   autocomplete="off" matInput name="applicationDescription" formControlName="description"  id="applicationDescription" placeholder="Application Description">
+         <label class="btn btn-info"  mat-raised-button matTooltip="A Description with a Max of 255 characters! &#10004;"><i class="fa fa-question-circle" ></i></label>
        </mat-form-field>
      </div>
 </div>
@@ -54,9 +55,9 @@
 <div class="col-lg-5" >
   <div class="form-group">
      <mat-form-field [color]="'primary'" class="example-full-width " >
-         <mat-select  ngModel placeholder="Application Status" required [(ngModel)]="applicationStatus" name="applicationStatus" id="applicationStatus"> 
-           <mat-option value="enabled">Enabled</mat-option>
-           <mat-option value="disabled">Disabled</mat-option>
+         <mat-select   placeholder="Application Status"  formControlName="enableFlag" name="enableFlag" id="enableFlag"> 
+           <mat-option value="1">Enabled</mat-option>
+           <mat-option value="0">Disabled</mat-option>
          </mat-select>
        </mat-form-field>
      </div>
@@ -101,12 +102,9 @@
       <br>
              
     <div class="text-center">
-      <!-- <div class="col-sm-12"> -->
          <div class="">
-          <button class="btn btn-primary btn-submit" [disabled]="applicationSaveForm.invalid" id="submitButton" type="submit">Submit</button>
+          <button class="btn btn-primary btn-submit" [disabled]="applicationForm.invalid" (click)="save()" id="submitButton" type="submit">Submit</button>
           <button type="button" class="btn btn-primary btn-close" (click)="abortSaveAction()">Cancel</button>
-    
-             <!-- </div> -->
       </div>
     </div>
    

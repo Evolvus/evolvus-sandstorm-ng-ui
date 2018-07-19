@@ -66,9 +66,7 @@ getRoleData(){
     }
 
   }, (err)=>{
-
     this.roleDataService.openDialog("error", err.error.description).subscribe((result)=>{
-      // console.log("Server Down");
     });  });
 
 }
@@ -76,9 +74,11 @@ getRoleData(){
 checkBoxTicked(value){
 this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
 if(value){
+  this.startIndex = 1;
+  this.pageNo = 1;
   this.getRoleData();
 }else{
-  this.getFilteredRoleData('');
+  this.getFilteredRoleData('filter');
 }
   }
 
@@ -111,7 +111,7 @@ getRoleDataBasedOnDefaultFilterCriteria(){
   }
   , (err)=>{
 
-    this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+    this.roleDataService.openDialog("error", err.error.description).subscribe((result)=>{
       // console.log("Server Down");
     });
   }
@@ -144,7 +144,7 @@ this.startIndex = (this.pageSize * this.startIndex);
   }else if(movement == 0){
     //only for pagination purpose
     if(this.listOfRoles.length == this.pageSize){
-      this.noOfRolesInCurrentPage = this.pageSize;
+      this.noOfRolesInCurrentPage = this.pageSize*(this.pageNo);
     }else{
       this.noOfRolesInCurrentPage = this.totalNoOfRoles;
     }
@@ -178,7 +178,7 @@ getFilteredRoleData(source){
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
    },(err) => {
-    this.roleDataService.openDialog("error", err.error.error).subscribe((result)=>{
+    this.roleDataService.openDialog("error", err.error.description).subscribe((result)=>{
       
     });
 
