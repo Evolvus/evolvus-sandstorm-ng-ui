@@ -18,12 +18,12 @@
       </li>
       <hr>
       <div class="side-menu-group">
-        <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup">
+        <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup; let i = index">
           <li class="header">{{menuGroup.title | titlecase}}</li>
-          <div class="menuItem" *ngFor="let menuItem of menuGroup.menuItems">
+          <div class="menuItem" *ngFor="let menuItem of menuGroup.menuItems ; let j = index">
             <li class="menuItemRoute">
               <a routerLink="{{menuItem.menuItemCode}}">
-                <i class="evo-role"></i>
+                <i [ngClass]="user.role.menuGroup[i].menuItems[j].icon"></i>
                 <span>{{menuItem.title}}</span>
               </a>
             </li>

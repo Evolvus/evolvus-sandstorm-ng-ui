@@ -52,17 +52,19 @@
             </h1>
           </section>
           <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let menuItem of menuGroup.menuItems">
-            <div class="info-box maintananceicon1">
-              <span class="info-box-icon bg-transparent">
-                <span class="evo-role"></span>
-              </span>
-              <div class="info-box-content">
-                <a routerLink="/{{menuItem.menuItemCode}}">
-                  <span class="info-box-text">{{menuItem.title}}</span>
-                </a>
+            <a routerLink="/{{menuItem.menuItemCode}}">
+              <div class="info-box maintananceicon1">
+                <span class="info-box-icon bg-transparent">
+                  <span class="evo-role"></span>
+                </span>
+                <div class="info-box-content">
 
+                  <span class="info-box-text">{{menuItem.title}}</span>
+
+
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <!-- fix for small devices only -->

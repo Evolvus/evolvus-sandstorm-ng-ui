@@ -53,10 +53,20 @@ export class UserDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/masterCurrency`);
   }
   getAllEntities() {
-    return this.http.get(`${this.platformURL}/sandstorm/api/entity`);
+    return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
+      params:{
+        processingStatus: 'AUTHORIZED',
+        activationStatus: 'ACTIVE'
+      }
+    });
   }
   getAllRoleData(pageSize, pageNo) {
-    return this.http.get(`${this.platformURL}/sandstorm/api/role`);
+    return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
+      params:{
+        processingStatus: 'AUTHORIZED',
+        activationStatus: 'ACTIVE'
+      }
+      });
   }
   getAllUserData(pageSize, pageNo) {
     return this.http.get(`${this.platformURL}/sandstorm/api/user`, {

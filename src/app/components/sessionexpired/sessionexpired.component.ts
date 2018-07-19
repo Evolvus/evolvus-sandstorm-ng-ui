@@ -11,11 +11,11 @@ export class SessionexpiredComponent implements OnInit {
 
     ngOnInit() {
         setTimeout(()=>{
-            this.goToLogin();
+            this.login();
         }, 4000);
     }
 
-    goToLogin() {
+    login() {
         this.router.navigate(['login']);
     }
 }

@@ -7,7 +7,7 @@ export class SandstormGlobalVariablesService {
 
   constructor() { }
 
-  currentUser: any;
+  currentUser: any = {};
   
 }
 // export const SandstormGlobalVariablesService = {

@@ -30,7 +30,7 @@ export class ListEntityComponent implements OnInit {
   pageNo: number = 1;
   totalNoOfPages: number = 1;
   totalNoOfEntities: number = 0;
-  startIndex: number = 0;
+  startIndex: number = 1;
   constructor(
     private router: Router,
     private entityService: EntityDataService
@@ -105,8 +105,6 @@ export class ListEntityComponent implements OnInit {
   getAllEntityData() {
     this.entityService.getAllEntities(this.pageSize, this.pageNo).subscribe(
       (response: any) => {
-        this.startIndex = 1;
-        this.pageNo = 1;
         this.listOfEntities = response.data;
         this.totalNoOfEntities = response.totalNoOfRecords;
         this.totalNoOfPages = response.totalNoOfPages;
@@ -144,7 +142,8 @@ export class ListEntityComponent implements OnInit {
   checkBoxTicked(value) {
     this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
     if (value) {
-      
+      this.startIndex = 1;
+      this.pageNo = 1;
       this.getAllEntityData();
     } else {
       this.getFilteredEntityData("filter");
@@ -158,13 +157,17 @@ export class ListEntityComponent implements OnInit {
   setCurrentPage(movement: number) {
     if (movement == 1) {
       //next page
+
+
       this.pageNo = this.pageNo + 1;
       if (this.isViewAllOptionSelected) {
+    
+
         this.getAllEntityData();
       } else {
         this.getFilteredEntityData("");
       }
-      this.startIndex = this.pageSize * this.startIndex;
+      this.startIndex = this.pageSize * (this.pageNo - 1) + 1;
     } else if (movement == -1 && this.pageNo > 1) {
       //prev page
       this.pageNo = this.pageNo - 1;
@@ -173,15 +176,10 @@ export class ListEntityComponent implements OnInit {
       } else {
         this.getFilteredEntityData("");
       }
-      this.startIndex = this.startIndex - this.pageSize + 1;
+      this.startIndex = this.startIndex - this.pageSize;
     } else if (movement == 0) {
-      //only for pagination purpose
-      // if(this.listOfEntities.length == 0){
-      //   // this.startIndex = 0;
-      //   this.pageNo = 0;
-      // }
       if (this.listOfEntities.length == this.pageSize) {
-        this.noOfEntitiesInCurrentPage = this.pageSize * (this.pageNo);
+        this.noOfEntitiesInCurrentPage = this.pageSize * this.pageNo;
       } else {
         this.noOfEntitiesInCurrentPage = this.totalNoOfEntities;
       }

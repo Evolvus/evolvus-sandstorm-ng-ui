@@ -115,7 +115,6 @@ export class UpdateEntityComponent implements OnInit {
       });
 
     }, (err)=>{
-      console.log(err, "ERRRRRR");
       this.entityService.openDialog(
         "error",
        err.error.description

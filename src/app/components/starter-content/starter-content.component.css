@@ -1,6 +1,6 @@
-.info-box-content a{
+.info-box-content span{
     color: black;
 }
-.info-box-content:hover span{
+.col-md-6:hover span{
     color: white;
 }

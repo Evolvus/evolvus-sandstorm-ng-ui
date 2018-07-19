@@ -41,7 +41,7 @@
 	          			 	
 	          			 	<div class="form-group">					 			 
 						     	<mat-form-field class="example-full-width">
-									<input matInput placeholder="Phone Number" type="text" value="" formControlName="phoneNumber">
+									<input matInput placeholder="Phone Number" type="text" value=""  maxlength="10" formControlName="phoneNumber">
 									<mat-error *ngIf="userForm.controls.phoneNumber.dirty && userForm.controls.phoneNumber.invalid">Phone Number is Invalid</mat-error>
 									<mat-error *ngIf="userForm.controls.phoneNumber.pristine">This is a required field</mat-error>
 								</mat-form-field>  
@@ -49,7 +49,7 @@
 	          			 	
 	          			 	<div class="form-group">					 			
 						     	 <mat-form-field class="example-full-width">
-									<input matInput placeholder="Mobile Number" type="text" value="" formControlName="mobileNumber">
+									<input matInput placeholder="Mobile Number" type="text" value=""  maxlength="10" formControlName="mobileNumber">
 									<mat-error *ngIf="userForm.controls.mobileNumber.dirty && userForm.controls.mobileNumber.invalid">Mobile Number is Invalid</mat-error>
 									<mat-error *ngIf="userForm.controls.userId.pristine">This is a required field</mat-error>
 																</mat-form-field> 
@@ -83,30 +83,7 @@
 								</mat-form-field>
 							</div>	          			 	
 	          			 	
-	          			 	<!-- <div class="form-group">
-								<mat-form-field class="example-full-width">
-									<input type="text" placeholder="Country" aria-label="Number" matInput [formControl]="cntryControl" [matAutocomplete]="auto" required>
-										<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-											<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-												{{ option }}
-											</mat-option>
-									</mat-autocomplete>
-								</mat-form-field>
-							</div> -->
-							
-
-
-<!-- 	          			 
-							<div class="form-group">
-								<mat-form-field class="example-full-width">
-									<input type="text" placeholder="State" aria-label="Number" matInput [formControl]="stateControl" [matAutocomplete]="auto1" required>
-										<mat-autocomplete  #auto1="matAutocomplete">
-											<mat-option *ngFor="let option1 of filteredOptions1 | async" [value]="option1">
-														{{ option1 }}
-										</mat-option>
-									</mat-autocomplete>
-								</mat-form-field>
-							</div>	 -->
+	          			
 							<div class="form-group">					 			
 									<mat-form-field class="example-full-width">
 											<input type="text" placeholder="State"  matInput formControlName="state" required>
@@ -128,15 +105,7 @@
 									<mat-error *ngIf="userForm.controls.faxNumber.pristine">This is a required field</mat-error>
 									</mat-form-field> 
 								 </div>
-							<!-- <div class="form-group">
-								<mat-form-field class="example-full-width">
-									<mat-select placeholder="Timezone" [formControl]="select" aria-required="true">
-										<mat-option *ngFor="let timeZone of listOfTimeZones"  [value]="timeZone">
-									<b>{{timeZone.zoneCode}}</b>&nbsp;&nbsp;{{timeZone.offset}}
-										</mat-option>
-									</mat-select>
-								</mat-form-field> 
-							</div> -->
+			
 
 	          			 	
 	    			  </div>

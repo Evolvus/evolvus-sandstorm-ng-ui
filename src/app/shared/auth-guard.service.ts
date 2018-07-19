@@ -31,7 +31,7 @@ export class AuthGuardService implements CanActivate{
    this.isSessionActive().subscribe((session : any) => {
           if (session != null) {
          return new Observable<true>();
-          } else {
+          } else  {
             this.router.navigate(['login']);
             return new Observable<false>();
           }
@@ -39,7 +39,7 @@ export class AuthGuardService implements CanActivate{
           this.authService.isAuthenticated = false;
           this.authService.authenticatedSubject.next(this.authService.isAuthenticated);
           this.router.navigate(['sessionExpired']);
-          return new Observable<false>(); 
+          return new Observable<true>(); 
       });
 return true;
   }

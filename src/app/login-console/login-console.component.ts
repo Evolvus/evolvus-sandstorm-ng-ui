@@ -49,7 +49,6 @@ export class LoginConsoleComponent implements OnInit {
       const authentication = new Authentication(userName, userPassword, "SANDSTORM");
       this.authenticationService.authenticate(authentication).subscribe((user : any) => {
           if (user != null) {
-        this.authenticationService.userData.next(user);
             this.isUserAuthenticated = true;
             setTimeout(()=>{
                 this.authenticationService.isAuthenticated = true;
