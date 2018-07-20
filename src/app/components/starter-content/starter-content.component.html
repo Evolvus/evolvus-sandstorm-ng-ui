@@ -45,17 +45,17 @@
 
 
 
-        <div class="row" *ngFor="let menuGroup of user.role.menuGroup">
+        <div class="row" *ngFor="let menuGroup of user.role.menuGroup; let i = index">
           <section class="content-header home-header">
             <h1 class="txt-orange marT15">
               {{menuGroup.title | titlecase}}
             </h1>
           </section>
-          <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let menuItem of menuGroup.menuItems">
+          <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let menuItem of menuGroup.menuItems; let j = index">
             <a routerLink="/{{menuItem.menuItemCode}}">
               <div class="info-box maintananceicon1">
                 <span class="info-box-icon bg-transparent">
-                  <span class="evo-role"></span>
+                  <span [ngClass]="user.role.menuGroup[i].menuItems[j].icon"></span>
                 </span>
                 <div class="info-box-content">
 

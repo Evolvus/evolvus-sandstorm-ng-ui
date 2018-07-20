@@ -104,7 +104,7 @@
       </ul>
   
     <div class="nav navbar-nav navbar-center">
-    <span class="txt-blue">PROJECT ZERO</span>
+    <span class="txt-blue">SANDSTORM CONSOLE</span>
   <!--   <p class="text-center" style="font-size:14px;">Console</p>	 -->
  </div>
  
@@ -118,10 +118,10 @@
                     <div class="navbar-login">
                         <div class="row">
                             <div class="col-md-7 col-lg-7">
-                                <p class="text-left"><span class="txt-orange">Martin</span></p>
-                                <p class="text-left small">ID 88673856554</p>
-                                <p class="text-left small">Role: <span class="txt-orange">Checker</span></p>
-                                <p class="text-left small">LAST LOGIN<br></p>
+                                <p class="text-left"><span class="txt-orange">{{user.userName | uppercase}}</span></p>
+                                <p class="text-left small">ID : {{user.userId}}</p>
+                                <p class="text-left small">Role: <span class="txt-orange">{{user.role.roleName}}</span></p>
+                                <!-- <p class="text-left small">LAST LOGIN<br></p> -->
                             </div>
                             <div class="col-md-5 col-lg-5 logoutImg">
                                 <img src="assets/images/user.jpeg" width="75" height="80">
@@ -145,7 +145,7 @@
           <div>
             <span class="archive-link pull-right header-search-span">
               <span class="header-search">
-                      <input type="text" class="form-control input-sm" maxlength="64" placeholder="RTP User Search" />
+                      <input type="text" class="form-control input-sm" maxlength="64" placeholder="Console Search" />
                       <a href="#link" role="button" class="btn-srch"><i class="fa fa-search"></i></a>
                   </span>
             </span>

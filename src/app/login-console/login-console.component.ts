@@ -58,6 +58,7 @@ export class LoginConsoleComponent implements OnInit {
                 this.authenticationService.dtFormat = 'dd/MM/yyyy hh:mm:ss';
                 this.dateFormat =this.authenticationService.dtFormat;
                 this.globalVariableService.currentUser = user.data;
+                console.log(user);
                 this.router.navigate(['home']);
             }, 1000);    
           }else{
