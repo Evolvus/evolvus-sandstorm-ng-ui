@@ -25,11 +25,9 @@ export class AddUserComponent implements OnInit {
   filteredEntityNames: Observable<string[]> = new Observable<string[]>();
   listOfEntityNames: string[] = [];
   listOfEntities: any;
-  filteredRoleNames: Observable<string[]>= new Observable<string[]>();
+  filteredRoleNames: Observable<string[]> = new Observable<string[]>();
   listOfRoleNames: string[] = [];
   listOfRoles: any;
-  entitySelected: boolean = true;
-  roleSelected: boolean = true;
 
   constructor(
     private userDataService: UserDataService,
@@ -73,7 +71,6 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.userDataService.getAllMasterCurrency().subscribe((response: any) => {
       if (response.data.length != 0) {
         this.listOfMasterCurrency = response.data;
@@ -97,39 +94,45 @@ export class AddUserComponent implements OnInit {
   }
 
   save() {
-    
-
-
-  this.userDataService
-  .save(
-    this.userForm,
-    this.listOfRoles,
-    this.listOfEntities,
-    this.listOfMasterCurrency
-  )
-  .subscribe(
-    (response: any) => {
+    if (this.isAValidSelection("entity", this.userForm.value.entity)) {
+      if (this.isAValidSelection("role", this.userForm.value.role)) {
+        this.userDataService
+          .save(
+            this.userForm,
+            this.listOfRoles,
+            this.listOfEntities,
+            this.listOfMasterCurrency
+          )
+          .subscribe(
+            (response: any) => {
+              this.userDataService
+                .openDialog("success", response.description)
+                .subscribe(result => {
+                  this.router.navigate(["userManagement"]);
+                });
+            },
+            err => {
+              this.userDataService
+                .openDialog("error", err.error.description + ".")
+                .subscribe(result => {
+                  // Dialog Response can be handled here
+                });
+            }
+          );
+      } else {
+        this.userDataService
+          .openDialog("error", "Please Select a Valid Role" + ".")
+          .subscribe(result => {
+            // Dialog Response can be handled here
+          });
+      }
+    } else {
       this.userDataService
-        .openDialog("success", response.description)
+        .openDialog("error", "Please Select a Valid Entity" + ".")
         .subscribe(result => {
-          this.router.navigate(["userManagement"]);
-        });
-    },
-    (err) => {
-      this.roleSelected = true;
-      this.entitySelected = true;
-      this.userDataService
-        .openDialog("error", err.error.description + ".")
-        .subscribe(result => {
-        // Dialog Response can be handled here
+          // Dialog Response can be handled here
         });
     }
-  );
-
-
-   
- 
-
   }
 
   getFilteredEntityNames() {
@@ -168,15 +171,20 @@ export class AddUserComponent implements OnInit {
     );
   }
 
-
-  selectedFromDropDown(optionName){
-if(optionName=='entity'){
-  this.entitySelected = false;
-}if(optionName=='role'){
-  this.roleSelected = false;
-}
-
-}
-
-
+  isAValidSelection(propertyName, value) {
+    if (propertyName == "entity") {
+      if (this.listOfEntityNames.includes(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (propertyName == "role") {
+      if (this.listOfRoleNames.includes(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }

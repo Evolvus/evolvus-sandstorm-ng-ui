@@ -100,7 +100,7 @@
 							  </div>
 							  <div class="form-group">
 									<mat-form-field class="example-full-width">
-										<input matInput type="text" placeholder="Fax" value="" formControlName="faxNumber">
+										<input matInput type="text" placeholder="Fax" value="" maxlength="10" formControlName="faxNumber">
 										<mat-error *ngIf="userForm.controls.faxNumber.dirty && userForm.controls.faxNumber.invalid">Faxnumber is Invalid</mat-error>
 									<mat-error *ngIf="userForm.controls.faxNumber.pristine">This is a required field</mat-error>
 									</mat-form-field> 
@@ -126,7 +126,7 @@
 	    			<div class="form-group">
 						<mat-form-field class="example-full-width">
 								<input type="text" placeholder="User Role" matInput aria-label="User Role" formControlName="role" name="role" id="role" [matAutocomplete]="auto4" required>
-								<mat-autocomplete  #auto4="matAutocomplete" (optionSelected)="selectedFromDropDown('role')">
+								<mat-autocomplete  #auto4="matAutocomplete" >
 									<mat-option *ngFor="let roleName of filteredRoleNames | async" [value]="roleName">
 											{{ roleName  | uppercase}}
 									</mat-option>
@@ -140,7 +140,7 @@
 	    			  <div class="form-group">
 							<mat-form-field class="example-full-width">
 									<input type="text" placeholder="Branch" matInput formControlName="entity"  name="entity" id="entity" [matAutocomplete]="auto3" required>
-										<mat-autocomplete  #auto3="matAutocomplete"   (optionSelected)="selectedFromDropDown('entity')">
+										<mat-autocomplete  #auto3="matAutocomplete"   >
 											<mat-option  *ngFor="let entityName of filteredEntityNames | async" [value]="entityName">
 																{{ entityName | uppercase }}
 											</mat-option>

@@ -156,7 +156,9 @@ update(){
       this.roleData.activationStatus = this.roleForm.value.activationStatus,
       this.roleData.description = this.roleForm.value.description,
       this.roleData.menuGroup = this.listOfMenuGroups
-  
+      this.roleData.roleType = this.roleForm.value.roleType,
+      this.roleData.txnType = this.roleForm.value.txnType
+
    
       this.roleDataService.update(this.roleData).subscribe(
         (response: any) => {

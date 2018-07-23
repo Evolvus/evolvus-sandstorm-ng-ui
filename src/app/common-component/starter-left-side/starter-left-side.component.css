@@ -3,6 +3,21 @@
     margin-bottom: 10px;
 
 }
-.side-menu-group > .menu-group > .menu-item > .menuItemRoute:hover{
+
+li{
+    color: white;
+}
+.side-menu-group .menuItemRoute{
+    padding: 8px;
+}
+.side-menu-group .menuItem{
+    margin: 0;
+}
+.side-menu-group .menuItemRoute{
+margin-left: 1.1em;
+}
+.side-menu-group .menuItem:hover{
+    background-color: black;
     opacity: 0.5;
+    color: white;
 }

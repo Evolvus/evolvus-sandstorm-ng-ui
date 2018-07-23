@@ -140,31 +140,49 @@ export class UpdateUserComponent implements OnInit {
   }
 
   update() {
-    this.userDataService
-      .update(
-        this.userForm,
-        this.listOfRoles,
-        this.listOfEntities,
-        this.listOfMasterCurrency
-      )
-      .subscribe(
-        (response: {
-          savedEntityObject: Object;
-          description: string;
-          status: string;
-        }) => {
-          this.userDataService
-            .openDialog("success", response.description)
-            .subscribe(result => {
-              this.router.navigate(["userManagement"]);
-            });
-        },
-        err => {
-          this.userDataService
-            .openDialog("error", err.error.description + ".")
-            .subscribe(result => {});
-        }
-      );
+
+    if(this.isAValidSelection('entity', this.userForm.value.entity)){
+      if(this.isAValidSelection('role', this.userForm.value.role)){
+        this.userDataService
+        .update(
+          this.userForm,
+          this.listOfRoles,
+          this.listOfEntities,
+          this.listOfMasterCurrency
+        )
+        .subscribe(
+          (response: {
+            savedEntityObject: Object;
+            description: string;
+            status: string;
+          }) => {
+            this.userDataService
+              .openDialog("success", response.description)
+              .subscribe(result => {
+                this.router.navigate(["userManagement"]);
+              });
+          },
+          err => {
+            this.userDataService
+              .openDialog("error", err.error.description + ".")
+              .subscribe(result => {});
+          }
+        );
+      }else{
+        this.userDataService
+        .openDialog("error", "Please Select a Valid Role" + ".")
+        .subscribe(result => {
+          // Dialog Response can be handled here
+        });
+      }
+    }else{
+      this.userDataService
+        .openDialog("error", "Please Select a Valid Entity" + ".")
+        .subscribe(result => {
+          // Dialog Response can be handled here
+        });
+    }
+
   }
 
   getFilteredEntityNames() {
@@ -213,5 +231,21 @@ export class UpdateUserComponent implements OnInit {
     // }else{
     //   this.router.navigate(['viewRole', this.roleData.roleName]);
     // }
+  }
+  isAValidSelection(propertyName, value) {
+    if (propertyName == "entity") {
+      if (this.listOfEntityNames.includes(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (propertyName == "role") {
+      if (this.listOfRoleNames.includes(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }

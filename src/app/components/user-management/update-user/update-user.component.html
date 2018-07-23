@@ -44,7 +44,7 @@
 								
 								<div class="form-group">					 			 
 								  <mat-form-field class="example-full-width">
-									 <input matInput placeholder="Phone Number" type="text" value="" formControlName="phoneNumber">
+									 <input matInput placeholder="Phone Number" type="text" value="" maxlength="10" formControlName="phoneNumber">
 									 <mat-error *ngIf="userForm.controls.phoneNumber.dirty && userForm.controls.phoneNumber.invalid">Phone Number is Invalid</mat-error>
 									<mat-error *ngIf="userForm.controls.phoneNumber.pristine">This is a required field</mat-error>
 								 </mat-form-field>  
@@ -52,7 +52,7 @@
 								
 								<div class="form-group">					 			
 								   <mat-form-field class="example-full-width">
-									 <input matInput placeholder="Mobile Number" type="text" value="" formControlName="mobileNumber">
+									 <input matInput placeholder="Mobile Number" type="text" value="" maxlength="10" formControlName="mobileNumber">
 									 <mat-error *ngIf="userForm.controls.mobileNumber.dirty && userForm.controls.mobileNumber.invalid">Mobile Number is Invalid</mat-error>
 									 <mat-error *ngIf="userForm.controls.userId.pristine">This is a required field</mat-error>
 								 </mat-form-field> 
@@ -108,7 +108,7 @@
 							   </div>
 							   <div class="form-group">
 									 <mat-form-field class="example-full-width">
-										 <input matInput type="text" placeholder="Fax" value="" formControlName="faxNumber">
+										 <input matInput type="text" placeholder="Fax" maxlength="10" value="" formControlName="faxNumber">
 										 <mat-error *ngIf="userForm.controls.faxNumber.dirty && userForm.controls.faxNumber.invalid">Faxnumber is Invalid</mat-error>
 									<mat-error *ngIf="userForm.controls.faxNumber.pristine">This is a required field</mat-error>
 									 </mat-form-field> 

@@ -104,7 +104,7 @@
           </div>
         </mat-tab> -->
     </mat-tab-group>
-
+<!-- 
      
      <div class="row" ng-show="remark">
        <div class="col-md-4">
@@ -113,14 +113,14 @@
               <textarea class="form-control" rows="5" id="comment"></textarea>
            </div>
          </div>
-    </div> 
+    </div>  -->
     
     
      <div class="row text-center">
        <div class="col-sm-12">
           <div class="">
             
-            <div class="checker-specific-menus" *ngIf="roleType=='CHECKER'">
+            <!-- <div class="checker-specific-menus" *ngIf="roleType=='CHECKER'">
                 <mat-form-field class="example-full-width">
                     <textarea matInput placeholder="Leave a comment"></textarea>
                   </mat-form-field>
@@ -128,7 +128,7 @@
                 <button type="button" class="btn btn-default btn-approve"> Reprocess</button>
                 <button type="button" class="btn btn-default btn-reject"> Reject</button>
    
-            </div>
+            </div> -->
                <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending"> 
                   <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
                   <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
