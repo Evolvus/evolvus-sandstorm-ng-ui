@@ -101,10 +101,10 @@ export class UpdateEntityComponent implements OnInit {
 
   update() {
     this.entityData.description = this.entityForm.value.description;
-    this.entityData.name = this.entityForm.value.name;
+    // this.entityData.name = this.entityForm.value.name;
     this.entityData.enableFlag = this.entityForm.value.enableFlag;
     this.entityData.processingStatus = this.entityForm.value.processingStatus;
-    this.entityData.parent = this.entityForm.value.parent;
+    // this.entityData.parent = this.entityForm.value.parent;
     
     this.entityService.update(this.entityData).subscribe((response: any)=>{
       this.entityService.openDialog(

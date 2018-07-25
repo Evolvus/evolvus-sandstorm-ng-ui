@@ -101,7 +101,7 @@ export class ListUsersComponent implements OnInit {
     this.router.navigate(["viewUser", user.userName]);
   }
 
-  getFilteredUserData(source) {
+   getFilteredUserData(source) {
     if (source == "filter") {
       this.pageNo = 1;
       this.startIndex = 1;
@@ -136,8 +136,7 @@ export class ListUsersComponent implements OnInit {
   getAllUserData() {
     this.userDataService.getAllUserData(this.pageSize, this.pageNo).subscribe(
       (response: any) => {
-        this.pageNo = 1;
-        this.startIndex = 1;
+ 
         this.listOfUsers = response.data;
         this.totalNoOfUsers = response.totalNoOfRecords;
         this.totalNoOfPages = response.totalNoOfPages;
@@ -155,8 +154,9 @@ export class ListUsersComponent implements OnInit {
 
   checkBoxTicked(value) {
     this.isViewAllOptionSelected = !this.isViewAllOptionSelected;
-    console.log(value, "VALUE");
     if (value) {
+      this.startIndex = 1;
+      this.pageNo = 1;
       this.getAllUserData();
     } else {
       this.getFilteredUserData("");
@@ -176,7 +176,7 @@ export class ListUsersComponent implements OnInit {
       } else {
         this.getFilteredUserData("");
       }
-      this.startIndex = this.pageSize * this.startIndex;
+      this.startIndex = this.pageSize * (this.pageNo - 1) + 1;
     } else if (movement == -1 && this.pageNo > 1) {
       //prev page
       this.pageNo = this.pageNo - 1;
@@ -185,10 +185,10 @@ export class ListUsersComponent implements OnInit {
       } else {
         this.getFilteredUserData("");
       }
-      this.startIndex = this.startIndex - this.pageSize + 1;
+      this.startIndex = this.startIndex - this.pageSize;
     } else if (movement == 0) {
       if (this.listOfUsers.length == this.pageSize) {
-        this.noOfUsersInCurrentPage = this.pageSize;
+        this.noOfUsersInCurrentPage = this.pageSize * this.pageNo;
       } else {
         this.noOfUsersInCurrentPage = this.totalNoOfUsers;
       }

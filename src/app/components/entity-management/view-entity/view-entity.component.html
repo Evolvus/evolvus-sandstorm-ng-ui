@@ -1,64 +1,92 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper viewFormSec">
-    <!-- Content Header (Page header) -->
-    <section class="padL35 content-header ">
-      <h1 class="marTB15 txt-orange">
-        <div class="img_icon">
-         <span><i class="fa fa-angle-left"  mat-raised-button matTooltip="Back" [routerLink]="['/entityManagement']" aria-hidden="true"></i> View Entity Details</span>
-       </div>  
-      </h1>
-    </section> 
-    
-  
-     <section class="content">
-       <form>
-         <div class="row">
-           <div class="col-md-12">
-             <h4>Entity Information</h4>
-             <hr>
-           </div>
-           <div class="col-md-4">
-                  <div class="form-group">
-                     <h5>Entity Name</h5>
-                     <label>{{selectedEntity?.name}}</label>
-                 </div>
-            </div>
-  
-            <div class="col-md-4">						  
-                 <div class="form-group">
-                     <h5>Entity Code</h5>
-                     <label>{{selectedEntity?.entityCode}}</label>
-                 </div>
-             </div>
-            <div class="col-md-4">
-                 <div class="form-group">
-                     <h5>Activation Status</h5>
-                     <label>{{(selectedEntity?.enableFlag == true) ? 'Active' : 'Inactive'}}</label>
-                 </div>
-            </div>
-  
-            <div class="col-md-4">
-                 <div class="form-group">
-                     <h5>Processing Status</h5>
-                     <label>{{selectedEntity?.processingStatus}}</label>
-                 </div>
-           </div>
-           <div class="col-md-4">
-            <div class="form-group">
-                <h5>Description</h5>
-                <label>{{selectedEntity?.description}}</label>
-            </div>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper viewFormSec">
+  <!-- Content Header (Page header) -->
+  <section class="padL35 content-header ">
+    <h1 class="marTB15 txt-orange">
+      <div class="img_icon">
+        <span>
+          <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/entityManagement']" aria-hidden="true"></i> View Entity Details</span>
       </div>
-         </div>
-  
-       
+    </h1>
+  </section>
 
-  
-      <br>   
+
+  <section class="content">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Entity Information</h4>
+          <hr>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Entity Name</h5>
+            <label>{{selectedEntity?.name}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Entity Code</h5>
+            <label>{{selectedEntity?.entityCode}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Parent Entity</h5>
+            <label>{{selectedEntity?.parent}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Access Level</h5>
+            <label>{{selectedEntity?.accessLevel}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Activation Status</h5>
+            <label>{{(selectedEntity?.enableFlag == true) ? 'Active' : 'Inactive'}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Processing Status</h5>
+            <label>{{selectedEntity?.processingStatus}}</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Description</h5>
+            <label>{{selectedEntity?.description}}</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Created By</h5>
+            <label>{{selectedEntity?.createdBy}}</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Created Data & Time</h5>
+            <label>{{selectedEntity?.createdDate | date: 'medium'}}</label>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <br>
       <div class="text-center">
-         <!-- <div class="col-sm-12"> -->
-            <div class="">
-                  <!-- <div class="checker-buttons" *ngIf="roleType=='CHECKER'">
+        <!-- <div class="col-sm-12"> -->
+        <div class="">
+          <!-- <div class="checker-buttons" *ngIf="roleType=='CHECKER'">
                       <mat-form-field class="example-full-width">
                           <textarea matInput placeholder="Leave a comment"></textarea>
                         </mat-form-field>
@@ -66,18 +94,20 @@
                       <button type="button" class="btn btn-default btn-approve"> Reprocess</button>
                      <button type="button" class="btn btn-default btn-reject" > Reject</button>
                   </div> -->
-                 <button type="button" class="btn btn-default btn-submit"  [disabled]="isStatusPending" (click)="updateEntity()">
-                 <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
-                 <span *ngIf="!isStatusPending">Modify</span>
-                </button>
-                 <button type="button" class="btn btn-primary btn-close" (click)="abortViewAction()">Cancel</button>
-                </div>
-         </div>
-       <!-- </div> -->
-       </form>
-     </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
-            <style>
+          <button type="button" class="btn btn-default btn-submit" [disabled]="isStatusPending" (click)="updateEntity()">
+            <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
+            <span *ngIf="!isStatusPending">Modify</span>
+          </button>
+          <button type="button" class="btn btn-primary btn-close" (click)="abortViewAction()">Cancel</button>
+        </div>
+      </div>
+      <!-- </div> -->
+    </form>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<style>
   /* .content-wrapper{height: {{contentwrapper}} } */
-  </style>
-  
+
+</style>

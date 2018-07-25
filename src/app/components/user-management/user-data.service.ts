@@ -56,7 +56,7 @@ export class UserDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params:{
         processingStatus: 'AUTHORIZED',
-        activationStatus: 'ACTIVE'
+        enableFlag: '1'
       }
     });
   }
@@ -106,12 +106,14 @@ export class UserDataService {
     listOfEntities,
     listOfMasterCurrency
   ): any {
+    console.log(userForm,"USER");
+    
     var selectedRole = listOfRoles.filter(
       role => role.roleName == userForm.controls.role.value
     );
     var selectedEntity = listOfEntities.filter(
       entity => entity.name == userForm.controls.entity.value
-    );
+    );    
     var selectedMasterCurrency = listOfMasterCurrency.filter(
       masterCurrency =>
         masterCurrency.currencyName == userForm.controls.currency.value

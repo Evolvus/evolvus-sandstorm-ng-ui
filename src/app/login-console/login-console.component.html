@@ -1,84 +1,56 @@
-<!-- <div class="content-wrapper addFormSec">
 
-    <section class="popUp">
-      <div class="text-center">
-  <div class="row">
-    <div class="col-12">
-      <h5 class="text-center mb-4">Sandstorm Console</h5>
-      <br>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span >SANDSTORM CONSOLE</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-        <form  [formGroup]="loginForm" (ngSubmit)="login()">
-            <mat-form-field class="example-full-width">
-              <input matInput type="text" placeholder="Username" id="login-username" formControlName="userName" autofocus autocomplete="off">
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <input matInput type="password" placeholder="Password" formControlName="userPassword" id="login-password" type="password" autocomplete="off">
-            </mat-form-field>
+<div class="login-page" *ngIf="!isUserAuthenticated">
 
 
-        </form>
+
+
+  <div class="login-component" >
+    <div class="title">
+      <h2>LOGIN</h2>
+            <h5 *ngIf="viewPasswordComponent">Welcome, {{loginForm.value.userName | titlecase}}!</h5>
+
     </div>
-  </div>
-</div>
-</section>
-</div> -->
-<div class="container adminLoginSec" *ngIf="!isUserAuthenticated">
-  <div class="row">
-    <div class="col-md-4 text-center iconBlock">
-    <!-- 	<i class="fa fa-users" aria-hidden="true"></i> -->
-    <span class="evo-users3"></span>
-    <!-- 	<h1 class="text-blue"><b>000635</b></h1>
-      <p class="text-black">Active Users</p> -->
-    </div>
-    
-    <div class="col-md-12 text-center loginCenter">
-  
-      <div class="form-login">
-          <h4>SANDSTORM CONSOLE</h4>
-          
-<b><h3>LOGIN</h3></b>
     <br>
-  
-        <form   [formGroup]="loginForm" id="loginform" name="loginform"  method="post" enctype="multipart/form-data" novalidate>
-          <div class="form-group has-feedback has-feedback-user">
-
-            <mat-form-field class="example-full-width">
-  
-                <input id="login-username"  matInput  formControlName="userName" name="userName"  placeholder="Username" required>
-
-            </mat-form-field>
-                <i class="form-control-feedback evo-user3"></i> 
-        </div>
-        
-        <div class="form-group has-feedback">
-          <mat-form-field class="example-full-width">  
-          <input type="password" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword" required>
-          </mat-form-field>
-          <i class="form-control-feedback  glyphicon glyphicon-lock" style="color:#898989;"></i>
-        </div>
-        
-        <div class="row">
-                   <div class="col-sm-12">	
-                      <button type="submit"  id="loginButton" [disabled]="loginForm.invalid" (click)="login()"class="btn login-btn text-uppercase w-100 mt-3">Login</button>
-		         
-                   </div>
-               </div>  
-        </form>		
-        <br>
-        <h5>{{loginErrorMessage}}</h5>
+<form [formGroup]="loginForm" id="loginform" name="loginform" method="post" enctype="multipart/form-data">
+    <div class="username-component" *ngIf="viewUserNameComponent">
+      <mat-form-field class="example-full-width">
+        <input autofocus id="login-username" matInput formControlName="userName" minlength="5" maxlength="20" name="userName" placeholder="Username"
+          required>
+        <mat-error *ngIf="loginForm.invalid && loginForm.pristine">Username is Required</mat-error>
+        <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
+      </mat-form-field>
+      <div class="submit-button col-sm-6">
+        <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
       </div>
-  <!--     <p class="text-black">Last Login: 2017-08-08 </p> -->
     </div>
+
+    <div class="userpassword-component" *ngIf="viewPasswordComponent">
+      <mat-form-field class="example-full-width">
+        <input autofocus type="password" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword"
+          #passwordInput>
+        <mat-error *ngIf="loginForm.invalid">Password is Invalid!</mat-error>
+      </mat-form-field>
+
+    <div class="submit-button col-sm-6">
+        <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
+      </div>
+    </div>
+
+  </form>
   </div>
+
+
 </div>
+
 <div *ngIf="isUserAuthenticated">
     <div class="redirect">
-        <mat-progress-spinner
-        class="example-margin"
-        [color]="color"
-        [mode]="mode"
-        [value]="value">
-    </mat-progress-spinner>
+      <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
+      </mat-progress-spinner>
     </div>
   </div>

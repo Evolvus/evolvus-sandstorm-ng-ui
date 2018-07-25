@@ -43,7 +43,7 @@ export class EntityDataService {
   // }
 
   getFilteredEntityData(parent, enableFlag, processingStatus, pageSize, pageNo){
-
+console.log(enableFlag, "ENABLEFLAG");
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,  {
     params:  {
         parent: parent,
@@ -59,7 +59,8 @@ export class EntityDataService {
   getParentEntities(){
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
     params: {
-      processingStatus: 'AUTHORIZED'
+      processingStatus: 'AUTHORIZED',
+      enableFlag:  '1'
     }
     });
   }

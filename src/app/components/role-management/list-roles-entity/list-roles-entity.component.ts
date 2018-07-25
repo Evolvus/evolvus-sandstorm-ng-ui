@@ -128,7 +128,6 @@ export class ListRolesEntityComponent implements OnInit {
           }
         },
         err => {
-          console.log("I AM THE ONE WHO IS THROWING THE ERROR");
           this.roleDataService
             .openDialog("error", err.error.description)
             .subscribe(result => {
@@ -142,6 +141,7 @@ export class ListRolesEntityComponent implements OnInit {
     if (movement == 1) {
       //next page
       this.pageNo = this.pageNo + 1;
+
       if (this.isViewAllOptionSelected) {
         this.getRoleData();
       } else {

@@ -62,29 +62,36 @@ getFilteredEntityNames(){
 
 
   save() {
-    if(this.entityForm.value.enableFlag){
-      this.entityForm.value.enableFlag = "1";
+    if(this.isAValidSelection('entity', this.entityForm.value.parent)){
+      if(this.entityForm.value.enableFlag){
+        this.entityForm.value.enableFlag = "1";
+      }else{
+        this.entityForm.value.enableFlag = "0";
+      }      
+      this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
+        this.entityService.openDialog(
+           "success",
+          data.description
+         ).subscribe((result)=>{
+         this.router.navigate(['entityManagement']);
+         });
+    
+       }, (err)=>{
+        this.entityService.openDialog(
+          "error",
+         err.error.description+"."
+        ).subscribe((result)=>{
+  
+        });
+      });
     }else{
-      this.entityForm.value.enableFlag = "0";
-
+      this.entityService
+      .openDialog("error", "Please Select a Valid Entity" + ".")
+      .subscribe(result => {
+        // Dialog Response can be handled here
+      });
     }
     
-    this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
-      this.entityService.openDialog(
-         "success",
-        data.description
-       ).subscribe((result)=>{
-       this.router.navigate(['entityManagement']);
-       });
-  
-     }, (err)=>{
-      this.entityService.openDialog(
-        "error",
-       err.error.description+"."
-      ).subscribe((result)=>{
-
-      });
-    });
   }
 
   
@@ -99,7 +106,15 @@ getFilteredEntityNames(){
   }
 
 
-
+  isAValidSelection(propertyName, value) {
+    if (propertyName == "entity") {
+      if (this.listOfParentEntityNames.includes(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
 }
 

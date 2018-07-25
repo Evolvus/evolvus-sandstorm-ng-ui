@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SandstormGlobalVariablesService {
+export class SandstormGlobalVariablesService implements OnInit{
 
   constructor() { }
 
   currentUser: any = {};
   
+ngOnInit(){
+
 }
-// export const SandstormGlobalVariablesService = {
-// currentUserData: this.currentUser
-// };
+
+
+
+}
