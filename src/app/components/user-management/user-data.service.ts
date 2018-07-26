@@ -9,6 +9,8 @@ import { environment } from "../../../environments/environment";
 import { map } from "rxjs/operators";
 import { ConfirmationDialogEntityComponent } from "../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { of } from 'rxjs';
+import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 
 @Injectable({
   providedIn: "root"
@@ -32,11 +34,13 @@ export class UserDataService {
     pageSize: 5,
     pageNo: 1
   };
+  menuItemCode: string = "userManagement";
+  currentLoggedInUserData = this.globalVariablesService.currentUser;
 
 
 
 
-  constructor(private http: HttpClient, private dialog: MatDialog) { }
+  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { }
 
   getTableHeaders() {
     return this.userTableHeaders;
@@ -106,7 +110,6 @@ export class UserDataService {
     listOfEntities,
     listOfMasterCurrency
   ): any {
-    console.log(userForm,"USER");
     
     var selectedRole = listOfRoles.filter(
       role => role.roleName == userForm.controls.role.value
@@ -140,6 +143,14 @@ export class UserDataService {
 
     return userData;
   }
+
+  getCurrentUserData(){
+    return of(this.currentLoggedInUserData);
+    
+    }
+
+
+
 
   getFilteredUserData(
     userLoginStatus,
@@ -177,5 +188,14 @@ export class UserDataService {
     });
 
     return dialogRef.afterClosed();
+  }
+
+  getListOfSubMenuItems(){
+    return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
+    .reduce((menuItemsA, menuItemsC) => menuItemsA.concat(menuItemsC), [])
+    .filter(menuItem => menuItem.menuItemCode == 'userManagement')
+    .map(menuItem => menuItem.subMenuItems)
+    .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
+    .map(subMenuItem => subMenuItem.title); 
   }
 }

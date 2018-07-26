@@ -8,7 +8,7 @@
           <span class="evo-entity"></span>Entity Management</span>
       </h1>
 
-      <div class="rightSecBtn adjust-plussymbol">
+      <div class="rightSecBtn adjust-plussymbol" *ngIf="user.role.roleType=='MAKER'">
         <span [routerLink]="['/addEntity']" mat-raised-button matTooltip="Add New Entity">
           <span class="evo-entity"></span>
           <span class="plus-symbol">+</span>

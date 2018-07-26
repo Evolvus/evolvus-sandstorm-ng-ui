@@ -1,80 +1,85 @@
-  <div class="content-wrapper viewFormSec">
+<div class="content-wrapper viewFormSec">
   <section class="padL35 content-header ">
     <h1 class="marTB15 txt-orange">
       <div class="img_icon">
-       <span><i class="fa fa-angle-left"  mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i> View Role Details</span>
-     </div>  
+        <span>
+          <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i> View Role Details</span>
+      </div>
     </h1>
-  </section> 
+  </section>
 
-   <section class="content">
-     <form>
-       <div class="row">
-         <div class="col-md-12">
-           <h4>Role Information</h4>
-           <hr>
-         </div>
-         <div class="col-md-4">
-                <div class="form-group">
-                   <h5>Role Name</h5>
-                   <label>{{selectedRole?.roleName | titlecase}}</label>
-               </div>
+  <section class="content">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Role Information</h4>
+          <hr>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Role Name</h5>
+            <label>{{selectedRole?.roleName | titlecase}}</label>
           </div>
-
-          <div class="col-md-4">						  
-               <div class="form-group">
-                   <h5>Application Category</h5>
-                   <label>{{selectedRole?.applicationCode}}</label>
-               </div>
-           </div>
-          <div class="col-md-4">
-               <div class="form-group">
-                   <h5>Activation Status</h5>
-                   <label>{{selectedRole?.activationStatus}}</label>
-               </div>
-          </div>
-
-          <div class="col-md-4">
-              <div class="form-group">
-                  <h5>Role Type</h5>
-                  <label>{{selectedRole?.roleType}}</label>
-              </div>
         </div>
 
         <div class="col-md-4">
-            <div class="form-group transaction-type">
-                <h5>Transaction Type</h5>
-                <label *ngFor="let txnType of selectedRole?.txnType">{{txnType}}<span >,&nbsp;</span></label>
-            </div>
-      </div>
-
-          <div class="col-md-4">
-               <div class="form-group">
-                   <h5>Role Description</h5>
-                   <label>{{selectedRole?.description}}</label>
-               </div>
-         </div>
-  
-       </div>
-
-       <div class="row">
-          <div class="col-md-12">
-            <h4>Menu Access Details</h4>
-            <hr>
+          <div class="form-group">
+            <h5>Application Category</h5>
+            <label>{{selectedRole?.applicationCode}}</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Activation Status</h5>
+            <label>{{selectedRole?.activationStatus}}</label>
           </div>
         </div>
 
-       <mat-tab-group>
-        <mat-tab label="Menus" >
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Role Type</h5>
+            <label>{{selectedRole?.roleType}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group transaction-type">
+            <h5>Transaction Type</h5>
+            <label *ngFor="let txnType of selectedRole?.txnType">{{txnType}}
+              <span>,&nbsp;</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Role Description</h5>
+            <label>{{selectedRole?.description}}</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Menu Access Details</h4>
+          <hr>
+        </div>
+      </div>
+
+      <mat-tab-group>
+        <mat-tab label="Menus">
           <div class="tabContent">
             <div class="marB30">
-                <div class="col-md-12">
-                  <div class="form-group menu-item-display col-md-4" *ngFor="let mGroup of selectedRole?.menuGroup">
-                    <h5>{{mGroup?.title | titlecase}}</h5>
-                    <label *ngFor="let menuItem of mGroup?.menuItems">{{menuItem?.title}}<span >,&nbsp;</span> </label>
+              <div class="col-md-12">
+                <div class="form-group menu-item-display col-md-4" *ngFor="let mGroup of selectedRole?.menuGroup">
+                  <h5>{{mGroup?.title | titlecase}}</h5>
+                  <label *ngFor="let menuItem of mGroup?.menuItems">{{menuItem?.title}}
+                    <span>,&nbsp;</span>
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </mat-tab>
         <!-- <mat-tab label="Console">
@@ -103,8 +108,8 @@
             </div>
           </div>
         </mat-tab> -->
-    </mat-tab-group>
-<!-- 
+      </mat-tab-group>
+      <!-- 
      
      <div class="row" ng-show="remark">
        <div class="col-md-4">
@@ -114,30 +119,40 @@
            </div>
          </div>
     </div>  -->
-    
-    
-     <div class="row text-center">
-       <div class="col-sm-12">
-          <div class="">
-            
-            <!-- <div class="checker-specific-menus" *ngIf="roleType=='CHECKER'">
-                <mat-form-field class="example-full-width">
-                    <textarea matInput placeholder="Leave a comment"></textarea>
-                  </mat-form-field>
-                <button type="button" class="btn btn-default btn-approve"> Approve</button>
-                <button type="button" class="btn btn-default btn-approve"> Reprocess</button>
-                <button type="button" class="btn btn-default btn-reject"> Reject</button>
-   
-            </div> -->
-               <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending"> 
-                  <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
-                  <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
-                  <span *ngIf="!isStatusPending">Modify</span>
-               </button>
-               <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
-           </div>
-       </div>
-     </div>
-     </form>
-    </section> 
 
+
+      <div class="row text-center">
+        <div class="col-sm-12">
+          <div class="">
+
+            <div class="checker-specific-menus" *ngIf="user?.role.roleType=='CHECKER'">
+                <div class="row" ng-show="remark">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <span class="pull-left comments"><h5>Comments</h5></span>
+                          
+                           <textarea required class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                      </div>
+                    </div><br>
+              <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
+              <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
+              <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>
+              <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+            </div>
+
+            <div class="maker-specific-menus" *ngIf="user?.role.roleType=='MAKER'">
+              <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
+                <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
+                <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
+                <span *ngIf="!isStatusPending">Modify</span>
+              </button>
+              <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>

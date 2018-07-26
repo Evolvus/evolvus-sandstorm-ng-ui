@@ -22,25 +22,9 @@
           </div>
 
           <!-- fix for small devices only -->
-          <div class="clearfix visible-sm-block"></div>
         </div>
 
 
-        <!-- <div class="side-menu-group">
-          <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup">
-            <li class="header">{{menuGroup.title | titlecase}}</li>
-            <div class="menuItem" *ngFor="let menuItem of menuGroup.menuItems">
-              <li class="menuItemRoute">
-                <a routerLink="{{menuItem.menuItemCode}}">
-                  <i class="evo-role"></i>
-                  <span>{{menuItem.title}}</span>
-                </a>
-              </li>
-  
-            </div>
-            <hr>
-          </div>
-        </div> -->
 
 
 
@@ -70,6 +54,119 @@
           <!-- fix for small devices only -->
           <div class="clearfix visible-sm-block"></div>
         </div>
+      </div>
+      <div class="col-md-3 bg-grey marL15">
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="text-center marT15 txt-blue">Pending Actions</h4>
+            <div class="scrollbar" id="style-1" custom-scroll="{ 'theme': dark }">
+              <div class="force-overflow">
+                
+                <div class="pendingActionBlock">
+                  <div class="pull-left">
+                    User Role acceptance
+                  </div>
+                  <div class="pull-right">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+
+
+     
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row notficationBlock">
+          <div class="col-md-12">
+            <h4 class="text-center  marT20 txt-blue">Notifications</h4>
+            <div class="scrollbar" id="style-2" custom-scroll="{ 'theme': dark }">
+              <div class="force-overflow">
+                
+                <div class="notificationSec box box-primary no-margin-top">
+                  <div class="media">
+                    <div class="media-left">
+                      <a href="#">
+                               <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
+                           </a>
+                    </div>
+                    <div class="media-body">
+                      <div class="notificationClosebtn pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                      <p>X user Transaction Limit Crossed !Some more transaction notifications comes here</p>
+                      <small class="pull-right"><i class="fa fa-clock-o"></i> 1 hours ago</small>
+                    </div>
+                  </div>
+                </div>
+
+               
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <!--  <div class="box box-primary">
+               <div class="box-header with-border">
+                 <h3 class="box-title text-uppercase">Notifications</h3>
+                 <div class="box-tools pull-right">
+                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                 </div>
+               </div>/.box-header
+               <div class="box-body">
+                 <ul class="products-list product-list-in-box">
+                   <li class="item">
+                     <div class="product-img">
+                       <img src="images/user-icon.png" class="user-image" alt="User Image">
+                     </div>
+                     <div class="product-info">
+                       <a href="javascript::;" class="product-title">Samsung TV <span class="label label-warning pull-right">$1800</span></a>
+                       <span class="product-description">
+                        X user Transcation Limit Crossed !
+                       </span>
+                     </div>
+                   </li>/.item
+                   <li class="item">
+                     <div class="product-img">
+                      <img src="images/user-icon.png" class="user-image" alt="User Image">
+                     </div>
+                     <div class="product-info">
+                       <span class="product-description">
+                         X user Transcation Limit Crossed ! .Some more transctions notifications comes here
+                       </span>
+                       <small class="pull-right"><i class="fa fa-clock-o"></i> 2 hours</small>
+                     </div>
+                   </li>/.item
+                   <li class="item">
+                     <div class="product-img">
+                      <img src="images/user-icon.png" class="user-image" alt="User Image">
+                     </div>
+                     <div class="product-info">
+                       <span class="product-description">
+                         X user Transcation Limit Crossed !
+                       </span>
+                     </div>
+                   </li>/.item
+                 </ul>
+               </div>/.box-body
+               <div class="box-footer text-center">
+                 <a href="javascript::;" class="uppercase">View All Products</a>
+               </div> -->
+        <!-- /.box-footer
+             </div> -->
+        <!-- /.box -->
+
       </div>
       <!-- /.col -->
 

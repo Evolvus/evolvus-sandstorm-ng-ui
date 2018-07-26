@@ -1,5 +1,5 @@
 import { RoleModel } from './../role-model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoleDataService } from '../role-data.service';
@@ -14,14 +14,14 @@ export class ViewRoleEntityComponent implements OnInit {
   
   selectedRole: any;
   isStatusPending: boolean = true;
-  user: any;
-  roleType: any;
+  user: any= {};
+  listOfSubMenuItems: any= [];
+
   constructor(private router: Router, private route: ActivatedRoute, private roleDataService: RoleDataService) { }
  
   ngOnInit() {
-
     var roleName = this.route.snapshot.params['id'];
-    this.roleDataService.getOneRoleData(roleName)
+    this.roleDataService.getOneRoleData(roleName) 
      .subscribe((response: any)=>{
        if(response.data.length != 0){
       this.selectedRole = response.data[0];
@@ -32,38 +32,16 @@ export class ViewRoleEntityComponent implements OnInit {
           }
        }
    });
+   this.roleDataService.getCurrentUserData().subscribe((user: any)=>{
+     this.user = user;   
+   });
 
-
+   this.listOfSubMenuItems = this.roleDataService.getListOfSubMenuItems();
   
-
-
   }
 
 
-deleteRole(){
 
-this.roleDataService.openDialog(
-  "alert",
-  "Are you sure you want to delete "+this.selectedRole.roleName+" Role?"
-).subscribe((result)=>{
-  if(result==true){
-    this.roleDataService.deleteRole(this.selectedRole)
-    .subscribe((response)=>{
-      this.roleDataService.openDialog(
-        "success",
-        this.selectedRole.roleName + "\xa0Role Deleted Successfully!"
-      );
-    }, (err)=>{
-      this.roleDataService.openDialog(
-        "error",
-       "Error occurred while deleting role. Please try again!"
-      );
-    });  
-  }
-})
-
-
-}
 
 updateRole()
 {
@@ -74,10 +52,13 @@ updateRole()
   }
 
 
+
+doIExist(title){
+return this.listOfSubMenuItems.includes(title);
+}
+
+
 abortViewAction(){
-
   this.router.navigate(['roleManagement']);
-
-
 }
 }

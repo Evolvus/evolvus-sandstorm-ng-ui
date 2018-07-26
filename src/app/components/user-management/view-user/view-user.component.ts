@@ -12,6 +12,8 @@ export class ViewUserComponent implements OnInit {
 userName: string = "";
 selectedUser: any;
 isStatusPending: boolean = true;
+loggedInUser: any;
+listOfSubMenuItems: any = [];
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -36,6 +38,10 @@ isStatusPending: boolean = true;
 
       alert("No User Data");
     });
+    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.loggedInUser = user;   
+    });
+    this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
   }
 
 
@@ -49,5 +55,8 @@ isStatusPending: boolean = true;
     this.router.navigate(['/userManagement']);
       }
 
+      doIExist(title){
+        return this.listOfSubMenuItems.includes(title);
+        }
 
 }

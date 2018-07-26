@@ -2,3 +2,10 @@
     display: block;
 }
 .transaction-type label:last-child span{display: none;}
+.btn-default{
+    margin: 5px;
+}
+.comments h5::after {
+    content: "*";
+    color: red;
+}

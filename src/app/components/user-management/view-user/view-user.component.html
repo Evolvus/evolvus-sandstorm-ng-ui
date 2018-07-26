@@ -87,13 +87,7 @@
                <label>{{selectedUser?.activationStatus}}</label>
             </div>
            </div>
-<!--            
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Enabled / Disabled</h5>
-               <label>Active</label>
-             </div>
-           </div> -->
+
          </div>
          
          <div class="row">
@@ -123,25 +117,38 @@
             </div>
            </div>
          </div>
-             <!-- <div class="row" ng-show="remark">
-         <div class="col-md-4">
-             <div class="form-group">
-               <h5>Remarks</h5>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
-             </div>
-           </div>
-         </div> -->
+
          <div class="row text-center">
          <div class="col-sm-12">
             <div class="">
-                 <!-- <button type="button" class="btn btn-default btn-approve" ng-click="confirm();"> Approve</button>
-                 <button type="button" class="btn btn-default btn-reject" ng-click="reject();"> Reject</button> -->
-                 <button type="button" class="btn btn-default btn-submit" (click)="updateUser()" [disabled]="isStatusPending"> 
+
+                <div class="checker-specific-menus" *ngIf="loggedInUser?.role.roleType=='CHECKER'">
+                    <div class="row" ng-show="remark">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <span class="pull-left comments"><h5>Comments</h5></span>
+                              
+                               <textarea class="form-control" rows="5" id="comment"></textarea>
+                            </div>
+                          </div>
+                        </div><br>
+                  <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
+                  <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
+                  <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>
+                  <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+                </div>
+    
+                <div class="maker-specific-menus" *ngIf="loggedInUser?.role.roleType=='MAKER'">
+                  <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
                     <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
+                    <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
                     <span *ngIf="!isStatusPending">Modify</span>
-                 </button>
-                 <button type="button" class="btn btn-default btn-close" [routerLink]="['/userManagement']"> Cancel</button>
-             </div>
+                  </button>
+                  <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+    
+                </div>
+    
+              </div>
          </div>
        </div>
        </form>

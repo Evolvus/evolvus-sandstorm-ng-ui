@@ -1,0 +1,4 @@
+ .comments h5::after {
+    content: "*";
+    color: red;
+}

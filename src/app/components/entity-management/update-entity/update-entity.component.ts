@@ -19,6 +19,8 @@ export class UpdateEntityComponent implements OnInit {
   listOfParentEntityNames: string[] = [];
   listOfParentEntities: any;
   filteredEntityNames: Observable<string[]>;
+  user: any;
+  // listOfSubMenuItems: any= [];
 
   constructor(private entityService: EntityDataService, private router: Router, private route: ActivatedRoute) { 
     this.entityForm = new FormGroup({
@@ -75,6 +77,11 @@ export class UpdateEntityComponent implements OnInit {
         // no entity present with such entityCode PageNotFound 404 Error
       }
       });
+
+      this.entityService.getCurrentUserData().subscribe((user: any)=>{
+        this.user = user;   
+      });
+      // this.listOfSubMenuItems = this.entityService.getListOfSubMenuItems();
   
   }
   getAllEntities(){
@@ -135,4 +142,9 @@ export class UpdateEntityComponent implements OnInit {
     // }
   
   }
+
+  // doIExist(title){
+  //   return this.listOfSubMenuItems.includes(title);
+  //   }
+
 }

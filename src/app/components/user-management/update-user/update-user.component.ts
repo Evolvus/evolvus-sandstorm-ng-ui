@@ -25,7 +25,9 @@ export class UpdateUserComponent implements OnInit {
   listOfRoles: any;
 
   listOfMasterCurrency: any[] = [];
-
+  loggedInUser: any;
+  // listOfSubMenuItems: any = [];
+  
   constructor(
     private userDataService: UserDataService,
     private router: Router,
@@ -137,6 +139,10 @@ export class UpdateUserComponent implements OnInit {
           });
       }
     );
+    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.loggedInUser = user;   
+    });
+    // this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
   }
 
   update() {
@@ -248,4 +254,7 @@ export class UpdateUserComponent implements OnInit {
       }
     }
   }
+  // doIExist(title){
+  //   return this.listOfSubMenuItems.includes(title);
+  //   }
 }

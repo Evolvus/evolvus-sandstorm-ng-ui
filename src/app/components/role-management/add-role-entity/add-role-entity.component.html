@@ -3,7 +3,7 @@
   <!-- Content Header (Page header) -->
   <section class="padL35 content-header ">
     <h1 class="marTB15 txt-orange">
-      <div class="img_icon">
+      <div class="img_icon" >
         <span>
           <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/roleManagement']" aria-hidden="true"></i> Add New Role</span>
       </div>
@@ -144,7 +144,7 @@
       <div class="row text-center">
         <div class="col-md-12" style="margin-left: 2em;">
           <div class="">
-            <button type="submit" [disabled]="roleForm.invalid" class="btn btn-default btn-submit" (click)="save()">Add Role</button>
+            <button type="submit"  [disabled]="roleForm.invalid" class="btn btn-default btn-submit" (click)="save()">Add Role</button>
             <button type="button" class="btn btn-default btn-close" (click)="abortSaveAction()"> Close</button>
           </div>
         </div>

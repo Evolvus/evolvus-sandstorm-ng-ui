@@ -823,6 +823,10 @@ button#slideright span {
 }
 
 /* Buttons */
+.btn-default{
+    margin: 5px;
+}
+
 .btn-orange {
     display: inline-block;
     vertical-align: middle;
@@ -909,7 +913,6 @@ button#slideright span {
     background-color: #fff !important;
     color: #636363 !important;
     border-color: #5f5f5f !important;
-    margin-left:15px !important;
 }
 
 .btn-close:hover {
@@ -924,7 +927,6 @@ button#slideright span {
     background-color: #F10000
      !important;
     color: white !important;
-    margin-left:15px !important;
   
 }
 
@@ -954,8 +956,6 @@ button#slideright span {
     border-radius: 22px !important;
     outline: none !important;
     border-color:#000 !important;
-     margin-left:15px !important;
-     margin-right:15px !important;
 }
 
 .btn-reject:focus, .btn-reject:hover, .btn-reject:active, .btn-reject:visited{
@@ -1515,4 +1515,6 @@ float: left;
         .addFormSec .rolemenu-acces-tabs .mat-pseudo-checkbox{
             border: 0 !important;
             vertical-align: inherit !important;
-         }
+        }
+
+

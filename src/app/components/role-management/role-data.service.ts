@@ -1,4 +1,4 @@
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -19,10 +19,10 @@ export class RoleDataService {
 
 
 currentLoggedInUserData = this.globalVariablesService.currentUser;
+menuItemCode: string = "roleManagement";
+currentUser = new Subject<Object>();
 platformURL = environment.platformURL;
 listOfApplicationCategory: string [] = [];
-listOfActivationStatus: string[] = ["Active", "Inactive"];
-listOfProcessingStatus: string[] = ["Pending Authorization", "Rejected"];
 dialogClosed: Subject<boolean> = new Subject<boolean>();
 roleTableHeaders = ['Role Name','Role Description','Application Category','Activation Status','Processing Status','Associated Users','Last Modified Date Time'];
 defaultFilterCriteria = {
@@ -125,6 +125,12 @@ getLookUpCodeValues(lookupCode){
 
 }
 
+
+getCurrentUserData(){
+return of(this.currentLoggedInUserData);
+
+}
+
 openDialog(messageType, statusMessage): any {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
     width: "300px",
@@ -139,7 +145,14 @@ openDialog(messageType, statusMessage): any {
 }
 
 
-
+getListOfSubMenuItems(){
+  return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
+  .reduce((menuItemsA, menuItemsC) => menuItemsA.concat(menuItemsC), [])
+  .filter(menuItem => menuItem.menuItemCode == 'roleManagement')
+  .map(menuItem => menuItem.subMenuItems)
+  .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
+  .map(subMenuItem => subMenuItem.title); 
+}
 
 
 

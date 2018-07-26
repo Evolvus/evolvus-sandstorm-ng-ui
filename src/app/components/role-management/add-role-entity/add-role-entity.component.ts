@@ -31,6 +31,7 @@ export class AddRoleEntityComponent implements OnInit {
   listOfRoleTypes: any;
   listOfTxnTypes: any;
   user: any;   //currently loggedIn User
+  // listOfSubMenuItems: any= [];
 
    
 
@@ -40,8 +41,12 @@ export class AddRoleEntityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.roleDataService.currentLoggedInUserData;
-    this.roleForm = new FormGroup({
+    this.roleDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.user = user;   
+    });
+    // this.listOfSubMenuItems = this.roleDataService.getListOfSubMenuItems();
+
+      this.roleForm = new FormGroup({
       activationStatus: new FormControl('', Validators.required),
       roleName: new FormControl('', [Validators.pattern("[a-zA-Z0-9_-]*"), Validators.pattern(/^\S*$/), Validators.minLength(6), Validators.maxLength(35), Validators.required]),
       applicationCode: new FormControl('', Validators.required),
@@ -155,10 +160,16 @@ this.roleDataService.getLookUpCodeValues('ROLE_ROLETYPE').subscribe((response: a
 this.listOfRoleTypes = response.data.map(lookUp => lookUp.value);
 });
 }
+
 getTxtTypes(){
   this.roleDataService.getLookUpCodeValues('ROLE_TXNTYPE').subscribe((response: any)=>{
     this.listOfTxnTypes = response.data.map(lookUp => lookUp.value);
     });
 }
+
+
+// doIExist(title){
+//   return this.listOfSubMenuItems.includes(title);
+//   }
 
 }

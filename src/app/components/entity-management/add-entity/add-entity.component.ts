@@ -23,6 +23,8 @@ export class AddEntityComponent implements OnInit {
   listOfParentEntities: EntityModel[]=[];
   listOfParentEntityNames: string[]=[];
   filteredEntityNames: Observable<string[]>;
+  user: any;
+  // listOfSubMenuItems: any= [];
 
   constructor(public formBuilder: FormBuilder, private entityService: EntityDataService, private router: Router) {
     this.entityForm = new FormGroup({
@@ -40,6 +42,11 @@ export class AddEntityComponent implements OnInit {
   ngOnInit() {
     this.getParentEntities();
     this.getFilteredEntityNames();
+    this.entityService.getCurrentUserData().subscribe((user: any)=>{
+      this.user = user;   
+    });
+    // this.listOfSubMenuItems = this.entityService.getListOfSubMenuItems();
+
     
   }
 
@@ -115,6 +122,11 @@ getFilteredEntityNames(){
       }
     }
   }
+
+  // doIExist(title){
+  //   return this.listOfSubMenuItems.includes(title);
+  //   }
+
 
 }
 

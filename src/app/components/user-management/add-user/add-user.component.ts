@@ -28,7 +28,8 @@ export class AddUserComponent implements OnInit {
   filteredRoleNames: Observable<string[]> = new Observable<string[]>();
   listOfRoleNames: string[] = [];
   listOfRoles: any;
-
+  loggedInUser: any;
+  // listOfSubMenuItems: any = [];
   constructor(
     private userDataService: UserDataService,
     private router: Router
@@ -91,6 +92,10 @@ export class AddUserComponent implements OnInit {
         this.getFilteredRoleNames();
       }
     });
+    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.loggedInUser = user;   
+    });
+    // this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
   }
 
   save() {
@@ -187,4 +192,9 @@ export class AddUserComponent implements OnInit {
       }
     }
   }
+
+  // doIExist(title){
+  //   return this.listOfSubMenuItems.includes(title);
+  //   }
+
 }

@@ -31,6 +31,8 @@ export class ListEntityComponent implements OnInit {
   totalNoOfPages: number = 1;
   totalNoOfEntities: number = 0;
   startIndex: number = 1;
+  user: any;
+
   constructor(
     private router: Router,
     private entityService: EntityDataService
@@ -42,6 +44,10 @@ export class ListEntityComponent implements OnInit {
     this.defaultFilterCriteria = this.entityService.getDefaultFilterCriteria();
     this.getListOfEntities();
     this.getEntityDataBasedOnDefaultFilterCriteria();
+    this.entityService.getCurrentUserData().subscribe((user: any)=>{
+      this.user = user;   
+    });
+    // this.entityService.menuItemCode = 
   }
 
   getListOfEntities() {
@@ -195,4 +201,8 @@ export class ListEntityComponent implements OnInit {
       this.getFilteredEntityData("");
     }
   }
+
+
+
+
 }

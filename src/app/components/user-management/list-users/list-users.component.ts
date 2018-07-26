@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
   templateUrl: "./list-users.component.html",
   styleUrls: ["./list-users.component.css"]
 })
+
 export class ListUsersComponent implements OnInit {
   userTableHeaders: string[] = [];
   isViewAllOptionSelected: boolean = false;
@@ -27,6 +28,7 @@ export class ListUsersComponent implements OnInit {
   pageSize: number = 5;
   pageNo: number = 1;
   totalNoOfPages: number = 0;
+  loggedInUser: any;
 
   constructor(
     private userDataService: UserDataService,
@@ -38,6 +40,9 @@ export class ListUsersComponent implements OnInit {
     this.defaultFilterCriteria = this.userDataService.getDefaultFilterCriteria();
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
+    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.loggedInUser = user;   
+    });
   }
 
   getUserDataBasedOnDefaultFilterCriteria() {

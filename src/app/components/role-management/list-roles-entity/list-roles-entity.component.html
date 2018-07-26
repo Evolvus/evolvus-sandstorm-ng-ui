@@ -6,7 +6,7 @@
         <span><span class="evo-role"></span>Role Management</span>
       </h1>
       
-    <div class="rightSecBtn adjust-plussymbol"> 
+    <div class="rightSecBtn adjust-plussymbol" *ngIf = "user.role.roleType=='MAKER' " > 
         <span  [routerLink]="['/addRole']" mat-raised-button
         matTooltip="Add New Role"><span class="evo-role"></span><span class="plus-symbol">+</span></span>
      </div>

@@ -19,17 +19,19 @@ export class ViewEntityComponent implements OnInit {
   selectedEntity: any;
   isStatusPending: boolean = true;
   user: any;
-  roleType: any;
-  constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService, private globalVariableService: SandstormGlobalVariablesService) { }
+  listOfSubMenuItems: any= [];
+    constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService, private globalVariableService: SandstormGlobalVariablesService) { }
 
   ngOnInit() {
-    
+
     this.entityId = "" + this.route.snapshot.params['id'];
     this.entityService.getOneEntityData(this.entityId).subscribe((entityData: any)=>{
 
       this.selectedEntity = entityData.data[0];
-      this.user = this.globalVariableService.currentUser;
-      this.roleType = this.user.role.roleType;
+      this.entityService.getCurrentUserData().subscribe((user: any)=>{
+        this.user = user;   
+      });
+      this.listOfSubMenuItems = this.entityService.getListOfSubMenuItems();
       if(this.selectedEntity.processingStatus!='PENDING_AUTHORIZATION'){
     this.isStatusPending = false;
       }else{
@@ -50,5 +52,7 @@ export class ViewEntityComponent implements OnInit {
   abortViewAction(){
     this.router.navigate(['/entityManagement']);
       }
-
+  doIExist(title){
+    return this.listOfSubMenuItems.includes(title);
+    }
 }

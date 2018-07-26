@@ -35,6 +35,8 @@ export class UpdateRoleEntityComponent implements OnInit {
   listOfApplications: any[]=[];
   listOfRoleTypes: any;
   listOfTxnTypes: any;
+  // listOfSubMenuItems: any= [];
+
   user: any;   //currently loggedIn User
  // we have used two attributes of mat-checkbox in html. (change) and [checked].. 
  //[checked] is used in order to check the boxes of already selected Menu Items while loading
@@ -56,8 +58,10 @@ export class UpdateRoleEntityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.roleDataService.currentLoggedInUserData;
-
+    this.roleDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.user = user;   
+    });
+    // this.listOfSubMenuItems = this.roleDataService.getListOfSubMenuItems();
     this.roleDataService
     .getlistOfApplicationCategory()
     .subscribe((response: any) => {
@@ -71,7 +75,7 @@ export class UpdateRoleEntityComponent implements OnInit {
 
     this.getRoleData(roleName);
     this.getRoleTypes();
-  this.getTxtTypes();
+    this.getTxtTypes();
 
     
   }
@@ -213,4 +217,10 @@ getRoleTypes(){
       this.listOfTxnTypes = response.data.map(lookUp => lookUp.value);
       });
   }
+
+// doIExist(title){
+//   return this.listOfSubMenuItems.includes(title);
+//   }
+
+  
 }

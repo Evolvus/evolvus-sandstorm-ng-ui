@@ -31,6 +31,8 @@ export class ListRolesEntityComponent implements OnInit {
   totalNoOfPages: number = 0;
   totalNoOfRoles: number = 0;
   startIndex: number = 1;
+  user: any;   //currently loggedIn User
+
   constructor(
     private roleDataService: RoleDataService,
     private router: Router
@@ -41,6 +43,9 @@ export class ListRolesEntityComponent implements OnInit {
     this.defaultFilterCriteria = this.roleDataService.getDefaultFilterCriteria();
     this.getApplicationCodes();
     this.getRoleDataBasedOnDefaultFilterCriteria();
+    this.roleDataService.getCurrentUserData().subscribe((user: any)=>{
+      this.user = user;   
+    });
   }
 
   getApplicationCodes() {
@@ -48,9 +53,7 @@ export class ListRolesEntityComponent implements OnInit {
       .getlistOfApplicationCategory()
       .subscribe((response: any) => {
         this.listOfApplications = response.data;
-        for (let application of this.listOfApplications) {
-          this.listOfApplicationCategory.push(application.applicationCode);
-        }
+        this.listOfApplicationCategory = this.listOfApplications.map(application => application.applicationCode);
       });
   }
 
