@@ -144,4 +144,13 @@ export class EntityDataService {
     }
     return attribute;
   }
+
+  getWorkFlowData(wfInstanceId){
+    return this.http.get(`${this.platformURL}/swe/api/event`, {
+      params: {
+        wfInstanceId: wfInstanceId
+      }
+    });  }
+   
+
 }

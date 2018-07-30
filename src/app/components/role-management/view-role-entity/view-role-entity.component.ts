@@ -16,7 +16,8 @@ export class ViewRoleEntityComponent implements OnInit {
   isStatusPending: boolean = true;
   user: any= {};
   listOfSubMenuItems: any= [];
-
+  showWorkFlow: boolean = false;
+  listOfEvents: any []=[];
   constructor(private router: Router, private route: ActivatedRoute, private roleDataService: RoleDataService) { }
  
   ngOnInit() {
@@ -61,4 +62,21 @@ return this.listOfSubMenuItems.includes(title);
 abortViewAction(){
   this.router.navigate(['roleManagement']);
 }
+
+
+getWorkFlowData(){
+  if(!this.showWorkFlow){
+    this.roleDataService.getWorkFlowData(this.selectedRole.wfInstanceId)
+    .subscribe((response: any)=>{
+      this.showWorkFlow = !this.showWorkFlow;
+      if(response!=null){
+        this.listOfEvents = response.data;
+      }
+    });
+  }else{
+    this.showWorkFlow = !this.showWorkFlow;
+  }
+
+}
+
 }

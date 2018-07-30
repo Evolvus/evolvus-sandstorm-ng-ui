@@ -20,6 +20,8 @@ export class ViewEntityComponent implements OnInit {
   isStatusPending: boolean = true;
   user: any;
   listOfSubMenuItems: any= [];
+  showWorkFlow: boolean = false;
+  listOfEvents: any []=[];
     constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService, private globalVariableService: SandstormGlobalVariablesService) { }
 
   ngOnInit() {
@@ -54,5 +56,19 @@ export class ViewEntityComponent implements OnInit {
       }
   doIExist(title){
     return this.listOfSubMenuItems.includes(title);
+    }
+    getWorkFlowData(){
+      if(!this.showWorkFlow){
+        this.entityService.getWorkFlowData(this.selectedEntity.wfInstanceId)
+        .subscribe((response: any)=>{
+          this.showWorkFlow = !this.showWorkFlow;
+          if(response!=null){
+            this.listOfEvents = response.data;
+          }
+        });
+      }else{
+        this.showWorkFlow = !this.showWorkFlow;
+      }
+
     }
 }

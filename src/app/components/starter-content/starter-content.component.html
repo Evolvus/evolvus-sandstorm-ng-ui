@@ -62,21 +62,20 @@
           <div class="col-md-12">
             <h4 class="text-center marT15 txt-blue">Pending Actions</h4>
             <div class="scrollbar" id="style-1" custom-scroll="{ 'theme': dark }">
-              <div class="force-overflow">
+              <div class="force-overflow" *ngFor="let event of eventData">
                 
-                <div class="pendingActionBlock">
+                <div class="pendingActionBlock" >
                   <div class="pull-left">
-                    User Role acceptance
+                     {{event?.wfEntity}} acceptance
                   </div>
                   <div class="pull-right">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <i class="fa fa-angle-right" (click)="view(event?.wfEntity, event?.wfInstanceId)"aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center"><small>Requested username 1 hour ago</small></div>
+                <div class="text-center request-time"><small>Requested {{getTimeOfRequest(event?.wfEventDate)}} {{getTimeOfRequest(event?.wfEventDate) == '1' ? 'hour ago' : 'hours ago' }}</small></div>
 
-
-     
               </div>
+              
             </div>
           </div>
         </div>

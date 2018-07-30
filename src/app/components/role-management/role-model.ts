@@ -57,7 +57,7 @@ export class MenuItems
     menuItemCode: string;
     title: string;
     selectedFlag: boolean;
-
+    subMenuItems: MenuItems[]
     constructor(
       menuItemType: string,
       applicationCode: string,

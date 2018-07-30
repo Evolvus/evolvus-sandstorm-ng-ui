@@ -15,7 +15,7 @@ export class ListRolesEntityComponent implements OnInit {
   role: RoleModel;
   listOfRoles: any = [];
   listOfApplicationCategory: string[] = [];
-  listOfApplications: any;
+  listOfApplications: any []= [];
   defaultFilterCriteria = {
     applicationCode: "",
     activationStatus: "",
@@ -52,8 +52,11 @@ export class ListRolesEntityComponent implements OnInit {
     this.roleDataService
       .getlistOfApplicationCategory()
       .subscribe((response: any) => {
-        this.listOfApplications = response.data;
-        this.listOfApplicationCategory = this.listOfApplications.map(application => application.applicationCode);
+        if(response!=null){
+          console.log(response);
+          this.listOfApplications = response.data;
+          this.listOfApplicationCategory = this.listOfApplications.map(application => application.applicationCode);
+        }
       });
   }
 

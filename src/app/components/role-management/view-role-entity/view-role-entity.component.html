@@ -82,43 +82,22 @@
             </div>
           </div>
         </mat-tab>
-        <!-- <mat-tab label="Console">
-          <div class="tabContent">
-            <div class="marB30">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <h5>Administration</h5>
-                  <label>User Management</label>
-              </div>
-              </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <h5>Business Operations</h5>
-                <label>Checker</label>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                  <h5>Maintenance</h5>
-                  <label>Reason Code Maintenance</label>
-              </div>
-            </div>
-            </div>
-          </div>
-        </mat-tab> -->
       </mat-tab-group>
-      <!-- 
-     
-     <div class="row" ng-show="remark">
-       <div class="col-md-4">
-           <div class="form-group">
-             <h5>Remarks</h5>
-              <textarea class="form-control" rows="5" id="comment"></textarea>
-           </div>
-         </div>
-    </div>  -->
+
+      <br>
+      <div *ngIf="showWorkFlow">
+        <div class="col-md-12">
+          <h4>Work Flow - Events</h4>
+          <hr>
+        </div>
+        <div class="work-flow">
+          <app-evolvus-workflow-view [eventList]="listOfEvents"></app-evolvus-workflow-view>
+        </div>
+        <div class="no-event-data" *ngIf="listOfEvents.length==0">
+          <h6>No Data Found!</h6>
+        </div>
+        <hr>
+      </div>
 
 
       <div class="row text-center">
@@ -137,7 +116,10 @@
                     </div><br>
               <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
               <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
-              <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>
+              <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>    <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                  <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                  <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+                </button>
               <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
             </div>
 
@@ -147,6 +129,10 @@
                 <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
                 <span *ngIf="!isStatusPending">Modify</span>
               </button>
+              <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                  <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                  <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+                </button>
               <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
 
             </div>

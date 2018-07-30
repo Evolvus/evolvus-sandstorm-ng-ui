@@ -14,6 +14,8 @@ selectedUser: any;
 isStatusPending: boolean = true;
 loggedInUser: any;
 listOfSubMenuItems: any = [];
+showWorkFlow: boolean = false;
+listOfEvents: any []=[];
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -58,5 +60,21 @@ listOfSubMenuItems: any = [];
       doIExist(title){
         return this.listOfSubMenuItems.includes(title);
         }
+
+        getWorkFlowData(){
+          if(!this.showWorkFlow){
+            this.userDataService.getWorkFlowData(this.selectedUser.wfInstanceId)
+            .subscribe((response: any)=>{
+              this.showWorkFlow = !this.showWorkFlow;
+              if(response!=null){
+                this.listOfEvents = response.data;
+              }
+            });
+          }else{
+            this.showWorkFlow = !this.showWorkFlow;
+          }
+        
+        }
+        
 
 }

@@ -1516,5 +1516,10 @@ float: left;
             border: 0 !important;
             vertical-align: inherit !important;
         }
+        .no-event-data{
+            position: relative;
+            left: 1em;
+            color: red;
+        }
 
 

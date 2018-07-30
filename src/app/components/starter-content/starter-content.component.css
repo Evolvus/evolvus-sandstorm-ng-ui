@@ -4,3 +4,7 @@
 .col-md-6:hover span{
     color: white;
 }
+.force-overflow .request-time{
+    margin: 0px;
+    margin-top: -5px;
+}

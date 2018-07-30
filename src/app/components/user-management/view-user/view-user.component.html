@@ -117,6 +117,20 @@
             </div>
            </div>
          </div>
+         <br>
+         <div *ngIf="showWorkFlow">
+           <div class="col-md-12">
+             <h4>Work Flow - Events</h4>
+             <hr>
+           </div>
+           <div class="work-flow">
+             <app-evolvus-workflow-view [eventList]="listOfEvents"></app-evolvus-workflow-view>
+           </div>
+           <div class="no-event-data" *ngIf="listOfEvents.length==0">
+             <h6>No Data Found!</h6>
+           </div>
+           <hr>
+         </div>
 
          <div class="row text-center">
          <div class="col-sm-12">
@@ -135,6 +149,10 @@
                   <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
                   <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
                   <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>
+                  <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                      <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                      <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+                    </button>
                   <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
                 </div>
     
@@ -143,7 +161,10 @@
                     <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
                     <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
                     <span *ngIf="!isStatusPending">Modify</span>
-                  </button>
+                  </button>    <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                      <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                      <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+                    </button>
                   <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
     
                 </div>

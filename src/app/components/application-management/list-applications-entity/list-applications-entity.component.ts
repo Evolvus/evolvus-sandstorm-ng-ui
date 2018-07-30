@@ -60,7 +60,7 @@ getAllApplications(){
 }
 
   viewSelectedApplication() {
-    this.router.navigate(['/viewApplication', this.selectedApplication.applicationCode]);
+    this.router.navigate(['viewApplication', this.selectedApplication.applicationCode]);
   }
 
 

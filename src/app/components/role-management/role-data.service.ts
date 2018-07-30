@@ -1,7 +1,7 @@
 import { Observable, Subject, of } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 import { RoleModel } from './role-model';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { ConfirmationDialogEntityComponent } from "../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
@@ -32,11 +32,6 @@ defaultFilterCriteria = {
   pageSize: 5,
   pageNo: 1
 } 
-defaultHeaders: HttpHeaders = new HttpHeaders({
-entityCode: 'defaultEntity',
-tenantId: 'EVL',
-accessLevel: '0'
-});
 
 sampleDate: Date = new Date(); 
 
@@ -154,7 +149,13 @@ getListOfSubMenuItems(){
   .map(subMenuItem => subMenuItem.title); 
 }
 
-
+getWorkFlowData(wfInstanceId){
+  return this.http.get(`${this.platformURL}/swe/api/event`, {
+    params: {
+      wfInstanceId: wfInstanceId
+    }
+  }); 
+ }
 
 
 }

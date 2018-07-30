@@ -105,7 +105,7 @@
       </div>
 
 
-      <div class="row" *ngIf="applicationCategorySelected">
+      <div class="row" *ngIf="applicationCategorySelected && roleForm.value.roleType!=''">
         <div class="col-md-12">
           <h4>Menu Access Details</h4>
           <hr>
@@ -113,7 +113,7 @@
       </div>
 
       <div>
-        <mat-tab-group *ngIf="applicationCategorySelected">
+        <mat-tab-group *ngIf="applicationCategorySelected && roleForm.value.roleType!=''">
           <mat-tab label="Menus">
             <div class="row">
               <div class="col-md-12">
@@ -123,9 +123,16 @@
                       <div class="form-group">
                         <label class="checkbox-inline" *ngFor="let menuGroup of listOfMenuGroups">
                           <label for="" class="menu-group-title txt-orange">{{menuGroup.title}}</label>
-                          <div class="menu-items" *ngFor="let menuItem of menuGroup.menuItems">
-                            <mat-checkbox class="mat-pseudo-checkbox" (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.title | lowercase}}"
-                              name="{{menuItem.title | lowercase }}" value="{{menuItem.title | lowercase}}">{{menuItem.title}}</mat-checkbox>
+                          <div class="menu-items" *ngFor="let menuItem of menuGroup?.menuItems">
+                            <mat-checkbox class="mat-pseudo-checkbox"  (change)="addMenuItem(menuGroup, menuItem)" id="{{menuItem.menuItemCode | lowercase}}"
+                              name="{{menuItem.menuItemCode | lowercase }}" value="{{menuItem?.menuItemCode | lowercase}}">{{menuItem?.title}}</mat-checkbox>
+                              <br> 
+                              <div class="sub-menu-items" *ngIf="roleForm?.value.roleType=='CHECKER'">
+                                <div class=""  *ngFor="let subMenuItem of menuItem.subMenuItems">
+                                  <mat-checkbox class="mat-pseudo-checkbox" *ngIf="menuItem.selectedFlag" (change)="addSubMenuItem(menuItem, subMenuItem)" id="{{subMenuItem.menuItemCode | lowercase}}"
+                                  name="{{subMenuItem.menuItemCode | lowercase }}" value="{{subMenuItem?.menuItemCode | lowercase}}">{{subMenuItem?.title}}</mat-checkbox>
+                                 </div>
+                              </div>
                           </div>
                         </label>
                       </div>

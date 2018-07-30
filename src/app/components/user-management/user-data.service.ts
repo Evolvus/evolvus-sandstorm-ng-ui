@@ -198,4 +198,13 @@ export class UserDataService {
     .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
     .map(subMenuItem => subMenuItem.title); 
   }
+
+  getWorkFlowData(wfInstanceId){
+    return this.http.get(`${this.platformURL}/swe/api/event`, {
+      params: {
+        wfInstanceId: wfInstanceId
+      }
+    });  }
+
+
 }

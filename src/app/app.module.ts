@@ -75,6 +75,9 @@ import { ViewUserComponent } from './components/user-management/view-user/view-u
 import { UpdateUserComponent } from './components/user-management/update-user/update-user.component';
 
 
+// EVOLVUS NPM COMPONENTS
+
+import {EvolvusWorkflowViewModule} from '@evolvus/evolvus-workflow-event-view';
 
 //HELPER COMPONENTS
 
@@ -109,7 +112,7 @@ import { SearchPipe } from './components/shared/search.pipe';
     ViewUserComponent,
     UpdateUserComponent,
     SessionexpiredComponent,
-    LoginConsoleComponent
+    LoginConsoleComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +127,8 @@ import { SearchPipe } from './components/shared/search.pipe';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    EvolvusWorkflowViewModule
     
   ],
   entryComponents: [
