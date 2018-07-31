@@ -35,11 +35,11 @@ return this.http.get(`${this.platformURL}/swe/api/event`,{
 });
 }
 
-getWfEntityData(wfEntity, wfInstanceId){
+getWfEntityData(wfEntity, id){
   wfEntity = wfEntity.toLowerCase();
   return this.http.get(`${this.platformURL}/sandstorm/api/${wfEntity}`,{
     params:{
-      wfInstanceId: wfInstanceId
+      query: id
     }
   });
 }

@@ -199,12 +199,25 @@ export class UserDataService {
     .map(subMenuItem => subMenuItem.title); 
   }
 
-  getWorkFlowData(wfInstanceId){
+  getWorkFlowData(id){
     return this.http.get(`${this.platformURL}/swe/api/event`, {
       params: {
-        wfInstanceId: wfInstanceId
+        query: id
       }
     });  }
 
-
+    takeAction(type, user, comments) {
+      if(type=='APPROVE'){
+        type="AUTHORIZED";
+      }else if(type=='REJECT'){
+        type="REJECTED"
+      }
+      return this.http.post(`${this.platformURL}/swe/api/swe/complete`, {
+        wfInstanceId: user.wfInstanceId,
+        wfEntity: "USER",
+        wfEvent: type,
+        query: user._id,
+        comments: comments
+      });
+    }
 }

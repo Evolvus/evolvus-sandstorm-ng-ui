@@ -122,11 +122,7 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
     miIndex < this.selectedMenuGroups[mgIndex].menuItems.length;
     miIndex++
   ) {
-    this.selectedMenuGroups[mgIndex].menuItems[
-      miIndex
-    ].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[
-      miIndex
-    ].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
+    this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
   }
 }else{
   this.selectedMenuGroups.splice(mgIndex, 1);

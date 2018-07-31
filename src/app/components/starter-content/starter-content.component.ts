@@ -40,14 +40,19 @@ var eventDateTimeInMilliSeconds = +new Date(eventDateTime);
 var currentDateTimeInMilliSeconds = +new Date();
 var differenceDateTimeInMilliSeconds = currentDateTimeInMilliSeconds - eventDateTimeInMilliSeconds;
 var requestDateTimeInHours = (differenceDateTimeInMilliSeconds/(24*60*60*1000));
-return Math.ceil(requestDateTimeInHours);
+if(requestDateTimeInHours<1){ // in minutes
+return "Requested "+Math.ceil(requestDateTimeInHours * 60 * 1000)+" minutes ago";
+}else{
+  return "Requested "+(Math.ceil(requestDateTimeInHours))+" hours ago";
+}
 }
 
 
 
 
-view(wfEntity, wfInstanceId){
-  this.starterContentService.getWfEntityData(wfEntity, wfInstanceId).subscribe((response: any)=>{
+view(wfEntity, id){
+
+  this.starterContentService.getWfEntityData(wfEntity, id).subscribe((response: any)=>{
     if(response.data.length!=0){
       if(wfEntity=='ENTITY'){
         this.router.navigate(["viewEntity", response.data[0].entityCode]);

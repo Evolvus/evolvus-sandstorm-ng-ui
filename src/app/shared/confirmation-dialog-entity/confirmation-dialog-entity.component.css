@@ -28,6 +28,10 @@ h5{
     color:#ff8500;
 }
 
+.comment-box{
+margin-top: 3em;
+}
+
 h4{
     
     font-family: 'Segoe UI';
@@ -36,4 +40,14 @@ h4{
 .text-center{
     border: 1em solid white;
     border-radius: 10px;
+}
+
+.fa-comments{
+    font-size: 8em;
+    margin-right: 35px;
+    border: 0px;
+
+}
+text-area{
+    border: 1px solid black;
 }

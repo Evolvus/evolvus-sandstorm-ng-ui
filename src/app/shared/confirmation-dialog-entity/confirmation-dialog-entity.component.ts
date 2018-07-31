@@ -1,3 +1,5 @@
+import { Validators, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
@@ -7,6 +9,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class ConfirmationDialogEntityComponent implements OnInit {
 
+
+  statusMessage: string = "";
+messageType: string = "";
+serverError: boolean = false;
+commentForm: FormGroup = new FormGroup({comments: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])});
   constructor(  public dialogRef: MatDialogRef<ConfirmationDialogEntityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -17,13 +24,14 @@ export class ConfirmationDialogEntityComponent implements OnInit {
     this.serverError = true;
     }
   }
-  statusMessage: string = "";
-messageType: string = "";
-serverError: boolean = false;
+
   onNoClick(status): void {
   this.dialogRef.close(status);
-
-
   }
+
+addComments(status){
+  this.dialogRef.close({comments: this.commentForm.value.comments, status: status});
+}
+
 
 }

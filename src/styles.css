@@ -34,6 +34,9 @@
   .evo-newusers:before {
     content: "\eb16";
   }
+  .evo-application:before {
+    content: "\e9f7";
+  }
   .evo-reasoncode:before {
     content: "\eb1a";
   }
@@ -50,7 +53,7 @@
     content: "\e88a";
   }
   .evo-user:before {
-    content: "\eb1d";
+    content: "\eb16";
   }
 
 html {
@@ -958,7 +961,7 @@ button#slideright span {
     border-color:#000 !important;
 }
 
-.btn-reject:focus, .btn-reject:hover, .btn-reject:active, .btn-reject:visited{
+ .btn-reject:hover{
 	background-color: #fff !important;
     border-color: #000 !important;
     color:#000 !important;
@@ -1520,6 +1523,11 @@ float: left;
             position: relative;
             left: 1em;
             color: red;
+        }
+        .comments h6::after {
+            content: "*";
+            color: red;
+            font-size: 12px;
         }
 
 

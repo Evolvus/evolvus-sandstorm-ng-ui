@@ -36,7 +36,10 @@ export class AuthenticationService {
         this.isAuthenticated = false;
         this.authenticatedSubject.next(this.isAuthenticated);
         this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
-            this.router.navigate(['login']);
+            // this.router.navigate(['login']);
+            window.location.reload();
+            console.log("rorororor");
+
         });
     }
 }

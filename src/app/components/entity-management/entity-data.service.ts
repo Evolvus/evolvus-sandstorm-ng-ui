@@ -145,12 +145,26 @@ export class EntityDataService {
     return attribute;
   }
 
-  getWorkFlowData(wfInstanceId){
+  getWorkFlowData(id) {
     return this.http.get(`${this.platformURL}/swe/api/event`, {
       params: {
-        wfInstanceId: wfInstanceId
+        query: id
       }
-    });  }
-   
+    });
+  }
 
+  takeAction(type, entity, comments) {
+    if (type == "APPROVE") {
+      type = "AUTHORIZED";
+    } else if (type == "REJECT") {
+      type = "REJECTED";
+    }
+    return this.http.post(`${this.platformURL}/swe/api/swe/complete`, {
+      wfInstanceId: entity.wfInstanceId,
+      wfEntity: "ENTITY",
+      wfEvent: type,
+      query: entity._id,
+      comments: comments
+    });
+  }
 }

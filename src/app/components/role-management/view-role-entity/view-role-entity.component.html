@@ -86,9 +86,13 @@
 
       <br>
       <div *ngIf="showWorkFlow">
-        <div class="col-md-12">
-          <h4>Work Flow - Events</h4>
-          <hr>
+        <div class="work-flow-view">
+          <mat-tab-group>
+            <mat-tab label="Work Flow - History">
+
+            </mat-tab>
+
+          </mat-tab-group>
         </div>
         <div class="work-flow">
           <app-evolvus-workflow-view [eventList]="listOfEvents"></app-evolvus-workflow-view>
@@ -102,25 +106,18 @@
 
       <div class="row text-center">
         <div class="col-sm-12">
-          <div class="">
 
             <div class="checker-specific-menus" *ngIf="user?.role.roleType=='CHECKER'">
-                <div class="row" ng-show="remark">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                          <span class="pull-left comments"><h5>Comments</h5></span>
-                          
-                           <textarea required class="form-control" rows="5" id="comment"></textarea>
-                        </div>
-                      </div>
-                    </div><br>
-              <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
-              <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
-              <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>    <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
-                  <span *ngIf="!showWorkFlow">Show WorkFlow</span>
-                  <span *ngIf="showWorkFlow">Hide WorkFlow</span>
-                </button>
-              <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+
+                <button *ngIf="doIExist('Approve') && isStatusPending" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
+                <button *ngIf="doIExist('Reprocess') && isStatusPending" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
+                  Reprocess</button>
+                <button *ngIf="doIExist('Reject') && isStatusPending" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
+              <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+              </button>
+              <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
             </div>
 
             <div class="maker-specific-menus" *ngIf="user?.role.roleType=='MAKER'">
@@ -130,14 +127,13 @@
                 <span *ngIf="!isStatusPending">Modify</span>
               </button>
               <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
-                  <span *ngIf="!showWorkFlow">Show WorkFlow</span>
-                  <span *ngIf="showWorkFlow">Hide WorkFlow</span>
-                </button>
+                <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+              </button>
               <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
 
             </div>
 
-          </div>
         </div>
       </div>
     </form>

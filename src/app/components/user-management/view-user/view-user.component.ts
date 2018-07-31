@@ -16,6 +16,7 @@ loggedInUser: any;
 listOfSubMenuItems: any = [];
 showWorkFlow: boolean = false;
 listOfEvents: any []=[];
+
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -62,8 +63,9 @@ listOfEvents: any []=[];
         }
 
         getWorkFlowData(){
+          console.log(this.selectedUser, "SELECTED USER");
           if(!this.showWorkFlow){
-            this.userDataService.getWorkFlowData(this.selectedUser.wfInstanceId)
+            this.userDataService.getWorkFlowData(this.selectedUser._id)
             .subscribe((response: any)=>{
               this.showWorkFlow = !this.showWorkFlow;
               if(response!=null){
@@ -75,6 +77,17 @@ listOfEvents: any []=[];
           }
         
         }
-        
+        takeAction(type) {
+          this.userDataService
+            .openDialog("comments", "comments")
+            .subscribe(result => {
+              if (result.status) {
+                this.userDataService
+                  .takeAction(type, this.selectedUser, result.comments)
+                  .subscribe((response: any) => {});
+              } else {
+              }
+            });
+        }        
 
 }

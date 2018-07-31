@@ -59,7 +59,7 @@ export class ViewEntityComponent implements OnInit {
     }
     getWorkFlowData(){
       if(!this.showWorkFlow){
-        this.entityService.getWorkFlowData(this.selectedEntity.wfInstanceId)
+        this.entityService.getWorkFlowData(this.selectedEntity._id)
         .subscribe((response: any)=>{
           this.showWorkFlow = !this.showWorkFlow;
           if(response!=null){
@@ -70,5 +70,17 @@ export class ViewEntityComponent implements OnInit {
         this.showWorkFlow = !this.showWorkFlow;
       }
 
+    }
+    takeAction(type) {
+      this.entityService
+        .openDialog("comments", "comments")
+        .subscribe(result => {
+          if (result.status) {
+            this.entityService
+              .takeAction(type, this.selectedEntity, result.comments)
+              .subscribe((response: any) => {});
+          } else {
+          }
+        });
     }
 }

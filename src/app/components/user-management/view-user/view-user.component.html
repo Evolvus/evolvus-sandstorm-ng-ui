@@ -1,64 +1,69 @@
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper viewFormSec">
-    <!-- Content Header (Page header) -->
-    <section class="padL35 content-header ">
-      <h1 class="marTB15 txt-orange">
-       <div class="img_icon">
-         <span><i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/userManagement']" aria-hidden="true"></i> View User Details</span>
-       </div>  
-      </h1>
-    </section> 
- 
-     <section class="content">
-       <form>
-         <div class="row">
-           <div class="col-md-12">
-             <h4>User Information</h4>
-             <hr>
-           </div>
-            <div class="col-md-8 ">
-              <div class="col-md-6 no-padding-left">
-                  <div class="form-group">
-                     <h5>User Id</h5>
-                     <label>{{selectedUser?.userId}}</label>
-                 </div>
-                                 
-                 <div class="form-group">
-                     <h5>Designation</h5>
-                     <label>{{selectedUser?.designation}}</label>
-                 </div>
-                 
-                 <div class="form-group">
-                     <h5>Mobile Number</h5>
-                     <label>{{selectedUser?.contact.mobileNumber}}</label>
-                 </div>
-                 
-                    
-                 <div class="form-group">
-                  <h5>Fax</h5>
-                  <label>{{selectedUser?.contact.faxNumber}}</label>
-              </div>	
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper viewFormSec">
+  <!-- Content Header (Page header) -->
+  <section class="padL35 content-header ">
+    <h1 class="marTB15 txt-orange">
+      <div class="img_icon">
+        <span>
+          <i class="fa fa-angle-left" mat-raised-button matTooltip="Back" [routerLink]="['/userManagement']" aria-hidden="true"></i> View User Details</span>
+      </div>
+    </h1>
+  </section>
+
+  <section class="content">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>User Information</h4>
+          <hr>
+        </div>
+        <div class="col-md-8 ">
+          <div class="col-md-6 no-padding-left">
+            <div class="form-group">
+              <h5>User Id</h5>
+              <label>{{selectedUser?.userId}}</label>
+            </div>
+
+            <div class="form-group">
+              <h5>Designation</h5>
+              <label>{{selectedUser?.designation}}</label>
+            </div>
+
+            <div class="form-group">
+              <h5>Mobile Number</h5>
+              <label>{{selectedUser?.contact.mobileNumber}}</label>
+            </div>
+
+
+            <div class="form-group">
+              <h5>Fax</h5>
+              <label>{{selectedUser?.contact.faxNumber}}</label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <h5>User Name</h5>
+              <label>{{selectedUser?.userName}}</label>
+            </div>
+            <div class="form-group">
+              <h5>Branch ID </h5>
+              <label>{{selectedUser?.entityId}}</label>
+            </div>
+
+            <div class="form-group">
+              <h5>Email ID </h5>
+              <label>{{selectedUser?.contact.emailId}}</label>
+            </div>
+            <div class="form-group">
+                <h5>Status </h5>
+                <label>{{selectedUser?.processingStatus}}</label>
               </div>
-              
-               <div class="col-md-6">	    			  		
-                <div class="form-group">
-                  <h5>User Name</h5>
-                  <label>{{selectedUser?.userName}}</label>
-              </div>
-                 <div class="form-group">
-                     <h5>Branch ID </h5>
-                     <label>{{selectedUser?.entityId}}</label>
-                 </div>
-                 
-                 <div class="form-group">
-                     <h5>Email ID </h5>
-                     <label>{{selectedUser?.contact.emailId}}</label>
-                 </div>
-           
-               </div>
-         </div>
-         
-         <!-- <div class="col-md-4">
+  
+          </div>
+        </div>
+
+        <!-- <div class="col-md-4">
            <div><img src="assets/images/user.jpeg" height="150" width="190"></div>				
            <div class="">
              <button type="button" class="btn btn-info btn-add" style="margin-top:11%;margin-bottom:5%;">
@@ -66,113 +71,110 @@
                </button>
              </div>				    				     
          </div>				 -->
-         </div>
-         
-         <div class="row">
-           <div class="col-md-12">
-             <h4>Access Details</h4>
-             <hr>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Role</h5>
-               <label>{{selectedUser?.role.roleName}}</label>
-            </div>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Activation Status</h5>
-               <label>{{selectedUser?.activationStatus}}</label>
-            </div>
-           </div>
+      </div>
 
-         </div>
-         
-         <div class="row">
-           <div class="col-md-12">
-             <h4>Amount Limit Details</h4>
-             <hr>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Transaction Limit</h5>
-               <label>{{selectedUser?.individualTransactionLimit}}</label>
-            </div>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Daily Limit</h5>
-               <label>{{selectedUser?.dailyLimit}}</label>
-            </div>
-           </div>
-           
-           <div class="col-md-4">
-             <div class="form-group">
-               <h5>Currency</h5>
-               <label>{{selectedUser?.masterCurrency}}</label>
-            </div>
-           </div>
-         </div>
-         <br>
-         <div *ngIf="showWorkFlow">
-           <div class="col-md-12">
-             <h4>Work Flow - Events</h4>
-             <hr>
-           </div>
-           <div class="work-flow">
-             <app-evolvus-workflow-view [eventList]="listOfEvents"></app-evolvus-workflow-view>
-           </div>
-           <div class="no-event-data" *ngIf="listOfEvents.length==0">
-             <h6>No Data Found!</h6>
-           </div>
-           <hr>
-         </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Access Details</h4>
+          <hr>
+        </div>
 
-         <div class="row text-center">
-         <div class="col-sm-12">
-            <div class="">
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Role</h5>
+            <label>{{selectedUser?.role.roleName}}</label>
+          </div>
+        </div>
 
-                <div class="checker-specific-menus" *ngIf="loggedInUser?.role.roleType=='CHECKER'">
-                    <div class="row" ng-show="remark">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                              <span class="pull-left comments"><h5>Comments</h5></span>
-                              
-                               <textarea class="form-control" rows="5" id="comment"></textarea>
-                            </div>
-                          </div>
-                        </div><br>
-                  <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve"> Approve</button>
-                  <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit"> Reprocess</button>
-                  <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject"> Reject</button>
-                  <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
-                      <span *ngIf="!showWorkFlow">Show WorkFlow</span>
-                      <span *ngIf="showWorkFlow">Hide WorkFlow</span>
-                    </button>
-                  <button  type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
-                </div>
-    
-                <div class="maker-specific-menus" *ngIf="loggedInUser?.role.roleType=='MAKER'">
-                  <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
-                    <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
-                    <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
-                    <span *ngIf="!isStatusPending">Modify</span>
-                  </button>    <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
-                      <span *ngIf="!showWorkFlow">Show WorkFlow</span>
-                      <span *ngIf="showWorkFlow">Hide WorkFlow</span>
-                    </button>
-                  <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
-    
-                </div>
-    
-              </div>
-         </div>
-       </div>
-       </form>
-     </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
- 
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Activation Status</h5>
+            <label>{{selectedUser?.activationStatus}}</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Amount Limit Details</h4>
+          <hr>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Transaction Limit</h5>
+            <label>{{selectedUser?.individualTransactionLimit}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Daily Limit</h5>
+            <label>{{selectedUser?.dailyLimit}}</label>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>Currency</h5>
+            <label>{{selectedUser?.masterCurrency}}</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showWorkFlow">
+        <div class="work-flow-view">
+          <mat-tab-group>
+            <mat-tab label="Work Flow - History">
+
+            </mat-tab>
+
+          </mat-tab-group>
+        </div>
+        <div class="work-flow">
+          <app-evolvus-workflow-view [eventList]="listOfEvents"></app-evolvus-workflow-view>
+        </div>
+        <div class="no-event-data" *ngIf="listOfEvents.length==0">
+          <h6>No Data Found!</h6>
+        </div>
+        <hr>
+      </div>
+
+      <div class="row text-center">
+        <div class="col-sm-12">
+      <div class="row">
+
+
+            <div class="checker-specific-menus" *ngIf="loggedInUser?.role.roleType=='CHECKER'">
+                <button *ngIf="doIExist('Approve') && isStatusPending" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
+                <button *ngIf="doIExist('Reprocess') && isStatusPending" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
+                  Reprocess</button>
+                <button *ngIf="doIExist('Reject') && isStatusPending" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
+              <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+              </button>
+              <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+            </div>
+
+            <div class="maker-specific-menus" *ngIf="loggedInUser?.role.roleType=='MAKER'">
+              <button type="button" *ngIf="selectedUser?.processingStatus!='REJECTED'" class="btn btn-default btn-submit" (click)="updateUser()" [disabled]="isStatusPending">
+                <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
+                <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
+                <span *ngIf="!isStatusPending">Modify</span>
+              </button>
+              <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+                <span *ngIf="!showWorkFlow">Show WorkFlow</span>
+                <span *ngIf="showWorkFlow">Hide WorkFlow</span>
+              </button>
+              <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
+
+            </div>
+          </div>
+          </div>
+      </div>
+    </form>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -13,7 +13,7 @@
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="info-box maintananceicon1">
               <span class="info-box-icon bg-transparent">
-                <span class="evo-role"></span>
+                <span class="evo-application"></span>
               </span>
               <div class="info-box-content" [routerLink]="['/applicationManagement']">
                 <span class="info-box-text">Application Management</span>
@@ -69,18 +69,18 @@
                      {{event?.wfEntity}} acceptance
                   </div>
                   <div class="pull-right">
-                    <i class="fa fa-angle-right" (click)="view(event?.wfEntity, event?.wfInstanceId)"aria-hidden="true"></i>
+                    <i class="fa fa-angle-right" (click)="view(event?.wfEntity, event?.query)"aria-hidden="true"></i>
                   </div>
                 </div>
-                <div class="text-center request-time"><small>Requested {{getTimeOfRequest(event?.wfEventDate)}} {{getTimeOfRequest(event?.wfEventDate) == '1' ? 'hour ago' : 'hours ago' }}</small></div>
+                <div class="text-center request-time"><small>{{getTimeOfRequest(event?.wfEventDate)}}</small></div>
 
               </div>
-              
+              <div class="text-center" *ngIf="eventData.length==0"><h6 style="color: red;">No Pending Actions! </h6></div>
             </div>
           </div>
         </div>
 
-        <div class="row notficationBlock">
+        <!-- <div class="row notficationBlock">
           <div class="col-md-12">
             <h4 class="text-center  marT20 txt-blue">Notifications</h4>
             <div class="scrollbar" id="style-2" custom-scroll="{ 'theme': dark }">
@@ -111,7 +111,7 @@
             </div>
 
           </div>
-        </div>
+        </div> -->
 
 
 

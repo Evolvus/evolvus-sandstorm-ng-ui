@@ -5,7 +5,3 @@
 .btn-default{
     margin: 5px;
 }
-.comments h5::after {
-    content: "*";
-    color: red;
-}
