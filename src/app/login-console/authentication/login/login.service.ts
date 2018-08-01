@@ -35,11 +35,10 @@ export class AuthenticationService {
         // this.router.navigate([""]);
         this.isAuthenticated = false;
         this.authenticatedSubject.next(this.isAuthenticated);
-        this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
-            // this.router.navigate(['login']);
-            window.location.reload();
-            console.log("rorororor");
+        location.reload();
 
+        this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
+            this.router.navigate(['login']);
         });
     }
 }
