@@ -108,6 +108,7 @@ getRoleData(roleName){
         roleType: this.roleData.roleType
 
       });
+      console.log(this.roleData.applicationCode, "this.roleData.applicationCode");
       this.getMenuGroups(this.roleData.applicationCode);
    }
 

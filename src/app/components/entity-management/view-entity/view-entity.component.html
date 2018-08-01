@@ -49,7 +49,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <h5>Activation Status</h5>
-            <label>{{(selectedEntity?.enableFlag == true) ? 'Active' : 'Inactive'}}</label>
+            <label>{{selectedEntity?.enableFlag == 'true' ? 'Active' : 'Inactive'}}</label>
           </div>
         </div>
 
@@ -118,7 +118,7 @@
         <div class="maker-specific-menus" *ngIf="user?.role.roleType=='MAKER'">
       
 
-          <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
+          <button type="button" class="btn btn-default btn-submit" (click)="updateEntity()" [disabled]="isStatusPending">
             <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
             <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
             <span *ngIf="!isStatusPending">Modify</span>

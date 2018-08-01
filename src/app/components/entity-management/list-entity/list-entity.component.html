@@ -41,8 +41,8 @@
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
                          <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.enableFlag" name="enableFlag">
-                           <mat-option  value="1">Active</mat-option>
-                           <mat-option  value="0">Inactive</mat-option>
+                           <mat-option  value=true>Active</mat-option>
+                           <mat-option  value=false>Inactive</mat-option>
                          </mat-select>
                        </mat-form-field>
                 </div>
@@ -108,7 +108,7 @@
                       <td>{{ entity?.parent | uppercase}}</td>
                       <td>{{ entity?.accessLevel}}</td>
                       <td>{{ entity?.entityCode | uppercase}}</td>
-                      <td>{{ (entity?.enableFlag == true) ? 'Active' : 'Inactive'}}</td>
+                      <td>{{ entity?.enableFlag == 'true' ? 'Active' : 'Inactive'}}</td>
 
                       <td>{{ entity?.processingStatus}}</td>
                       <td>{{ entity?.createdBy}}</td>

@@ -70,11 +70,7 @@ getFilteredEntityNames(){
 
   save() {
     if(this.isAValidSelection('entity', this.entityForm.value.parent)){
-      if(this.entityForm.value.enableFlag){
-        this.entityForm.value.enableFlag = "1";
-      }else{
-        this.entityForm.value.enableFlag = "0";
-      }      
+     
       this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
         this.entityService.openDialog(
            "success",

@@ -81,7 +81,18 @@ export class ViewRoleEntityComponent implements OnInit {
           this.comments = result.comments;
           this.roleDataService
             .takeAction(type, this.selectedRole, this.comments)
-            .subscribe((response: any) => {});
+            .subscribe((response: any) => {
+              this.roleDataService
+            .openDialog("success", response.description)
+            .subscribe(result => {
+              this.router.navigate(["roleManagement"]);
+            });
+            }, (err)=>{
+              this.roleDataService
+            .openDialog("error", err.description)
+            .subscribe(result => {
+            });
+            });
         } else {
         }
       });

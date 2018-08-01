@@ -80,7 +80,7 @@ export class EntityDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
       params: {
         processingStatus: "AUTHORIZED",
-        enableFlag: "1"
+        enableFlag: "true"
       }
     });
   }

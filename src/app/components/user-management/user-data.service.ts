@@ -60,7 +60,7 @@ export class UserDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params:{
         processingStatus: 'AUTHORIZED',
-        enableFlag: '1'
+        enableFlag: "true"
       }
     });
   }
@@ -170,10 +170,10 @@ export class UserDataService {
     });
   }
 
-  getOneUserData(userName) {
+  getOneUserData(userId) {
     return this.http.get(`${this.platformURL}/sandstorm/api/user`, {
       params: {
-        userName: userName
+        userId: userId
       }
     });
   }

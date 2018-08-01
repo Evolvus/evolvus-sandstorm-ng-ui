@@ -41,7 +41,7 @@ var currentDateTimeInMilliSeconds = +new Date();
 var differenceDateTimeInMilliSeconds = currentDateTimeInMilliSeconds - eventDateTimeInMilliSeconds;
 var requestDateTimeInHours = (differenceDateTimeInMilliSeconds/(24*60*60*1000));
 if(requestDateTimeInHours<1){ // in minutes
-return "Requested "+Math.ceil(requestDateTimeInHours * 60 * 1000)+" minutes ago";
+return "Requested "+Math.ceil(requestDateTimeInHours/ (60 * 1000))+" minutes ago";
 }else{
   return "Requested "+(Math.ceil(requestDateTimeInHours))+" hours ago";
 }
@@ -61,7 +61,7 @@ view(wfEntity, id){
       }else if(wfEntity=='APPLICATION'){
         this.router.navigate(['viewApplication', response.data[0].applicationCode]);
       }else if(wfEntity=='USER'){
-        this.router.navigate(["viewUser", response.data[0].userName]);
+        this.router.navigate(["viewUser", response.data[0].userId]);
       }
     }
   })

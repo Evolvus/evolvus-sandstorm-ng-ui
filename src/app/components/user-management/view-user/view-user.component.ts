@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewUserComponent implements OnInit {
 
-userName: string = "";
+userId: string = "";
 selectedUser: any;
 isStatusPending: boolean = true;
 loggedInUser: any;
@@ -20,8 +20,8 @@ listOfEvents: any []=[];
   constructor(private userDataService: UserDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.userName = "" + this.route.snapshot.params['id'];
-    this.userDataService.getOneUserData(this.userName).subscribe((userData: any)=>{
+    this.userId = "" + this.route.snapshot.params['id'];
+    this.userDataService.getOneUserData(this.userId).subscribe((userData: any)=>{
 
 
 
@@ -33,7 +33,7 @@ listOfEvents: any []=[];
               this.isStatusPending = true;
             }
       }else{ //If there is no data with that Username
-        this.userDataService.openDialog("error", "No User found with Username "+this.userName!).subscribe((response)=>{
+        this.userDataService.openDialog("error", "No User found with UserId "+this.userId!).subscribe((response)=>{
           this.router.navigate(['userManagement']);
         });
       }
@@ -63,7 +63,6 @@ listOfEvents: any []=[];
         }
 
         getWorkFlowData(){
-          console.log(this.selectedUser, "SELECTED USER");
           if(!this.showWorkFlow){
             this.userDataService.getWorkFlowData(this.selectedUser._id)
             .subscribe((response: any)=>{
@@ -84,7 +83,18 @@ listOfEvents: any []=[];
               if (result.status) {
                 this.userDataService
                   .takeAction(type, this.selectedUser, result.comments)
-                  .subscribe((response: any) => {});
+                  .subscribe((response: any) => {
+                    this.userDataService
+                    .openDialog("success", response.description)
+                    .subscribe(result => {
+                      this.router.navigate(["userManagement"]);
+                    });
+                  }, (err)=>{
+                    this.userDataService
+                    .openDialog("error", err.description)
+                    .subscribe(result => {
+                    });
+                  });
               } else {
               }
             });

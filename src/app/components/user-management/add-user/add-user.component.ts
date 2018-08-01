@@ -50,7 +50,7 @@ export class AddUserComponent implements OnInit {
       entity: new FormControl("", [Validators.required]),
       emailId: new FormControl("", [Validators.required, Validators.email]),
       phoneNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
-      mobileNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
+      mobileNumber: new FormControl("",Validators.pattern("[0-9]{10}")),
       country: new FormControl("", [
         Validators.required,
         Validators.maxLength(140)

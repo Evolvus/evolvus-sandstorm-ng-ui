@@ -39,7 +39,7 @@ getWfEntityData(wfEntity, id){
   wfEntity = wfEntity.toLowerCase();
   return this.http.get(`${this.platformURL}/sandstorm/api/${wfEntity}`,{
     params:{
-      query: id
+      _id : id
     }
   });
 }

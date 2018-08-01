@@ -15,7 +15,7 @@ export class ViewEntityComponent implements OnInit {
 
 
 
-  entityId: string = "";
+  entityCode: string = "";
   selectedEntity: any;
   isStatusPending: boolean = true;
   user: any;
@@ -26,8 +26,8 @@ export class ViewEntityComponent implements OnInit {
 
   ngOnInit() {
 
-    this.entityId = "" + this.route.snapshot.params['id'];
-    this.entityService.getOneEntityData(this.entityId).subscribe((entityData: any)=>{
+    this.entityCode = "" + this.route.snapshot.params['id'];
+    this.entityService.getOneEntityData(this.entityCode).subscribe((entityData: any)=>{
 
       this.selectedEntity = entityData.data[0];
       this.entityService.getCurrentUserData().subscribe((user: any)=>{
@@ -78,8 +78,22 @@ export class ViewEntityComponent implements OnInit {
           if (result.status) {
             this.entityService
               .takeAction(type, this.selectedEntity, result.comments)
-              .subscribe((response: any) => {});
+              .subscribe((response: any) => {
+                this.entityService.openDialog(
+                  "success",
+                  response.description
+                ).subscribe((result)=>{
+                this.router.navigate(['entityManagement']);
+                });
+              }, (err)=>{
+                this.entityService.openDialog(
+                  "error",
+                  err.description
+                ).subscribe((result)=>{
+                });
+              });
           } else {
+//when user clicks cancel on comment dialog
           }
         });
     }

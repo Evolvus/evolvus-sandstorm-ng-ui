@@ -103,7 +103,7 @@ export class ListUsersComponent implements OnInit {
   }
 
   view(user) {
-    this.router.navigate(["viewUser", user.userName]);
+    this.router.navigate(["viewUser", user.userId]);
   }
 
    getFilteredUserData(source) {
