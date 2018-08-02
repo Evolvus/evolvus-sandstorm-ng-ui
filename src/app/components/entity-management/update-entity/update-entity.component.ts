@@ -66,7 +66,6 @@ export class UpdateEntityComponent implements OnInit {
       if(response.data!=[]){
         this.entityData = response.data[0];
         this.entityForm.patchValue({
-         
           enableFlag: this.entityData.enableFlag,
           name: this.entityData.name,
           entityCode: this.entityData.entityCode,

@@ -26,4 +26,6 @@ label{
   font-size: 12px;
   margin-top: -10px;
   margin-right: -30px;
-} 
+}   .form-group .menu-items .sub-menu-items mat-checkbox{
+  margin-left: 20px;
+ }

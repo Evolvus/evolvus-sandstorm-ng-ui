@@ -39,11 +39,11 @@ var currentDateTime = +new Date();
 var eventDateTimeInMilliSeconds = +new Date(eventDateTime);
 var currentDateTimeInMilliSeconds = +new Date();
 var differenceDateTimeInMilliSeconds = currentDateTimeInMilliSeconds - eventDateTimeInMilliSeconds;
-var requestDateTimeInHours = (differenceDateTimeInMilliSeconds/(24*60*60*1000));
+var requestDateTimeInHours = (differenceDateTimeInMilliSeconds/(60*60*1000));
 if(requestDateTimeInHours<1){ // in minutes
-return "Requested "+Math.ceil(requestDateTimeInHours/ (60 * 1000))+" minutes ago";
+return "Requested "+ (Math.ceil(differenceDateTimeInMilliSeconds / (60 * 1000)))+" minutes ago";
 }else{
-  return "Requested "+(Math.ceil(requestDateTimeInHours))+" hours ago";
+  return "Requested "+(Math.floor(requestDateTimeInHours))+" hour/s ago";
 }
 }
 

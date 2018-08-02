@@ -68,35 +68,37 @@ export class ListEntityComponent implements OnInit {
       )
       .subscribe(
         (response: any) => {
-          if (response.totalNoOfRecords == 0) {
-            this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
-
-            this.entityService
-              .getFilteredEntityData(
-                this.defaultFilterCriteria.parent,
-                this.defaultFilterCriteria.enableFlag,
-                this.defaultFilterCriteria.processingStatus,
-                this.defaultFilterCriteria.pageSize,
-                this.defaultFilterCriteria.pageNo
-              )
-              .subscribe(
-                (response: any) => {
-                  this.listOfEntities = response.data;
-                  this.totalNoOfEntities = response.totalNoOfRecords;
-                  this.totalNoOfPages = response.totalNoOfPages;
-                  this.startIndex = 1;
-                  this.setCurrentPage(0);
-                },
-                err => {
-                  this.noEntityDataMessage = "Server Error! Try Again Later!";
-                }
-              );
-          } else {
-            this.listOfEntities = response.data;
-            this.totalNoOfEntities = response.totalNoOfRecords;
-            this.totalNoOfPages = response.totalNoOfPages;
-            this.startIndex = 1;
-            this.setCurrentPage(0);
+          if(response!=null){
+            if (response.totalNoOfRecords == 0) {
+              this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
+  
+              this.entityService
+                .getFilteredEntityData(
+                  this.defaultFilterCriteria.parent,
+                  this.defaultFilterCriteria.enableFlag,
+                  this.defaultFilterCriteria.processingStatus,
+                  this.defaultFilterCriteria.pageSize,
+                  this.defaultFilterCriteria.pageNo
+                )
+                .subscribe(
+                  (response: any) => {
+                    this.listOfEntities = response.data;
+                    this.totalNoOfEntities = response.totalNoOfRecords;
+                    this.totalNoOfPages = response.totalNoOfPages;
+                    this.startIndex = 1;
+                    this.setCurrentPage(0);
+                  },
+                  err => {
+                    this.noEntityDataMessage = "Server Error! Try Again Later!";
+                  }
+                );
+            } else {
+              this.listOfEntities = response.data;
+              this.totalNoOfEntities = response.totalNoOfRecords;
+              this.totalNoOfPages = response.totalNoOfPages;
+              this.startIndex = 1;
+              this.setCurrentPage(0);
+            }
           }
         },
         err => {

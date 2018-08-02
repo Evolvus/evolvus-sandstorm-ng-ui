@@ -30,11 +30,16 @@ export class UpdateRoleEntityComponent implements OnInit {
   listOfMenuGroups: MenuGroup[];
   listOfSelectedMenuGroups: MenuGroup[];
   listOfMenuItemCodes: string[] = [];
+  listOfSubMenuItemCodes: string[] = [];
   menuGroupNotSelected = false;
   menuItemsChanged = false;
   listOfApplications: any[]=[];
   listOfRoleTypes: any;
   listOfTxnTypes: any;
+  selectedMenuGroups: any[] = [];
+  selectedMenuItems: any[] = [];
+  selectedSubMenuItems: any[] = [];
+  subMenuItemsChanged: boolean = false;
   // listOfSubMenuItems: any= [];
 
   user: any;   //currently loggedIn User
@@ -72,8 +77,36 @@ export class UpdateRoleEntityComponent implements OnInit {
 
 
     var roleName = this.route.snapshot.params['id'];
+    this.roleDataService.getOneRoleData(roleName)
+    .subscribe((response: any)=>{
+      if(response!=null){
+       this.roleData = response.data[0];
+       this.listOfSelectedMenuGroups = this.roleData.menuGroup;
+       this.addSelectedMenuItemCodes();
+       this.addSelectedSubMenuItemCodes();
+       
+setTimeout(()=>{
+  this.roleDataService
+       .getListOfMenuGroups(response.data[0].applicationCode)
+       .subscribe((response: any) => {
+         this.listOfMenuGroups = response.data;
+    
+       });   
+}, 100);
+         this.roleForm.patchValue({
+         activationStatus: this.roleData.activationStatus,
+         roleName: this.roleData.roleName,
+         applicationCode: this.roleData.applicationCode,
+         description: this.roleData.description,
+         txnType: this.roleData.txnType,
+         roleType: this.roleData.roleType
+ 
+       });
+      }
+  }
 
-    this.getRoleData(roleName);
+ );
+    // this.getRoleData(roleName);
     this.getRoleTypes();
     this.getTxtTypes();
 
@@ -91,29 +124,45 @@ addSelectedMenuItemCodes(){
   }
  
 
+
+
 }
+addSelectedSubMenuItemCodes(){   
+  //All the MenuItemCodes of selected MenuItems of the selected Role is added to a list for UI representation during loading..
 
-getRoleData(roleName){
-  this.roleDataService.getOneRoleData(roleName)
-     .subscribe((response: any)=>{
-      this.roleData = response.data[0];
-      this.listOfSelectedMenuGroups = this.roleData.menuGroup;
-      this.addSelectedMenuItemCodes();
-      this.roleForm.patchValue({
-        activationStatus: this.roleData.activationStatus,
-        roleName: this.roleData.roleName,
-        applicationCode: this.roleData.applicationCode,
-        description: this.roleData.description,
-        txnType: this.roleData.txnType,
-        roleType: this.roleData.roleType
+    for(let menuGroup of this.listOfSelectedMenuGroups){
+      for(let menuItem of menuGroup.menuItems){
+        for(let subMenuItem of menuItem.subMenuItems){
+          this.listOfSubMenuItemCodes.push(subMenuItem.menuItemCode);
+        }
+      }
+    }
+  }
+  
 
-      });
-      console.log(this.roleData.applicationCode, "this.roleData.applicationCode");
-      this.getMenuGroups(this.roleData.applicationCode);
-   }
+// getRoleData(roleName){
+//   this.roleDataService.getOneRoleData(roleName)
+//      .subscribe((response: any)=>{
+//        if(response!=null){
+//         this.roleData = response.data[0];
+//         this.listOfSelectedMenuGroups = this.roleData.menuGroup;
+//         this.addSelectedMenuItemCodes();
+//         this.addSelectedSubMenuItemCodes();
+//         this.getMenuGroups(response.data[0].applicationCode);
+//         this.roleForm.patchValue({
+//           activationStatus: this.roleData.activationStatus,
+//           roleName: this.roleData.roleName,
+//           applicationCode: this.roleData.applicationCode,
+//           description: this.roleData.description,
+//           txnType: this.roleData.txnType,
+//           roleType: this.roleData.roleType
+  
+//         });
+//        }
+//    }
 
-  );
-}
+//   );
+// }
 
 
 getMenuGroups(applicationCode) {
@@ -121,6 +170,7 @@ getMenuGroups(applicationCode) {
     .getListOfMenuGroups(applicationCode)
     .subscribe((response: any) => {
       this.listOfMenuGroups = response.data;
+      this.addSelectedMenuItemCodes();
     });
 }
 
@@ -133,29 +183,39 @@ if(menuItem.selectedFlag){
 }
 
 }
+addSubMenuItem(menuItemFromUser, subMenuItemFromUser) {
+  this.subMenuItemsChanged = true;
+  if(subMenuItemFromUser.selectedFlag){
+    subMenuItemFromUser.selectedFlag = false;
+  }else{
+    subMenuItemFromUser.selectedFlag = true;
+  }
+}
 
 update(){
 
-    for (var mgIndex = 0; mgIndex < this.listOfMenuGroups.length; mgIndex++) {
-      this.menuGroupNotSelected = true;
-      for (var miIndex = 0; miIndex < this.listOfMenuGroups[mgIndex].menuItems.length; miIndex++) {
-        if (!this.listOfMenuGroups[mgIndex].menuItems[miIndex].selectedFlag) {
+  this.selectedMenuGroups = this.listOfMenuGroups.filter(menuGroup => menuGroup.selectedFlag==true);
 
-          this.listOfMenuGroups[mgIndex].menuItems.splice(miIndex, 1);
-          --miIndex;
-          this.menuGroupNotSelected = true;
+  for (var mgIndex = 0; mgIndex < this.selectedMenuGroups.length; mgIndex++) {
+    this.selectedMenuGroups[mgIndex].menuItems = this.selectedMenuGroups[
+      mgIndex
+    ].menuItems.filter(menuItem => menuItem.selectedFlag == true);
 
-        } else {
+if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
+for (
+  var miIndex = 0;
+  miIndex < this.selectedMenuGroups[mgIndex].menuItems.length;
+  miIndex++
+) {
+  this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
+}
+}else{
+this.selectedMenuGroups.splice(mgIndex, 1);
+}
 
-          this.menuGroupNotSelected = false;
-        }
-      }
-      if (this.listOfMenuGroups[mgIndex].menuItems.length == 0) {  //Removing a menu group if it doesn't have any menu items
-        this.listOfMenuGroups.splice(mgIndex, 1);
-        --mgIndex;
-      }
-    }
+  }
 
+    
       this.roleData.roleName = this.roleForm.value.roleName,
       this.roleData.applicationCode = this.roleForm.value.applicationCode,
       this.roleData.activationStatus = this.roleForm.value.activationStatus,
@@ -194,6 +254,20 @@ if(!this.menuItemsChanged){
 }else{
   return menuItem.selectedFlag;
 }
+}
+
+
+checkIfSubMenuItemIsSelected(subMenuItem): boolean{
+  console.log(subMenuItem.menuItemCode, "subMenuItem.menuItemCode");
+  if(!this.subMenuItemsChanged){
+    if(this.listOfSubMenuItemCodes.includes(subMenuItem.menuItemCode)){
+
+      subMenuItem.selectedFlag = true;
+   return true;
+    }
+  }else{
+    return subMenuItem.selectedFlag;
+  }
 }
 
 abortSaveAction(){

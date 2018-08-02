@@ -50,7 +50,7 @@ listOfEvents: any []=[];
 
   updateUser(){
     if(!this.isStatusPending){
-    this.router.navigate(['/updateUser', this.selectedUser.userName]);
+    this.router.navigate(['/updateUser', this.selectedUser.userId]);
     }
     }
   
