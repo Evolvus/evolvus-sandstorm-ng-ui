@@ -258,7 +258,6 @@ if(!this.menuItemsChanged){
 
 
 checkIfSubMenuItemIsSelected(subMenuItem): boolean{
-  console.log(subMenuItem.menuItemCode, "subMenuItem.menuItemCode");
   if(!this.subMenuItemsChanged){
     if(this.listOfSubMenuItemCodes.includes(subMenuItem.menuItemCode)){
 

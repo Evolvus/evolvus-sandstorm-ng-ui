@@ -110,10 +110,10 @@
 
 
 
-                <button *ngIf="doIExist('Approve') && isStatusPending" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
-                <button *ngIf="doIExist('Reprocess') && isStatusPending" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
+                <button *ngIf="doIExist('Approve') && !isStatusPending" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
+                <button *ngIf="doIExist('Reprocess') && !isStatusPending" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
                   Reprocess</button>
-                <button *ngIf="doIExist('Reject') && isStatusPending" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
+                <button *ngIf="doIExist('Reject') && !isStatusPending" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
     
               <button type="button" *ngIf="user?.role.roleType=='MAKER'" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
                 <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>

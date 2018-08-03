@@ -38,7 +38,6 @@ export class ViewEntityComponent implements OnInit {
       if(this.selectedEntity.processingStatus!='PENDING_AUTHORIZATION'){
     this.isStatusPending = false;
       }else{
-        console.log(this.selectedEntity.processingStatus, "inside else");
 
         this.isStatusPending = true;
       }

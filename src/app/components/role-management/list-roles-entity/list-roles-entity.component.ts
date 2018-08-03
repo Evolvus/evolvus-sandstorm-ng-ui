@@ -39,7 +39,6 @@ export class ListRolesEntityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("I am called");
     this.tableHeader = this.roleDataService.getTableHeaders();
     this.defaultFilterCriteria = this.roleDataService.getDefaultFilterCriteria();
     this.getApplicationCodes();
@@ -54,7 +53,6 @@ export class ListRolesEntityComponent implements OnInit {
       .getlistOfApplicationCategory()
       .subscribe((response: any) => {
         if(response!=null){
-          console.log(response);
           this.listOfApplications = response.data;
           this.listOfApplicationCategory = this.listOfApplications.map(application => application.applicationCode);
         }
