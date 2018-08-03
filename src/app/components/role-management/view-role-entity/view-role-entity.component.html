@@ -107,21 +107,15 @@
       <div class="row text-center">
         <div class="col-sm-12">
 
-            <div class="checker-specific-menus" *ngIf="user?.role.roleType=='CHECKER'">
+
+
 
                 <button *ngIf="doIExist('Approve') && isStatusPending" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
                 <button *ngIf="doIExist('Reprocess') && isStatusPending" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
                   Reprocess</button>
                 <button *ngIf="doIExist('Reject') && isStatusPending" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
-              <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
-                <span *ngIf="!showWorkFlow">Show WorkFlow</span>
-                <span *ngIf="showWorkFlow">Hide WorkFlow</span>
-              </button>
-              <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
-            </div>
-
-            <div class="maker-specific-menus" *ngIf="user?.role.roleType=='MAKER'">
-              <button type="button" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
+    
+              <button type="button" *ngIf="user?.role.roleType=='MAKER'" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
                 <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
                 <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
                 <span *ngIf="!isStatusPending">Modify</span>
@@ -132,7 +126,6 @@
               </button>
               <button type="button" class="btn btn-default btn-close" (click)="abortViewAction()"> Cancel</button>
 
-            </div>
 
         </div>
       </div>

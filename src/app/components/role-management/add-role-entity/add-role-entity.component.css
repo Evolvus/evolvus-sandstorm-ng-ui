@@ -30,3 +30,6 @@ font-size: 15px;
   .form-group .menu-items .sub-menu-items mat-checkbox{
    margin-left: 20px;
   }
+  .form-group .menu-items{
+    margin-right: 15em;
+  }

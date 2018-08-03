@@ -8,6 +8,7 @@
     margin: 0px;
     margin-top: -5px;
 }
-/* .force-overflow .request-time  small{
-    font-size: 10px;
-} */
+
+h6 a{
+cursor: pointer;
+}

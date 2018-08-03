@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 import 'hammerjs';
 //SERVICE COMPONENTS
 
@@ -129,6 +129,7 @@ import { SearchPipe } from './components/shared/search.pipe';
     MatCheckboxModule,
     MatDialogModule,
     MatSelectModule,
+    MatExpansionModule,
     EvolvusWorkflowViewModule
     
   ],

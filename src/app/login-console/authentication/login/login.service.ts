@@ -1,10 +1,14 @@
-import { environment } from './../../../../environments/environment';
 import { Authentication } from './../../../models/authentication.model';
+import { environment } from './../../../../environments/environment';
 
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Subject} from "rxjs";
+import { SandstormGlobalVariablesService } from './../../../shared/sandstorm-global-variables.service';
+
+
+
 
 @Injectable()
 export class AuthenticationService {
@@ -13,7 +17,7 @@ export class AuthenticationService {
     authenticatedSubject = new Subject();
     dtFormat :string;
     userData = new Subject<any>();
-    constructor(private http : HttpClient, private router : Router) {}
+    constructor(private http : HttpClient, private router : Router, private globalVariableService: SandstormGlobalVariablesService) {}
 
 
 
@@ -35,8 +39,8 @@ export class AuthenticationService {
         // this.router.navigate([""]);
         this.isAuthenticated = false;
         this.authenticatedSubject.next(this.isAuthenticated);
-        location.reload();
-
+        location.href='/';
+        this.globalVariableService.currentUser = null;
         this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
             this.router.navigate(['login']);
         });

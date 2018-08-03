@@ -202,7 +202,8 @@ export class UserDataService {
   getWorkFlowData(id){
     return this.http.get(`${this.platformURL}/swe/api/event`, {
       params: {
-        query: id
+        query: id,
+        sort: "+wfEventDate"
       }
     });  }
 
