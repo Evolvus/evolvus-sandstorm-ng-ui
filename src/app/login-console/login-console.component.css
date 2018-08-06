@@ -40,7 +40,9 @@
 } */
 .login-page{
     padding: 5em;
-    padding-bottom: 9em;
+    padding-bottom: 6em;
+    padding-right: 3em;
+    padding-left: 3em;
     position: absolute;
     top: 20%;
     left: 32%;
@@ -52,14 +54,25 @@
 
 }
 .submit-button{
-margin-top: 2em;
+    position: relative;
+top: 1em;
 }
 
+.title{
+position: relative;
+bottom: 20px;
+}
 
-.title h3{
+.title h4{
 font-family: 'Times New Roman', Times, serif;
+color: #ff8500;
 }
-.title h5{
+.sub-title h5{
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 color:#0d476d !important;	
+}.error-display{
+    position: relative;
+    top: 3em;
+    color: red;
+    width: 300px;
 }

@@ -1,4 +1,3 @@
-
 <!-- <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span >SANDSTORM CONSOLE</span>
@@ -10,47 +9,53 @@
 
 
 
-  <div class="login-component" >
+  <div class="login-component">
     <div class="title">
-      <h2>LOGIN</h2>
-            <h5 *ngIf="viewPasswordComponent">Welcome, {{loginForm.value.userName | titlecase}}!</h5>
-
+      <h4>Sandstorm Console - Login</h4>
     </div>
+
+    <div class="sub-title">
+      <h5 *ngIf="viewPasswordComponent">Welcome, {{loginForm.value.userName | uppercase}}!</h5>
+    </div>
+
     <br>
-<form [formGroup]="loginForm" id="loginform" name="loginform" method="post" enctype="multipart/form-data">
-    <div class="username-component" *ngIf="viewUserNameComponent">
-      <mat-form-field class="example-full-width">
-        <input autofocus id="login-username" matInput formControlName="userName" minlength="5" maxlength="20" name="userName" placeholder="Username"
-          required>
-        <mat-error *ngIf="loginForm.invalid && loginForm.pristine">Username is Required</mat-error>
-        <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
-      </mat-form-field>
-      <div class="submit-button col-sm-6">
-        <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
+    <form [formGroup]="loginForm" id="loginform" name="loginform" method="post" enctype="multipart/form-data">
+      <div class="username-component" *ngIf="viewUserNameComponent">
+        <mat-form-field class="example-full-width">
+          <input autofocus id="login-username" matInput formControlName="userName" minlength="5" maxlength="20" name="userName" placeholder="Username"
+            required>
+          <mat-error *ngIf="loginForm.invalid && loginForm.pristine">Username is Required</mat-error>
+          <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
+
+        </mat-form-field>
+        <div class="submit-button col-sm-6">
+          <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
+        </div>
+
       </div>
-    </div>
 
-    <div class="userpassword-component" *ngIf="viewPasswordComponent">
-      <mat-form-field class="example-full-width">
-        <input autofocus type="password" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword"
-          #passwordInput>
-        <mat-error *ngIf="loginForm.invalid">Password is Invalid!</mat-error>
-      </mat-form-field>
+      <div class="userpassword-component" *ngIf="viewPasswordComponent">
+        <mat-form-field class="example-full-width">
+          <input autofocus type="password" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword"
+            #passwordInput>
+          
+        </mat-form-field>
 
-    <div class="submit-button col-sm-6">
-        <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
+        <div class="submit-button col-sm-6">
+          <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
+        </div>
       </div>
+    </form>
+    <div class="error-display col-md-6">
+        <h6 *ngIf="loginErrorMessage!=''">{{loginErrorMessage}}</h6>
     </div>
-
-  </form>
   </div>
-
 
 </div>
 
 <div *ngIf="isUserAuthenticated">
-    <div class="redirect">
-      <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
-      </mat-progress-spinner>
-    </div>
+  <div class="redirect">
+    <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
   </div>
+</div>

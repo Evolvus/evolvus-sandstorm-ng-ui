@@ -14,11 +14,17 @@ platformURL = environment.platformURL;
 getListOfFileTypes(){
   return this.http.get(`${this.platformURL}/sandstorm/api/lookup`, {
     params:{
-      lookupCode: "IMPORT_TYPE"
+      lookupCode: "FILE_UPLOAD_CONSOLE"
     }
   });
 }
 
+upload(file, lookupCode, value)
+{
+  // return this.http.get(`${this.platformURL}/bulkupload/api/v0.1/upload`, {
+  //   params:{
 
-
+  //   }
+  // });
+}
 }

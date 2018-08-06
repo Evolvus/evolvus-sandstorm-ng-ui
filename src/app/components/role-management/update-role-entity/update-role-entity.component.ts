@@ -132,8 +132,10 @@ addSelectedSubMenuItemCodes(){
 
     for(let menuGroup of this.listOfSelectedMenuGroups){
       for(let menuItem of menuGroup.menuItems){
-        for(let subMenuItem of menuItem.subMenuItems){
-          this.listOfSubMenuItemCodes.push(subMenuItem.menuItemCode);
+        if(menuItem.subMenuItems){
+          for(let subMenuItem of menuItem.subMenuItems){
+            this.listOfSubMenuItemCodes.push(subMenuItem.menuItemCode);
+          }
         }
       }
     }
@@ -194,8 +196,7 @@ addSubMenuItem(menuItemFromUser, subMenuItemFromUser) {
 
 update(){
 
-  this.selectedMenuGroups = this.listOfMenuGroups.filter(menuGroup => menuGroup.selectedFlag==true);
-
+  this.selectedMenuGroups = this.listOfMenuGroups;
   for (var mgIndex = 0; mgIndex < this.selectedMenuGroups.length; mgIndex++) {
     this.selectedMenuGroups[mgIndex].menuItems = this.selectedMenuGroups[
       mgIndex
@@ -220,11 +221,11 @@ this.selectedMenuGroups.splice(mgIndex, 1);
       this.roleData.applicationCode = this.roleForm.value.applicationCode,
       this.roleData.activationStatus = this.roleForm.value.activationStatus,
       this.roleData.description = this.roleForm.value.description,
-      this.roleData.menuGroup = this.listOfMenuGroups
+      this.roleData.menuGroup = this.selectedMenuGroups
       this.roleData.roleType = this.roleForm.value.roleType,
       this.roleData.txnType = this.roleForm.value.txnType
 
-   
+   console.log(this.selectedMenuGroups, "selectedMenu");
       this.roleDataService.update(this.roleData).subscribe(
         (response: any) => {
          this.roleDataService.openDialog(

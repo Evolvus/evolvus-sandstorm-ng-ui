@@ -20,8 +20,7 @@ export class AppComponent implements OnInit, OnDestroy{
     this.body.classList.add('skin-blue');
     this.body.classList.add('sidebar-mini');
     this.subscribe = this.authService.authenticatedSubject.subscribe((status : boolean) => {
-      this.isAuthenticated
-       = status;
+      this.isAuthenticated = status;
   });
   }
 

@@ -70,6 +70,7 @@ export class LoginConsoleComponent implements OnInit {
             this.router.navigate(['login']);
           }
       }, err => {
+
           if(err.statusText === "Unauthorized"){
       this.loginErrorMessage = "*UserName / Password doesn't match!";
           }else{
@@ -79,6 +80,8 @@ export class LoginConsoleComponent implements OnInit {
           this.authenticationService.authenticatedSubject.next(this.authenticationService.isAuthenticated);
 
           this.loginForm.reset();
+          this.viewPasswordComponent = false;
+          this.viewUserNameComponent = true;
           this.router.navigate(["login"]);
 
       });

@@ -15,6 +15,7 @@ export class StarterContentComponent implements OnInit {
 user: any;
 eventData: any = [];
 panelOpenState = false;
+
   constructor(private globalVariableService: SandstormGlobalVariablesService, private starterContentService: StarterContentService, private router: Router)
  { }
 
@@ -67,5 +68,9 @@ view(wfEntity, id){
   })
 
 }
+
+
+
+
 
 }

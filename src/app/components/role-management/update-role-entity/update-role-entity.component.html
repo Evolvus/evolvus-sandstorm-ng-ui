@@ -127,7 +127,7 @@
                                 name="{{menuItem?.menuItemCode | lowercase }}" 
                                 value="{{menuItem?.menuItemCode | lowercase}}" >{{menuItem?.title}}</mat-checkbox>
                                 <br>
-                                <div class="sub-menu-items" *ngIf="roleForm?.value.roleType=='CHECKER'">
+                                <div class="sub-menu-items">
                                     <div class=""  *ngFor="let subMenuItem of menuItem?.subMenuItems">
                                       <mat-checkbox class="mat-pseudo-checkbox" *ngIf="menuItem?.selectedFlag" (change)="addSubMenuItem(menuItem, subMenuItem)" id="{{subMenuItem?.menuItemCode | lowercase}}"
                                       name="{{subMenuItem?.menuItemCode | lowercase }}" [checked] = "checkIfSubMenuItemIsSelected(subMenuItem)"value="{{subMenuItem?.menuItemCode | lowercase}}">{{subMenuItem?.title}}</mat-checkbox>
