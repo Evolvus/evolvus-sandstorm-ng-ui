@@ -22,6 +22,7 @@ import { AddEntityComponent } from '../components/entity-management/add-entity/a
 import { ViewEntityComponent } from './../components/entity-management/view-entity/view-entity.component';
 import { UpdateEntityComponent } from '../components/entity-management/update-entity/update-entity.component';
 import { LoginConsoleComponent } from './../login-console/login-console.component';
+import { BulkUploadComponent } from './../components/maintenance/bulk-upload/bulk-upload.component';
 
 const routes: Routes =[
   {
@@ -56,7 +57,7 @@ const routes: Routes =[
    { path: 'viewEntity/:id', component: ViewEntityComponent , canActivate: [AuthGuardService] },
    { path: 'updateEntity/:id', component: UpdateEntityComponent , canActivate: [AuthGuardService] },
   
-
+   { path: 'bulkUpload', component: BulkUploadComponent , canActivate: [AuthGuardService] },
 ];
 
 

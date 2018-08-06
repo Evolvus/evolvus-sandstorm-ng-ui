@@ -75,10 +75,14 @@ import { ListUsersComponent } from './components/user-management/list-users/list
 import { ViewUserComponent } from './components/user-management/view-user/view-user.component';
 import { UpdateUserComponent } from './components/user-management/update-user/update-user.component';
 
+// BULK UPLOAD COMPONENT
+
+import { BulkUploadComponent } from './components/maintenance/bulk-upload/bulk-upload.component';
 
 // EVOLVUS NPM COMPONENTS
 
 import {EvolvusWorkflowViewModule} from '@evolvus/evolvus-workflow-event-view';
+import { EvolvusBulkUploadModule } from '@evolvus/evolvus-bulk-upload-view';
 
 //HELPER COMPONENTS
 
@@ -114,6 +118,8 @@ import { SearchPipe } from './components/shared/search.pipe';
     UpdateUserComponent,
     SessionexpiredComponent,
     LoginConsoleComponent,
+    BulkUploadComponent
+
   ],
   imports: [
     BrowserModule,
@@ -130,7 +136,8 @@ import { SearchPipe } from './components/shared/search.pipe';
     MatDialogModule,
     MatSelectModule,
     MatExpansionModule,
-    EvolvusWorkflowViewModule
+    EvolvusWorkflowViewModule,
+EvolvusBulkUploadModule
     
   ],
   entryComponents: [

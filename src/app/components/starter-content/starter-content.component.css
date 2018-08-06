@@ -12,3 +12,8 @@
 h6 a{
 cursor: pointer;
 }
+
+.row h4{
+ position: relative;
+ top: 12px;
+}

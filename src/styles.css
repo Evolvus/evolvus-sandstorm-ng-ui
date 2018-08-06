@@ -43,6 +43,9 @@
   .evo-routingcode:before {
     content: "\eb1c";
   }
+  .evo-bulkupload:before {
+    content: "\f093";
+  }
   .evo-Archival:before {
     content: "\eb15";
   }
@@ -1028,8 +1031,8 @@ button#slideright span {
 }
 
 .rolemenu-acces-tabs label.checkbox-inline{
-    width:50%;
-    /* margin-right: 1em; */
+    /* width:50%; */
+    margin-right: 1em;
 }
 
 .rolemenu-acces-tabs  input[type=checkbox]{

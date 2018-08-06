@@ -152,7 +152,7 @@
             Reprocess</button>
           <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
     
-        <button type="button" *ngIf="loggedInUser?.role.roleType=='MAKER'" class="btn btn-default btn-submit" (click)="updateRole()" [disabled]="isStatusPending">
+        <button type="button"  class="btn btn-default btn-submit" *ngIf="doIExist('Modify')" (click)="updateUser()" [disabled]="isStatusPending">
           <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
           <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
           <span *ngIf="!isStatusPending">Modify</span>
