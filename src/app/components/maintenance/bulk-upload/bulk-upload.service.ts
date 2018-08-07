@@ -22,14 +22,13 @@ getListOfFileTypes(){
 }
 
 upload(file, lookupCode, value)
-{
+{ 
   const formData = new FormData();
   formData.append('file', file);
   formData.append('lookupCode', lookupCode);
   formData.append('value', value);
-  return this.http.post(`${this.platformURL}/bulkupload/api/v0.1/upload`, formData);
+   return this.http.post(`${this.platformURL}/bulkupload/api/v0.1/upload`,formData);
 }
-
 
 openDialog(messageType, statusMessage): any {
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
@@ -39,7 +38,6 @@ openDialog(messageType, statusMessage): any {
       type: messageType
     }
   });
-
-  return dialogRef.afterClosed();
 }
+
 }

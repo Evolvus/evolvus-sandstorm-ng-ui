@@ -21,19 +21,21 @@ export class BulkUploadComponent implements OnInit {
       }
     });
   }
-  upload(response){
-   this.selectedFile = response.file;
-   if(this.selectedFile!=null){
-     this.bulkUploadService.upload(response.file, response.fileType.lookupCode, response.fileType.value)
-     .subscribe((response: any)=>{
-this.bulkUploadService.openDialog(
-  "success",
- response.description
-).subscribe((result)=>{
-// this.router.navigate(['entityManagement']);
-});
-     })
-   }
+  upload(event){
+    console.log(event);
+    
+   this.selectedFile = event.file;
+    if(event.file!=null){
+      this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
+      .subscribe((response: any)=>{
+        this.bulkUploadService.openDialog(
+          "success",
+          "File Uploaded Successfully!"   
+        ).subscribe((result)=>{
+
+        });
+      });
+    }
   }
 
 
