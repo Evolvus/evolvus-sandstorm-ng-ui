@@ -20,11 +20,11 @@ getListOfFileTypes(){
 }
 
 upload(file, lookupCode, value)
-{
-  // return this.http.get(`${this.platformURL}/bulkupload/api/v0.1/upload`, {
-  //   params:{
-
-  //   }
-  // });
+{ 
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('lookupCode', lookupCode);
+  formData.append('value', value);
+   return this.http.post(`${this.platformURL}/bulkupload/api/v0.1/upload`,formData);
 }
 }

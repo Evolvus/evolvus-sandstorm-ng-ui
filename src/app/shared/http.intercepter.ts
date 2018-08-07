@@ -64,6 +64,16 @@ export class JWTTokenIntercepter implements HttpInterceptor {
 
             this.headers = new HttpHeaders({"Content-Type": "application/json", Authorization: this.authService.getToken()});
             const modifiedRequest = req.clone({headers: this.headers});
+
+            if (req.url.indexOf('/bulkupload') > -1) {
+                this.headers = new HttpHeaders({Authorization: this.authService.getToken()});
+                const uploadRequest = req.clone({headers: this.headers});
+                console.log('Upload Request', uploadRequest);
+                return next.handle(uploadRequest);
+              }
+
+
+
             return next.handle(modifiedRequest);
         }
     }

@@ -20,14 +20,16 @@ export class BulkUploadComponent implements OnInit {
       }
     });
   }
-  upload(selectedFile){
-   this.selectedFile = selectedFile;
-  //  if(selectedFile!=null){
-  //    this.bulkUploadService.upload(selectedFile, this.selectedFileType, this.selectedFileType.value)
-  //    .subscribe((response: any)=>{
-
-  //    })
-  //  }
+  upload(event){
+    console.log(event);
+    
+   this.selectedFile = event.file;
+    if(event.file!=null){
+      this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
+      .subscribe((response: any)=>{
+        console.log('Uploaded to server',response);
+      })
+    }
   }
 
   saveFileType(fileType){
