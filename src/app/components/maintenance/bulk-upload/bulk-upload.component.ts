@@ -1,5 +1,6 @@
 import { BulkUploadService } from './bulk-upload.service';
 import { Component, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-bulk-upload',
   templateUrl: './bulk-upload.component.html',
@@ -20,18 +21,20 @@ export class BulkUploadComponent implements OnInit {
       }
     });
   }
-  upload(selectedFile){
-   this.selectedFile = selectedFile;
-  //  if(selectedFile!=null){
-  //    this.bulkUploadService.upload(selectedFile, this.selectedFileType, this.selectedFileType.value)
-  //    .subscribe((response: any)=>{
-
-  //    })
-  //  }
+  upload(response){
+   this.selectedFile = response.file;
+   if(this.selectedFile!=null){
+     this.bulkUploadService.upload(response.file, response.fileType.lookupCode, response.fileType.value)
+     .subscribe((response: any)=>{
+this.bulkUploadService.openDialog(
+  "success",
+ response.description
+).subscribe((result)=>{
+// this.router.navigate(['entityManagement']);
+});
+     })
+   }
   }
 
-  saveFileType(fileType){
-   this.selectedFileType = fileType;
-  }
 
 }

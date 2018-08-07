@@ -10,7 +10,7 @@
     </h1>
   </section>
 
-<app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (selectedFile)="upload($event)" (selectedFileType)="saveFileType($event)"></app-evolvus-bulk-upload-view>
+<app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)"></app-evolvus-bulk-upload-view>
 
 
 

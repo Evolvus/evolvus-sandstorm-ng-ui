@@ -1,6 +1,8 @@
 import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { ConfirmationDialogEntityComponent } from "../../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +10,7 @@ export class BulkUploadService {
 
 platformURL = environment.platformURL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dialog: MatDialog) { }
 
 
 getListOfFileTypes(){
@@ -21,10 +23,23 @@ getListOfFileTypes(){
 
 upload(file, lookupCode, value)
 {
-  // return this.http.get(`${this.platformURL}/bulkupload/api/v0.1/upload`, {
-  //   params:{
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('lookupCode', lookupCode);
+  formData.append('value', value);
+  return this.http.post(`${this.platformURL}/bulkupload/api/v0.1/upload`, formData);
+}
 
-  //   }
-  // });
+
+openDialog(messageType, statusMessage): any {
+  let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
+    width: "300px",
+    data: {
+      message: statusMessage,
+      type: messageType
+    }
+  });
+
+  return dialogRef.afterClosed();
 }
 }
