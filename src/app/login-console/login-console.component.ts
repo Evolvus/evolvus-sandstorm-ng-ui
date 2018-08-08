@@ -56,11 +56,9 @@ export class LoginConsoleComponent implements OnInit {
           if (user != null) {
             this.isUserAuthenticated = true;
             setTimeout(()=>{
-              console.log(user, "user");
                 this.authenticationService.isAuthenticated = true;
                 this.authenticationService.authenticatedSubject.next(this.authenticationService.isAuthenticated);
                 this.authenticationService.setToken(user.token);
-                //Need to update below hardcoded to user.supportedDtformat.format
                 this.authenticationService.dtFormat = 'dd/MM/yyyy hh:mm:ss';
                 this.dateFormat =this.authenticationService.dtFormat;
                 this.globalVariableService.currentUser = user.data;

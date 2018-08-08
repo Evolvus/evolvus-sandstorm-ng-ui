@@ -91,7 +91,7 @@
                      <tbody>
                       <tr (click)="view(user)" *ngFor="let user of listOfUsers">
                         <td>{{user?.userId}}</td>
-                        <td>{{user?.userName | titlecase}}</td>
+                        <td>{{user?.userName}}</td>
                         <td>{{user?.loginStatus}}</td>
                         <td>{{user?.activationStatus}}</td>
                         <td>{{user?.processingStatus}}</td>
@@ -109,28 +109,19 @@
              </div>
            </div>
            <div class="pull-right marTB2 paginationSec">			
-            <!-- <button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button> -->
-                <!-- <input  type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
-               <!-- {{pageNo}} / {{totalNoOfPages}} -->
-              <!-- <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button> -->
+        
             </div>
-            <!-- <div class="row row-padding" *ngIf="listOfRoles.length == 0">
-              <div class="row text-center">
-                <h5 class="txt-red" style="color:red;">No Role Details Available!</h5>
-                <br>
-              </div>
-            </div>  -->
+          
          
          <div class="pull-right marTB2 paginationSec">			
          <button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
-             <!-- <input type="text" class="text-center paginationInput" style="width:30px;" value="1"> / 1  -->
              {{pageNo}} / {{totalNoOfPages}}
 
            <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="listOfUsers.length ==0 || pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
          </div>
          <div class="row row-padding" *ngIf="listOfUsers.length == 0">
             <div class="row text-center">
-              <h5 class="txt-red" style="color:red;">No User Details Available!</h5>
+              <h5 class="txt-red" style="color:red;">No Records Found!</h5>
               <br>
             </div>
           </div> 

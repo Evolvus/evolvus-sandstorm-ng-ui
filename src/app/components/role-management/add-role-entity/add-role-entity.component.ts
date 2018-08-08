@@ -47,7 +47,6 @@ export class AddRoleEntityComponent implements OnInit {
     // this.listOfSubMenuItems = this.roleDataService.getListOfSubMenuItems();
 
     this.roleForm = new FormGroup({
-      activationStatus: new FormControl("", Validators.required),
       roleName: new FormControl("", [
         Validators.pattern("[a-zA-Z0-9_-]*"),
         Validators.pattern(/^\S*$/),
@@ -133,7 +132,7 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
     var roleData = {
       roleName: this.roleForm.value.roleName,
       applicationCode: this.roleForm.value.applicationCode,
-      activationStatus: this.roleForm.value.activationStatus,
+      activationStatus: "ACTIVE",
       roleType: this.roleForm.value.roleType,
       txnType: this.roleForm.value.txnType,
       description: this.roleForm.value.description,

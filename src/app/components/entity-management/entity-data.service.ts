@@ -12,12 +12,11 @@ export class EntityDataService {
   entityTableHeaders = [
     "Entity Name",
     "Parent Entity Name",
-    "Entity Level",
     "Entity Code",
     "Activation Status",
     "Processing Status",
-    "Created User",
-    "Created Date Time"
+    "Created By",
+    "Last Modified Date Time"
   ];
   defaultHeaders: HttpHeaders;
   defaultFilterCriteria = {

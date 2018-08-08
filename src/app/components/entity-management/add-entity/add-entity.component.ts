@@ -35,7 +35,7 @@ export class AddEntityComponent implements OnInit {
       parent: new FormControl('', Validators.required),
       description: new FormControl('', [
       Validators.minLength(6), Validators.maxLength(140)]),
-      enableFlag: new FormControl('', Validators.required)
+      enableFlag: new FormControl('true', Validators.required)
     });
   }
 
@@ -70,7 +70,6 @@ getFilteredEntityNames(){
 
   save() {
     if(this.isAValidSelection('entity', this.entityForm.value.parent)){
-     
       this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
         this.entityService.openDialog(
            "success",

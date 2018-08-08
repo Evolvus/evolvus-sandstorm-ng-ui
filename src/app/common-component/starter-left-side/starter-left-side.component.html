@@ -8,15 +8,6 @@
         </a>
       </li>
       <hr>
-
-      <li class="header">Application</li>
-      <li>
-        <a [routerLink]="['applicationManagement']">
-          <i class="evo-application"></i>
-          <span>Application Management</span>
-        </a>
-      </li>
-      <hr>
       <div class="side-menu-group">
         <div class="menu-group" *ngFor="let menuGroup of user.role.menuGroup; let i = index">
           <li class="header">{{menuGroup.title | titlecase}}</li>

@@ -5,24 +5,7 @@
 
 
 
-        <div class="row">
-          <section class="content-header home-header">
-            <h1 class="txt-orange marT15">Application</h1>
-          </section>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="info-box maintananceicon1">
-              <span class="info-box-icon bg-transparent">
-                <span class="evo-application"></span>
-              </span>
-              <div class="info-box-content" [routerLink]="['/applicationManagement']">
-                <span class="info-box-text">Application Management</span>
-              </div>
-              
-              
-            </div>
-          </div>
 
-        </div>
 
         <div class="row" *ngFor="let menuGroup of user.role.menuGroup; let i = index">
           <section class="content-header home-header">
@@ -58,14 +41,14 @@
                   <mat-expansion-panel class="col-md-12">
             <!-- <h4 class="  txt-blue"></h4> -->
             <mat-expansion-panel-header>
-                <mat-panel-title>
+                <mat-panel-title class="panel-title">
                     <h4 class="txt-blue">Pending Actions <mat-icon></mat-icon> </h4>
                 </mat-panel-title>
                 <mat-panel-description>
                   
                   </mat-panel-description>
               </mat-expansion-panel-header>
-            <mat-accordion *ngFor="let event of eventData">
+            <mat-accordion *ngFor="let event of eventData" class="accordion">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>

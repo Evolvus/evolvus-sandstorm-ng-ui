@@ -66,7 +66,7 @@ export class AddUserComponent implements OnInit {
       // timeZone: new FormControl("", [Validators.required]),
       individualTransactionLimit: new FormControl("", [Validators.required]),
       dailyLimit: new FormControl("", [Validators.required]),
-      currency: new FormControl("", [Validators.required]),
+      currency: new FormControl(""),
       faxNumber: new FormControl("")
     });
   }

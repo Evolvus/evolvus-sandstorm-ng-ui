@@ -12,7 +12,9 @@
 h6 a{
 cursor: pointer;
 }
-
-mat-panel-title{
-  margin-top: 1.1em;  
+.panel-title h4{
+  margin-top: 1.4em;  
+}
+.accordion{
+width: 100px;
 }

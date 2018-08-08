@@ -225,7 +225,6 @@ this.selectedMenuGroups.splice(mgIndex, 1);
       this.roleData.roleType = this.roleForm.value.roleType,
       this.roleData.txnType = this.roleForm.value.txnType
 
-   console.log(this.selectedMenuGroups, "selectedMenu");
       this.roleDataService.update(this.roleData).subscribe(
         (response: any) => {
          this.roleDataService.openDialog(

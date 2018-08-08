@@ -26,11 +26,10 @@ export class RoleDataService {
   dialogClosed: Subject<boolean> = new Subject<boolean>();
   roleTableHeaders = [
     "Role Name",
-    "Role Description",
     "Application Category",
     "Activation Status",
     "Processing Status",
-    "Associated Users",
+    "Created By",
     "Last Modified Date Time"
   ];
   defaultFilterCriteria = {

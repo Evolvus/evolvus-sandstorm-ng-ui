@@ -66,6 +66,7 @@ export class ViewEntityComponent implements OnInit {
           this.showWorkFlow = !this.showWorkFlow;
           if(response!=null){
             this.listOfEvents = response.data;
+
           }
         });
       }else{

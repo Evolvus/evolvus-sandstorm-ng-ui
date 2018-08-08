@@ -21,8 +21,10 @@ export class BulkUploadComponent implements OnInit {
       }
     });
   }
+
+
+  
   upload(event){
-    console.log(event);
     
    this.selectedFile = event.file;
     if(event.file!=null){

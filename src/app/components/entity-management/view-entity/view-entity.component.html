@@ -96,7 +96,6 @@
           <div class="no-event-data" *ngIf="listOfEvents.length==0">
             <h6>No Data Found!</h6>
           </div>
-          <hr>
         </div>
 
       <br>
@@ -104,15 +103,13 @@
       <div class="text-center">
         <div class="col-sm-12">
 
-          <button *ngIf="doIExist('Approve')" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
-          <button *ngIf="doIExist('Reprocess')" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
+          <button *ngIf="doIExist('Approve') && selectedEntity?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
+          <button *ngIf="doIExist('Reprocess') && selectedEntity?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
             Reprocess</button>
-          <button *ngIf="doIExist('Reject')" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
+          <button *ngIf="doIExist('Reject') && selectedEntity?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
   
-        <button type="button" class="btn btn-default btn-submit" *ngIf="doIExist('Modify')" (click)="updateEntity()" [disabled]="isStatusPending">
-          <span *ngIf="isStatusPending" matTooltip="Processing Status is Pending">Modify</span>
-          <!-- <span *ngIf="areThereAnyUsersAssociated" matTooltip="Processing Status is Pending">Modify</span> -->
-          <span *ngIf="!isStatusPending">Modify</span>
+        <button type="button" class="btn btn-default btn-submit" *ngIf="doIExist('Modify') && selectedEntity?.processingStatus == 'AUTHORIZED'" (click)="updateEntity()" [disabled]="isStatusPending">
+          <span>Modify</span>
         </button>
         <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
           <span *ngIf="!showWorkFlow">Show WorkFlow</span>

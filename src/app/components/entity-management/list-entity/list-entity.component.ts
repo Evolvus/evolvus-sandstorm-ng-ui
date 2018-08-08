@@ -46,6 +46,8 @@ export class ListEntityComponent implements OnInit {
     this.getEntityDataBasedOnDefaultFilterCriteria();
     this.entityService.getCurrentUserData().subscribe((user: any)=>{
       this.user = user;   
+    }, (err)=>{
+      alert("I am throwing error");
     });
     // this.entityService.menuItemCode = 
   }
@@ -53,6 +55,8 @@ export class ListEntityComponent implements OnInit {
   getListOfEntities() {
     this.entityService.getAllEntities(0, 1).subscribe((response: any) => {
       this.listOfParentEntities = response.data;
+    },(err)=>{
+      // handle error
     });
   }
 
@@ -103,9 +107,9 @@ export class ListEntityComponent implements OnInit {
         },
         err => {
           this.entityService
-            .openDialog("error", err.error.description)
+            .openDialog("error", "Unexpected Error : Please Try Again")
             .subscribe(result => {
-              // console.log("Server Down");
+              // console.log(err, "Server Down");
             });
         }
       );
@@ -159,6 +163,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   view(entity) {
+    this.reset();
     this.router.navigate(["viewEntity", entity.entityCode]);
   }
 
@@ -204,7 +209,15 @@ export class ListEntityComponent implements OnInit {
     }
   }
 
-
+  reset(){
+    this.defaultFilterCriteria = {
+      parent: "",
+      enableFlag: "",
+      processingStatus: "",
+      pageSize: 5,
+      pageNo: 1
+    };
+  }
 
 
 }

@@ -68,7 +68,6 @@ export class JWTTokenIntercepter implements HttpInterceptor {
             if (req.url.indexOf('/bulkupload') > -1) {
                 this.headers = new HttpHeaders({Authorization: this.authService.getToken()});
                 const uploadRequest = req.clone({headers: this.headers});
-                console.log('Upload Request', uploadRequest);
                 return next.handle(uploadRequest);
               }
 
@@ -82,38 +81,5 @@ export class JWTTokenIntercepter implements HttpInterceptor {
         return this.http.get(`${this.serviceUrl}/sessionCheck`, {headers: this.headers});
     }
 
-    /*
-    console.log("1.isAuthenticated", this.authService.isAuthenticated);
-        if (localStorage.getItem("token") != null) {
-            this.headers = new HttpHeaders({"Content-Type": "application/json", Authorization: localStorage.getItem("token")});
-        }
-        console.log("2.isAuthenticated", this.authService.isAuthenticated);
-        const modifiedRequest = req.clone({headers: this.headers});
-        console.log("3.isAuthenticated", this.authService.isAuthenticated);
-        if (req.url != `${this.serviceUrl}/sessionCheck` && req.url != `${this.serviceUrl}/auth`) {
-            console.log("4.isAuthenticated", this.authService.isAuthenticated);
-            this.http.get(`${this.serviceUrl}/sessionCheck`, {headers: this.headers}).subscribe((data : any) => {
-                console.log("5.isAuthenticated", this.authService.isAuthenticated);
-                if (data) {
-                    this.authService.isAuthenticated = true;
-                    console.log("token", data.token.toString());
-                    localStorage.setItem("token", data.token.toString());
-                }
-                return next.handle(modifiedRequest);
-            }, err => {
-                console.log("6.isAuthenticated", this.authService.isAuthenticated);
-                console.log("Error in sessionCheck", err);
-                this.authService.isAuthenticated = false;
-                //this.router.navigate(["sessionExpired"]);
-                return next.handle(modifiedRequest);
-            });
-        } else if (this.authService.isAuthenticated === false) {
-            console.log("6.isAuthenticated", this.authService.isAuthenticated);
-            return next.handle(modifiedRequest);
-        } else {
-            console.log("7.isAuthenticated", this.authService.isAuthenticated);
-            this.router.navigate(["/login"]);
-            return next.handle(modifiedRequest);
-        }
-    */
+  
 }

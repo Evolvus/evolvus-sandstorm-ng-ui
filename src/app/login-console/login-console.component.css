@@ -25,19 +25,13 @@
       margin-top: 17em;
   }
 
-  /* button{
-      margin-top: 1.5em;
-  }
-  h5{
-      color:#0d476d !important;	
 
-  }
-.form-login h4, h3{
-    color: #ff8500;
-}
-.adminLoginSec{
 
-} */
+/* img{ */
+    /* position: relative; */
+    /* top: -10px; */
+    /* left: 32%; */
+/* } */
 .login-page{
     padding: 5em;
     padding-bottom: 6em;
@@ -48,7 +42,7 @@
     left: 32%;
     /* margin-right: -50%; */
     background-color: transparent;
-    box-shadow: 5px 5px 30px   lightgrey;
+    box-shadow: 5px 5px 30px  grey;
     border: 0.2px solid whitesmoke;
 
 

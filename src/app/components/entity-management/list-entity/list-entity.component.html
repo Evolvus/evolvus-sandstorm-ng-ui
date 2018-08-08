@@ -106,14 +106,14 @@
 
                       <td>{{ entity?.name | uppercase}}</td>
                       <td>{{ entity?.parent | uppercase}}</td>
-                      <td>{{ entity?.accessLevel}}</td>
+                      <!-- <td>{{ entity?.accessLevel}}</td> -->
                       <td>{{ entity?.entityCode | uppercase}}</td>
                       <td>{{ entity?.enableFlag == 'true' ? 'Active' : 'Inactive'}}</td>
 
                       <td>{{ entity?.processingStatus}}</td>
                       <td>{{ entity?.createdBy}}</td>
 
-                      <td>{{ entity?.lastUpdatedDate | date : 'full'}}</td>
+                      <td>{{ entity?.lastUpdatedDate | date : 'medium'}}</td>
                     </tr>
                   </tbody>
                   <!--Table body-->
@@ -134,7 +134,7 @@
         </div>
     <div class="row row-padding" *ngIf="listOfEntities.length == 0">
       <div class="row text-center">
-        <h5 class="txt-red" style="color:red;">No Entity Details Available!</h5>
+        <h5 class="txt-red" style="color:red;">No Records Found!</h5>
         <br>
       </div>
     </div> 

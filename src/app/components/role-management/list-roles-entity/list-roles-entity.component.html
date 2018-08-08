@@ -95,11 +95,10 @@
 									    <tbody>
 									      <tr (click)="view(role)" *ngFor="let role of listOfRoles">
 									        <td>{{role?.roleName}}</td>
-									        <td>{{role?.description}}</td>
 									        <td>{{role?.applicationCode}}</td>
 									        <td>{{role?.activationStatus}}</td>
 													<td>{{role?.processingStatus}}</td>
-													<td>{{role?.associatedUsers}}</td>
+													<td>{{role?.createdBy}}</td>
 									        <td>{{role?.lastUpdatedDate | date : 'medium'}} </td>
 									       
 									        <td></td>
@@ -120,7 +119,7 @@
           </div>
           <div class="row row-padding" *ngIf="listOfRoles.length == 0">
             <div class="row text-center">
-              <h5 class="txt-red" style="color:red;">No Role Details Available!</h5>
+              <h5 class="txt-red" style="color:red;">No Records Found!</h5>
               <br>
             </div>
           </div> 
