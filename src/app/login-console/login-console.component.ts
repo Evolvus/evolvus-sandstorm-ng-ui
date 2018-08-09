@@ -27,8 +27,8 @@ export class LoginConsoleComponent implements OnInit {
   color = 'primary';
   mode = 'indeterminate';
   value = 25;
-
-
+eyeOpen = false;
+passwordType: string = "password";
 
   constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService
      ) {}
@@ -97,5 +97,16 @@ if(!this.loginForm.controls.userName.invalid){
   this.viewPasswordComponent = !this.viewPasswordComponent;
   this.usernameShow = !this.usernameShow;
 }
+  }
+
+
+  changeInputType() {
+    this.eyeOpen = !this.eyeOpen;
+    if (!this.eyeOpen) {
+    this.passwordType = "password";
+    }
+    else {
+      this.passwordType = "text";
+    }
   }
 }

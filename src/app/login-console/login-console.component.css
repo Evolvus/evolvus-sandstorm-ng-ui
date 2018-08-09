@@ -70,3 +70,14 @@ color:#0d476d !important;
     color: red;
     width: 300px;
 }
+
+
+  .form-control-feedback.glyphicon.glyphicon-eye-close {
+    background-color: #d14f4f;
+  
+  }
+  .form-control-feedback.glyphicon.glyphicon-eye-open {
+    background-color: #79c0f7;
+  
+  
+  }

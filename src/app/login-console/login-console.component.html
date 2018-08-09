@@ -35,13 +35,20 @@
 
       </div>
 
+
+
       <div class="userpassword-component" *ngIf="viewPasswordComponent">
         <mat-form-field class="example-full-width">
-          <input autofocus type="password" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword"
-            #passwordInput>
+          <input autofocus type="{{passwordType}}" id="passwordInput" matInput placeholder="Password" minlength="5" maxlength="20" formControlName="userPassword"
+            >
           
         </mat-form-field>
+        <span *ngIf="eyeOpen; else eyeClosed" class="glyphicon glyphicon-eye-close" (click)="changeInputType()" title="Hide Password"></span>
 
+        <ng-template #eyeClosed>
+          <span class="glyphicon glyphicon-eye-open" title="Show Password" (click)="changeInputType()"></span>
+        </ng-template>
+        
         <div class="submit-button col-sm-6">
           <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
         </div>
