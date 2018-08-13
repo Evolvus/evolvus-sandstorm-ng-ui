@@ -108,7 +108,7 @@
                       <td>{{ entity?.parent | uppercase}}</td>
                       <!-- <td>{{ entity?.accessLevel}}</td> -->
                       <td>{{ entity?.entityCode | uppercase}}</td>
-                      <td>{{ entity?.enableFlag == 'true' ? 'Active' : 'Inactive'}}</td>
+                      <td>{{ entity?.activationStatus | uppercase}}</td>
 
                       <td>{{ entity?.processingStatus}}</td>
                       <td>{{ entity?.createdBy}}</td>

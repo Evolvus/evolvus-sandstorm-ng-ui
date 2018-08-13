@@ -78,11 +78,11 @@
           <div class="col-md-5">
               <div class="form-group">
                 <mat-form-field class="example-full-width ">
-                  <mat-select  placeholder="Activation Status" formControlName="enableFlag" required name="enableFlag" id="enableFlag">
-                    <mat-option value=true>Active</mat-option>
-                    <mat-option value=false>Inactive</mat-option>
+                  <mat-select  placeholder="Activation Status" formControlName="activationStatus" required name="activationStatus" id="activationStatus">
+                    <mat-option value="ACTIVE">Active</mat-option>
+                    <mat-option value="INACTIVE">Inactive</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="entityForm.controls.enableFlag.invalid">This is a required field</mat-error>
+                  <mat-error *ngIf="entityForm.controls.activationStatus.invalid">This is a required field</mat-error>
                 </mat-form-field>
             
               </div>

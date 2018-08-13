@@ -15,7 +15,7 @@ export class UpdateEntityComponent implements OnInit {
 
 
   entityForm: FormGroup;
-  entityData: EntityModel;
+  entityData: any;
   listOfParentEntityNames: string[] = [];
   listOfParentEntities: any;
   filteredEntityNames: Observable<string[]>;
@@ -44,7 +44,7 @@ export class UpdateEntityComponent implements OnInit {
         Validators.minLength(6),
         Validators.maxLength(140)
       ])),
-      enableFlag: new FormControl('', Validators.compose([
+      activationStatus: new FormControl('', Validators.compose([
         Validators.required
       ]))
     });
@@ -66,7 +66,7 @@ export class UpdateEntityComponent implements OnInit {
       if(response.data!=[]){
         this.entityData = response.data[0];
         this.entityForm.patchValue({
-          enableFlag: this.entityData.enableFlag,
+          activationStatus: this.entityData.activationStatus,
           name: this.entityData.name,
           entityCode: this.entityData.entityCode,
           description: this.entityData.description,
@@ -108,7 +108,7 @@ export class UpdateEntityComponent implements OnInit {
   update() {
     this.entityData.description = this.entityForm.value.description;
     // this.entityData.name = this.entityForm.value.name;
-    this.entityData.enableFlag = this.entityForm.value.enableFlag;
+    this.entityData.enableFlag = this.entityForm.value.activationStatus;
     this.entityData.processingStatus = this.entityForm.value.processingStatus;
     // this.entityData.parent = this.entityForm.value.parent;
     

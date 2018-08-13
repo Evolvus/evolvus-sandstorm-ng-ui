@@ -35,7 +35,6 @@ export class AddEntityComponent implements OnInit {
       parent: new FormControl('', Validators.required),
       description: new FormControl('', [
       Validators.minLength(6), Validators.maxLength(140)]),
-      enableFlag: new FormControl('true', Validators.required)
     });
   }
 
