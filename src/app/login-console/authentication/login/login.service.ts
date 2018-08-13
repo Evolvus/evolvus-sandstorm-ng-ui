@@ -21,7 +21,6 @@ export class AuthenticationService {
 
 
 
-
     authenticate(authentication : Authentication) {
         return this.http.post(`${this.serviceUrl}/auth`, authentication);
     }

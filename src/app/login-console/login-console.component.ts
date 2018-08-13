@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import { AuthenticationService } from './authentication/login/login.service';
 import { Authentication } from "../models/authentication.model";
 import { SandstormGlobalVariablesService } from './../shared/sandstorm-global-variables.service';
-
+import { UserDataService } from '../components/user-management/user-data.service';
 
 @Component({
   selector: 'app-login-console',
@@ -29,8 +29,9 @@ export class LoginConsoleComponent implements OnInit {
   value = 25;
 eyeOpen = false;
 passwordType: string = "password";
+doesUserExists: boolean = false;
+  constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService, private userDataService: UserDataService
 
-  constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService
      ) {}
 
   ngOnInit() {
@@ -93,9 +94,24 @@ passwordType: string = "password";
 
   changeView(){
 if(!this.loginForm.controls.userName.invalid){
-  this.viewUserNameComponent = !this.viewUserNameComponent;
-  this.viewPasswordComponent = !this.viewPasswordComponent;
-  this.usernameShow = !this.usernameShow;
+//   console.log("user id", this.loginForm.value.userName);
+//  this.userDataService.verify("SANDSTORM", this.loginForm.value.userName)
+//  .subscribe((response: any)=>{
+//    console.log("RESPONSE", response);
+//    if(response!=null){
+//      if(response.data==true){
+//       this.doesUserExists = false;
+//       this.viewUserNameComponent = !this.viewUserNameComponent;
+//       this.viewPasswordComponent = !this.viewPasswordComponent;
+//       this.usernameShow = !this.usernameShow;
+//      }else{
+//     this.doesUserExists = true;
+//      }
+//    }
+//  })
+this.viewUserNameComponent = !this.viewUserNameComponent;
+this.viewPasswordComponent = !this.viewPasswordComponent;
+this.usernameShow = !this.usernameShow;
 }
   }
 

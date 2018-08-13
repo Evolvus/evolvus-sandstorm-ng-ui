@@ -132,7 +132,7 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
     var roleData = {
       roleName: this.roleForm.value.roleName,
       applicationCode: this.roleForm.value.applicationCode,
-      activationStatus: "ACTIVE",
+      // activationStatus: "ACTIVE",
       roleType: this.roleForm.value.roleType,
       txnType: this.roleForm.value.txnType,
       description: this.roleForm.value.description,

@@ -26,9 +26,12 @@ export class JWTTokenIntercepter implements HttpInterceptor {
         //1.Step  check authService.isAuthenticated is 'false' if yes continue the request.
         if (this.authService.isAuthenticated === false) {
             if (req.url === `${this.serviceUrl}/auth`) {
+
                 return next.handle(req);
                 
-            } else {
+            }
+            
+            else {
                 this.authService.isAuthenticated = false;
                 this.authService.authenticatedSubject.next(this.authService.isAuthenticated);
                 this.router.navigate(['login']);

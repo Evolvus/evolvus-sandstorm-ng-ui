@@ -221,4 +221,22 @@ export class UserDataService {
         comments: comments
       });
     }
+
+    verify(applicationCode, userId){
+      var user = {
+        applicationCode: applicationCode,
+        userId: userId
+      };
+      console.log("verify in user service");
+      return this.http.get(`${this.platformURL}/sandstorm/api/user/verify`,{
+       params:{
+         applicationCode:applicationCode,
+         userId:userId
+       }
+      }
+      
+    );
+  }
+
+
 }
