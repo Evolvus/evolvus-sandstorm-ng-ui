@@ -30,9 +30,13 @@ export class LoginConsoleComponent implements OnInit {
 eyeOpen = false;
 passwordType: string = "password";
 doesUserExists: boolean = false;
+isInternetAvailable: boolean = navigator.onLine;
   constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService, private userDataService: UserDataService
 
-     ) {}
+     ) {
+
+      
+     }
 
   ngOnInit() {
       this.loginForm = new FormGroup({
@@ -40,10 +44,16 @@ doesUserExists: boolean = false;
           userPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
       });
 
+      window.setInterval(()=>{
+        if(!navigator.onLine){
+         this.isInternetAvailable = false;
+        }
+      }, 1500);
 
-  }
 
-  ngAfterViewInit(){
+    }
+ 
+  ngAfterViewInit(){ 
   }
 
   login() {
@@ -125,4 +135,7 @@ this.usernameShow = !this.usernameShow;
       this.passwordType = "text";
     }
   }
+
+
+
 }
