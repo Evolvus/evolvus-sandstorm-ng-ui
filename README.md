@@ -1,23 +1,4 @@
-<html>
-<head>
-<style>
-p{
-color: #0d476d;
-}
 
-.description p{
-margin-left: 3em;
-color: #ff8500;
-}
-.description p, a{
-color: #ff8500;
-}
-.description b, l{
-color: black;
-}
-</style>
-</head>
-<body>
 
 <h1 align="center">
 	<img height="100" src="./src/assets/images/flux_evolvus-logo.png" alt="Evolvus Solution Pvt Ltd." />
@@ -59,9 +40,9 @@ color: black;
 <br>
 <br>
 &copy; MIT License
-</body>
 
-</html>
+
+
 
 
 
