@@ -19,7 +19,7 @@ export class ListEntityComponent implements OnInit {
   listOfEntities: any = [];
   defaultFilterCriteria = {
     parent: "",
-    enableFlag: "",
+    activationStatus: "",
     processingStatus: "",
     pageSize: 5,
     pageNo: 1
@@ -65,7 +65,7 @@ export class ListEntityComponent implements OnInit {
     this.entityService
       .getFilteredEntityData(
         this.defaultFilterCriteria.parent,
-        this.defaultFilterCriteria.enableFlag,
+        this.defaultFilterCriteria.activationStatus,
         this.defaultFilterCriteria.processingStatus,
         this.defaultFilterCriteria.pageSize,
         this.defaultFilterCriteria.pageNo
@@ -79,7 +79,7 @@ export class ListEntityComponent implements OnInit {
               this.entityService
                 .getFilteredEntityData(
                   this.defaultFilterCriteria.parent,
-                  this.defaultFilterCriteria.enableFlag,
+                  this.defaultFilterCriteria.activationStatus,
                   this.defaultFilterCriteria.processingStatus,
                   this.defaultFilterCriteria.pageSize,
                   this.defaultFilterCriteria.pageNo
@@ -138,7 +138,7 @@ export class ListEntityComponent implements OnInit {
     this.entityService
       .getFilteredEntityData(
         this.defaultFilterCriteria.parent,
-        this.defaultFilterCriteria.enableFlag,
+        this.defaultFilterCriteria.activationStatus,
         this.defaultFilterCriteria.processingStatus,
         this.pageSize,
         this.pageNo
@@ -170,8 +170,6 @@ export class ListEntityComponent implements OnInit {
   setCurrentPage(movement: number) {
     if (movement == 1) {
       //next page
-
-
       this.pageNo = this.pageNo + 1;
       if (this.isViewAllOptionSelected) {
     
@@ -212,7 +210,7 @@ export class ListEntityComponent implements OnInit {
   reset(){
     this.defaultFilterCriteria = {
       parent: "",
-      enableFlag: "",
+      activationStatus: "",
       processingStatus: "",
       pageSize: 5,
       pageNo: 1

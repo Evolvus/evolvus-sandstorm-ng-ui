@@ -21,7 +21,7 @@ export class EntityDataService {
   defaultHeaders: HttpHeaders;
   defaultFilterCriteria = {
     parent: undefined,
-    enableFlag: undefined,
+    activationStatus: undefined,
     processingStatus: "PENDING_AUTHORIZATION",
     pageSize: 5,
     pageNo: 1
@@ -59,7 +59,7 @@ export class EntityDataService {
 
   getFilteredEntityData(
     parent,
-    enableFlag,
+    activationStatus,
     processingStatus,
     pageSize,
     pageNo
@@ -67,7 +67,7 @@ export class EntityDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
       params: {
         parent: parent,
-        enableFlag: enableFlag,
+        activationStatus: activationStatus,
         processingStatus: processingStatus,
         pageSize: pageSize,
         pageNo: pageNo
@@ -79,7 +79,7 @@ export class EntityDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`, {
       params: {
         processingStatus: "AUTHORIZED",
-        enableFlag: "true"
+        activationStatus: "ACTIVE"
       }
     });
   }

@@ -9,7 +9,7 @@ import { environment } from "../../../environments/environment";
 import { map } from "rxjs/operators";
 import { ConfirmationDialogEntityComponent } from "../../shared/confirmation-dialog-entity/confirmation-dialog-entity.component";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { of } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 
 @Injectable({
@@ -36,8 +36,8 @@ export class UserDataService {
   };
   menuItemCode: string = "userManagement";
   currentLoggedInUserData = this.globalVariablesService.currentUser;
-
-
+  filterCriteria = new BehaviorSubject<Object>(this.defaultFilterCriteria);
+   
 
 
   constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { }
@@ -47,7 +47,7 @@ export class UserDataService {
   }
 
   getDefaultFilterCriteria() {
-    return this.defaultFilterCriteria;
+    this.filterCriteria.next(this.defaultFilterCriteria);
   }
 
   getAllTimeZones() {

@@ -37,7 +37,9 @@ export class ListUsersComponent implements OnInit {
 
   ngOnInit() {
     this.userTableHeaders = this.userDataService.getTableHeaders();
-    this.defaultFilterCriteria = this.userDataService.getDefaultFilterCriteria();
+    this.userDataService.filterCriteria.subscribe((filterCriteria: any)=>{
+this.defaultFilterCriteria = filterCriteria;
+    });
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
     this.userDataService.getCurrentUserData().subscribe((user: any)=>{

@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import {Component, OnInit,Inject, ViewChild, ElementRef} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
@@ -6,6 +8,7 @@ import { AuthenticationService } from './authentication/login/login.service';
 import { Authentication } from "../models/authentication.model";
 import { SandstormGlobalVariablesService } from './../shared/sandstorm-global-variables.service';
 import { UserDataService } from '../components/user-management/user-data.service';
+import { animationFrameScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-login-console',
@@ -31,11 +34,13 @@ eyeOpen = false;
 passwordType: string = "password";
 doesUserExists: boolean = false;
 isInternetAvailable: boolean = navigator.onLine;
+emitMe = new BehaviorSubject<number>(5);
+new: any [] = [10, 26, 36, 21, 25, 89, 63, 25, 69, 56, 54];
   constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService, private userDataService: UserDataService
 
      ) {
 
-      
+
      }
 
   ngOnInit() {
@@ -51,10 +56,23 @@ isInternetAvailable: boolean = navigator.onLine;
       }, 1500);
 
 
+this.emitMe.subscribe((nu)=>{
+  console.log("Number emitted is "+nu);
+});
+
+
     }
  
-  ngAfterViewInit(){ 
-  }
+grow(){
+const random = (Math.random());
+  this.emitMe.next(random);
+
+}
+call(){
+  console.log(this.emitMe.getValue());
+}
+
+
 
   login() {
       

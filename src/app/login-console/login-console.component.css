@@ -78,9 +78,14 @@ color:#0d476d !important;
   }
   .form-control-feedback.glyphicon.glyphicon-eye-open {
     background-color: #79c0f7;
-  
+ 
   
   }
   
 
 
+  .rectangle{
+padding: 50px;
+width: 10px;
+border: 1px solid black;
+}

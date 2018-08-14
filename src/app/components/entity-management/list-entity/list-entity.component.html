@@ -40,9 +40,9 @@
                <div class="col-lg-3">
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
-                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.enableFlag" name="enableFlag">
-                           <mat-option  value=true>Active</mat-option>
-                           <mat-option  value=false>Inactive</mat-option>
+                         <mat-select placeholder="Activation Status"  [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.activationStatus" name="activationStatus">
+                           <mat-option  value="ACTIVE">Active</mat-option>
+                           <mat-option  value="INACTIVE">Inactive</mat-option>
                          </mat-select>
                        </mat-form-field>
                 </div>

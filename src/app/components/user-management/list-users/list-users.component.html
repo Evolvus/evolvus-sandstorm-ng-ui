@@ -4,7 +4,7 @@
       <span><span class="evo-newusers"></span>User Management</span>
     </h1>
     
-  <div class="rightSecBtn" *ngIf = "loggedInUser.role.roleType=='MAKER'" > 
+  <div class="rightSecBtn" *ngIf = "loggedInUser?.role?.roleType=='MAKER'" > 
       <span (click)="add()" mat-raised-button
       matTooltip="Add New User"><span class="evo-user"></span><span class="plus-symbol">+</span> </span>
    </div>

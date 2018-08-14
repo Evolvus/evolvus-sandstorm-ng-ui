@@ -108,7 +108,7 @@ export class UpdateEntityComponent implements OnInit {
   update() {
     this.entityData.description = this.entityForm.value.description;
     // this.entityData.name = this.entityForm.value.name;
-    this.entityData.enableFlag = this.entityForm.value.activationStatus;
+    this.entityData.activationStatus = this.entityForm.value.activationStatus;
     this.entityData.processingStatus = this.entityForm.value.processingStatus;
     // this.entityData.parent = this.entityForm.value.parent;
     
