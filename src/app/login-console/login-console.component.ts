@@ -56,21 +56,21 @@ new: any [] = [10, 26, 36, 21, 25, 89, 63, 25, 69, 56, 54];
       }, 1500);
 
 
-this.emitMe.subscribe((nu)=>{
-  console.log("Number emitted is "+nu);
-});
+// this.emitMe.subscribe((nu)=>{
+//   console.log("Number emitted is "+nu);
+// });
 
 
     }
  
-grow(){
-const random = (Math.random());
-  this.emitMe.next(random);
+// grow(){
+// const random = (Math.random());
+//   this.emitMe.next(random);
 
-}
-call(){
-  console.log(this.emitMe.getValue());
-}
+// }
+// call(){
+//   console.log(this.emitMe.getValue());
+// }
 
 
 
