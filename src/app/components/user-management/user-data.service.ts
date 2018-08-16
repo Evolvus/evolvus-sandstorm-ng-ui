@@ -35,12 +35,17 @@ export class UserDataService {
     pageNo: 1
   };
   menuItemCode: string = "userManagement";
-  currentLoggedInUserData = this.globalVariablesService.currentUser;
+  currentLoggedInUserData: any = {};
   filterCriteria = new BehaviorSubject<Object>(this.defaultFilterCriteria);
    
 
 
-  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { }
+  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { 
+
+    this.currentLoggedInUserData =this.globalVariablesService.currentUser.subscribe((user: any)=>{
+      this.currentLoggedInUserData = user;
+    })
+  }
 
   getTableHeaders() {
     return this.userTableHeaders;
@@ -145,7 +150,7 @@ export class UserDataService {
   }
 
   getCurrentUserData(){
-    return of(this.currentLoggedInUserData);
+    return this.currentLoggedInUserData;
     
     }
 
@@ -191,7 +196,7 @@ export class UserDataService {
   }
 
   getListOfSubMenuItems(){
-    return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
+        return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
     .reduce((menuItemsA, menuItemsC) => menuItemsA.concat(menuItemsC), [])
     .filter(menuItem => menuItem.menuItemCode == 'userManagement')
     .map(menuItem => menuItem.subMenuItems)

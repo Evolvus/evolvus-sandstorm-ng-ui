@@ -24,6 +24,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTreeModule} from '@angular/material/tree';
+
 import 'hammerjs';
 //SERVICE COMPONENTS
 
@@ -90,7 +92,6 @@ import { SessionexpiredComponent } from './components/sessionexpired/sessionexpi
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 import { SearchPipe } from './components/shared/search.pipe';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -137,13 +138,15 @@ import { SearchPipe } from './components/shared/search.pipe';
     MatSelectModule,
     MatExpansionModule,
     EvolvusWorkflowViewModule,
-EvolvusBulkUploadModule
+EvolvusBulkUploadModule,
+MatTreeModule
     
   ],
   entryComponents: [
     ConfirmationDialogEntityComponent, LoginConsoleComponent
   ],
-  providers: [ResponsiveService, RoleDataService, EntityDataService, ApplicationDataService,   AuthGuardService,  AuthenticationService, 
+  providers: [ResponsiveService, RoleDataService, EntityDataService, ApplicationDataService,   AuthGuardService
+,    AuthenticationService, 
     {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTTokenIntercepter,

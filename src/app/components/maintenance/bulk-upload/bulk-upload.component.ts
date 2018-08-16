@@ -1,6 +1,11 @@
 import { BulkUploadService } from './bulk-upload.service';
 import { Component, OnInit } from '@angular/core';
 
+import {BehaviorSubject} from 'rxjs';
+
+
+
+
 @Component({
   selector: 'app-bulk-upload',
   templateUrl: './bulk-upload.component.html',
@@ -12,7 +17,6 @@ export class BulkUploadComponent implements OnInit {
   fileTypes: any[]=[];
   selectedFileType: any;
   selectedFile: any;
-  constructor(private bulkUploadService: BulkUploadService) { }
 
   ngOnInit() {
     this.bulkUploadService.getListOfFileTypes().subscribe((response: any)=>{
@@ -40,5 +44,17 @@ export class BulkUploadComponent implements OnInit {
     }
   }
 
+  constructor(private bulkUploadService: BulkUploadService) {
+
+  }
+
+
+ 
+ 
+
+
+
 
 }
+
+

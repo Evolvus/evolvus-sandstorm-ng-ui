@@ -1,7 +1,7 @@
 .info-box-content span{
     color: black;
 }
-.col-md-6:hover span{
+.col-md-6:hover .info-box .info-box-content span{
     color: white;
 }
 .force-overflow .request-time{
@@ -12,9 +12,19 @@
 h6 a{
 cursor: pointer;
 }
-.panel-title h4{
-  margin-top: 1.4em;  
+
+
+
+
+.row .col-md-12 .notification {
+position: relative;
+top: 8px;
 }
-.accordion{
-width: 100px;
+.fa{
+    color: darkgoldenrod;
+    font-size: 15px;
+}
+
+.notification b{
+    color: red;
 }

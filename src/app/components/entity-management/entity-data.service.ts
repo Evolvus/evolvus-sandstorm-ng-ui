@@ -26,7 +26,7 @@ export class EntityDataService {
     pageSize: 5,
     pageNo: 1
   };
-  currentLoggedInUserData = this.globalVariablesService.currentUser;
+  currentLoggedInUserData: any = {};
   menuItemCode: string = "entityManagement";
   constructor(
     public http: HttpClient,
@@ -38,6 +38,10 @@ export class EntityDataService {
       tenantId: "T001",
       accessLevel: "0"
     });
+
+
+    this.currentLoggedInUserData = this.globalVariablesService.currentUser.getValue();
+
   }
 
   getListOfSubMenuItems() {

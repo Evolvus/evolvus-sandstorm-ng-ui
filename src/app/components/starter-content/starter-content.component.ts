@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-starter-content',
   templateUrl: './starter-content.component.html',
@@ -12,25 +11,21 @@ import { Router } from '@angular/router';
 })
 export class StarterContentComponent implements OnInit {
 
-user: any;
+user: any = {};
 eventData: any = [];
 panelOpenState = false;
+isPanelOpened = false;
 
   constructor(private globalVariableService: SandstormGlobalVariablesService, private starterContentService: StarterContentService, private router: Router)
  { }
 
 
   ngOnInit() {
-this.user = this.globalVariableService.currentUser;  
-this.starterContentService.getSWEEventData()
-.subscribe((eventData: any)=>{
-  if(eventData!=null){
-    this.eventData = eventData.data;
-  }
-  
-});
-
-
+    this.user = this.globalVariableService.currentUser.getValue();
+this.getWfEventData();
+setInterval(()=>{
+ this.getWfEventData();
+},6000)
 
   }
 
@@ -49,7 +44,15 @@ return "Requested "+ (Math.ceil(differenceDateTimeInMilliSeconds / (60 * 1000)))
 }
 
 
-
+getWfEventData(){
+  this.starterContentService.getSWEEventData()
+.subscribe((eventData: any)=>{
+  if(eventData!=null){
+    this.eventData = eventData.data;
+  }
+  
+});
+}
 
 view(wfEntity, id){
 
@@ -69,8 +72,8 @@ view(wfEntity, id){
 
 }
 
+panelOpened(){
 
-
-
-
+    this.isPanelOpened = !this.isPanelOpened;
+}
 }

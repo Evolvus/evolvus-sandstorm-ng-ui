@@ -18,7 +18,7 @@ export class StarterLeftSideComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.globalVariableService.currentUser;
+    this.user = this.globalVariableService.currentUser.getValue();
   }
 
 

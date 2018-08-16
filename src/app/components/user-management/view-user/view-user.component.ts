@@ -46,9 +46,7 @@ export class ViewUserComponent implements OnInit {
         alert("No User Data");
       }
     );
-    this.userDataService.getCurrentUserData().subscribe((user: any) => {
-      this.loggedInUser = user;
-    });
+    this.loggedInUser = this.userDataService.getCurrentUserData();
     this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
   }
 

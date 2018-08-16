@@ -35,7 +35,8 @@ passwordType: string = "password";
 doesUserExists: boolean = false;
 isInternetAvailable: boolean = navigator.onLine;
 emitMe = new BehaviorSubject<number>(5);
-new: any [] = [10, 26, 36, 21, 25, 89, 63, 25, 69, 56, 54];
+loggedInUser = {};
+user = new BehaviorSubject<any>(this.loggedInUser);
   constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService, private userDataService: UserDataService
 
      ) {
@@ -90,7 +91,10 @@ new: any [] = [10, 26, 36, 21, 25, 89, 63, 25, 69, 56, 54];
                 this.authenticationService.setToken(user.token);
                 this.authenticationService.dtFormat = 'dd/MM/yyyy hh:mm:ss';
                 this.dateFormat =this.authenticationService.dtFormat;
-                this.globalVariableService.currentUser = user.data;
+                // this.globalVariableService.currentUser = user.data;
+                this.globalVariableService.currentUser.next(user.data);
+
+                
                 this.router.navigate(['home']);
             }, 1000);    
           }else{

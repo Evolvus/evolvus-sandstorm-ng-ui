@@ -92,9 +92,7 @@ export class AddUserComponent implements OnInit {
         this.getFilteredRoleNames();
       }
     });
-    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
-      this.loggedInUser = user;   
-    });
+    this.loggedInUser = this.userDataService.getCurrentUserData();
     // this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
   }
 

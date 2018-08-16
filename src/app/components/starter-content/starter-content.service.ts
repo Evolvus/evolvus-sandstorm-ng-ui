@@ -8,6 +8,7 @@ import { RoleDataService } from '../role-management/role-data.service';
 import { EntityDataService } from './../entity-management/entity-data.service';
 import { UserDataService } from './../user-management/user-data.service';
 import { ApplicationDataService } from './../application-management/application-data.service';
+import { timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +29,18 @@ platformURL = environment.platformURL;
 
 
 getSWEEventData(){
-return this.http.get(`${this.platformURL}/swe/api/event`,{
-  params:{
-    wfInstanceStatus: 'PENDING_AUTHORIZATION'
-  }
-});
+
+  return this.http.get(`${this.platformURL}/swe/api/event`,{
+    params:{
+      wfInstanceStatus: 'PENDING_AUTHORIZATION'
+    }
+  });
+
 }
+
+
+
+
 
 getWfEntityData(wfEntity, id){
   wfEntity = wfEntity.toLowerCase();

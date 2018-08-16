@@ -42,9 +42,7 @@ this.defaultFilterCriteria = filterCriteria;
     });
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
-    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
-      this.loggedInUser = user;   
-    });
+    this.loggedInUser = this.userDataService.getCurrentUserData();
   }
 
   getUserDataBasedOnDefaultFilterCriteria() {

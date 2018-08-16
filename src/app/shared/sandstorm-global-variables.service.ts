@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
@@ -7,7 +8,8 @@ export class SandstormGlobalVariablesService implements OnInit{
 
   constructor() { }
 
-  currentUser: any = {};
+  user: any = {};
+  currentUser = new BehaviorSubject<any>(this.user);
   
 ngOnInit(){
 

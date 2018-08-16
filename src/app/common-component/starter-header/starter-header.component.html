@@ -2,156 +2,61 @@
 
   <!-- Logo -->
   <a ui-sref="#" class="logo">
-    <span class="logo-mini"><b>Z</b>ERO</span>
-    <span class="logo-lg"><h5 style="margin-top: 2em;">Sandstorm-Console</h5></span>
-      <span id="nav-icon1" class="open" data-toggle="offcanvas" role="button">
-    </span> 
+    <span class="logo-mini">
+      <b>Z</b>ERO</span>
+    <span class="logo-lg">
+      <h5 style="margin-top: 2em;">Sandstorm-Console</h5>
+    </span>
+    <span id="nav-icon1" class="open" data-toggle="offcanvas" role="button">
+    </span>
   </a>
-  
+
 
 
   <nav class="navbar navbar-static-top" role="navigation">
-      <a (click)="sideBarmenu()" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
-      </a>
+    <a (click)="sideBarmenu()" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
 
-      <ul class="nav navbar-nav paddR25">            
-        <li class="dropdown user user-menu">
-        <a id="drop2" class="dropdown-toggle userfluxlogin bellIcon" role="button">
-      <!-- <img src="images/user-icon.png" height="30" width="30"> -->
-      
-       <i class="fa fa-bell" aria-hidden="true"></i></a>
-          <ul role="menu" class="dropdown-menu dropdown-menu-animated notify-area" aria-labelledby="drop2">
-          <li>			                        
-              <div class="navbar-login">
-                  <h4 class="text-center  marT20 txt-blue">Notifications</h4>
-                <div class="scrollbar" id="style-2"  custom-scroll="{ 'theme': dark }">           			
-                  <div class="force-overflow">           				
-                    <div class="notificationSec box box-primary no-margin-top">
-                      <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                              <div class="notificationClosebtn pull-right">                  
-                                      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                <p>X user Transaction Limit Crossed !Some more transaction notifications comes here</p>
-                                <small class="pull-right"><i class="fa fa-clock-o"></i> 2 mins agao</small>
-                            </div>
-                        </div>
-                    </div> 
-            
-          
-                    <div class="notificationSec box box-primary">
-                          <div class="media">	            	 	
-                          <div class="media-left">
-                              <a href="#">
-                                  <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                            <div class="notificationClosebtn pull-right">                  
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                              <p>X user Transaction Limit Crossed</p>
-                              <small class="pull-right"><i class="fa fa-clock-o"></i> 3 min ago</small>
-                          </div>
-                      </div>
-                    </div> 
 
-                    <div class="notificationSec box box-primary">
-                          <div class="media">	            	 	
-                          <div class="media-left">
-                              <a href="#">
-                                  <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                            <div class="notificationClosebtn pull-right">                  
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                              <p>X user Transaction Limit Crossed</p>
-                              <small class="pull-right"><i class="fa fa-clock-o"></i> 4 min ago</small>
-                          </div>
-                      </div>
-                    </div> 
-                
-                    <div class="notificationSec box box-primary">
-                          <div class="media">	            	 	
-                          <div class="media-left">
-                              <a href="#">
-                                  <img src="assets/images/user-icon.png" class="user-image" alt="User Image">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                            <div class="notificationClosebtn pull-right">                  
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                  </div>
-                              <p>X user Transaction Limit Crossed</p>
-                              <small class="pull-right"><i class="fa fa-clock-o"></i> 15 min ago</small>
-                          </div>
-                      </div>
-                    </div> 
-                  </div>            
-              </div>
-          </div>
-        </li>
-    </ul>
-      </li>
-      </ul>
-  
+
     <div class="nav navbar-nav navbar-center">
-    <span class="txt-blue">Sandstorm-Console</span>
-  <!--   <p class="text-center" style="font-size:14px;">Console</p>	 -->
- </div>
- 
+      <span class="txt-blue">Sandstorm-Console</span>
+      <!--   <p class="text-center" style="font-size:14px;">Console</p>	 -->
+    </div>
+
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav paddR25">            
+      <ul class="nav navbar-nav paddR25">
         <li class="dropdown user user-menu">
-           <a id="drop1" class="dropdown-toggle userfluxlogin" role="button"><img src="assets/images/user-icon.png" height="30" width="30"></a>
+          <a id="drop1" class="dropdown-toggle userfluxlogin" role="button">
+            <img src="assets/images/user-icon.png" height="30" width="30">
+          </a>
           <ul role="menu" class="dropdown-menu dropdown-menu-animated" aria-labelledby="drop1">
-               <li>			                        
-                    <div class="navbar-login">
-                        <div class="row">
-                            <div class="col-md-7 col-lg-7">
-                                <p class="text-left"><span class="txt-orange">{{user.userName | uppercase}}</span></p>
-                                <p class="text-left small">ID : {{user.userId}}</p>
-                                <p class="text-left small">Role: <span class="txt-orange">{{user.role.roleName}}</span></p>
-                                <!-- <p class="text-left small">LAST LOGIN<br></p> -->
-                            </div>
-                            <div class="col-md-5 col-lg-5 logoutImg">
-                                <img src="assets/images/user.jpeg" width="75" height="80">
-                            </div>
-                        </div>
-                        <hr style="margin-top:6px;">
-                        <div class="row logoutBtn">
-                            <div class="col-md-12 text-center">
-                              <button type="button" class="btn btn-orange" (click)="logout()" >Logout</button>
-                            </div>
-                          </div>
+            <li>
+              <div class="navbar-login">
+                <div class="row">
+                  <div class="col-md-6 col-lg-6">
+                    <p class="text-left medium txt-orange">
+                      <i class="evo-user"></i> {{user?.userId}}</p>
+                    <p class="text-left small">{{user?.role?.roleName}}</p>
+                  </div>
+                    <div class="col-md-2">
+                        <button mat-raised-button type="button">Profile</button>
                     </div>
-                </li>
+                </div>
+                <hr style="margin-top:6px;">
+                <div class="row logoutBtn">
+                  <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-orange" (click)="logout()">Logout</button>
+                  </div>
+                </div>
+              </div>
+            </li>
           </ul>
-      </li>
+        </li>
       </ul>
     </div>
-    
-  <div class="nav navbar-nav navbar-right">
-        <form action="" class="search-form">
-          <div>
-            <span class="archive-link pull-right header-search-span">
-              <span class="header-search">
-                      <input type="text" class="form-control input-sm" maxlength="64" placeholder="Console Search" />
-                      <a href="#link" role="button" class="btn-srch"><i class="fa fa-search"></i></a>
-                  </span>
-            </span>
-          </div>                	
-      </form>
- </div>
 
   </nav>
 </header>

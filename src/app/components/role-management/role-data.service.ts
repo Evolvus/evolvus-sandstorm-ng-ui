@@ -12,13 +12,8 @@ import { SandstormGlobalVariablesService } from "../../shared/sandstorm-global-v
   providedIn: "root"
 })
 export class RoleDataService {
-  constructor(
-    private http: HttpClient,
-    private dialog: MatDialog,
-    private globalVariablesService: SandstormGlobalVariablesService
-  ) {}
 
-  currentLoggedInUserData = this.globalVariablesService.currentUser;
+  currentLoggedInUserData: any = {};
   menuItemCode: string = "roleManagement";
   currentUser = new Subject<Object>();
   platformURL = environment.platformURL;
@@ -43,6 +38,20 @@ export class RoleDataService {
   sampleDate: Date = new Date();
 
   roleData: RoleModel[] = [];
+
+
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private globalVariablesService: SandstormGlobalVariablesService
+  ) {
+    this.currentLoggedInUserData = this.globalVariablesService.currentUser.getValue();
+
+
+
+  }
+
+
 
   createNewRole(role: RoleModel) {
     this.roleData.push(role);
