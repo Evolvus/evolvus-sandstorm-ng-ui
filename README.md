@@ -4,7 +4,7 @@
 	<img height="100" src="./src/assets/images/flux_evolvus-logo.png" alt="Evolvus Solution Pvt Ltd." />
 	<br>
 </h1>
-<p align="center" style="color: #0d476d; margin-left: 1em; font-size: 40px;">SANDSTORM CONSOLE</p>
+<h3 align="center" style="color: #0d476d; margin-left: 1em; font-size: 40px;">SANDSTORM CONSOLE</h3>
 <br>
 <br>
 <h4 align="left">About</h4>
