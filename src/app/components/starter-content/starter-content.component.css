@@ -18,7 +18,7 @@ cursor: pointer;
 
 .row .col-md-12 .notification {
 position: relative;
-top: 8px;
+top: 2px;
 }
 .fa{
     color: darkgoldenrod;

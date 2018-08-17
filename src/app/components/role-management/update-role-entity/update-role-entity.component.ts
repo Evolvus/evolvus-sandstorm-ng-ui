@@ -208,7 +208,9 @@ for (
   miIndex < this.selectedMenuGroups[mgIndex].menuItems.length;
   miIndex++
 ) {
+  if(this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems){
   this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
+  }
 }
 }else{
 this.selectedMenuGroups.splice(mgIndex, 1);

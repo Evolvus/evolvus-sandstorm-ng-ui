@@ -1,7 +1,7 @@
 <div class="content-wrapper home-sec">
   <section class="content">
     <div class="row">
-      <div class="col-md-9 padR50">
+      <div class="col-md-8 padR50">
 
 
 
@@ -14,8 +14,8 @@
             </h1>
           </section>
           <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let menuItem of menuGroup.menuItems; let j = index">
-            <a routerLink="/{{menuItem.menuItemCode}}" >
-              <div class="info-box maintananceicon1" >
+            <a routerLink="/{{menuItem.menuItemCode}}">
+              <div class="info-box maintananceicon1">
                 <span class="info-box-icon bg-transparent">
                   <span [ngClass]="user.role.menuGroup[i].menuItems[j].icon"></span>
                 </span>
@@ -25,101 +25,65 @@
 
 
                 </div>
-          
+
               </div>
-     
             </a>
 
           </div>
-     
+
         </div>
       </div>
-      <div class="col-md-3  marL15">
-
+      <div class="col-md-4  marL15">
 
         <div class="row">
-          <div class="col-md-12" >
-              <mat-accordion >
-                  <mat-expansion-panel  (opened)="panelOpened()" (closed)="panelOpened()">
-            <mat-expansion-panel-header>
-                <mat-panel-title class="panel-title">
-                   Pending Actions <mat-icon> </mat-icon>
-                </mat-panel-title>
-                <mat-panel-description>
+          <div class="col-md-12">
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpened()" (closed)="panelOpened()">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="panel-title">
+                    Pending Actions
+                    <mat-icon> </mat-icon>
+                  </mat-panel-title>
+                  <mat-panel-description>
 
                   </mat-panel-description>
-              </mat-expansion-panel-header>
-            <mat-accordion *ngFor="let event of eventData" class="accordion">
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    <p>{{event?.wfEntity}}</p>
-                  </mat-panel-title>
-             
                 </mat-expansion-panel-header>
-                <h6>ACTION : {{event?.wfEntityAction}}</h6>
-                <h6>{{getTimeOfRequest(event?.wfEventDate)}}</h6>
-                <h6>
-                  <a (click)="view(event?.wfEntity, event?.query)">View</a>
-                </h6>
+                <mat-accordion *ngFor="let event of eventData" class="accordion">
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <p>{{event?.wfEntity}}</p>
+                      </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <h6>ACTION : {{event?.wfEntityAction}}</h6>
+                    <h6>{{getTimeOfRequest(event?.wfEventDate)}}</h6>
+                    <h6>
+                      <a (click)="view(event?.wfEntity, event?.query)">View</a>
+                    </h6>
+                  </mat-expansion-panel>
+                </mat-accordion>
               </mat-expansion-panel>
+
             </mat-accordion>
-          </mat-expansion-panel>
+            <div class="notification" *ngIf="!isPanelOpened">
+              <h6 *ngIf="eventData.length!=1" class="text-center">You have
+                <b>{{eventData.length}}</b> Pending Actions! &nbsp;
+                <i class="fa fa-bell faa-ring animated"></i>
+              </h6>
+              <h6 *ngIf="eventData.length==1" class="text-center">You have
+                <b>{{eventData.length}}</b> Pending Action! &nbsp;
+                <i class="fa fa-bell faa-ring animated"></i>
+              </h6>
+            </div>
 
-          </mat-accordion>
-          <div class="notification" *ngIf="!isPanelOpened">
-            <h6 *ngIf="eventData.length!=1" class="text-center">You have <b>{{eventData.length}}</b> Pending Actions! &nbsp;<i class="fa fa-bell faa-ring animated"></i> </h6>
-            <h6 *ngIf="eventData.length==1" class="text-center">You have <b>{{eventData.length}}</b> Pending Action! &nbsp;<i class="fa fa-bell faa-ring animated"></i> </h6>
-            
           </div>
 
-          </div>
-
-        </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
 
       </div>
-
-
     </div>
+
+    
   </section>
 </div>

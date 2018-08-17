@@ -1,9 +1,9 @@
 import { RoleModel } from "./../role-model";
 import { Router, ActivatedRouteSnapshot } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RoleDataService } from "../role-data.service";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatMenuTrigger } from "@angular/material";
 
 @Component({
   selector: "app-view-role-entity",
@@ -18,7 +18,9 @@ export class ViewRoleEntityComponent implements OnInit {
   showWorkFlow: boolean = false;
   listOfEvents: any[] = [];
   comments: string = "";
-
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  isPanelOpened: boolean = false;
+  panelOpenState: boolean =false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -97,4 +99,12 @@ export class ViewRoleEntityComponent implements OnInit {
         }
       });
   }
+
+  log(){
+   this.trigger.openMenu();
+  }
+  panelOpened(){
+
+    this.isPanelOpened = !this.isPanelOpened;
+}
 }

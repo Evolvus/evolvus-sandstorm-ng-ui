@@ -195,4 +195,9 @@ export class AddUserComponent implements OnInit {
   //   return this.listOfSubMenuItems.includes(title);
   //   }
 
+toUpperCase(event){
+   event.target.value = event.target.value.toUpperCase();
+}
+
+
 }

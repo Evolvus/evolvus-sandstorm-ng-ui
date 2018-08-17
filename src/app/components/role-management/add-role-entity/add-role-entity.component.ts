@@ -121,7 +121,9 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
     miIndex < this.selectedMenuGroups[mgIndex].menuItems.length;
     miIndex++
   ) {
-    this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
+    if(this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems){
+      this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems = this.selectedMenuGroups[mgIndex].menuItems[miIndex].subMenuItems.filter(subMenuItem => subMenuItem.selectedFlag == true);
+    }
   }
 }else{
   this.selectedMenuGroups.splice(mgIndex, 1);
@@ -132,7 +134,6 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
     var roleData = {
       roleName: this.roleForm.value.roleName,
       applicationCode: this.roleForm.value.applicationCode,
-      // activationStatus: "ACTIVE",
       roleType: this.roleForm.value.roleType,
       txnType: this.roleForm.value.txnType,
       description: this.roleForm.value.description,
@@ -184,4 +185,9 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
   // doIExist(title){
   //   return this.listOfSubMenuItems.includes(title);
   //   }
+
+  toUpperCase(event){
+    event.target.value = event.target.value.toUpperCase();
+ }
+
 }
