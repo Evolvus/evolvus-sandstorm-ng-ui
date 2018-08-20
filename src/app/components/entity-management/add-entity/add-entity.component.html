@@ -35,8 +35,8 @@
               <mat-form-field class="example-full-width">
                 <input  required autocomplete="off" formControlName="name" matInput name="name" minlength="6" maxlength="35"
                   id="name" placeholder="Entity Name" (keyup)="toUpperCase($event)" >
-                  <mat-error *ngIf="entityForm.controls.name.dirty && entityForm.controls.name.invalid">Invalid Entity Name. Please check info!</mat-error>
-                  <mat-error *ngIf="entityForm.controls.name.pristine">This is a required field</mat-error>
+                  <mat-error id="nameError1" *ngIf="entityForm.controls.name.dirty && entityForm.controls.name.invalid">Invalid Entity Name. Please check info!</mat-error>
+                  <mat-error id="nameError2" *ngIf="entityForm.controls.name.pristine">This is a required field</mat-error>
                   <label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label>
               </mat-form-field>
 
@@ -47,8 +47,8 @@
               <mat-form-field class="example-full-width">
                 <input  required autocomplete="off" formControlName="entityCode" matInput name="entityCode" minlength="3" maxlength="20"
                   id="entityCode" placeholder="Entity Code"  (keyup)="toUpperCase($event)">
-                  <mat-error *ngIf="entityForm.controls.entityCode.dirty && entityForm.controls.entityCode.invalid">Invalid Entity Code. Please check info!</mat-error>
-                  <mat-error *ngIf="entityForm.controls.entityCode.pristine">This is a required field</mat-error>
+                  <mat-error id="entityCodeError1" *ngIf="entityForm.controls.entityCode.dirty && entityForm.controls.entityCode.invalid">Invalid Entity Code. Please check info!</mat-error>
+                  <mat-error id="entityCodeError2"*ngIf="entityForm.controls.entityCode.pristine">This is a required field</mat-error>
                   <label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label>
               </mat-form-field>
              
@@ -65,7 +65,7 @@
                   <mat-option  *ngFor="let parent of filteredEntityNames | async" [value]="parent">{{parent}}
                   </mat-option>
                 </mat-autocomplete>
-                <mat-error *ngIf="entityForm.controls.parent.invalid">This is a required field</mat-error>
+                <mat-error id="parentEntityError"*ngIf="entityForm.controls.parent.invalid">This is a required field</mat-error>
               </mat-form-field>
             
             </div>
@@ -88,8 +88,8 @@
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
                      <textarea required matInput placeholder="Description" formControlName="description" name="description" ></textarea>
-                     <mat-error *ngIf="entityForm.controls.description.dirty && entityForm.controls.description.invalid">Invalid Entity Description. Please check info!</mat-error>
-                     <mat-error *ngIf="entityForm.controls.description.pristine">This is a required field</mat-error>
+                     <mat-error id="entityDescriptionError1" *ngIf="entityForm.controls.description.dirty && entityForm.controls.description.invalid">Invalid Entity Description. Please check info!</mat-error>
+                     <mat-error id="entityDescriptionError2"*ngIf="entityForm.controls.description.pristine">This is a required field</mat-error>
                      <label class="btn btn-info"  mat-raised-button matTooltip="6 - 140 characters &#10004;"><i class="fa fa-question-circle" ></i></label>
                    </mat-form-field>
                  </div>

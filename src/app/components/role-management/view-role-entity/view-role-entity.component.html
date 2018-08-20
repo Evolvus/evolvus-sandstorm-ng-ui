@@ -100,7 +100,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-accordion *ngFor="let menuItem of mGroup?.menuItems">
-              <mat-expansion-panel hideToggle="menuItem?.subMenuItems?.length>0" >
+              <mat-expansion-panel hideToggle=false >
                 <mat-expansion-panel-header class="right-aligned-header">
                   <mat-panel-title>
                     {{menuItem?.title | uppercase}}

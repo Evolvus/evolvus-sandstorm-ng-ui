@@ -12,7 +12,7 @@ export class SessionexpiredComponent implements OnInit {
     ngOnInit() {
         setTimeout(()=>{
             this.login();
-        }, 4000);
+        }, 3000);
     }
 
     login() {

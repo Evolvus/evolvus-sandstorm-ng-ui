@@ -31,8 +31,8 @@
                   <div class="form-group">
                      <mat-form-field class="example-full-width">
                          <input required matInput placeholder="Role Name" formControlName="roleName" required name="roleName">
-                         <mat-error *ngIf="roleForm.controls.roleName.dirty && roleForm.controls.roleName.invalid">Invalid Role Name. Please check info!</mat-error>
-                         <mat-error *ngIf="roleForm.controls.roleName.pristine">This is a required field</mat-error>
+                         <mat-error  id="roleNameError1" *ngIf="roleForm.controls.roleName.dirty && roleForm.controls.roleName.invalid">Invalid Role Name. Please check info!</mat-error>
+                         <mat-error id="roleNameError2" *ngIf="roleForm.controls.roleName.pristine">This is a required field</mat-error>
                          <label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label>
                        </mat-form-field>
                      </div>
@@ -46,7 +46,7 @@
                     <mat-select placeholder="Application Category"  formControlName="applicationCode" (ngModelChange)="getMenuGroups(applicationCode.value)"  required  name="applicationCode" #applicationCode> 
                       <mat-option  *ngFor="let applicationCode of listOfApplicationCodes"  value="{{applicationCode}}">{{applicationCode}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="roleForm.controls.applicationCode.invalid">This is a required field</mat-error>
+                    <mat-error  id="applicationCategoryRoleError" *ngIf="roleForm.controls.applicationCode.invalid">This is a required field</mat-error>
 
                   </mat-form-field>
                 </div>
@@ -56,8 +56,10 @@
               <div class="form-group">
                 <mat-form-field [color]="'primary'" class="example-full-width">
                   <mat-select placeholder="Role Type" formControlName="roleType" required name="roleType">
-                    <mat-option *ngFor="let roleType of listOfRoleTypes" value="{{roleType}}">{{roleType}}</mat-option>
+                    <mat-option id="roleTypeError" *ngFor="let roleType of listOfRoleTypes" value="{{roleType}}">{{roleType}}</mat-option>
                   </mat-select>
+                  <mat-error  id="roleTypeError" *ngIf="roleForm.controls.roleType.pristine">This is a required field</mat-error>
+
                 </mat-form-field>
               </div>
             </div>
@@ -69,6 +71,8 @@
                   <mat-select placeholder="Transaction Type" formControlName="txnType" required name="txnType" multiple>
                     <mat-option *ngFor="let txnType of listOfTxnTypes" value="{{txnType}}">{{txnType}}</mat-option>
                   </mat-select>
+                  <mat-error  id="txnTypeError" *ngIf="roleForm.controls.txnType.pristine">This is a required field</mat-error>
+
                 </mat-form-field>
               </div>
             </div>
@@ -92,8 +96,8 @@
                  <mat-form-field  class="example-full-width">
 
                      <textarea required matInput placeholder="Role Description"  formControlName="description" name="description" ></textarea>
-                     <mat-error *ngIf="roleForm.controls.description.dirty && roleForm.controls.description.invalid">Invalid Entity Description. Please check info!</mat-error>
-                     <mat-error *ngIf="roleForm.controls.description.pristine">This is a required field</mat-error>
+                     <mat-error id="roleDescriptionError1" *ngIf="roleForm.controls.description.dirty && roleForm.controls.description.invalid">Invalid Entity Description. Please check info!</mat-error>
+                     <mat-error id="roleDescriptionError2" *ngIf="roleForm.controls.description.pristine">This is a required field</mat-error>
                      <label class="btn btn-info"  mat-raised-button matTooltip="6 - 140 characters &#10004;"><i class="fa fa-question-circle" ></i></label>
                    </mat-form-field>
                  </div>

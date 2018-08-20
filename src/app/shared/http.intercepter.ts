@@ -73,13 +73,10 @@ export class JWTTokenIntercepter implements HttpInterceptor {
                 const uploadRequest = req.clone({headers: this.headers});
                 return next.handle(uploadRequest);
               }
-
-
-
             return next.handle(modifiedRequest);
         }
     }
-
+    
     isSessionActive() {
         return this.http.get(`${this.serviceUrl}/sessionCheck`, {headers: this.headers});
     }
