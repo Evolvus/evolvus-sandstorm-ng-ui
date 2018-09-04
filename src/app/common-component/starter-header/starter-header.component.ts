@@ -11,6 +11,7 @@ import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-v
 export class StarterHeaderComponent implements OnInit {
   body: HTMLBodyElement = document.getElementsByTagName('body')[0];
   user: any;
+  loggingOut: boolean = false;
   constructor(private authService: AuthenticationService, private globalVariableService: SandstormGlobalVariablesService, private router: Router) { }
 
   ngOnInit() {
@@ -28,7 +29,9 @@ export class StarterHeaderComponent implements OnInit {
 
 
 logout(){
-  this.authService.logout();
+  // setTimeout(()=>{
+    this.authService.logout();
+// }, 1000);    
 }
 
 

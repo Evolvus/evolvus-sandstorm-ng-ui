@@ -36,12 +36,12 @@ export class UpdateUserComponent implements OnInit {
     this.userForm = new FormGroup({
       userId: new FormControl(""),
       userName: new FormControl(""),
-      designation: new FormControl("", [Validators.maxLength(140)]),
+      designation: new FormControl("", [Validators.minLength(6), Validators.maxLength(35)]),
       role: new FormControl("", [Validators.required]),
       entity: new FormControl("", [Validators.required]),
       emailId: new FormControl("", [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(""),
-      mobileNumber: new FormControl(""),
+      phoneNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
+      mobileNumber: new FormControl("",Validators.pattern("[0-9]{10}")),
       country: new FormControl("", [
         Validators.required,
         Validators.maxLength(140)
@@ -55,10 +55,10 @@ export class UpdateUserComponent implements OnInit {
         Validators.maxLength(140)
       ]),
       // timeZone: new FormControl("", [Validators.required]),
-      individualTransactionLimit: new FormControl("", [Validators.required]),
-      dailyLimit: new FormControl("", [Validators.required]),
+      individualTransactionLimit: new FormControl(""),
+      dailyLimit: new FormControl(""),  
       currency: new FormControl("", [Validators.required]),
-      faxNumber: new FormControl("")
+      faxNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{10}")])
     });
   }
 

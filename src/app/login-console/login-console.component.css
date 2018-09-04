@@ -30,13 +30,22 @@
 /* img{ */
     /* position: relative; */
     /* top: -10px; */
-    /* left: 32%; */
+    /* left: 32%; */    
 /* } */
+mat-progress-bar{
+    position: relative;
+    top: 9em;
+    left: 29.8em;   
+    width: 29.8em;        
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: red;
+}
 .login-page{
-    padding: 5em;
-    padding-bottom: 6em;
-    padding-right: 3em;
-    padding-left: 3em;
+    padding-top: 3em;       
+    padding-bottom: 5em;     
+    padding-right: 2em;  
+    padding-left: 2em;
     position: absolute;
     top: 20%;
     left: 32%;
@@ -44,27 +53,32 @@
     background-color: transparent;
     box-shadow: 5px 5px 30px  grey;
     border: 0.2px solid whitesmoke;
-
-
+    max-width: 30em;   
+    
 }
 .submit-button{
     position: relative;
 top: 1em;
+align-self: flex-end;
 }
 
 .title{
 position: relative;
-bottom: 20px;
+bottom: 10px;
 }
-
+.title h3{
+    font-family: 'Times New Roman';
+    }
 .title h4{
-font-family: 'Times New Roman', Times, serif;
-color: #ff8500;
+    font-family: 'Trebuchet MS';
+    color: #d14f4f;
 }
 .sub-title h5{
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-color:#0d476d !important;	
-}.error-display{
+color: #d14f4f;
+	
+}
+.error-display{
     position: relative;
     top: 3em;
     color: red;
@@ -82,10 +96,19 @@ color:#0d476d !important;
   
   }
   
-
-
   .rectangle{
 padding: 50px;
 width: 10px;
 border: 1px solid black;
+}
+.fa-arrow-circle-left{
+font-size: 20px;  
+position: relative;
+cursor: pointer;  
+color: #283593;    
+font-size: 15px;     
+}
+.visual{
+position: relative;
+top: 1em;
 }

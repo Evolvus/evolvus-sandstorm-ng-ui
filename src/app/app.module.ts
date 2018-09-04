@@ -26,6 +26,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import 'hammerjs';
 //SERVICE COMPONENTS
@@ -141,7 +142,8 @@ import { SearchPipe } from './components/shared/search.pipe';
     EvolvusWorkflowViewModule,
 EvolvusBulkUploadModule,
 MatTreeModule,
-MatMenuModule
+MatMenuModule,
+MatProgressBarModule
     
   ],
   entryComponents: [

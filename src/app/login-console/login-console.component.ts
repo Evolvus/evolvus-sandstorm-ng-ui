@@ -37,6 +37,8 @@ isInternetAvailable: boolean = navigator.onLine;
 emitMe = new BehaviorSubject<number>(5);
 loggedInUser = {};
 user = new BehaviorSubject<any>(this.loggedInUser);
+transitionToPasswordPage: boolean = false;
+
   constructor(el: ElementRef, private authenticationService : AuthenticationService, private router : Router, private globalVariableService: SandstormGlobalVariablesService, private userDataService: UserDataService
 
      ) {
@@ -141,9 +143,16 @@ if(!this.loginForm.controls.userName.invalid){
 //      }
 //    }
 //  })
-this.viewUserNameComponent = !this.viewUserNameComponent;
-this.viewPasswordComponent = !this.viewPasswordComponent;
-this.usernameShow = !this.usernameShow;
+this.transitionToPasswordPage = true;
+document.getElementById('login-page').style.opacity = "0.7";
+setTimeout(()=>{
+  document.getElementById('login-page').style.opacity = "1";
+  this.transitionToPasswordPage = false;
+  this.viewUserNameComponent = !this.viewUserNameComponent;
+  this.viewPasswordComponent = !this.viewPasswordComponent;
+  this.usernameShow = !this.usernameShow;
+}, 1500);
+
 }
   }
 

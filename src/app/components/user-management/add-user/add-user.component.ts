@@ -45,7 +45,7 @@ export class AddUserComponent implements OnInit {
         Validators.maxLength(140),
         Validators.required
       ]),
-      designation: new FormControl("", [Validators.maxLength(140)]),
+      designation: new FormControl("", [Validators.minLength(6), Validators.maxLength(35)]),
       role: new FormControl("", [Validators.required]),
       entity: new FormControl("", [Validators.required]),
       emailId: new FormControl("", [Validators.required, Validators.email]),
@@ -64,10 +64,10 @@ export class AddUserComponent implements OnInit {
         Validators.maxLength(140)
       ]),
       // timeZone: new FormControl("", [Validators.required]),
-      individualTransactionLimit: new FormControl("", [Validators.required]),
-      dailyLimit: new FormControl("", [Validators.required]),
+      individualTransactionLimit: new FormControl(""),
+      dailyLimit: new FormControl(""),    
       currency: new FormControl(""),
-      faxNumber: new FormControl("")
+      faxNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{10}")])
     });
   }
 

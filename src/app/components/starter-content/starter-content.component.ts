@@ -38,8 +38,10 @@ var differenceDateTimeInMilliSeconds = currentDateTimeInMilliSeconds - eventDate
 var requestDateTimeInHours = (differenceDateTimeInMilliSeconds/(60*60*1000));
 if(requestDateTimeInHours<1){ // in minutes
 return "Requested "+ (Math.ceil(differenceDateTimeInMilliSeconds / (60 * 1000)))+" minutes ago";
-}else{
+}else if(requestDateTimeInHours<24){
   return "Requested "+(Math.floor(requestDateTimeInHours))+" hour/s ago";
+}else{
+  return "Requested "+(Math.floor(requestDateTimeInHours / 24))+" day/s ago";  
 }
 }
 
@@ -73,7 +75,6 @@ view(wfEntity, id){
 }
 
 panelOpened(){
-
     this.isPanelOpened = !this.isPanelOpened;
 }
 }
