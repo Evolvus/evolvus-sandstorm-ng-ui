@@ -108,10 +108,10 @@
             Reprocess</button>
           <button *ngIf="doIExist('Reject') && selectedEntity?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
   
-        <button type="button" class="btn btn-default btn-submit" *ngIf="doIExist('Modify') && selectedEntity?.processingStatus == 'AUTHORIZED'" (click)="updateEntity()" [disabled]="isStatusPending">
+        <button type="button" class="btn btn-default btn-submit" *ngIf="(doIExist('Modify') && ((selectedEntity?.processingStatus == 'AUTHORIZED') || (selectedEntity?.processingStatus == 'RE_PROCESS')))" (click)="updateEntity()" [disabled]="isStatusPending">
           <span>Modify</span>
         </button>
-        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">  
           <span *ngIf="!showWorkFlow">Show WorkFlow</span>
           <span *ngIf="showWorkFlow">Hide WorkFlow</span>
         </button>

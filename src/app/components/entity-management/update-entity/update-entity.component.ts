@@ -49,7 +49,7 @@ export class UpdateEntityComponent implements OnInit {
       ]))
     });
 
-
+    
  
   }
 

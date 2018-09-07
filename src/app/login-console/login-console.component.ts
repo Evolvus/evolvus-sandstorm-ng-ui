@@ -118,7 +118,7 @@ transitionToPasswordPage: boolean = false;
   changeView(){
 
 
-    
+ 
 if(!this.loginForm.controls.userName.invalid){
 //   console.log("user id", this.loginForm.value.userName);
 //  this.userDataService.verify("SANDSTORM", this.loginForm.value.userName)

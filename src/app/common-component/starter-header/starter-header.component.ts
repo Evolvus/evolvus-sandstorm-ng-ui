@@ -29,9 +29,8 @@ export class StarterHeaderComponent implements OnInit {
 
 
 logout(){
-  // setTimeout(()=>{
+    
     this.authService.logout();
-// }, 1000);    
 }
 
 
