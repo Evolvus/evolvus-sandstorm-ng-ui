@@ -26,14 +26,14 @@
             <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
             <mat-error *ngIf="doesUserExists">User Id doesn't exist!</mat-error>
           </mat-form-field>
-          <div class="submit-button col-md-6">
+          <div class="submit-button col-md-10">
             <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
           </div>
 
         </div>
+  
 
-
-
+ 
         <div class="userpassword-component" *ngIf="viewPasswordComponent">
           <mat-form-field class="example-full-width col-md-10">
             <input autofocus type="{{passwordType}}" id="passwordInput" matInput placeholder="Password" minlength="5" maxlength="20"
@@ -49,7 +49,7 @@
             </ng-template>
           </div>
           <div class="passwordPage-buttons col-md-10">
-            <button type="button" style="margin-right: 6px;" (click)="changeView()" mat-raised-button color="warn">Back</button>
+            <button type="button" style="margin-right: 6px;" (click)="changeView()" mat-stroked-button >Back</button>
             <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
           </div>
 

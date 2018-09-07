@@ -24,6 +24,7 @@ mat-progress-bar{
     color: red;
 }
 .login-page{
+  
     padding-top: 3em;       
     padding-bottom: 3em;     
     padding-right: 2em;  
@@ -75,12 +76,11 @@ font-family: 'Quicksand', sans-serif;
   }
   
   .passwordPage-buttons{
-        position: relative;
-    top: 1em;
-    align-self: flex-end;
-    
+   margin-top: 0.6em;
   }
-
+  .submit-button{
+    margin-top: 0.6em;
+   }
 .visual{
 position: relative;
 top: 1em;
