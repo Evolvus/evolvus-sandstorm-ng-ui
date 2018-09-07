@@ -176,9 +176,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <mat-form-field class="example-full-width">
-              <input  type="number" matInput placeholder="Individual Transaction Limit" value="" formControlName="individualTransactionLimit">
-              <!-- <mat-error id="Error1" *ngIf="userForm.controls.individualTransactionLimit.dirty && userForm.controls.individualTransactionLimit.invalid">Individual Transaction Limit is Invalid</mat-error>
-						    <mat-error id="entityError1" *ngIf="userForm.controls.individualTransactionLimit.pristine">This is a required field</mat-error> -->
+              <input required type="number" matInput placeholder="Individual Transaction Limit" value="" formControlName="individualTransactionLimit">
+              <!-- <mat-error id="Error1" *ngIf="userForm.controls.individualTransactionLimit.dirty && userForm.controls.individualTransactionLimit.invalid">Individual Transaction Limit is Invalid</mat-error> -->
+						    <mat-error id="entityError1" *ngIf="userForm.controls.individualTransactionLimit.pristine">This is a required field</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -186,9 +186,9 @@
         <div class="col-md-4">
           <div class="form-group">  
             <mat-form-field class="example-full-width">
-              <input  type="number" matInput placeholder="Daily Limit" value="" formControlName="dailyLimit">
-              <!-- <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.dirty && userForm.controls.dailyLimit.invalid">Daily Limit is Invalid</mat-error>
-						    <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.pristine">This is a required field</mat-error> -->
+              <input required type="number" matInput placeholder="Daily Limit" value="" formControlName="dailyLimit">
+               <!-- <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.dirty && userForm.controls.dailyLimit.invalid">Daily Limit is Invalid</mat-error> -->
+						    <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.pristine">This is a required field</mat-error> 
             </mat-form-field>
 
           </div>

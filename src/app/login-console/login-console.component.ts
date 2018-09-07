@@ -59,21 +59,10 @@ transitionToPasswordPage: boolean = false;
       }, 1500);
 
 
-// this.emitMe.subscribe((nu)=>{
-//   console.log("Number emitted is "+nu);
-// });
 
 
     }
  
-// grow(){
-// const random = (Math.random());
-//   this.emitMe.next(random);
-
-// }
-// call(){
-//   console.log(this.emitMe.getValue());
-// }
 
 
 
@@ -127,6 +116,9 @@ transitionToPasswordPage: boolean = false;
 
 
   changeView(){
+
+
+    
 if(!this.loginForm.controls.userName.invalid){
 //   console.log("user id", this.loginForm.value.userName);
 //  this.userDataService.verify("SANDSTORM", this.loginForm.value.userName)

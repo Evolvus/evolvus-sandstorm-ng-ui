@@ -55,8 +55,8 @@ export class UpdateUserComponent implements OnInit {
         Validators.maxLength(140)
       ]),
       // timeZone: new FormControl("", [Validators.required]),
-      individualTransactionLimit: new FormControl(""),
-      dailyLimit: new FormControl(""),  
+      individualTransactionLimit: new FormControl("", Validators.required),
+      dailyLimit: new FormControl("", Validators.required),  
       currency: new FormControl("", [Validators.required]),
       faxNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{10}")])
     });

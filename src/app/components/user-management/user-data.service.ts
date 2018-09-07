@@ -65,7 +65,7 @@ export class UserDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params:{
         processingStatus: 'AUTHORIZED',
-        enableFlag: "true"
+        activationStatus: 'ACTIVE' 
       }
     });
   }

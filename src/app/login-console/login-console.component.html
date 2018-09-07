@@ -1,82 +1,68 @@
-<!-- <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span >SANDSTORM CONSOLE</span>
-  </mat-toolbar-row>
-</mat-toolbar> -->
+<div class="login-screen">
+  <mat-progress-bar mode="indeterminate" *ngIf="transitionToPasswordPage"></mat-progress-bar>
 
-<!-- <button (click)="grow()">grow</button>
-<button (click)="call()">call</button>
+  <div class="login-page" id="login-page" *ngIf="!isUserAuthenticated">
+    <div class="login-component col-md-12">
 
-<div class="rectangle" id="rectangular">
-
-</div> -->
-<mat-progress-bar mode="indeterminate" *ngIf="transitionToPasswordPage"></mat-progress-bar>
-
-<div class="login-page" id="login-page" *ngIf="!isUserAuthenticated">
-
-  <i class="fa fa-arrow-circle-left" *ngIf="viewPasswordComponent" (click)="changeView()"></i>
- 
-
-
-  <div class="login-component col-md-12">  
-
-    <!-- <img src="./assets/images/flux_evolvus-logo.png" alt=""> -->
-
-    <div class="title col-md-12">
-      <h3>Sandstorm Console</h3>
-    </div>
-    <div class="title col-md-12" *ngIf="!viewPasswordComponent">   
-      <h4>Sign In</h4>
-    </div>
-
-    <div class="sub-title col-md-12">
-      <h5 *ngIf="viewPasswordComponent">Welcome, {{loginForm.value.userName | uppercase}}!</h5>
-    </div>
-
-    <br>
-    <form [formGroup]="loginForm" id="loginform" name="loginform" method="post" enctype="multipart/form-data">
-
-      <div class="username-component" *ngIf="viewUserNameComponent">
-        <mat-form-field class="example-full-width col-md-12">  
-          <input autofocus id="login-username" matInput formControlName="userName" minlength="5" maxlength="20" name="userName" placeholder="UserId"
-            required>
-          <mat-error *ngIf="loginForm.invalid && loginForm.pristine">Username is Required</mat-error>
-          <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
-          <mat-error *ngIf="doesUserExists">User Id doesn't exist!</mat-error>
-        </mat-form-field>
-        <div class="submit-button col-md-6">
-          <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
-        </div>
-
+      <div class="title main-title col-md-12">
+        Sandstorm Console
+      </div>
+      <div class="title login-title col-md-12" *ngIf="!viewPasswordComponent">
+        Sign In
       </div>
 
-
-
-      <div class="userpassword-component" *ngIf="viewPasswordComponent">
-        <mat-form-field class="example-full-width col-md-10">
-          <input autofocus type="{{passwordType}}" id="passwordInput" matInput placeholder="Password" minlength="5" maxlength="20"
-            formControlName="userPassword">
-
-        </mat-form-field>
-        <div class="visual col-md-2">
-          <span *ngIf="eyeOpen; else eyeClosed" class="glyphicon glyphicon-eye-close" (click)="changeInputType()" title="Hide Password"></span>
-  
-          <ng-template #eyeClosed>
-            <span class="glyphicon glyphicon-eye-open" title="Show Password" (click)="changeInputType()"></span>
-          </ng-template>
-        </div>
-  
-        <div class="submit-button col-md-6">
-          <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
-        </div>
+      <div class="title sub-title col-md-12" *ngIf="viewPasswordComponent">
+        Welcome, {{loginForm.value.userName | uppercase}}!
       </div>
-    </form>
-    <div class="error-display col-md-6">
-      <h6 *ngIf="loginErrorMessage!=''">{{loginErrorMessage}}</h6>
+
+      <br>
+      <form [formGroup]="loginForm" id="loginform" name="loginform" method="post" enctype="multipart/form-data">
+
+        <div class="username-component" *ngIf="viewUserNameComponent">
+          <mat-form-field class="example-full-width col-md-12">
+            <input autofocus id="login-username" matInput formControlName="userName" minlength="5" maxlength="20" name="userName" placeholder="UserId"
+              required>
+            <mat-error *ngIf="loginForm.invalid && loginForm.pristine">Username is Required</mat-error>
+            <mat-error *ngIf="loginForm.dirty && loginForm.invalid">Username is Invalid</mat-error>
+            <mat-error *ngIf="doesUserExists">User Id doesn't exist!</mat-error>
+          </mat-form-field>
+          <div class="submit-button col-md-6">
+            <button (click)="changeView()" type="button" mat-raised-button color="primary">Next</button>
+          </div>
+
+        </div>
+
+
+
+        <div class="userpassword-component" *ngIf="viewPasswordComponent">
+          <mat-form-field class="example-full-width col-md-10">
+            <input autofocus type="{{passwordType}}" id="passwordInput" matInput placeholder="Password" minlength="5" maxlength="20"
+              formControlName="userPassword">
+              <mat-error *ngIf="loginForm.controls.userPassword.invalid">Password is Required</mat-error>
+
+          </mat-form-field>
+          <div class="visual col-md-2">
+            <span *ngIf="eyeOpen; else eyeClosed" class="glyphicon glyphicon-eye-close" (click)="changeInputType()" title="Hide Password"></span>
+
+            <ng-template #eyeClosed>
+              <span class="glyphicon glyphicon-eye-open" title="Show Password" (click)="changeInputType()"></span>
+            </ng-template>
+          </div>
+          <div class="passwordPage-buttons col-md-10">
+            <button type="button" style="margin-right: 6px;" (click)="changeView()" mat-raised-button color="warn">Back</button>
+            <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
+          </div>
+
+        </div>
+      </form>
+      <div class="error-display col-md-6">
+        <h6 *ngIf="loginErrorMessage!=''">{{loginErrorMessage}}</h6>
+      </div>
     </div>
+
   </div>
-
 </div>
+
 
 <div *ngIf="isUserAuthenticated">
   <div class="redirect">

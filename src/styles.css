@@ -1,6 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');  
 @font-face {
     font-family: 'evicons';
     src:  url('assets/fonts/evicons.eot?pl6bxf');

@@ -1,20 +1,4 @@
 
-/* .adminLoginSec .loginCenter{
-    width: 30em;
-    height: 40em;
-    border: 1px solid black;
-    box-shadow: 0, 0, 10, 40;
-    margin-top: 8em;
-    margin-left: 10em;
-
-    } */
-    /* .adminLoginSec .loginCenter form{
-        margin-left: 36em;
-        margin-top: 2em;
-    } */
-    /* .adminLoginSec .loginCenter form .submit-button{
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-    } */
 .container{
     border: 1px solid black;
 
@@ -25,27 +9,25 @@
       margin-top: 17em;
   }
 
-
-
-/* img{ */
-    /* position: relative; */
-    /* top: -10px; */
-    /* left: 32%; */    
-/* } */
+.login-screen{
+    position: absolute;
+    top: 20%;
+    left: 36%;
+}
 mat-progress-bar{
-    position: relative;
-    top: 9em;
-    left: 29.8em;   
-    width: 29.8em;        
+    position: absolute;
+    top: 17.5%;
+    left: 32%;
+    width: 27.6em;           
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     color: red;
 }
 .login-page{
     padding-top: 3em;       
-    padding-bottom: 5em;     
+    padding-bottom: 3em;     
     padding-right: 2em;  
-    padding-left: 2em;
+    padding-left: 2em;  
     position: absolute;
     top: 20%;
     left: 32%;
@@ -56,27 +38,23 @@ mat-progress-bar{
     max-width: 30em;   
     
 }
-.submit-button{
-    position: relative;
-top: 1em;
-align-self: flex-end;
-}
 
 .title{
 position: relative;
-bottom: 10px;
+bottom: 15px;
+font-family: 'Quicksand', sans-serif;
+
 }
-.title h3{
-    font-family: 'Times New Roman';
-    }
-.title h4{
-    font-family: 'Trebuchet MS';
-    color: #d14f4f;
+.main-title{
+      
+    font-size: 2em;   
 }
-.sub-title h5{
-font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-color: #d14f4f;
-	
+.login-title {   
+    font-weight: bold;  
+}
+.sub-title {
+    font-weight: bold;  
+
 }
 .error-display{
     position: relative;
@@ -96,18 +74,13 @@ color: #d14f4f;
   
   }
   
-  .rectangle{
-padding: 50px;
-width: 10px;
-border: 1px solid black;
-}
-.fa-arrow-circle-left{
-font-size: 20px;  
-position: relative;
-cursor: pointer;  
-color: #283593;    
-font-size: 15px;     
-}
+  .passwordPage-buttons{
+        position: relative;
+    top: 1em;
+    align-self: flex-end;
+    
+  }
+
 .visual{
 position: relative;
 top: 1em;
