@@ -17,7 +17,8 @@ export class AuthenticationService {
     authenticatedSubject = new Subject();
     dtFormat :string;
     userData = new Subject<any>();
-    constructor(private http : HttpClient, private router : Router, private globalVariableService: SandstormGlobalVariablesService) {}
+    constructor(private http : HttpClient, private router : Router, private globalVariableService: SandstormGlobalVariablesService) {
+    }
 
 
 
@@ -27,21 +28,26 @@ export class AuthenticationService {
 
     setToken(token) {
         localStorage.setItem("token", token);
-    }
+    } 
 
     getToken() {
         return localStorage.getItem("token");
     }
+    
 
     logout() {
+        console.log("loggingout");  
         localStorage.clear();
         // this.router.navigate([""]);
         this.isAuthenticated = false;
+
         this.authenticatedSubject.next(this.isAuthenticated);
         location.href='/';
         this.globalVariableService.currentUser = null;
         this.http.get(`${this.serviceUrl}/logoutClearance`).subscribe(data => {
+
             this.router.navigate(['login']);
+        
         });
     }
 }

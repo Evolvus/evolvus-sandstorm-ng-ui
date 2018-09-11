@@ -25,8 +25,8 @@ export class ViewEntityComponent implements OnInit {
     constructor(private route: ActivatedRoute, private router: Router, private entityService: EntityDataService, private globalVariableService: SandstormGlobalVariablesService) { }
 
   ngOnInit() {
-
     this.entityCode = "" + this.route.snapshot.params['id'];
+
     this.entityService.getOneEntityData(this.entityCode).subscribe((entityData: any)=>{
 
       this.selectedEntity = entityData.data[0];
@@ -43,7 +43,8 @@ export class ViewEntityComponent implements OnInit {
       }
     }, (err)=>{
 
-    })
+    });
+
   }
 
 

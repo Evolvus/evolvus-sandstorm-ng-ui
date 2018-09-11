@@ -94,6 +94,7 @@ import { SessionexpiredComponent } from './components/sessionexpired/sessionexpi
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 import { SearchPipe } from './components/shared/search.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,7 @@ import { SearchPipe } from './components/shared/search.pipe';
     UpdateUserComponent,
     SessionexpiredComponent,
     LoginConsoleComponent,
-    BulkUploadComponent
+    BulkUploadComponent,
 
   ],
   imports: [

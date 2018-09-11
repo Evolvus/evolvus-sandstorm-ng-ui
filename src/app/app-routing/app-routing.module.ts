@@ -1,3 +1,4 @@
+
 import { SessionexpiredComponent } from './../components/sessionexpired/sessionexpired.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -58,6 +59,8 @@ const routes: Routes =[
    { path: 'updateEntity/:id', component: UpdateEntityComponent , canActivate: [AuthGuardService] },
   
    { path: 'bulkUpload', component: BulkUploadComponent , canActivate: [AuthGuardService] },
+
+
 ];
 
 

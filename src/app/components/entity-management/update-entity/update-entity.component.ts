@@ -134,7 +134,7 @@ export class UpdateEntityComponent implements OnInit {
     // if(this.entityForm.touched){
       // tempStatus = this.entityService.openDialog("alert", "All the changes will be discarded, click OK to continue!");
       // if(tempStatus === "success"){
-        this.router.navigate(['viewEntity', this.entityData.entityId]);  
+        this.router.navigate(['viewEntity', this.entityData.entityCode]);   
       // }
     // }else{
       // this.router.navigate(['viewRole', this.entityData.entityId]);  

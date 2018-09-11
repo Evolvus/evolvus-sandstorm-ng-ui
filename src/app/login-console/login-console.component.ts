@@ -87,6 +87,7 @@ transitionToPasswordPage: boolean = false;
 
                 
                 this.router.navigate(['home']);
+
             }, 1000);    
           }else{
             this.router.navigate(['login']);
