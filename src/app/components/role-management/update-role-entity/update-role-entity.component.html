@@ -30,14 +30,14 @@
               <div class="col-md-5">
                   <div class="form-group">
                      <mat-form-field class="example-full-width">
-                         <input required matInput placeholder="Role Name" formControlName="roleName" required name="roleName">
+                         <input required autocomplete="off" readonly matInput placeholder="Role Name" formControlName="roleName" required name="roleName">
                          <mat-error  id="roleNameError1" *ngIf="roleForm.controls.roleName.dirty && roleForm.controls.roleName.invalid">Invalid Role Name. Please check info!</mat-error>
                          <mat-error id="roleNameError2" *ngIf="roleForm.controls.roleName.pristine">This is a required field</mat-error>
                          <label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label>
                        </mat-form-field>
                      </div>
                 </div>
-
+  
             
            
            <div class="col-md-5">

@@ -36,6 +36,8 @@ export class AddUserComponent implements OnInit {
   ) {
     this.userForm = new FormGroup({
       userId: new FormControl("", [
+        Validators.pattern("[a-zA-Z0-9_-]*"),
+        Validators.pattern(/^\S*$/), 
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(35)

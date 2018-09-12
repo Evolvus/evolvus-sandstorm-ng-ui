@@ -149,13 +149,13 @@
         <div class="col-sm-12">
           <button *ngIf="doIExist('Approve') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'"  type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
           <button *ngIf="doIExist('Reprocess') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
-            Reprocess</button>
+            Reprocess</button> 
           <button *ngIf="doIExist('Reject') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
     
-        <button type="button"  class="btn btn-default btn-submit" *ngIf="(doIExist('Modify') && ((selectedUser?.processingStatus == 'AUTHORIZED') || (selectedUser?.processingStatus == 'RE_PROCESS')))" (click)="updateUser()" [disabled]="isStatusPending">
+        <button type="button"  class="btn btn-default btn-submit" *ngIf="(doIExist('Modify') && ((selectedUser?.processingStatus == 'AUTHORIZED') || (selectedUser?.processingStatus == 'REPROCESS')))" (click)="updateUser()" [disabled]="isStatusPending">
           Modify  
         </button>
-        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
+        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">  
           <span *ngIf="!showWorkFlow">Show WorkFlow</span>
           <span *ngIf="showWorkFlow">Hide WorkFlow</span>
         </button>
