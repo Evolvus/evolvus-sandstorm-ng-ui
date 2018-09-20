@@ -58,9 +58,9 @@ export class UpdateRoleEntityComponent implements OnInit {
       applicationCode: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       roleType: new FormControl('', Validators.required),
-      txnType: new FormControl([], Validators.required)
+      // txnType: new FormControl([], Validators.required)
     });
-  }
+  } 
 
   ngOnInit() {
     this.roleDataService.getCurrentUserData().subscribe((user: any)=>{

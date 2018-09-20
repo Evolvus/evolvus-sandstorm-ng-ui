@@ -61,7 +61,7 @@ export class AddRoleEntityComponent implements OnInit {
         Validators.maxLength(140)
       ]),
       roleType: new FormControl("", Validators.required),
-      txnType: new FormControl([], Validators.required)
+      // txnType: new FormControl([], Validators.required)
     });
 
     //data for the input fields

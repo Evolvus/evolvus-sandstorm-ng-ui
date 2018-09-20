@@ -24,7 +24,7 @@ import { ViewEntityComponent } from './../components/entity-management/view-enti
 import { UpdateEntityComponent } from '../components/entity-management/update-entity/update-entity.component';
 import { LoginConsoleComponent } from './../login-console/login-console.component';
 import { BulkUploadComponent } from './../components/maintenance/bulk-upload/bulk-upload.component';
-
+import { NotFoundComponent } from './../components/not-found/not-found.component';
 const routes: Routes =[
   {
     path: "", 
@@ -60,7 +60,7 @@ const routes: Routes =[
   
    { path: 'bulkUpload', component: BulkUploadComponent , canActivate: [AuthGuardService] },
 
-
+   {path: '**', component: NotFoundComponent} 
 ];
 
 

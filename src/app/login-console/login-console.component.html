@@ -5,7 +5,7 @@
     <div class="login-component col-md-12">
 
       <div class="title main-title col-md-12">
-        Sandstorm Console
+        Sandstorm - Console
       </div>
       <div class="title login-title col-md-12" *ngIf="!viewPasswordComponent">
         Sign In
@@ -51,16 +51,17 @@
           <div class="passwordPage-buttons col-md-10">
             <button type="button" style="margin-right: 6px;" (click)="changeView()" mat-stroked-button >Back</button>
             <button type="button" (click)="login()" mat-raised-button color="primary">Login</button>
-          </div>  
-
+          </div>    
+    
         </div>
-      </form>
+      </form>  
       <div class="error-display col-md-6">
         <h6 *ngIf="loginErrorMessage!=''">{{loginErrorMessage}}</h6>
-      </div>
+      </div> 
     </div>
-
+ 
   </div>
+
 </div>
 
 

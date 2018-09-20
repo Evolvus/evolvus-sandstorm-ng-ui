@@ -93,7 +93,7 @@ import { EvolvusBulkUploadModule } from '@evolvus/evolvus-bulk-upload-view';
 import { SessionexpiredComponent } from './components/sessionexpired/sessionexpired.component'; 
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 import { SearchPipe } from './components/shared/search.pipe';
-
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +123,7 @@ import { SearchPipe } from './components/shared/search.pipe';
     SessionexpiredComponent,
     LoginConsoleComponent,
     BulkUploadComponent,
+    NotFoundComponent
 
   ],
   imports: [
