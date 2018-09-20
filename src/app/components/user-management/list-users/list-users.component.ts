@@ -19,7 +19,7 @@ export class ListUsersComponent implements OnInit {
     processingStatus: "PENDING_AUTHORIZATION",
     pageSize: 5,
     pageNo: 1
-  };
+  };  
   noUserDataMessage: string = "";
   listOfUsers: UserModel[] = [];
   startIndex: number = 0;
