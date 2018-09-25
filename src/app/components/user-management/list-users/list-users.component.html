@@ -91,7 +91,7 @@
                      <tbody>
                       <tr (click)="view(user)" *ngFor="let user of listOfUsers">
                         <td>{{user?.userId}}</td>
-                        <td>{{user?.userName}}</td>
+                        <td class="ellipsis">{{user?.userName}}</td>    
                         <td>{{user?.loginStatus}}</td>
                         <td>{{user?.activationStatus}}</td>
                         <td>{{user?.processingStatus}}</td>

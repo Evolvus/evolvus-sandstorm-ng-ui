@@ -100,19 +100,19 @@
                             <th *ngFor="let header of tableHeader">{{header}}</th>									       
                           </tr> 
               
-                  </thead>
+                  </thead> 
                   <tbody *ngIf ="listOfEntities.length != 0">
                     <tr *ngFor="let entity of listOfEntities" (click)="view(entity)">
 
-                      <td>{{ entity?.name | uppercase}}</td>
+                      <td class="ellipsis">{{ entity?.name | uppercase}}</td>
                       <td>{{ entity?.parent | uppercase}}</td>
                       <!-- <td>{{ entity?.accessLevel}}</td> -->
-                      <td>{{ entity?.entityCode | uppercase}}</td>
+                      <td class="ellipsis">{{ entity?.entityCode | uppercase}}</td>
                       <td>{{ entity?.activationStatus | uppercase}}</td>
 
                       <td>{{ entity?.processingStatus}}</td>
                       <td>{{ entity?.createdBy}}</td>
-
+ 
                       <td>{{ entity?.lastUpdatedDate | date : 'medium'}}</td>
                     </tr>
                   </tbody>

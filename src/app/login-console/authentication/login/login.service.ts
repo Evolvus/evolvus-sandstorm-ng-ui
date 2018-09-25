@@ -36,11 +36,8 @@ export class AuthenticationService {
     
 
     logout() {
-        console.log("loggingout");  
         localStorage.clear();
-        // this.router.navigate([""]);
         this.isAuthenticated = false;
-
         this.authenticatedSubject.next(this.isAuthenticated);
         location.href='/';
         this.globalVariableService.currentUser = null;
