@@ -22,6 +22,8 @@ export class AuthenticationService {
 
 
 
+
+
     authenticate(authentication : Authentication) {
         return this.http.post(`${this.serviceUrl}/auth`, authentication);
     }
@@ -46,5 +48,21 @@ export class AuthenticationService {
             this.router.navigate(['login']);
         
         });
+    
     }
+    verify(applicationCode, userId){
+        var user = {
+          applicationCode: applicationCode,
+          userId: userId
+        }; 
+        return this.http.get(`${this.serviceUrl}/sandstorm/api/user/verify`,{
+         params:{
+           applicationCode:applicationCode,
+           userId:userId
+         }
+        }
+        
+      );
+    }
+  
 }

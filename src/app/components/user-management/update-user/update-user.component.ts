@@ -26,6 +26,8 @@ export class UpdateUserComponent implements OnInit {
 
   listOfMasterCurrency: any[] = [];
   loggedInUser: any;
+
+  
   // listOfSubMenuItems: any = [];
   
   constructor(
@@ -106,10 +108,11 @@ export class UpdateUserComponent implements OnInit {
               var selectedEntity = this.listOfEntities.filter(
                 entity => entity.entityId == this.selectedUserData.entityId
               );
-              this.userForm.patchValue({
-                entity: selectedEntity[0].name
-              });
-              this.getFilteredEntityNames();
+                   this.getFilteredEntityNames();
+                    this.userForm.patchValue({    
+                      entity: selectedEntity[0].name
+                    });
+                 
             }
           });
           this.userDataService
@@ -130,7 +133,7 @@ export class UpdateUserComponent implements OnInit {
             });
         }
       },
-      err => {
+      err => {  
         //If there is any error
         this.userDataService
           .openDialog("error", err.error.description)
@@ -139,10 +142,7 @@ export class UpdateUserComponent implements OnInit {
           });
       }
     );
-    this.userDataService.getCurrentUserData().subscribe((user: any)=>{
-      this.loggedInUser = user;   
-    });
-    // this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
+    this.loggedInUser = this.userDataService.getCurrentUserData();
   }
 
   update() {

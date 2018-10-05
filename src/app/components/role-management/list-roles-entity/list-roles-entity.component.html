@@ -56,6 +56,7 @@
               <div class="col-md-3 filterView">
                 <div class="checkbox form-group">
                     <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
+                    <mat-icon><i class="fa fa-times" (click)="reset('html'); viewAll._checked=false" matTooltip="Reset"></i></mat-icon> 
              </div>
               </div>
             </div>   			
@@ -117,7 +118,7 @@
              {{pageNo}} / {{totalNoOfPages}}
 		    		<button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
           </div>
-          <div class="row row-padding" *ngIf="listOfRoles.length == 0">
+          <div class="row row-padding" *ngIf="listOfRoles?.length == 0">
             <div class="row text-center">
               <h5 class="txt-red" style="color:red;">No Records Found!</h5>
               <br>

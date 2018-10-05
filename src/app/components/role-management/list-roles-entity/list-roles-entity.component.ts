@@ -13,7 +13,7 @@ import { Pipe } from "@angular/core";
 export class ListRolesEntityComponent implements OnInit {
   tableHeader: any = [];
   role: RoleModel;
-  listOfRoles: any = [];
+  listOfRoles: any;
   listOfApplicationCategory: string[] = [];
   listOfApplications: any []= [];
   defaultFilterCriteria = {
@@ -91,12 +91,12 @@ export class ListRolesEntityComponent implements OnInit {
   }
 
   view(role: RoleModel) {
+    this.reset('ts'); 
     this.router.navigate(["viewRole", role.roleName]);
   }
 
   getRoleDataBasedOnDefaultFilterCriteria() {
-    this.listOfRoles = [];
-    this.roleDataService
+    this.roleDataService 
       .getFilteredRoleData(
         this.defaultFilterCriteria.applicationCode,
         this.defaultFilterCriteria.activationStatus,
@@ -210,5 +210,17 @@ export class ListRolesEntityComponent implements OnInit {
             .subscribe(result => {});
         }
       );
+  }
+
+  reset(source){
+    this.defaultFilterCriteria.pageNo=1;
+    this.defaultFilterCriteria.pageSize=5;
+    this.defaultFilterCriteria.activationStatus=undefined;
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";  
+    this.defaultFilterCriteria.applicationCode=undefined; 
+    if(source=='html'){
+     this.getRoleDataBasedOnDefaultFilterCriteria();
+     this.isViewAllOptionSelected = false;
+    }  
   }
 }

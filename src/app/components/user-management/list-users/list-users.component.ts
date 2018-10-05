@@ -42,7 +42,9 @@ this.defaultFilterCriteria = filterCriteria;
     });
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
-    this.loggedInUser = this.userDataService.getCurrentUserData();
+    this.userDataService.getCurrentUserData().subscribe((response: any)=>{
+      this.loggedInUser = response;
+    })
   }
 
   getUserDataBasedOnDefaultFilterCriteria() {
@@ -103,6 +105,7 @@ this.defaultFilterCriteria = filterCriteria;
   }
 
   view(user) {
+    this.reset('ts');
     this.router.navigate(["viewUser", user.userId]);
   }
 
@@ -208,5 +211,17 @@ this.defaultFilterCriteria = filterCriteria;
     } else {
       this.getFilteredUserData("");
     }
+  }
+
+  reset(source){
+    this.defaultFilterCriteria.pageNo=1;
+    this.defaultFilterCriteria.pageSize=5;
+    this.defaultFilterCriteria.activationStatus=undefined;
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";  
+    this.defaultFilterCriteria.userLoginStatus=undefined; 
+    if(source=='html'){
+     this.getUserDataBasedOnDefaultFilterCriteria();
+     this.isViewAllOptionSelected = false;
+    }  
   }
 }

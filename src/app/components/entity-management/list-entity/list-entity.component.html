@@ -30,12 +30,12 @@
                <div class="col-lg-3">
                  <div class="form-group">
                      <mat-form-field [color]="'primary'">
-                         <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')"required [(ngModel)]="defaultFilterCriteria.parent" name="parent">
+                         <mat-select placeholder="Parent Entity" [disabled] = "isViewAllOptionSelected" (selectionChange)="getFilteredEntityData('filter')" [(ngModel)]="defaultFilterCriteria.parent" name="parent">
                            <mat-option *ngFor="let parentEntity of listOfParentEntities" value="{{parentEntity.name}}">{{parentEntity.name}}</mat-option>
-                         </mat-select>
+                         </mat-select>    
                        </mat-form-field>
-                </div>
-               </div>
+                </div>  
+               </div>  
                
                <div class="col-lg-3">
                  <div class="form-group">
@@ -60,14 +60,17 @@
                        </mat-form-field>
                 </div>
                </div>
-               
+                             
+    
                <div class="col-lg-3">
                  <div class="checkbox form-group">
                      <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
-              </div>
-               </div>
+                     <mat-icon><i class="fa fa-times" matTooltip="Reset" (click)="reset('html'); viewAll._checked=false" ></i></mat-icon>
+ 
+              </div> 
+               </div>  
              </div>   			
-          </form> 
+          </form>    
           </div>
         </div>
 

@@ -18,8 +18,16 @@ mat-form-field{
 }
   
   
+.reset-form{
+  position: relative;
+  top: 15px;  
+}
   
   
-  
-  
+  .fa-times{
+    margin-left: 2em;    
+    cursor: pointer;  
+    font-size: 20px;
+    font-weight: lighter;
+  }
   

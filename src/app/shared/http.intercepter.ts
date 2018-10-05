@@ -25,8 +25,8 @@ export class JWTTokenIntercepter implements HttpInterceptor {
     intercept(req : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> {
         //1.Step  check authService.isAuthenticated is 'false' if yes continue the request.
         if (this.authService.isAuthenticated === false) {
-            if (req.url === `${this.serviceUrl}/auth`) {
-
+            if (req.url === `${this.serviceUrl}/auth` || req.url === `${this.serviceUrl}/sandstorm/api/user/verify`) {
+  
                 return next.handle(req);
                 
             }

@@ -48,6 +48,7 @@ export class ViewUserComponent implements OnInit {
     );
     this.loggedInUser = this.userDataService.getCurrentUserData();
     this.listOfSubMenuItems = this.userDataService.getListOfSubMenuItems();
+    console.log(this.listOfSubMenuItems);
   }
 
   updateUser() {

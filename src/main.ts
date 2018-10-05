@@ -10,3 +10,7 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
+  console.log(
+    "This is Developer Console. Your 'Console' is right there to serve you! #Evolvus :)"
+  );
+  console.log("");  

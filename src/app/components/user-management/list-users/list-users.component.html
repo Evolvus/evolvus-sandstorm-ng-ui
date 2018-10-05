@@ -49,6 +49,8 @@
             <div class="col-md-3 filterView">
               <div class="checkbox form-group">
                   <mat-checkbox (change)="checkBoxTicked(viewAll._checked)" #viewAll>View All</mat-checkbox>
+                  <mat-icon><i class="fa fa-times" matTooltip="Reset" (click)="reset('html'); viewAll._checked=false"></i></mat-icon> 
+  
            </div>
             </div>
      

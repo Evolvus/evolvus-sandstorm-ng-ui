@@ -32,15 +32,15 @@ export class ListEntityComponent implements OnInit {
   totalNoOfEntities: number = 0;
   startIndex: number = 1;
   user: any;
-
+  isViewAllChecked: boolean = false;
   constructor(
     private router: Router,
     private entityService: EntityDataService
   ) {}
 
   ngOnInit() {
-    this.tableHeader = this.entityService.getTableHeaders();
-    this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
+    this.tableHeader = this.entityService.getTableHeaders();  
+    this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";    
     this.defaultFilterCriteria = this.entityService.getDefaultFilterCriteria();
     this.getListOfEntities();
     this.getEntityDataBasedOnDefaultFilterCriteria();
@@ -72,7 +72,7 @@ export class ListEntityComponent implements OnInit {
       )
       .subscribe(
         (response: any) => {
-          if(response!=null){
+          if(response!=null){ 
             if (response.totalNoOfRecords == 0) {
               this.defaultFilterCriteria.processingStatus = "AUTHORIZED";
   
@@ -163,7 +163,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   view(entity) {
-    this.reset();
+    this.reset('ts');
     this.router.navigate(["viewEntity", entity.entityCode]);
   }
 
@@ -207,14 +207,16 @@ export class ListEntityComponent implements OnInit {
     }
   }
 
-  reset(){
-    this.defaultFilterCriteria = {
-      parent: "",
-      activationStatus: "",
-      processingStatus: "",
-      pageSize: 5,
-      pageNo: 1
-    };
+  reset(source){
+    this.defaultFilterCriteria.pageNo=1;
+    this.defaultFilterCriteria.pageSize=5;
+    this.defaultFilterCriteria.activationStatus=undefined;
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";  
+    this.defaultFilterCriteria.parent=undefined;
+    if(source=='html'){
+     this.getEntityDataBasedOnDefaultFilterCriteria();
+     this.isViewAllOptionSelected = false;
+    }
   }
 
 

@@ -20,16 +20,14 @@ margin-left: 0.8em;
     background-color: black;
     opacity: 0.5;
     color: white;
-}
+}  
 .menuItem > li{
     transition:all 0.3s ease;
 }
 .menuItem li >a>i::before {
-    /* color: #A0A0A0 !important; */
     margin-right: 14px;
     font-size: 17px;
     vertical-align: middle;
-
   }
 
  .menuItem > li:hover .menuItem {

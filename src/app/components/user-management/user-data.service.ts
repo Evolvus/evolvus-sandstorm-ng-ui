@@ -41,10 +41,9 @@ export class UserDataService {
 
 
   constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { 
-
-    this.currentLoggedInUserData =this.globalVariablesService.currentUser.subscribe((user: any)=>{
-      this.currentLoggedInUserData = user;
-    })
+    this.getCurrentUserData().subscribe((response: any)=>{
+      this.currentLoggedInUserData = response;
+    })    
   }
 
   getTableHeaders() {
@@ -64,16 +63,14 @@ export class UserDataService {
   getAllEntities() {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params:{
-        processingStatus: 'AUTHORIZED',
-        activationStatus: 'ACTIVE' 
-      }
+        processingStatus: 'AUTHORIZED'
+      } 
     });
   }
   getAllRoleData(pageSize, pageNo) {
     return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
       params:{
-        processingStatus: 'AUTHORIZED',
-        activationStatus: 'ACTIVE'
+        processingStatus: 'AUTHORIZED'
       }
       });
   }
@@ -149,9 +146,8 @@ export class UserDataService {
     return userData;
   }
 
-  getCurrentUserData(){
-    return this.currentLoggedInUserData;
-    
+  getCurrentUserData(){  
+   return this.globalVariablesService.currentUser;
     }
 
 
@@ -196,12 +192,14 @@ export class UserDataService {
   }
 
   getListOfSubMenuItems(){
-        return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
-    .reduce((menuItemsA, menuItemsC) => menuItemsA.concat(menuItemsC), [])
-    .filter(menuItem => menuItem.menuItemCode == 'userManagement')
-    .map(menuItem => menuItem.subMenuItems)
-    .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
-    .map(subMenuItem => subMenuItem.title); 
+
+      return this.currentLoggedInUserData.role.menuGroup.map(menuGroup => menuGroup.menuItems)
+      .reduce((menuItemsA, menuItemsC) => menuItemsA.concat(menuItemsC), [])
+      .filter(menuItem => menuItem.menuItemCode == 'userManagement')
+      .map(menuItem => menuItem.subMenuItems)
+      .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
+      .map(subMenuItem => subMenuItem.title); 
+         
   }
 
   getWorkFlowData(id){
@@ -227,21 +225,6 @@ export class UserDataService {
       });
     }
 
-    verify(applicationCode, userId){
-      var user = {
-        applicationCode: applicationCode,
-        userId: userId
-      };
-      console.log("verify in user service");
-      return this.http.get(`${this.platformURL}/sandstorm/api/user/verify`,{
-       params:{
-         applicationCode:applicationCode,
-         userId:userId
-       }
-      }
-      
-    );
-  }
 
 
 }

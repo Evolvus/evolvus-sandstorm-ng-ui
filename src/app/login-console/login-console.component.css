@@ -1,87 +1,83 @@
-
-.container{
-    border: 1px solid black;
-
+mat-progress-spinner {
+  margin-left: 43em;
+  margin-top: 17em;
 }
 
-    mat-progress-spinner{
-      margin-left: 43em; 
-      margin-top: 17em;
-  }
-
-.login-screen{
-    position: absolute;
-    top: 20%;
-    left: 36%;
+.login-screen {
+  max-width: 480px;
+  max-height: 250px;
+  position: absolute;
+  left: 30em;
+  top: 13em;
 }
-mat-progress-bar{
-    position: absolute;
-    top: 17.5%;
-    left: 32%;
-    width: 27.6em;           
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-    color: red;
+mat-progress-bar {
+  position: relative;
+  top: 5px;
+  width: 28.4em;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  color: red;
+  margin-left: 2em;
 }
-.login-page{
-  
-    padding-top: 3em;       
-    padding-bottom: 3em;     
-    padding-right: 2em;  
-    padding-left: 2em;  
-    position: absolute;
-    top: 20%;
-    left: 32%;
-    /* margin-right: -50%; */
-    background-color: transparent;
-    box-shadow: 5px 5px 30px  grey;
-    border: 0.2px solid whitesmoke;
-    max-width: 30em;   
-    
+.login-page {
+  width: 400px;
+  height: 220px;
+  margin-left: 2em;
+  background-color: transparent;
+  box-shadow: 5px 5px 30px grey;
+  border-radius: 10px;
 }
 
-.title{
-position: relative;
-bottom: 15px;
-font-family: 'Quicksand', sans-serif;
-
+.title {
+  font-family: "Quicksand", sans-serif;
 }
-.main-title{
-      
-    font-size: 2em;   
+.main-title {
+  font-size: 2em;
 }
-.login-title {   
-    font-weight: bold;  
+.login-title {
+  font-weight: bold;
 }
 .sub-title {
-    font-weight: bold;  
-
-}
-.error-display{
-    position: relative;
-    top: 3em;
-    color: red;
-    width: 300px;
+  font-weight: bold;
 }
 
+.passwordPage-buttons {
+  margin-top: 0.6em;
+  
+}
+.submit-button {
+  margin-top: 0.6em;
 
-  .form-control-feedback.glyphicon.glyphicon-eye-close {
-    background-color: #d14f4f;
-  
-  }
-  .form-control-feedback.glyphicon.glyphicon-eye-open {
-    background-color: #79c0f7;
- 
-  
-  }
-  
-  .passwordPage-buttons{
-   margin-top: 0.6em;
-  }
-  .submit-button{
-    margin-top: 0.6em;
-   }
-.visual{
-position: relative;
-top: 1em;
-}  
+}
+#loginButton{
+  margin-right: 0.5em;
+}
+.glyphicon {
+  font-size: 12px;
+}
+
+.user-exist-message {
+  padding-top: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: lighter;
+  color: red;
+}
+
+.fa-times {
+  font-size: 11px;
+  color: black;
+  font-weight: lighter;
+  cursor: pointer;
+}
+.auth-fail-message {
+  margin-top: 10px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: lighter;
+  color: red;
+}
+
+.login-component {
+  margin-top: 1.5em;
+}
