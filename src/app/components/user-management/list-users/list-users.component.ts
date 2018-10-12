@@ -21,7 +21,7 @@ export class ListUsersComponent implements OnInit {
     pageNo: 1
   };  
   noUserDataMessage: string = "";
-  listOfUsers: UserModel[] = [];
+  listOfUsers: UserModel[];  
   startIndex: number = 0;
   noOfUsersInCurrentPage: number = 0;
   totalNoOfUsers: number = 0;
@@ -48,7 +48,7 @@ this.defaultFilterCriteria = filterCriteria;
   }
 
   getUserDataBasedOnDefaultFilterCriteria() {
-    this.listOfUsers = [];
+    // this.listOfUsers = [];
     this.userDataService
       .getFilteredUserData(
         this.defaultFilterCriteria.userLoginStatus,

@@ -20,3 +20,7 @@ mat-panel-title {
 mat-panel-description {
   color: black;
 }
+.description{
+  width: 15em;   
+  word-wrap: break-word;
+}  

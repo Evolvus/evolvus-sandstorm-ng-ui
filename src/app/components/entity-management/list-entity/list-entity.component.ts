@@ -16,7 +16,7 @@ export class ListEntityComponent implements OnInit {
   isViewAllOptionSelected: boolean = false;
   listOfParentEntities: string[] = [];
   tableHeader: any[];
-  listOfEntities: any = [];
+  listOfEntities: any[]; 
   defaultFilterCriteria = {
     parent: "",
     activationStatus: "",
@@ -61,7 +61,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   getEntityDataBasedOnDefaultFilterCriteria() {
-    this.listOfEntities = [];
+    // this.listOfEntities = [];  
     this.entityService
       .getFilteredEntityData(
         this.defaultFilterCriteria.parent,

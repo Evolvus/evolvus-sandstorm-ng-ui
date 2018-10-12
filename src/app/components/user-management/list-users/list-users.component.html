@@ -118,10 +118,10 @@
          <div class="pull-right marTB2 paginationSec">			
          <button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
              {{pageNo}} / {{totalNoOfPages}}
-
-           <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="listOfUsers.length ==0 || pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+  
+           <button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="listOfUsers?.length ==0 || pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
          </div>
-         <div class="row row-padding" *ngIf="listOfUsers.length == 0">
+         <div class="row row-padding" *ngIf="listOfUsers?.length == 0">
             <div class="row text-center">
               <h5 class="txt-red" style="color:red;">No Records Found!</h5>
               <br>
@@ -129,6 +129,6 @@
           </div> 
        </div>
      </div>
-
+  
    </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
