@@ -35,7 +35,7 @@
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Designation" formControlName="designation">
-                <mat-error id="designationError1" *ngIf="userForm.controls.designation.dirty && userForm.controls.designation.invalid">Designation is Invalid. Please check info!</mat-error>
+                <mat-error id="designationError1" *ngIf="userForm.controls.designation.dirty && userForm.controls.designation.touched">Designation is Invalid. Please check info!</mat-error>
                 <mat-error id="designationError2" *ngIf="userForm.controls.designation.pristine">This is a required field</mat-error>
                 <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004;">
                   <i class="fa fa-question-circle"></i>
@@ -151,7 +151,7 @@
                   {{ entityName | uppercase }}
                 </mat-option>
               </mat-autocomplete>
-              <mat-error id="entityError1">This Entity Doesn't exist!</mat-error>
+              <mat-error id="entityError1">This Branch Doesn't exist!</mat-error>
 
               <mat-error id="entityError2" *ngIf="userForm.controls.entity.pristine">This is a required field</mat-error>
 

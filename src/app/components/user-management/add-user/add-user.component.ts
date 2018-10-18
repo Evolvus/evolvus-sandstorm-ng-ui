@@ -37,7 +37,7 @@ export class AddUserComponent implements OnInit {
     this.userForm = new FormGroup({
       userId: new FormControl("", [
         Validators.pattern("[a-zA-Z0-9_-]*"),
-        Validators.pattern(/^\S*$/), 
+        Validators.pattern(/^\S*$/),
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(35)
@@ -67,7 +67,7 @@ export class AddUserComponent implements OnInit {
       ]),
       // timeZone: new FormControl("", [Validators.required]),
       individualTransactionLimit: new FormControl("", Validators.required),
-      dailyLimit: new FormControl("", Validators.required),       
+      dailyLimit: new FormControl("", Validators.required),
       currency: new FormControl("", Validators.required),
       faxNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{10}")])
     });
@@ -133,7 +133,7 @@ export class AddUserComponent implements OnInit {
       }
     } else {
       this.userDataService
-        .openDialog("error", "Please Select a Valid Entity" + ".")
+        .openDialog("error", "Please Select a Valid Branch" + ".")
         .subscribe(result => {
           // Dialog Response can be handled here
         });

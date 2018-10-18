@@ -27,9 +27,9 @@ export class UpdateUserComponent implements OnInit {
   listOfMasterCurrency: any[] = [];
   loggedInUser: any;
 
-  
+
   // listOfSubMenuItems: any = [];
-  
+
   constructor(
     private userDataService: UserDataService,
     private router: Router,
@@ -58,7 +58,7 @@ export class UpdateUserComponent implements OnInit {
       ]),
       // timeZone: new FormControl("", [Validators.required]),
       individualTransactionLimit: new FormControl("", Validators.required),
-      dailyLimit: new FormControl("", Validators.required),  
+      dailyLimit: new FormControl("", Validators.required),
       currency: new FormControl("", [Validators.required]),
       faxNumber: new FormControl("", [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{10}")])
     });
@@ -109,10 +109,10 @@ export class UpdateUserComponent implements OnInit {
                 entity => entity.entityId == this.selectedUserData.entityId
               );
                    this.getFilteredEntityNames();
-                    this.userForm.patchValue({    
+                    this.userForm.patchValue({
                       entity: selectedEntity[0].name
                     });
-                 
+
             }
           });
           this.userDataService
@@ -133,7 +133,7 @@ export class UpdateUserComponent implements OnInit {
             });
         }
       },
-      err => {  
+      err => {
         //If there is any error
         this.userDataService
           .openDialog("error", err.error.description)
@@ -183,7 +183,7 @@ export class UpdateUserComponent implements OnInit {
       }
     }else{
       this.userDataService
-        .openDialog("error", "Please Select a Valid Entity" + ".")
+        .openDialog("error", "Please Select a Valid Branch" + ".")
         .subscribe(result => {
           // Dialog Response can be handled here
         });
