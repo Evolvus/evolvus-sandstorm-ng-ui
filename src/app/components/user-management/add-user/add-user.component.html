@@ -83,7 +83,7 @@
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <input required matInput placeholder="Email ID" value="" formControlName="emailId">
-                <mat-error id="emailIdError1" *ngIf="userForm.controls.emailId.dirty && userForm.controls.emailId.invalid">EmailId is Invalid</mat-error>
+                <mat-error id="emailIdError1" *ngIf="userForm.controls.emailId.dirty && userForm.controls.emailId.invalid">Email Id is Invalid</mat-error>
                 <mat-error id="emailIdError2" *ngIf="userForm.controls.emailId.pristine">This is a required field</mat-error>
               </mat-form-field>
             </div>
@@ -184,11 +184,11 @@
         </div>
 
         <div class="col-md-4">
-          <div class="form-group">  
+          <div class="form-group">
             <mat-form-field class="example-full-width">
               <input required type="number" matInput placeholder="Daily Limit" value="" formControlName="dailyLimit">
                <!-- <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.dirty && userForm.controls.dailyLimit.invalid">Daily Limit is Invalid</mat-error> -->
-						    <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.pristine">This is a required field</mat-error> 
+						    <mat-error id="entityError1" *ngIf="userForm.controls.dailyLimit.pristine">This is a required field</mat-error>
             </mat-form-field>
 
           </div>

@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  platformURL: 'http://192.168.1.115:9090'
-};  
- 
+  platformURL: 'http://10.10.69.193:9090'
+};
+
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
@@ -14,4 +14,3 @@ export const environment = {
  * because it will have performance impact when throw error
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-       

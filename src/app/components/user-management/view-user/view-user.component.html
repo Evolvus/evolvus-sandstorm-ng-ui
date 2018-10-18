@@ -59,17 +59,17 @@
                 <h5>Status </h5>
                 <label>{{selectedUser?.processingStatus}}</label>
               </div>
-  
+
           </div>
         </div>
 
         <!-- <div class="col-md-4">
-           <div><img src="assets/images/user.jpeg" height="150" width="190"></div>				
+           <div><img src="assets/images/user.jpeg" height="150" width="190"></div>
            <div class="">
              <button type="button" class="btn btn-info btn-add" style="margin-top:11%;margin-bottom:5%;">
                  <i class="fa fa-camera" aria-hidden="true"></i> Update / Change Photo
                </button>
-             </div>				    				     
+             </div>
          </div>				 -->
       </div>
 
@@ -142,20 +142,20 @@
 
 
 
-    
+
 
 
       <div class="row text-center">
         <div class="col-sm-12">
-          <button *ngIf="doIExist('Approve') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'"  type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
-          <button *ngIf="doIExist('Reprocess') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
-            Reprocess</button> 
-          <button *ngIf="doIExist('Reject') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
-    
+          <button *ngIf="doIExist('Approve') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION' && loggedInUser?.userId != selectedUser.createdBy"  type="button" class="btn btn-default btn-approve" (click)="takeAction('APPROVE')"> Approve</button>
+          <button *ngIf="doIExist('Reprocess') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION' && loggedInUser?.userId != selectedUser.createdBy" type="button" class="btn btn-default btn-submit" (click)="takeAction('REPROCESS')">
+            Reprocess</button>
+          <button *ngIf="doIExist('Reject') && selectedUser?.processingStatus == 'PENDING_AUTHORIZATION' && loggedInUser?.userId != selectedUser.createdBy" type="button" class="btn btn-default btn-reject" (click)="takeAction('REJECT')"> Reject</button>
+
         <button type="button"  class="btn btn-default btn-submit" *ngIf="(doIExist('Modify') && ((selectedUser?.processingStatus == 'AUTHORIZED') || (selectedUser?.processingStatus == 'REPROCESS')))" (click)="updateUser()" [disabled]="isStatusPending">
-          Modify  
+          Modify
         </button>
-        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">  
+        <button type="button" class="btn btn-default btn-submit" (click)="getWorkFlowData()">
           <span *ngIf="!showWorkFlow">Show WorkFlow</span>
           <span *ngIf="showWorkFlow">Hide WorkFlow</span>
         </button>
