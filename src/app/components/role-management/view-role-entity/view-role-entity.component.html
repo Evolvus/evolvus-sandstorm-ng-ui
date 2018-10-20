@@ -149,12 +149,12 @@
 
 
 
-          <button *ngIf="doIExist('Approve') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-approve"
+          <button *ngIf="doIExist('Approve') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'  && user?.userId != selectedRole?.createdBy" type="button" class="btn btn-default btn-approve"
             (click)="takeAction('APPROVE')"> Approve</button>
-          <button *ngIf="doIExist('Reprocess') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-submit"
+          <button *ngIf="doIExist('Reprocess') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'  && user?.userId != selectedRole?.createdBy" type="button" class="btn btn-default btn-submit"
             (click)="takeAction('REPROCESS')">
             Reprocess</button>
-          <button *ngIf="doIExist('Reject') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'" type="button" class="btn btn-default btn-reject"  
+          <button *ngIf="doIExist('Reject') && selectedRole?.processingStatus == 'PENDING_AUTHORIZATION'  && user?.userId != selectedRole?.createdBy" type="button" class="btn btn-default btn-reject"  
             (click)="takeAction('REJECT')"> Reject</button>
   
           <button type="button" class="btn btn-default btn-submit" *ngIf="(doIExist('Modify') && ((selectedRole?.processingStatus == 'AUTHORIZED') || (selectedRole?.processingStatus == 'REPROCESS')))"

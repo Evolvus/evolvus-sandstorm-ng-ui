@@ -43,7 +43,7 @@ this.defaultFilterCriteria = filterCriteria;
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
     this.userDataService.getCurrentUserData().subscribe((response: any)=>{
-      this.loggedInUser = response;
+      this.loggedInUser = response;      
     })
   }
 

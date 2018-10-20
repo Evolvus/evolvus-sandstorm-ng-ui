@@ -38,11 +38,10 @@ export class ViewRoleEntityComponent implements OnInit {
           this.isStatusPending = true;
         }
       }
-    });
+    }); 
     this.roleDataService.getCurrentUserData().subscribe((user: any) => {
       this.user = user;
     });
-
     this.listOfSubMenuItems = this.roleDataService.getListOfSubMenuItems();
   }
 
