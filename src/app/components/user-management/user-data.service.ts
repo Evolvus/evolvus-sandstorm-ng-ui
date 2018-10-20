@@ -67,10 +67,12 @@ export class UserDataService {
       } 
     });
   }
+  
   getAllRoleData(pageSize, pageNo) {
     return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
       params:{
-        processingStatus: 'AUTHORIZED'
+        processingStatus: 'AUTHORIZED',
+        activationStatus: 'ACTIVE'  
       }
       });
   }
