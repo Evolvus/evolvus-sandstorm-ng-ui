@@ -2,8 +2,8 @@
 
   <!-- Logo -->
   <a ui-sref="#" class="logo">
-    <span class="logo-mini">
-      <b>Z</b>ERO</span>
+    <span class="logo-mini" style="font-size: 10px;">
+      Console</span>   
     <span class="logo-lg">
       <h5 style="margin-top: 2em;">Sandstorm - Console</h5>
     </span>
@@ -11,7 +11,7 @@
     </span>
   </a>
   
-
+  
 
   <nav class="navbar navbar-static-top" role="navigation">
     <a (click)="sideBarmenu()" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -19,15 +19,27 @@
     </a>
 
 
-
     <div class="nav navbar-nav navbar-center">
       <span class="txt-blue">Sandstorm - Console</span>
       <!--   <p class="text-center" style="font-size:14px;">Console</p>	 -->
     </div>
 
+        <div class="btn-group">  
+            <i class="fa fa-bookmark  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Console Apps   
+            </i>    
+            <ul class="dropdown-menu">  
+              <li *ngFor="let application of listOfApplications"><a (click)="navToApp(application)">{{application?.applicationName}}</a></li>
+            </ul>
+          </div>   
+
+
     <!-- Navbar Right Menu -->
-    <div class="navbar-custom-menu">
+    <div class="navbar-custom-menu"> 
+      
       <ul class="nav navbar-nav paddR25">
+
+         
         <li class="dropdown user user-menu">
           <a id="drop1" class="dropdown-toggle userfluxlogin" role="button">
             <img src="assets/images/user-icon.png" height="30" width="30">
@@ -49,10 +61,13 @@
                   </div>
                 </div>
               </div>
-            </li>
+            </li> 
           </ul>
         </li>
+
       </ul>
+  
+
     </div>
 
   </nav>
