@@ -28,7 +28,7 @@
 
 
 
-    
+
         <div class="row">
           <div class="col-md-5">
             <div class="form-group">
@@ -51,11 +51,11 @@
                   <mat-error id="entityCodeError2"*ngIf="entityForm.controls.entityCode.pristine">This is a required field</mat-error>
                   <label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label>
               </mat-form-field>
-             
+
 
             </div>
           </div>
-         
+
           <div class="col-md-5">
             <div class="form-group">
 
@@ -67,10 +67,10 @@
                 </mat-autocomplete>
                 <mat-error id="parentEntityError"*ngIf="entityForm.controls.parent.invalid">This is a required field</mat-error>
               </mat-form-field>
-            
+
             </div>
           </div>
-  
+
           <!-- <div class="col-md-5">
               <div class="form-group">
                 <mat-form-field class="example-full-width ">
@@ -79,15 +79,15 @@
                     <mat-option value="false">Inactive</mat-option>
                   </mat-select>
                   <mat-error *ngIf="entityForm.controls.enableFlag.invalid">This is a required field</mat-error>
-                   
+
                 </mat-form-field>
-            
+
               </div>
             </div> -->
           <div class="col-md-5">
               <div class="form-group">
                  <mat-form-field  class="example-full-width">
-                     <textarea required matInput placeholder="Description" formControlName="description" name="description" ></textarea>
+                     <textarea required matInput placeholder="Description" autocomplete="off" formControlName="description" name="description" ></textarea>
                      <mat-error id="entityDescriptionError1" *ngIf="entityForm.controls.description.dirty && entityForm.controls.description.invalid">Invalid Entity Description. Please check info!</mat-error>
                      <mat-error id="entityDescriptionError2"*ngIf="entityForm.controls.description.pristine">This is a required field</mat-error>
                      <label class="btn btn-info"  mat-raised-button matTooltip="6 - 140 characters &#10004;"><i class="fa fa-question-circle" ></i></label>
@@ -95,9 +95,9 @@
                  </div>
             </div>
 
-        
 
-     
+
+
         </div>
       </form>
     </section>

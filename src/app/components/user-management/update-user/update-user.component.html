@@ -24,7 +24,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput readonly placeholder="User Id" formControlName="userId">
+                <input matInput readonly placeholder="User Id" autocomplete="off" formControlName="userId">
                 <!-- <mat-error *ngIf="userForm.controls.userId.dirty && userForm.controls.userId.invalid">UserId is Invalid. Please check info!</mat-error>
 									<mat-error *ngIf="userForm.controls.userId.pristine">This is a required field</mat-error>
 									<label class="btn btn-info"  mat-raised-button matTooltip="6 - 35 characters &#10004; [a-zA-Z0-9] &#10004; Hyphen and Underscore &#10004; Space &#10008;"><i class="fa fa-question-circle" ></i></label> -->
@@ -37,7 +37,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Designation" formControlName="designation">
+                <input matInput placeholder="Designation" autocomplete="off" formControlName="designation">
                 <mat-error id="designationError1" *ngIf="userForm.controls.designation.dirty && userForm.controls.designation.invalid">Designation is Invalid. Please check info!</mat-error>
                 <mat-error id="designationError2" *ngIf="userForm.controls.designation.pristine">This is a required field</mat-error>
                 <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004; Space &#10004; Special Characters &#10008;">
@@ -49,21 +49,21 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Phone Number" type="text" value="" maxlength="10" formControlName="phoneNumber">
+                <input matInput placeholder="Phone Number" autocomplete="off" type="text" value="" maxlength="10" formControlName="phoneNumber">
                 <mat-error id="phNoError1" *ngIf="userForm.controls.phoneNumber.dirty && userForm.controls.phoneNumber.invalid">Phone Number is Invalid</mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Mobile Number" type="text" value="" maxlength="10" formControlName="mobileNumber">
+                <input matInput placeholder="Mobile Number" autocomplete="off" type="text" value="" maxlength="10" formControlName="mobileNumber">
                 <mat-error id="mbNoError1" *ngIf="userForm.controls.mobileNumber.dirty && userForm.controls.mobileNumber.invalid">Mobile Number is Invalid</mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input type="text" placeholder="City / Town" matInput formControlName="city" required>
+                <input type="text" placeholder="City / Town" autocomplete="off" matInput formControlName="city" required>
                 <mat-error id="cityError1" *ngIf="userForm.controls.city.dirty && userForm.controls.city.invalid">City is Invalid</mat-error>
                 <mat-error id="cityError2" *ngIf="userForm.controls.city.pristine">This is a required field</mat-error>
                 <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004; Space &#10004; Special Characters &#10008;">
@@ -77,7 +77,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input readonly matInput placeholder="User Name" value="" formControlName="userName">
+                <input readonly matInput placeholder="User Name" autocomplete="off" value="" formControlName="userName">
                 <!-- <mat-error *ngIf="userForm.controls.userName.dirty && userForm.controls.userName.invalid">User Name is Invalid. Please check info!</mat-error>
 									<mat-error *ngIf="userForm.controls.userName.pristine">This is a required field</mat-error>
 									<label class="btn btn-info"  mat-raised-button matTooltip="6 - 140 characters &#10004;"><i class="fa fa-question-circle" ></i></label> -->
@@ -89,7 +89,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input type="email" required matInput placeholder="Email ID" value="" formControlName="emailId">
+                <input type="email" required matInput placeholder="Email ID" autocomplete="off" value="" formControlName="emailId">
                 <mat-error id="emailIdError1" *ngIf="userForm.controls.emailId.dirty && userForm.controls.emailId.invalid">Email Id is Invalid</mat-error>
                 <mat-error id="emailIdError2" *ngIf="userForm.controls.emailId.pristine">This is a required field</mat-error>
               </mat-form-field>
@@ -102,7 +102,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input type="text" placeholder="State" matInput formControlName="state" required>
+                <input type="text" placeholder="State" autocomplete="off" matInput formControlName="state" required>
                 <mat-error id="stateError1" *ngIf="userForm.controls.state.dirty && userForm.controls.state.invalid">State is Invalid</mat-error>
                 <mat-error id="stateError2" *ngIf="userForm.controls.state.pristine">This is a required field</mat-error>
                 <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004; Space &#10004; Special Characters &#10008;">
@@ -112,7 +112,7 @@
             </div>
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input type="text" placeholder="Country" matInput formControlName="country" required>
+                <input type="text" placeholder="Country" autocomplete="off" matInput formControlName="country" required>
                 <mat-error id="countryError1" *ngIf="userForm.controls.country.dirty && userForm.controls.country.invalid">Country is Invalid</mat-error>
                 <mat-error id="countryError2" *ngIf="userForm.controls.country.pristine">This is a required field</mat-error>
                 <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004; Space &#10004; Special Characters &#10008;">
@@ -122,7 +122,7 @@
             </div>
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput type="text" placeholder="Fax" maxlength="10" value="" formControlName="faxNumber">
+                <input matInput type="text"  placeholder="Fax" autocomplete="off" maxlength="10" value="" formControlName="faxNumber">
                 <mat-error id="faxError1"  *ngIf="userForm.controls.faxNumber.dirty && userForm.controls.faxNumber.invalid">Fax Number is Invalid</mat-error>
               </mat-form-field>
             </div>
