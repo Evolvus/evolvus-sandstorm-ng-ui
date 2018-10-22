@@ -40,7 +40,7 @@
                 <input matInput placeholder="Designation" formControlName="designation">
                 <mat-error id="designationError1" *ngIf="userForm.controls.designation.dirty && userForm.controls.designation.invalid">Designation is Invalid. Please check info!</mat-error>
                 <mat-error id="designationError2" *ngIf="userForm.controls.designation.pristine">This is a required field</mat-error>
-                <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004;">
+                <label class="btn btn-info" mat-raised-button matTooltip="6 - 35 characters &#10004; Space &#10004; Special Characters &#10008;">
                   <i class="fa fa-question-circle"></i>
                 </label>
               </mat-form-field>

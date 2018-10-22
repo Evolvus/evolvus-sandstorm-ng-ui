@@ -38,7 +38,7 @@ export class UpdateUserComponent implements OnInit {
     this.userForm = new FormGroup({
       userId: new FormControl(""),
       userName: new FormControl(""),
-      designation: new FormControl("", [Validators.minLength(6), Validators.maxLength(35)]),
+      designation: new FormControl("", [Validators.minLength(6), Validators.maxLength(35), Validators.pattern("[a-zA-Z \-\]*")]),
       role: new FormControl("", [Validators.required]),
       entity: new FormControl("", [Validators.required]),
       emailId: new FormControl("", [Validators.required, Validators.email]),
