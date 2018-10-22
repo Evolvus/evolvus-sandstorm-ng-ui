@@ -55,14 +55,17 @@ export class AddUserComponent implements OnInit {
       mobileNumber: new FormControl("",Validators.pattern("[0-9]{10}")),
       country: new FormControl("", [
         Validators.required,
+        Validators.pattern("[a-zA-Z \-\]*"),
         Validators.maxLength(140)
       ]),
       state: new FormControl("", [
         Validators.required,
+        Validators.pattern("[a-zA-Z \-\]*"),
         Validators.maxLength(140)
       ]),
       city: new FormControl("", [
         Validators.required,
+        Validators.pattern("[a-zA-Z \-\]*"),
         Validators.maxLength(140)
       ]),
       // timeZone: new FormControl("", [Validators.required]),
