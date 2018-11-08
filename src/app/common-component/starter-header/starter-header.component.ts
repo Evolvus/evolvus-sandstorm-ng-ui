@@ -56,8 +56,8 @@ getApplicationData(){
 
   navToApp(application){ 
 
-      window.open(`${application.url}`);  
+      window.open(`${application.url}/redirect/${this.user.userId}/${localStorage.getItem('token')}`);  
   
-   }
-
+   }   
+  
 }
