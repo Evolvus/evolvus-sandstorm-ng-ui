@@ -54,10 +54,10 @@ getApplicationData(){
   }
 
 
-  navToApp(application){ 
-  
-      window.open(`${application.url}`);  
-  
-   }   
-  
+  navToApp(application){  
+     
+    window.open(`${application.url}`);  
+         
+   }    
+   
 }

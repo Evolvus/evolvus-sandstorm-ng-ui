@@ -96,17 +96,16 @@ export class LoginConsoleComponent implements OnInit {
               );                           
               this.authenticationService.setToken(user.token);
               var myDate = new Date(); 
-myDate.setMonth(myDate.getMonth() + 12);  
-console.log('I am in login console');  
-              document.cookie = 'token' +"=" + `${user.token}` + ";domain=.ibl.com;path=/;expires=" + myDate;  
-              document.cookie = 'userId' +"=" + `${user.data.userId}` + ";domain=.ibl.com;path=/;expires=" + myDate;  
+              myDate.setMonth(myDate.getMonth() + 12);
+              document.cookie = 'token' +"=" + `${user.token}` + ";domain=.indusind.com;path=/;expires=" + myDate;  
+              document.cookie = 'userId' +"=" + `${user.data.userId}` + ";domain=.indusind.com;path=/;expires=" + myDate;
               this.authenticationService.dtFormat = "dd/MM/yyyy hh:mm:ss";
               this.dateFormat = this.authenticationService.dtFormat;
               // this.globalVariableService.currentUser = user.data;
-              this.globalVariableService.currentUser.next(user.data);
+              this.globalVariableService.currentUser.next(user.data);  
 
               this.router.navigate(["home"]);
-            }, 1000);
+            }, 1000);  
           } else {
             this.router.navigate(["login"]);
           }
