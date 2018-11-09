@@ -1,7 +1,6 @@
 import { AuthenticationService } from './login-console/authentication/login/login.service';
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

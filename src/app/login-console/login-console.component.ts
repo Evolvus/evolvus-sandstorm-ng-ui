@@ -8,6 +8,7 @@ import {
   ViewChild,
   ElementRef
 } from "@angular/core";
+
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "./authentication/login/login.service";
@@ -94,6 +95,11 @@ export class LoginConsoleComponent implements OnInit {
                 this.authenticationService.isAuthenticated
               );                           
               this.authenticationService.setToken(user.token);
+              var myDate = new Date(); 
+myDate.setMonth(myDate.getMonth() + 12);  
+console.log('I am in login console');  
+              document.cookie = 'token' +"=" + `${user.token}` + ";domain=.ibl.com;path=/;expires=" + myDate;  
+              document.cookie = 'userId' +"=" + `${user.data.userId}` + ";domain=.ibl.com;path=/;expires=" + myDate;  
               this.authenticationService.dtFormat = "dd/MM/yyyy hh:mm:ss";
               this.dateFormat = this.authenticationService.dtFormat;
               // this.globalVariableService.currentUser = user.data;
