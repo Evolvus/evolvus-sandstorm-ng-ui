@@ -33,7 +33,7 @@ export class LoginConsoleComponent implements OnInit {
   viewPasswordComponent: boolean = false;
   color = "primary";
   mode = "indeterminate";
-  value = 25;
+  value = 25; 
   eyeOpen = false;  
   passwordType: string = "password";
   doesUserExists: boolean = false;
@@ -51,8 +51,10 @@ export class LoginConsoleComponent implements OnInit {
     private router: Router,
     private globalVariableService: SandstormGlobalVariablesService,
     private userDataService: UserDataService
-  ) {}
- 
+  ) {
+   
+  }
+   
   ngOnInit() {  
     this.loginForm = new FormGroup({
       userId: new FormControl("", [
@@ -95,21 +97,17 @@ export class LoginConsoleComponent implements OnInit {
                 this.authenticationService.isAuthenticated
               );                           
               this.authenticationService.setToken(user.token);
-              var myDate = new Date(); 
-              myDate.setMonth(myDate.getMonth() + 12);
-              document.cookie = 'token' +"=" + `${user.token}` + ";domain=.indusind.com;path=/;expires=" + myDate;  
-              document.cookie = 'userId' +"=" + `${user.data.userId}` + ";domain=.indusind.com;path=/;expires=" + myDate;
               this.authenticationService.dtFormat = "dd/MM/yyyy hh:mm:ss";
               this.dateFormat = this.authenticationService.dtFormat;
-              // this.globalVariableService.currentUser = user.data;
-              this.globalVariableService.currentUser.next(user.data);  
+              // this.globalVariableService.currentUser = user.data; 
+              this.globalVariableService.currentUser.next(user.data);   
 
               this.router.navigate(["home"]);
             }, 1000);  
           } else {
             this.router.navigate(["login"]);
           }
-        },
+        }, 
         err => {   
           if (err.error) {     
             this.displayError = true;
@@ -144,11 +142,12 @@ export class LoginConsoleComponent implements OnInit {
     if (!this.loginForm.controls.userId.invalid) {
       this.transition("loading");
       if (action == 'next') {
+        this.authenticationService.verify(''); // Need to change this.
         this.displayError = false;
-        this.authenticationService
-          .verify("SANDSTORM", this.loginForm.value.userId)
-          .subscribe(
-            (response: any) => {
+        this.authenticationService  
+          .responseData
+          .subscribe(   
+            (response: any) => {  
               if (response != null) {
                 if (response.data == true) {
                   this.changeButtonType(1);

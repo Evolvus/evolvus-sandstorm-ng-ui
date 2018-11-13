@@ -4,7 +4,7 @@ import { environment } from './../../../../environments/environment';
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Subject} from "rxjs";
+import {Subject, BehaviorSubject} from "rxjs";
 import { SandstormGlobalVariablesService } from './../../../shared/sandstorm-global-variables.service';
 
 
@@ -17,6 +17,9 @@ export class AuthenticationService {
     authenticatedSubject = new Subject();
     dtFormat :string;
     userData = new Subject<any>();
+    response = {data: true};
+    responseData = new BehaviorSubject<any>(this.response);
+
     constructor(private http : HttpClient, private router : Router, private globalVariableService: SandstormGlobalVariablesService) {
     }
 
@@ -47,22 +50,23 @@ export class AuthenticationService {
 
             this.router.navigate(['login']);
         
-        });
+        });  
     
     }
-    verify(applicationCode, userId){
-        var user = {
-          applicationCode: applicationCode,
-          userId: userId
-        }; 
-        return this.http.get(`${this.serviceUrl}/sandstorm/api/user/verify`,{
-         params:{
-           applicationCode:applicationCode,
-           userId:userId
-         }
-        }
+    verify(userId){
+    //     var user = {
+    //       userId: userId
+    //     }; 
+    //     return this.http.get(`${this.serviceUrl}/sandstorm/api/user/verify`,{
+    //      params:{
+    //        userId:userId 
+    //      }
+    //     }
         
-      );
+    //   );  
+    var response = {data: true}; 
+    this.responseData.next(response); 
     }
-  
+    
 }
+  

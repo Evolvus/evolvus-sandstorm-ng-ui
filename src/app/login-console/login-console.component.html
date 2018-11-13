@@ -20,7 +20,7 @@
   
           <div class="username-component" *ngIf="viewUserNameComponent">
             <mat-form-field class="col-md-12 col-sm-12 col-xs-12">
-              <input autofocus id="login-username" matInput formControlName="userId" minlength="5" maxlength="20" name="userId" placeholder="UserId"
+              <input autofocus id="login-username" matInput formControlName="userId" autocomplete="off" minlength="5" maxlength="20" name="userId" placeholder="UserId"
                 required>
               <mat-icon *ngIf="doesUserExists" matSuffix align="right" (click)="reset()">
                 <i class="fa fa-times" matTooltip="Clear"></i>
@@ -45,8 +45,8 @@
      
   
           <div class="userpassword-component" *ngIf="viewPasswordComponent">
-            <mat-form-field class="example-full-width col-md-12">
-              <input autofocus type="{{passwordType}}" id="passwordInput" matInput placeholder="Password" minlength="5" maxlength="20"
+            <mat-form-field class="example-full-width col-md-12"> 
+              <input autofocus type="{{passwordType}}" id="passwordInput" autocomplete="off" matInput placeholder="Password" minlength="5" maxlength="20"
                 class="example-right-align" formControlName="userPassword">
               <mat-icon align="right" matSuffix *ngIf="eyeOpen" (click)="changeInputType()">
                 <span class="glyphicon glyphicon-eye-close"></span>

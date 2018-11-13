@@ -1,14 +1,15 @@
 <div class="content-wrapper home-sec">
   <section class="content">
-    <div class="row">
+    <div class="row" *ngIf="user.applicationCode=='SANDSTORM'">
       <div class="col-md-8 padR50">
 
 
+  
+ 
+<div class="menu-items-application" >  
 
-
-
-        <div class="row" *ngFor="let menuGroup of user.role.menuGroup; let i = index">
-          <section class="content-header home-header">
+        <div class="row" *ngFor="let menuGroup of user.role.menuGroup; let i = index" >
+          <section class="content-header home-header"> 
             <h1 class="txt-orange marT15">
               {{menuGroup.title | titlecase}}
             </h1>
@@ -32,6 +33,8 @@
           </div>
 
         </div>
+      </div>
+
       </div>
       <div class="col-md-4  marL15">
 

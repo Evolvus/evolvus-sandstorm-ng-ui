@@ -16,6 +16,7 @@ eventData: any = [];
 panelOpenState = false;
 isPanelOpened = false;
 
+
   constructor(private globalVariableService: SandstormGlobalVariablesService, private starterContentService: StarterContentService, private router: Router)
  { }
 

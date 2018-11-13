@@ -17,8 +17,13 @@ export class StarterHeaderComponent implements OnInit {
   platformURL = environment.platformURL;
   listOfApplications: any[]=[];
   application: any; 
+domain: string ='';
+  constructor(private http: HttpClient,private authService: AuthenticationService, private globalVariableService: SandstormGlobalVariablesService, private router: Router) { 
+    this.domain = location.hostname;
+    this.domain = this.domain.substring(this.domain.indexOf('.'));
+    this.domain.trim();  
+  }
 
-  constructor(private http: HttpClient,private authService: AuthenticationService, private globalVariableService: SandstormGlobalVariablesService, private router: Router) { }
 
   ngOnInit() {
 
@@ -55,9 +60,12 @@ getApplicationData(){
 
 
   navToApp(application){  
-     
+    var myDate = new Date();      
+    myDate.setMinutes(myDate.getMinutes() + 2); //2 minutes cookie is available 
+    document.cookie = 'token' +"=" + `${localStorage.getItem('token')}` + ";domain="+this.domain+";path=/;expires=" + myDate;  
+    document.cookie = 'userId' +"=" + `${this.user.userId}` + ";domain="+this.domain+";path=/;expires=" + myDate;
     window.open(`${application.url}`);  
          
    }    
    
-}
+}   
