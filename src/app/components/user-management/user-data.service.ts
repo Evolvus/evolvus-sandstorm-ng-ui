@@ -131,6 +131,7 @@ export class UserDataService {
       designation: userForm.value.designation,
       role: selectedRole[0],
       entityId: selectedEntity[0].entityId,
+      activationStatus: userForm.value.activationStatus,
       masterCurrency: userForm.value.currency,
       contact: {
         phoneNumber: userForm.value.phoneNumber,

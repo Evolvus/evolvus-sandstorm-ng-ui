@@ -44,6 +44,9 @@ export class UpdateUserComponent implements OnInit {
       emailId: new FormControl("", [Validators.required, Validators.email]),
       phoneNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
       mobileNumber: new FormControl("",Validators.pattern("[0-9]{10}")),
+      activationStatus: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
       country: new FormControl("", [
         Validators.required,
         Validators.pattern("[a-zA-Z \-\]*"),
@@ -86,6 +89,7 @@ export class UpdateUserComponent implements OnInit {
             faxNumber: userData.contact.faxNumber,
             userId: userData.userId,
             userName: userData.userName,
+            activationStatus: userData.activationStatus,
             individualTransactionLimit: userData.individualTransactionLimit,
             dailyLimit: userData.dailyLimit,
             currency: userData.masterCurrency,

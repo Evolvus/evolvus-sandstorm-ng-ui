@@ -53,6 +53,7 @@ export class AddUserComponent implements OnInit {
       emailId: new FormControl("", [Validators.required, Validators.email]),
       phoneNumber: new FormControl("", Validators.pattern("[0-9]{10}")),
       mobileNumber: new FormControl("",Validators.pattern("[0-9]{10}")),
+      
       country: new FormControl("", [
         Validators.required,
         Validators.pattern("[a-zA-Z \-\]*"),
