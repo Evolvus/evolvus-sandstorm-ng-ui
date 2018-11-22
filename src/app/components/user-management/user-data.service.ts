@@ -37,13 +37,13 @@ export class UserDataService {
   menuItemCode: string = "userManagement";
   currentLoggedInUserData: any = {};
   filterCriteria = new BehaviorSubject<Object>(this.defaultFilterCriteria);
-   
 
 
-  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) { 
+
+  constructor(private http: HttpClient, private dialog: MatDialog, private globalVariablesService: SandstormGlobalVariablesService) {
     this.getCurrentUserData().subscribe((response: any)=>{
       this.currentLoggedInUserData = response;
-    })    
+    })
   }
 
   getTableHeaders() {
@@ -64,15 +64,15 @@ export class UserDataService {
     return this.http.get(`${this.platformURL}/sandstorm/api/entity`,{
       params:{
         processingStatus: 'AUTHORIZED'
-      } 
+      }
     });
   }
-  
+
   getAllRoleData(pageSize, pageNo) {
     return this.http.get(`${this.platformURL}/sandstorm/api/role`,{
       params:{
         processingStatus: 'AUTHORIZED',
-        activationStatus: 'ACTIVE'  
+        activationStatus: 'ACTIVE'
       }
       });
   }
@@ -114,13 +114,13 @@ export class UserDataService {
     listOfEntities,
     listOfMasterCurrency
   ): any {
-    
+
     var selectedRole = listOfRoles.filter(
       role => role.roleName == userForm.controls.role.value
     );
     var selectedEntity = listOfEntities.filter(
       entity => entity.name == userForm.controls.entity.value
-    );    
+    );
     var selectedMasterCurrency = listOfMasterCurrency.filter(
       masterCurrency =>
         masterCurrency.currencyName == userForm.controls.currency.value
@@ -149,7 +149,7 @@ export class UserDataService {
     return userData;
   }
 
-  getCurrentUserData(){  
+  getCurrentUserData(){
    return this.globalVariablesService.currentUser;
     }
 
@@ -201,8 +201,8 @@ export class UserDataService {
       .filter(menuItem => menuItem.menuItemCode == 'userManagement')
       .map(menuItem => menuItem.subMenuItems)
       .reduce((subMenuItemsA, subMenuItemsC) => subMenuItemsA.concat(subMenuItemsC), [])
-      .map(subMenuItem => subMenuItem.title); 
-         
+      .map(subMenuItem => subMenuItem.title);
+
   }
 
   getWorkFlowData(id){
@@ -214,6 +214,8 @@ export class UserDataService {
     });  }
 
     takeAction(type, user, comments) {
+      console.log('type', type);
+
       if(type=='APPROVE'){
         type="AUTHORIZED";
       }else if(type=='REJECT'){

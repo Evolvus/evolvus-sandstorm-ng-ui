@@ -81,6 +81,8 @@ export class ViewUserComponent implements OnInit {
     }
   }
   takeAction(type) {
+    console.log('type', type);
+
     this.userDataService
       .openDialog("comments", "comments")
       .subscribe(result => {

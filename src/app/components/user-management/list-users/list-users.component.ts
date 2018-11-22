@@ -19,9 +19,9 @@ export class ListUsersComponent implements OnInit {
     processingStatus: "PENDING_AUTHORIZATION",
     pageSize: 5,
     pageNo: 1
-  };  
+  };
   noUserDataMessage: string = "";
-  listOfUsers: UserModel[];  
+  listOfUsers: UserModel[];
   startIndex: number = 0;
   noOfUsersInCurrentPage: number = 0;
   totalNoOfUsers: number = 0;
@@ -43,7 +43,7 @@ this.defaultFilterCriteria = filterCriteria;
     this.defaultFilterCriteria.processingStatus = "PENDING_AUTHORIZATION";
     this.getUserDataBasedOnDefaultFilterCriteria();
     this.userDataService.getCurrentUserData().subscribe((response: any)=>{
-      this.loggedInUser = response;      
+      this.loggedInUser = response;
     })
   }
 
@@ -144,13 +144,16 @@ this.defaultFilterCriteria = filterCriteria;
   getAllUserData() {
     this.userDataService.getAllUserData(this.pageSize, this.pageNo).subscribe(
       (response: any) => {
- 
+ console.log('response', response);
+
         this.listOfUsers = response.data;
         this.totalNoOfUsers = response.totalNoOfRecords;
         this.totalNoOfPages = response.totalNoOfPages;
         this.setCurrentPage(0);
       },
       err => {
+        console.log('error', err);
+
         this.userDataService
           .openDialog("error", err.error.description + ".")
           .subscribe(result => {
@@ -217,11 +220,11 @@ this.defaultFilterCriteria = filterCriteria;
     this.defaultFilterCriteria.pageNo=1;
     this.defaultFilterCriteria.pageSize=5;
     this.defaultFilterCriteria.activationStatus=undefined;
-    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";  
-    this.defaultFilterCriteria.userLoginStatus=undefined; 
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";
+    this.defaultFilterCriteria.userLoginStatus=undefined;
     if(source=='html'){
      this.getUserDataBasedOnDefaultFilterCriteria();
      this.isViewAllOptionSelected = false;
-    }  
+    }
   }
 }
