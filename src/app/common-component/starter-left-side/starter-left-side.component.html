@@ -9,21 +9,23 @@
       </li>
       
       <hr>
-      <div class="side-menu-group" *ngIf="user.applicationCode=='SANDSTORM'">
-        <div class="menu-group" *ngFor="let menuGroup of user?.role.menuGroup; let i = index" >
-          <li class="header">{{menuGroup.title | titlecase}}</li>
-          <div class="menuItem" *ngFor="let menuItem of menuGroup?.menuItems ; let j = index">
-            <li class="menuItemRoute"> 
-              <a routerLink="{{menuItem.menuItemCode}}">
-                <i [ngClass]="user.role.menuGroup[i].menuItems[j].icon"></i>
-                <span>{{menuItem.title}}</span>
-              </a>
-            </li>
-
-          </div>
-          <hr>
-        </div>  
+      <div class="display-menus"*ngIf="user.applicationCode=='SANDSTORM'">
+        <div class="side-menu-group" *ngFor="let menuGroup of user?.role.menuGroup; let i = index" >  
+          <div class="menu-group">
+            <li class="header">{{menuGroup.title | titlecase}}</li>
+            <div class="menuItem" *ngFor="let menuItem of menuGroup?.menuItems ; let j = index">
+              <li class="menuItemRoute"> 
+                <a routerLink="{{menuItem.menuItemCode}}">
+                  <i [ngClass]="user.role.menuGroup[i].menuItems[j].icon"></i>
+                  <span *ngIf="sideBarStatus">{{menuItem.title}}</span>
+                </a>
+              </li>
+            </div>
+            <hr>
+          </div>  
+        </div>
       </div>
+
     </ul>
 
 

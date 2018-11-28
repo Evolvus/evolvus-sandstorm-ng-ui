@@ -11,14 +11,18 @@ import { SandstormGlobalVariablesService } from "./../../shared/sandstorm-global
 export class StarterLeftSideComponent implements OnInit {
   userMenuGroups: any;
   user: any;
+  sideBarStatus = true;
   constructor(
     private router: Router,
     private authService: AuthenticationService,
-    private globalVariableService: SandstormGlobalVariablesService
+    private globalVariableService: SandstormGlobalVariablesService,
   ) {}
 
   ngOnInit() {
     this.user = this.globalVariableService.currentUser.getValue();
+    this.globalVariableService.sideBarStatus.subscribe((response)=>{
+      this.sideBarStatus = response; 
+    })
   }
 
 

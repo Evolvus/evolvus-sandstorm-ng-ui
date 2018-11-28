@@ -4,6 +4,7 @@ import { AuthenticationService } from './../../login-console/authentication/logi
 import { Component, OnInit } from '@angular/core';
 import { SandstormGlobalVariablesService } from '../../shared/sandstorm-global-variables.service';
 import { environment } from '../../../environments/environment';
+import { Subject } from 'rxjs';
   
 @Component({
   selector: 'app-starter-header',
@@ -17,6 +18,7 @@ export class StarterHeaderComponent implements OnInit {
   platformURL = environment.platformURL;
   listOfApplications: any[]=[];
   application: any; 
+  sideBarOpened = true;
 domain: string ='';
   constructor(private http: HttpClient,private authService: AuthenticationService, private globalVariableService: SandstormGlobalVariablesService, private router: Router) { 
     this.domain = location.hostname;
@@ -40,8 +42,10 @@ this.getApplicationData().subscribe((response: any)=>{
 
   sideBarmenu(){
   //  console.log(this.body.classList.toggle;
+  this.sideBarOpened = !this.sideBarOpened;
     this.body.classList.toggle('sidebar-collapse');
-  }
+    this.globalVariableService.sideBarStatus.next(this.sideBarOpened); 
+  } 
 
   viewProfile(){
     this.router.navigate(["viewUser", this.user.userId]);
