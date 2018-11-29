@@ -4,7 +4,7 @@
       <li class="active" *ngIf="user.applicationCode=='SANDSTORM'">
         <a [routerLink]="['/home']">
           <i class="evo-home4"></i>
-          <span>Home</span>
+          <span *ngIf="sideBarStatus">Home</span>
         </a>  
       </li>
       
