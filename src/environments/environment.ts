@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   platformURL: 'http://10.10.69.193:9090'
-};
+}; 
 
 /*
  * In development mode, to ignore zone related error stack frames such as

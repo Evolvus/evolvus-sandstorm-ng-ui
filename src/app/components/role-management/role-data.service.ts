@@ -78,14 +78,15 @@ export class RoleDataService {
     return this.roleTableHeaders;
   }
 
-  getDefaultFilterCriteria() {
+  getDefaultFilterCriteria() { 
     return this.defaultFilterCriteria;
   }
 
   getListOfMenuGroups(applicationCode: string) {
     return this.http.get(`${this.platformURL}/sandstorm/api/menu`, {
       params: {
-        applicationCode: applicationCode
+        applicationCode: applicationCode,
+        tenantId: this.currentLoggedInUserData.tenantId
       }
     });
   }
