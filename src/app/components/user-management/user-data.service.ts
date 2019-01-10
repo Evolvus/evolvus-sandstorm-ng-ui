@@ -182,12 +182,13 @@ export class UserDataService {
     });
   }
 
-  openDialog(messageType, statusMessage): any {
+  openDialog(type, messageType, statusMessage): any {
     let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
       width: "300px",
       data: {
         message: statusMessage,
-        type: messageType
+        msgtype: messageType,
+        actionType: type
       }
     });
 
@@ -214,8 +215,6 @@ export class UserDataService {
     });  }
 
     takeAction(type, user, comments) {
-      console.log('type', type);
-
       if(type=='APPROVE'){
         type="AUTHORIZED";
       }else if(type=='REJECT'){

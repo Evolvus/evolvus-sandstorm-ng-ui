@@ -144,14 +144,14 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
       this.roleDataService.save(roleData).subscribe(
         (data: { savedRoleObject: Object; description: string }) => {
           this.roleDataService
-            .openDialog("success", data.description)
+            .openDialog("","success", data.description)
             .subscribe(result => {
               this.router.navigate(["roleManagement"]);
             });
         },
         err => {
           this.roleDataService
-            .openDialog("error", err.error.description)
+            .openDialog("","error", err.error.description)
             .subscribe(result => {
               this.getMenuGroups(this.roleForm.value.applicationCode);
             });
@@ -159,7 +159,7 @@ if(this.selectedMenuGroups[mgIndex].menuItems.length!=0){
       );
     } else {
       this.roleDataService
-        .openDialog("error", "Menus is a required field!")
+        .openDialog("","error", "Menus is a required field!")
         .subscribe(result => {
           this.getMenuGroups(this.roleForm.value.applicationCode);
         });

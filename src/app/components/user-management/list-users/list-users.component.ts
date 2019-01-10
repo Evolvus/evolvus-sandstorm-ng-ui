@@ -80,7 +80,7 @@ this.defaultFilterCriteria = filterCriteria;
                 },
                 err => {
                   this.userDataService
-                    .openDialog("error", err.error.description + ".")
+                    .openDialog("","error", err.error.description + ".")
                     .subscribe(result => {
                       // Dialog Response can be handled here
                     });
@@ -96,7 +96,7 @@ this.defaultFilterCriteria = filterCriteria;
         },
         err => {
           this.userDataService
-            .openDialog("error", err.error.description)
+            .openDialog("","error", err.error.description)
             .subscribe(result => {
               // Dialog Response can be handled here
             });
@@ -133,7 +133,7 @@ this.defaultFilterCriteria = filterCriteria;
         },
         err => {
           this.userDataService
-            .openDialog("error", err.error.description + ".")
+            .openDialog("","error", err.error.description + ".")
             .subscribe(result => {
               // Dialog Response can be handled here
             });
@@ -155,7 +155,7 @@ this.defaultFilterCriteria = filterCriteria;
         console.log('error', err);
 
         this.userDataService
-          .openDialog("error", err.error.description + ".")
+          .openDialog("","error", err.error.description + ".")
           .subscribe(result => {
             // Dialog Response can be handled here
           });

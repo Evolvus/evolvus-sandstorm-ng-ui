@@ -134,7 +134,7 @@ export class UpdateUserComponent implements OnInit {
         } else {
           //If there is no data with that Username
           this.userDataService
-            .openDialog("error", "No User found with Username " + userName!)
+            .openDialog("","error", "No User found with Username " + userName!)
             .subscribe(response => {
               this.router.navigate(["userManagement"]);
             });
@@ -143,7 +143,7 @@ export class UpdateUserComponent implements OnInit {
       err => {
         //If there is any error
         this.userDataService
-          .openDialog("error", err.error.description)
+          .openDialog("","error", err.error.description)
           .subscribe(response => {
             this.router.navigate(["userManagement"]);
           });
@@ -170,27 +170,27 @@ export class UpdateUserComponent implements OnInit {
             status: string;
           }) => {
             this.userDataService
-              .openDialog("success", response.description)
+              .openDialog("","success", response.description)
               .subscribe(result => {
                 this.router.navigate(["userManagement"]);
               });
           },
           err => {
             this.userDataService
-              .openDialog("error", err.error.description + ".")
+              .openDialog("","error", err.error.description + ".")
               .subscribe(result => {});
           }
         );
       }else{
         this.userDataService
-        .openDialog("error", "Please Select a Valid Role" + ".")
+        .openDialog("","error", "Please Select a Valid Role" + ".")
         .subscribe(result => {
           // Dialog Response can be handled here
         });
       }
     }else{
       this.userDataService
-        .openDialog("error", "Please Select a Valid Branch" + ".")
+        .openDialog("","error", "Please Select a Valid Branch" + ".")
         .subscribe(result => {
           // Dialog Response can be handled here
         });

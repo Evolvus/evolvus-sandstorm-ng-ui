@@ -12,14 +12,26 @@ export class ConfirmationDialogEntityComponent implements OnInit {
 
   statusMessage: string = "";
 messageType: string = "";
+type: string="";
 serverError: boolean = false;
-commentForm: FormGroup = new FormGroup({comments: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])});
+commentForm: FormGroup = new FormGroup({comments: new FormControl('',[Validators.required,Validators.minLength(5), Validators.maxLength(255)])});
   constructor(  public dialogRef: MatDialogRef<ConfirmationDialogEntityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.statusMessage = this.data.message;
-    this.messageType = this.data.type;
+    this.messageType = this.data.msgtype;
+    this.type = this.data.actionType;
+    console.log("this.type",this.type);
+    
+    if(this.type === "APPROVE"){
+      this.commentForm.get('comments').clearValidators();
+      this.commentForm.updateValueAndValidity();
+    }else{
+      this.commentForm.get('comments').setValidators([Validators.required,Validators.minLength(5), Validators.maxLength(255)]);
+      this.commentForm.get('comments').updateValueAndValidity();
+    }
+    
     if(this.statusMessage == undefined){
     this.serverError = true;
     }
@@ -29,7 +41,10 @@ commentForm: FormGroup = new FormGroup({comments: new FormControl('', [Validator
   this.dialogRef.close(status);
   }
 
-addComments(status){
+addComments(status){ 
+  if(this.type=='APPROVE'){
+    this.commentForm.patchValue({comments: 'Accepted'});
+  } 
   this.dialogRef.close({comments: this.commentForm.value.comments, status: status});
 }
 

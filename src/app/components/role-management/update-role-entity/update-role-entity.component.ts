@@ -229,7 +229,7 @@ this.selectedMenuGroups.splice(mgIndex, 1);
 
       this.roleDataService.update(this.roleData).subscribe(
         (response: any) => {
-         this.roleDataService.openDialog(
+         this.roleDataService.openDialog("",
             "success",
            response.description
           ).subscribe((result)=>{
@@ -237,7 +237,7 @@ this.selectedMenuGroups.splice(mgIndex, 1);
           });
       },
       err => {
-        this.roleDataService.openDialog("error", err.error.description).subscribe((response)=>{
+        this.roleDataService.openDialog("","error", err.error.description).subscribe((response)=>{
           this.router.navigate(['viewRole', this.roleData.roleName]);  
         })
       }

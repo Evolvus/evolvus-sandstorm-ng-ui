@@ -70,7 +70,7 @@ getFilteredEntityNames(){
   save() {
     if(this.isAValidSelection('entity', this.entityForm.value.parent)){ -
       this.entityService.save(this.entityForm.value).subscribe((data: {savedEntityObject: Object, description: string}) => {
-        this.entityService.openDialog(
+        this.entityService.openDialog("",
            "success",
           data.description
          ).subscribe((result)=>{
@@ -78,7 +78,7 @@ getFilteredEntityNames(){
          });
     
        }, (err)=>{
-        this.entityService.openDialog(
+        this.entityService.openDialog("",
           "error",
          err.error.description+"."
         ).subscribe((result)=>{
@@ -87,7 +87,7 @@ getFilteredEntityNames(){
       });
     }else{
       this.entityService
-      .openDialog("error", "Please Select a Valid Entity" + ".")
+      .openDialog("","error", "Please Select a Valid Entity" + ".")
       .subscribe(result => {
         // Dialog Response can be handled here
       });

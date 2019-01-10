@@ -119,12 +119,13 @@ export class EntityDataService {
     );
   }
 
-  openDialog(messageType, statusMessage): any {
+  openDialog(type, messageType, statusMessage): any {
     let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
       width: "300px",
       data: {
         message: statusMessage,
-        type: messageType
+        msgtype: messageType,
+        actionType: type
       }
     });
 

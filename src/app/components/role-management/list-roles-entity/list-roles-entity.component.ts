@@ -73,7 +73,7 @@ export class ListRolesEntityComponent implements OnInit {
       },
       err => {
         this.roleDataService
-          .openDialog("error", err.error.description)
+          .openDialog("","error", err.error.description)
           .subscribe(result => {});
       }
     );
@@ -134,7 +134,7 @@ export class ListRolesEntityComponent implements OnInit {
         },
         err => {
           this.roleDataService
-            .openDialog("error", err.error.description)
+            .openDialog("","error", err.error.description)
             .subscribe(result => {
               // console.log("Server Down");
             });
@@ -206,7 +206,7 @@ export class ListRolesEntityComponent implements OnInit {
         },
         err => {
           this.roleDataService
-            .openDialog("error", err.error.description)
+            .openDialog("","error", err.error.description)
             .subscribe(result => {});
         }
       );
