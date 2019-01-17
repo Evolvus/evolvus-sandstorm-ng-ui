@@ -36,7 +36,7 @@ export class ViewUserComponent implements OnInit {
         } else {
           //If there is no data with that Username
           this.userDataService
-            .openDialog("error", "No User found with UserId " + this.userId!)
+            .openDialog("","error", "No User found with UserId " + this.userId!)
             .subscribe(response => {
               this.router.navigate(["userManagement"]);
             });
@@ -84,7 +84,7 @@ export class ViewUserComponent implements OnInit {
     console.log('type', type);
 
     this.userDataService
-      .openDialog("comments", "comments")
+      .openDialog(type,"comments", "comments")
       .subscribe(result => {
         if (result.status) {
           this.userDataService
@@ -92,14 +92,14 @@ export class ViewUserComponent implements OnInit {
             .subscribe(
               (response: any) => {
                 this.userDataService
-                  .openDialog("success", response.description)
+                  .openDialog(type,"success", response.description)
                   .subscribe(result => {
                     this.router.navigate(["userManagement"]);
                   });
               },
               err => {
                 this.userDataService
-                  .openDialog("error", err.description)
+                  .openDialog(type,"error", err.description)
                   .subscribe(result => {});
               }
             );

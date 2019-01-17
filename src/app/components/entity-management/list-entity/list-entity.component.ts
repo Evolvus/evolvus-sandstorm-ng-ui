@@ -107,7 +107,7 @@ export class ListEntityComponent implements OnInit {
         },
         err => {
           this.entityService
-            .openDialog("error", "Unexpected Error : Please Try Again")
+            .openDialog("","error", "Unexpected Error : Please Try Again")
             .subscribe(result => {
               // console.log(err, "Server Down");
             });

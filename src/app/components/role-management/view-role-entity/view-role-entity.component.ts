@@ -76,7 +76,7 @@ export class ViewRoleEntityComponent implements OnInit {
 
   takeAction(type) {
     this.roleDataService
-      .openDialog("comments", "comments")
+      .openDialog(type,"comments", "comments")
       .subscribe(result => {
         if (result.status) {
           this.comments = result.comments;
@@ -84,13 +84,13 @@ export class ViewRoleEntityComponent implements OnInit {
             .takeAction(type, this.selectedRole, this.comments)
             .subscribe((response: any) => {
               this.roleDataService
-            .openDialog("success", response.description)
+            .openDialog(type,"success", response.description)
             .subscribe(result => {
               this.router.navigate(["roleManagement"]);
             });
             }, (err)=>{
               this.roleDataService
-            .openDialog("error", err.description)
+            .openDialog(type,"error", err.description)
             .subscribe(result => {
             });
             });

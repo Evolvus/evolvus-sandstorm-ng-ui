@@ -77,13 +77,14 @@ export class ViewEntityComponent implements OnInit {
     }
     takeAction(type) {
       this.entityService
-        .openDialog("comments", "comments")
+        .openDialog(type,"comments", "comments")
         .subscribe(result => {
           if (result.status) {
             this.entityService
               .takeAction(type, this.selectedEntity, result.comments)
               .subscribe((response: any) => {
                 this.entityService.openDialog(
+                  type,
                   "success",
                   response.description
                 ).subscribe((result)=>{
@@ -91,6 +92,7 @@ export class ViewEntityComponent implements OnInit {
                 });
               }, (err)=>{
                 this.entityService.openDialog(
+                  type,
                   "error",
                   err.description
                 ).subscribe((result)=>{

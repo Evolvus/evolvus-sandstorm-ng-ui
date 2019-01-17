@@ -115,14 +115,14 @@ export class AddUserComponent implements OnInit {
           .subscribe(
             (response: any) => {
               this.userDataService
-                .openDialog("success", response.description)
+                .openDialog("","success", response.description)
                 .subscribe(result => {
                   this.router.navigate(["userManagement"]);
                 });
             },
             err => {
               this.userDataService
-                .openDialog("error", err.error.description + ".")
+                .openDialog("","error", err.error.description + ".")
                 .subscribe(result => {
                   // Dialog Response can be handled here
                 });
@@ -130,14 +130,14 @@ export class AddUserComponent implements OnInit {
           );
       } else {
         this.userDataService
-          .openDialog("error", "Please Select a Valid Role" + ".")
+          .openDialog("","error", "Please Select a Valid Role" + ".")
           .subscribe(result => {
             // Dialog Response can be handled here
           });
       }
     } else {
       this.userDataService
-        .openDialog("error", "Please Select a Valid Branch" + ".")
+        .openDialog("","error", "Please Select a Valid Branch" + ".")
         .subscribe(result => {
           // Dialog Response can be handled here
         });

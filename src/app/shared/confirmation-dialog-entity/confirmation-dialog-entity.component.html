@@ -25,7 +25,7 @@
               <div class="">
                   <form [formGroup]="commentForm">                   
                     <mat-form-field>
-                        <textarea matInput required placeholder="Comments"maxlength="255" minlength="5" formControlName="comments"  name="comments" class="form-control" rows="5" id="comment"></textarea>
+                        <textarea matInput placeholder="Comments" maxlength="255" formControlName="comments"  name="comments" class="form-control" rows="5" id="comment"></textarea>
                         <mat-error *ngIf="commentForm.dirty && commentForm.invalid">Required Field</mat-error>
                     </mat-form-field>
                   </form>

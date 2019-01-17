@@ -113,7 +113,7 @@ export class UpdateEntityComponent implements OnInit {
     // this.entityData.parent = this.entityForm.value.parent;
     
     this.entityService.update(this.entityData).subscribe((response: any)=>{
-      this.entityService.openDialog(
+      this.entityService.openDialog("",
         "success",
        response.description
       ).subscribe((result)=>{
@@ -121,7 +121,7 @@ export class UpdateEntityComponent implements OnInit {
       });
 
     }, (err)=>{
-      this.entityService.openDialog(
+      this.entityService.openDialog("",
         "error",
        err.error.description
       ).subscribe((result)=>{
