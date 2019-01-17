@@ -1,19 +1,82 @@
 <div class="content-wrapper addFormSec">
 
+    <section class="padL35 content-header">
 
-
-  <section class="padL35 content-header">
-    <h1 class="marTB15 txt-orange">
-      <span>
+      <h1 class="marTB15 txt-orange">
+        <span>
         <span class="evo-bulkupload"></span> Bulk Upload</span>
-    </h1>
-  </section>
+      </h1>
+    </section>
 
-  <app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)"></app-evolvus-bulk-upload-view>
+    <app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)"></app-evolvus-bulk-upload-view>
+<br>
+    <!-- <div class="row"> -->
+    		<div class="col-md-12" >
+    			<div class="gridHeadSec" *ngIf='listOfFiles?.length!= 0' >
+    				<h4>Available Files</h4>
+    				<h5>Showing {{startIndex}} to {{ noOfFilesInCurrentPage }} out of {{ totalNoOfFiles }}</h5>
+
+    				<div class="pull-right">
+						<h5 class="txt-black">Results per Page</h5>
+						<mat-select name="tablePageSize" (selectionChange)="setPageSize()" [(ngModel)]="pageSize" class="form-control">
+                <mat-option [value]="5" >5</mat-option>
+                <mat-option [value]="10">10</mat-option>
+                <mat-option [value]="15">15</mat-option>
+                <mat-option [value]="20">20</mat-option>
+			     	</mat-select>
+					</div>
+          </div>
+
+              <div class="col-md-12" *ngIf='listOfFiles?.length!= 0'>
 
 
+                  <div class="tablegrid animated">
+                      <div class="slide-table">
+                         <!-- <div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div> -->
+                            <div id="container-table">
+                            <div id="content-table">
+                                <table class="table table-bordered table-striped ">
+                              <thead>
+                                  <tr>
+                                      <th *ngFor="let header of tableHeader">{{header}}</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                  <tr  *ngFor="let file of listOfFiles">
+                                    <td>{{file?.fileName}}</td>
+                                    <td>{{file?.fileType}}</td>
+                                    <td>{{file?.totalTransaction}}</td>
+                                    <td>{{file?.uploadedBy}}</td>
+                                    <td>{{file?.processingStatus}}</td>
+                                    <td >
+                                     <span *ngIf="file?.processingStatus=='ERROR'"> <i class="fa fa-file-excel-o fa-2x"  (click)="exportAsXLSX($event, file)" aria-hidden="true" style="cursor: pointer;" > </i> &nbsp; &nbsp;{{ file?.fileName }} </span> </td>
+                                  </tr>
+
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- <div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div> -->
+                        </div>
+                      </div>
+
+              </div>
 
 
-
-
+    			<div class="pull-right marTB2 paginationSec" *ngIf='listOfFiles?.length!= 0'>
+					<button class="btn btn-default" (click)="setCurrentPage(-1)" [disabled]="pageNo == 1 "><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</button>
+              <!-- <input  type="text" class="text-center paginationInput"  [(ngModel)]="pageNo" style="width:30px;" value="{{pageNo}}">/ {{totalNoOfPages}}  -->
+             {{pageNo}} / {{totalNoOfPages}}
+		    		<button class="btn btn-default" (click)="setCurrentPage(1)" [disabled]="pageNo==totalNoOfPages">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+          </div>
+          <br>
+          <div class="row row-padding" *ngIf="listOfFiles?.length == 0">
+            <div class="row text-center">
+              <h5 class="txt-red" style="color:red;">No Records Found!</h5>
+              <br>
+            </div>
+          </div>
+    		</div>
+    	<!-- </div> -->
 </div>

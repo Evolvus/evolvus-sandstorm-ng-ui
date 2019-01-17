@@ -26,16 +26,16 @@ export class JWTTokenIntercepter implements HttpInterceptor {
         //1.Step  check authService.isAuthenticated is 'false' if yes continue the request.
         if (this.authService.isAuthenticated === false) {
             if (req.url === `${this.serviceUrl}/auth` || req.url === `${this.serviceUrl}/sandstorm/api/user/verify`) {
-  
+
                 return next.handle(req);
-                
+
             }
-            
+
             else {
                 this.authService.isAuthenticated = false;
                 this.authService.authenticatedSubject.next(this.authService.isAuthenticated);
                 this.router.navigate(['login']);
-                return new Observable<null>(); 
+                return new Observable<null>();
 //before it was returning only null.. throws an error TypeError: You provided an invalid object where a stream was expected. You can provide an Observable, Promise, Array, or Iterable
             }
         }
@@ -55,13 +55,13 @@ export class JWTTokenIntercepter implements HttpInterceptor {
                         this.authService.isAuthenticated = false;
                         this.authService.authenticatedSubject.next(this.authService.isAuthenticated);
                         this.router.navigate(['sessionExpired']);
-                        return new Observable<null>(); 
+                        return new Observable<null>();
                     }
                 }, err => {
                     this.authService.isAuthenticated = false;
                     this.authService.authenticatedSubject.next(this.authService.isAuthenticated);
                     this.router.navigate(['sessionExpired']);
-                    return new Observable<null>(); 
+                    return new Observable<null>();
                 });
             }
 
@@ -73,13 +73,21 @@ export class JWTTokenIntercepter implements HttpInterceptor {
                 const uploadRequest = req.clone({headers: this.headers});
                 return next.handle(uploadRequest);
               }
+
+            if (req.url.indexOf('/api/v0.1/upload`') > -1) {
+              this.headers = new HttpHeaders({"Content-Type": "application/json",Authorization: this.authService.getToken()});
+              const uploadRequest = req.clone({headers: this.headers});
+              console.log('headerrrr', this.headers);
+
+              return next.handle(uploadRequest);
+            }
             return next.handle(modifiedRequest);
         }
     }
-    
+
     isSessionActive() {
         return this.http.get(`${this.serviceUrl}/sessionCheck`, {headers: this.headers});
     }
 
-  
+
 }

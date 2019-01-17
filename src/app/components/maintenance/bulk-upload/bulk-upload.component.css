@@ -4,3 +4,11 @@ top: 3em;
 }.example-tree-progress-bar {
     margin-left: 30px;
   }
+  table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }

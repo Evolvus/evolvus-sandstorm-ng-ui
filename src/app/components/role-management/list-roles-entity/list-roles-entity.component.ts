@@ -44,7 +44,7 @@ export class ListRolesEntityComponent implements OnInit {
     this.getApplicationCodes();
     this.getRoleDataBasedOnDefaultFilterCriteria();
     this.roleDataService.getCurrentUserData().subscribe((user: any)=>{
-      this.user = user;   
+      this.user = user;
     });
   }
 
@@ -91,12 +91,12 @@ export class ListRolesEntityComponent implements OnInit {
   }
 
   view(role: RoleModel) {
-    this.reset('ts'); 
+    this.reset('ts');
     this.router.navigate(["viewRole", role.roleName]);
   }
 
   getRoleDataBasedOnDefaultFilterCriteria() {
-    this.roleDataService 
+    this.roleDataService
       .getFilteredRoleData(
         this.defaultFilterCriteria.applicationCode,
         this.defaultFilterCriteria.activationStatus,
@@ -216,11 +216,11 @@ export class ListRolesEntityComponent implements OnInit {
     this.defaultFilterCriteria.pageNo=1;
     this.defaultFilterCriteria.pageSize=5;
     this.defaultFilterCriteria.activationStatus=undefined;
-    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";  
-    this.defaultFilterCriteria.applicationCode=undefined; 
+    this.defaultFilterCriteria.processingStatus="PENDING_AUTHORIZATION";
+    this.defaultFilterCriteria.applicationCode=undefined;
     if(source=='html'){
      this.getRoleDataBasedOnDefaultFilterCriteria();
      this.isViewAllOptionSelected = false;
-    }  
+    }
   }
 }

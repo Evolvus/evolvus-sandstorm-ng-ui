@@ -27,6 +27,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTableModule} from '@angular/material/table';
+
 
 import 'hammerjs';
 //SERVICE COMPONENTS
@@ -90,10 +92,11 @@ import { EvolvusBulkUploadModule } from '@evolvus/evolvus-bulk-upload-view';
 
 //HELPER COMPONENTS
 
-import { SessionexpiredComponent } from './components/sessionexpired/sessionexpired.component'; 
+import { SessionexpiredComponent } from './components/sessionexpired/sessionexpired.component';
 import { ConfirmationDialogEntityComponent } from './shared/confirmation-dialog-entity/confirmation-dialog-entity.component';
 import { SearchPipe } from './components/shared/search.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ExcelService } from './components/maintenance/bulk-upload/excel-service.service';
 
 @NgModule({
   declarations: [
@@ -145,14 +148,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 EvolvusBulkUploadModule,
 MatTreeModule,
 MatMenuModule,
-MatProgressBarModule
-    
+MatProgressBarModule,
+MatTableModule
+
   ],
   entryComponents: [
     ConfirmationDialogEntityComponent, LoginConsoleComponent
   ],
-  providers: [ResponsiveService, RoleDataService, EntityDataService, ApplicationDataService,   AuthGuardService
-,    AuthenticationService, 
+  providers: [ResponsiveService, RoleDataService, EntityDataService, ExcelService, ApplicationDataService,   AuthGuardService
+,    AuthenticationService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTTokenIntercepter,
