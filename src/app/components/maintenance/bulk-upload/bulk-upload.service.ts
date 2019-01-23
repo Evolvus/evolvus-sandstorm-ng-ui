@@ -62,11 +62,14 @@ upload(file, lookupCode, value)
 }
 
 openDialog(messageType, statusMessage): any {
+
+
   let dialogRef = this.dialog.open(ConfirmationDialogEntityComponent, {
     width: "300px",
     data: {
       message: statusMessage,
-      type: messageType
+      actionType: messageType,
+      msgtype: messageType
     }
   });
 }

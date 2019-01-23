@@ -23,7 +23,7 @@ commentForm: FormGroup = new FormGroup({comments: new FormControl('',[Validators
     this.messageType = this.data.msgtype;
     this.type = this.data.actionType;
     console.log("this.type",this.type);
-    
+
     if(this.type === "APPROVE"){
       this.commentForm.get('comments').clearValidators();
       this.commentForm.updateValueAndValidity();
@@ -31,7 +31,7 @@ commentForm: FormGroup = new FormGroup({comments: new FormControl('',[Validators
       this.commentForm.get('comments').setValidators([Validators.required,Validators.minLength(5), Validators.maxLength(255)]);
       this.commentForm.get('comments').updateValueAndValidity();
     }
-    
+
     if(this.statusMessage == undefined){
     this.serverError = true;
     }
@@ -41,10 +41,10 @@ commentForm: FormGroup = new FormGroup({comments: new FormControl('',[Validators
   this.dialogRef.close(status);
   }
 
-addComments(status){ 
+addComments(status){
   if(this.type=='APPROVE'){
     this.commentForm.patchValue({comments: 'Accepted'});
-  } 
+  }
   this.dialogRef.close({comments: this.commentForm.value.comments, status: status});
 }
 

@@ -52,6 +52,8 @@ export class BulkUploadComponent implements OnInit {
     var suffixFileName = fileName.substring(fileName.lastIndexOf("."));
     fileName = preffixFileName.concat(suffixFileName);
     this.bulkUploadService.getFileByName(fileName).subscribe((response: any) => {
+      console.log('responseeee', response);
+
       if (response.data.length == 0) {
 
         this.selectedFile = event.file;
@@ -60,10 +62,19 @@ export class BulkUploadComponent implements OnInit {
             .subscribe((response: any) => {
               this.bulkUploadService.openDialog(
                 "success",
-                "File Uploaded Successfully!"
+                "Please wait file uploading is in In-progress"
               ).subscribe((result) => {
 
               });
+              if(response != null){
+                this.bulkUploadService.openDialog(
+                  "success",
+                  "file is successfully uploaded. Verification and Processing is In-progress. File with status will be updated in few minutes."
+                ).subscribe((result) => {
+
+                });
+                this.getFiles();
+              }
             });
         }
       } else {
@@ -71,6 +82,7 @@ export class BulkUploadComponent implements OnInit {
           "error",
           "selected file is already exist"
         ).subscribe((result) => {
+console.log('resultttttt', result);
 
         });
 
