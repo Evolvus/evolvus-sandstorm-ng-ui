@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  platformURL: 'http://192.168.1.36:9090'
+  platformURL: 'http://10.10.69.193:9090'
 };
 
 /*
