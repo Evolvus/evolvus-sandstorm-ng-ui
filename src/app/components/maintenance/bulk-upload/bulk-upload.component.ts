@@ -15,7 +15,7 @@ import { SandstormGlobalVariablesService } from 'src/app/shared/sandstorm-global
 })
 export class BulkUploadComponent implements OnInit {
 
-  tableHeader: string[] = ['File Name', 'File Type', 'Total Transaction', 'Uploaded By', 'Processing Status', 'Error Log'];
+  tableHeader: string[] = ['File Name','Total Transaction','Processed Count', 'Uploaded By', 'Process Status', 'Error Log'];
   fileTypes: any[] = [];
   selectedFileType: any;
   selectedFile: any;
@@ -35,8 +35,8 @@ export class BulkUploadComponent implements OnInit {
 
     this.bulkUploadService.getListOfFileTypes().subscribe((response: any) => {
       if (response != null) {
+        
         this.fileTypes = response.data;
-
       }
     });
     this.getFiles();
@@ -52,7 +52,6 @@ export class BulkUploadComponent implements OnInit {
     var suffixFileName = fileName.substring(fileName.lastIndexOf("."));
     fileName = preffixFileName.concat(suffixFileName);
     this.bulkUploadService.getFileByName(fileName).subscribe((response: any) => {
-      console.log('responseeee', response);
 
       if (response.data.length == 0) {
 
@@ -60,21 +59,24 @@ export class BulkUploadComponent implements OnInit {
         if (event.file != null) {
           this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
             .subscribe((response: any) => {
+              if(response != null){
+                this.getFiles();
               this.bulkUploadService.openDialog(
                 "success",
                 "Please wait file uploading is in In-progress"
               ).subscribe((result) => {
-
+               
               });
-              if(response != null){
+             
                 this.bulkUploadService.openDialog(
                   "success",
                   "file is successfully uploaded. Verification and Processing is In-progress. File with status will be updated in few minutes."
                 ).subscribe((result) => {
-
+          
                 });
-                this.getFiles();
+               
               }
+             
             });
         }
       } else {
@@ -82,7 +84,6 @@ export class BulkUploadComponent implements OnInit {
           "error",
           "selected file is already exist"
         ).subscribe((result) => {
-console.log('resultttttt', result);
 
         });
 
@@ -94,6 +95,7 @@ console.log('resultttttt', result);
   getFiles() {
     this.bulkUploadService.getAllFiles(this.pageSize, this.pageNo).subscribe((response: any) => {
       this.listOfFiles = response.data;
+      console.log('fillll',response.data);
       this.totalNoOfFiles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
