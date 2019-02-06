@@ -60,7 +60,7 @@ export class BulkUploadComponent implements OnInit {
           this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
             .subscribe((response: any) => {
               if(response != null){
-                this.getFiles();
+              this.getFilesInInterval(5);
               this.bulkUploadService.openDialog(
                 "success",
                 "Please wait file uploading is in In-progress"
@@ -95,7 +95,6 @@ export class BulkUploadComponent implements OnInit {
   getFiles() {
     this.bulkUploadService.getAllFiles(this.pageSize, this.pageNo).subscribe((response: any) => {
       this.listOfFiles = response.data;
-      console.log('fillll',response.data);
       this.totalNoOfFiles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
       this.setCurrentPage(0);
@@ -141,17 +140,30 @@ export class BulkUploadComponent implements OnInit {
     excelObj.errorLog = file.errorLog;
 
     this.listOfExcelObjs.push(excelObj);
+    
     this.excelService.exportAsExcelFile(this.listOfExcelObjs, `Error-bulkUpload File`);
-  }
+    this.listOfExcelObjs = [];
+    }
   constructor(private bulkUploadService: BulkUploadService, private excelService: ExcelService) {
   }
 
+
+getFilesInInterval(intervalTime){
+var refreshCount = 0;
+ var interval = setInterval(()=>{
+    if(refreshCount<=intervalTime){
+      this.getFiles();
+    }else{
+      clearInterval(interval);
+    }
+  }, 1000*intervalTime);
+}
 }
 export class ExcelObject {
-  fileName: any;
+  fileName: any;  
   fileType: any;
 
-  totalTransaction: any;
+  totalTransaction: any;   
   uploadedBy: any;
   processingStatus: any;
   errorLog: any;
