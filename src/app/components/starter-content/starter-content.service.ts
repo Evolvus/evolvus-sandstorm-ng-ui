@@ -28,11 +28,13 @@ platformURL = environment.platformURL;
   }
 
 
-getSWEEventData(){
+getSWEEventData(limit,entity){
 
   return this.http.get(`${this.platformURL}/swe/api/event`,{
     params:{
-      wfInstanceStatus: 'PENDING_AUTHORIZATION'
+      wfInstanceStatus: 'PENDING_AUTHORIZATION',
+      wfEntity: entity,
+      limit:limit
     }
   });
 
