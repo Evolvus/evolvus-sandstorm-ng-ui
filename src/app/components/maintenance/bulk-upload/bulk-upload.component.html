@@ -8,7 +8,7 @@
       </h1>
     </section>
 
-    <app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)"></app-evolvus-bulk-upload-view>
+    <app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)" ></app-evolvus-bulk-upload-view>
 <br>
     <!-- <div class="row"> -->
     		<div class="col-md-12" >
@@ -47,6 +47,7 @@
                                     <td>{{file?.fileName}}</td>
                                     <td>{{file?.totalTransaction}}</td>
                                     <td>{{file?.totalProcessedCount}}</td>
+                                    <td>{{file?.createdDate | date : 'medium'}}</td>
                                     <td>{{file?.uploadedBy}}</td>
                                     <td>{{file?.processingStatus}}</td>
                                     <td >

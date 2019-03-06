@@ -72,6 +72,7 @@ openDialog(messageType, statusMessage): any {
       msgtype: messageType
     }
   });
+  return dialogRef.afterClosed();
 }
 
 }

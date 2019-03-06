@@ -15,7 +15,7 @@ import { SandstormGlobalVariablesService } from 'src/app/shared/sandstorm-global
 })
 export class BulkUploadComponent implements OnInit {
 
-  tableHeader: string[] = ['File Name','Total Transaction','Processed Count', 'Uploaded By', 'Process Status', 'Error Log'];
+  tableHeader: string[] = ['File Name', 'Total Transaction', 'Processed Count', 'Creation Date', 'Uploaded By', 'Process Status', 'Error Log'];
   fileTypes: any[] = [];
   selectedFileType: any;
   selectedFile: any;
@@ -29,71 +29,68 @@ export class BulkUploadComponent implements OnInit {
   listOfExcelObjs: ExcelObject[] = [];
   excelObj: ExcelObject;
   loggedInUser: any;
+  uploadInitiated: Boolean = false;
 
   ngOnInit() {
     this.loggedInUser = this.bulkUploadService.getCurrentUserData();
 
     this.bulkUploadService.getListOfFileTypes().subscribe((response: any) => {
       if (response != null) {
-        
+
         this.fileTypes = response.data;
       }
     });
     this.getFiles();
   }
 
-
-
   upload(event) {
-    var fileName = event.file.name;
 
-    var preffixFileName = fileName.substring(0, fileName.lastIndexOf("."));
-    preffixFileName = preffixFileName.concat("_" + this.loggedInUser.value.tenantId);
-    var suffixFileName = fileName.substring(fileName.lastIndexOf("."));
-    fileName = preffixFileName.concat(suffixFileName);
-    this.bulkUploadService.getFileByName(fileName).subscribe((response: any) => {
+    if (!this.uploadInitiated) {
+      this.uploadInitiated = true;
+      var fileName = event.file.name;
+      var preffixFileName = fileName.substring(0, fileName.lastIndexOf("."));
+      preffixFileName = preffixFileName.concat("_" + this.loggedInUser.value.tenantId);
+      var suffixFileName = fileName.substring(fileName.lastIndexOf("."));
+      fileName = preffixFileName.concat(suffixFileName);
+      this.bulkUploadService.getFileByName(fileName).subscribe((response: any) => {
 
-      if (response.data.length == 0) {
+        if (response.data.length == 0) {
 
-        this.selectedFile = event.file;
-        if (event.file != null) {
-          this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
-            .subscribe((response: any) => {
-              if(response != null){
-              this.getFilesInInterval(5);
-              this.bulkUploadService.openDialog(
-                "success",
-                "Please wait file uploading is in In-progress"
-              ).subscribe((result) => {
-               
+          this.selectedFile = event.file;
+          if (event.file != null) {
+            this.bulkUploadService.upload(event.file, event.fileType.lookupCode, event.fileType.value)
+              .subscribe((response: any) => {
+                if (response != null) {
+                  this.getFilesInInterval(5);
+
+                  this.bulkUploadService.openDialog(
+                    "success",
+                    "file is successfully uploaded. Verification and Processing is In-progress. File with status will be updated in few minutes."
+                  ).subscribe((result) => {
+                    this.uploadInitiated = false;
+                  });
+
+                }
+
               });
-             
-                this.bulkUploadService.openDialog(
-                  "success",
-                  "file is successfully uploaded. Verification and Processing is In-progress. File with status will be updated in few minutes."
-                ).subscribe((result) => {
-          
-                });
-               
-              }
-             
-            });
+          }
+        } else {
+          this.bulkUploadService.openDialog(
+            "error",
+            "selected file is already exist"
+          ).subscribe((result) => {
+            this.uploadInitiated = false;
+
+
+          });
+
         }
-      } else {
-        this.bulkUploadService.openDialog(
-          "error",
-          "selected file is already exist"
-        ).subscribe((result) => {
-
-        });
-
-      }
-    });
-
-
+      });
+    }
   }
   getFiles() {
     this.bulkUploadService.getAllFiles(this.pageSize, this.pageNo).subscribe((response: any) => {
+
       this.listOfFiles = response.data;
       this.totalNoOfFiles = response.totalNoOfRecords;
       this.totalNoOfPages = response.totalNoOfPages;
@@ -140,30 +137,30 @@ export class BulkUploadComponent implements OnInit {
     excelObj.errorLog = file.errorLog;
 
     this.listOfExcelObjs.push(excelObj);
-    
+
     this.excelService.exportAsExcelFile(this.listOfExcelObjs, `Error-bulkUpload File`);
     this.listOfExcelObjs = [];
-    }
+  }
   constructor(private bulkUploadService: BulkUploadService, private excelService: ExcelService) {
   }
 
 
-getFilesInInterval(intervalTime){
-var refreshCount = 0;
- var interval = setInterval(()=>{
-    if(refreshCount<=intervalTime){
-      this.getFiles();
-    }else{
-      clearInterval(interval);
-    }
-  }, 1000*intervalTime);
-}
+  getFilesInInterval(intervalTime) {
+    var refreshCount = 0;
+    var interval = setInterval(() => {
+      if (refreshCount <= intervalTime) {
+        this.getFiles();
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000 * intervalTime);
+  }
 }
 export class ExcelObject {
-  fileName: any;  
+  fileName: any;
   fileType: any;
 
-  totalTransaction: any;   
+  totalTransaction: any;
   uploadedBy: any;
   processingStatus: any;
   errorLog: any;
