@@ -1,5 +1,5 @@
 import { BulkUploadService } from './bulk-upload.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
@@ -30,6 +30,15 @@ export class BulkUploadComponent implements OnInit {
   excelObj: ExcelObject;
   loggedInUser: any;
   uploadInitiated: Boolean = false;
+  @ViewChild('tablescroll', { read: ElementRef }) public tablescroll: ElementRef;
+
+  public scrollRight(): void {
+    this.tablescroll.nativeElement.scrollTo({ left: (this.tablescroll.nativeElement.scrollLeft + 300), behavior: 'smooth' });
+  }
+
+  public scrollLeft(): void {
+    this.tablescroll.nativeElement.scrollTo({ left: (this.tablescroll.nativeElement.scrollLeft - 300), behavior: 'smooth' });
+  }
 
   ngOnInit() {
     this.loggedInUser = this.bulkUploadService.getCurrentUserData();

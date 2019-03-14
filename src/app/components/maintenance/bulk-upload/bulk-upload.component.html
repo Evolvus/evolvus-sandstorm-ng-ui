@@ -28,12 +28,10 @@
           </div>
 
               <div class="col-md-12" *ngIf='listOfFiles?.length!= 0'>
-
-
                   <div class="tablegrid animated">
                       <div class="slide-table">
-                         <!-- <div class="float-buttons"><button id="slideleft" ng-click="slideright()"><span><</span></button></div> -->
-                            <div id="container-table">
+                         <div class="float-buttons"><button id="slideleft" (click)="scrollLeft()"><span><</span></button></div>
+                            <div id="container-table" #tablescroll>
                             <div id="content-table">
                                 <table class="table table-bordered table-striped ">
                               <thead>
@@ -58,7 +56,7 @@
                             </table>
                           </div>
                         </div>
-                        <!-- <div class="float-buttons">   <button id="slideright" ng-click="slideleft()"><span>></span></button></div> -->
+                        <div class="float-buttons"> <button id="slideright" (click)="scrollRight()"><span>></span></button></div>
                         </div>
                       </div>
 

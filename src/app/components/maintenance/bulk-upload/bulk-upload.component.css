@@ -12,3 +12,6 @@ top: 3em;
 tr{
   width: auto;
 }
+#slideleft{
+  align-content: center
+}
