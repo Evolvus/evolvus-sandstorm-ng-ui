@@ -15,3 +15,12 @@ tr{
 #slideleft{
   align-content: center
 }
+
+.gridHeadSec {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.tbl-container {
+  position: relative;
+  top: 25px;
+}

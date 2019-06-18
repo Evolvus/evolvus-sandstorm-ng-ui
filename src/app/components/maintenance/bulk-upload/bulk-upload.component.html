@@ -11,7 +11,7 @@
     <app-evolvus-bulk-upload-view class="bulk-view" [fileTypes]="fileTypes" (response)="upload($event)" ></app-evolvus-bulk-upload-view>
 <br>
     <!-- <div class="row"> -->
-    		<div class="col-md-12" >
+    		<div class="col-md-12 tbl-container">
     			<div class="gridHeadSec" *ngIf='listOfFiles?.length!= 0' >
     				<h4>Available Files</h4>
     				<h5>Showing {{startIndex}} to {{ noOfFilesInCurrentPage }} out of {{ totalNoOfFiles }}</h5>
