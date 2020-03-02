@@ -16,6 +16,7 @@ import { Authentication } from "../models/authentication.model";
 import { SandstormGlobalVariablesService } from "./../shared/sandstorm-global-variables.service";
 import { UserDataService } from "../components/user-management/user-data.service";
 import { animationFrameScheduler } from "rxjs";
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: "app-login-console",
@@ -80,7 +81,7 @@ export class LoginConsoleComponent implements OnInit {
     if (!this.loginForm.invalid) {
       this.loginForm.setErrors(null);
       const userName = this.loginForm.value.userId;
-      const userPassword = this.loginForm.value.userPassword;
+      const userPassword = CryptoJS.AES.encrypt(this.loginForm.value.userPassword,userName).toString();
       const authentication = new Authentication(
         userName,
         userPassword,
