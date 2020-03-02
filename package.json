@@ -28,6 +28,7 @@
     "admin-lte": "2.3.11",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
+    "crypto-js": "^4.0.0",
     "doc-cookies": "^1.1.0",
     "file-saver": "^2.0.0",
     "font-awesome": "^4.7.0",
