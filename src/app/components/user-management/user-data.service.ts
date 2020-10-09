@@ -21,7 +21,7 @@ export class UserDataService {
   userTableHeaders = [
     "User Id",
     "User Name",
-    "Login Status",
+    // "Login Status",
     "Activation Status",
     "Processing Status",
     "User Role",
